@@ -13,6 +13,7 @@ import {
   Star,
   Stethoscope,
 } from 'lucide-react';
+import { asset } from '@/lib/asset';
 import { tratamientoProgresoPct, usePortalCliente } from '@/context/PortalClienteContext';
 import { PortalTreatmentEmptyPlaceholder } from '../components/PortalTreatmentEmptyPlaceholder';
 
@@ -41,7 +42,7 @@ export function TratamientoView() {
         className="relative overflow-hidden rounded-3xl"
       >
         <img
-          src={activeTreatment.imagen}
+          src={asset(activeTreatment.imagen)}
           alt={activeTreatment.nombre}
           className="h-56 w-full object-cover lg:h-72"
         />

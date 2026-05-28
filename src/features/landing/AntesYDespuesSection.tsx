@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote, Sparkles, Star } from 'lucide-react';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
+import { asset } from '@/lib/asset';
 
 type Caso = {
   slug: string;
@@ -32,8 +33,8 @@ const CASOS: Caso[] = [
     testimonio:
       'No buscaba un resultado mágico, buscaba acompañamiento. Las chicas me explicaron todo en cada sesión y vi mi piel cambiar.',
     cliente: 'Sofía R.',
-    beforeSrc: '/casos/body-up-antes.jpg',
-    afterSrc: '/casos/body-up-despues.jpg',
+    beforeSrc: asset('casos/body-up-antes.jpg'),
+    afterSrc: asset('casos/body-up-despues.jpg'),
   },
   {
     slug: 'criolipolisis-piernas',
@@ -43,8 +44,8 @@ const CASOS: Caso[] = [
     testimonio:
       'Lo más lindo es entrar y sentir que es tu momento. La crio fue mucho más cómoda de lo que pensaba.',
     cliente: 'Mariela B.',
-    beforeSrc: '/casos/crio-antes.jpg',
-    afterSrc: '/casos/crio-despues.jpg',
+    beforeSrc: asset('casos/crio-antes.jpg'),
+    afterSrc: asset('casos/crio-despues.jpg'),
   },
   {
     slug: 'lifting-pestanas',
@@ -54,8 +55,8 @@ const CASOS: Caso[] = [
     testimonio:
       'Mi mirada cambió. Es sutil pero la diferencia entre maquillarme y no maquillarme se nota muchísimo.',
     cliente: 'Camila G.',
-    beforeSrc: '/casos/pestanas-antes.jpg',
-    afterSrc: '/casos/pestanas-despues.jpg',
+    beforeSrc: asset('casos/pestanas-antes.jpg'),
+    afterSrc: asset('casos/pestanas-despues.jpg'),
   },
   {
     slug: 'depilacion-piernas',
@@ -65,8 +66,8 @@ const CASOS: Caso[] = [
     testimonio:
       'Ya no me preocupo por la depilación cada semana. La constancia y la atención hicieron toda la diferencia.',
     cliente: 'Laura M.',
-    beforeSrc: '/casos/depilacion-antes.jpg',
-    afterSrc: '/casos/depilacion-despues.jpg',
+    beforeSrc: asset('casos/depilacion-antes.jpg'),
+    afterSrc: asset('casos/depilacion-despues.jpg'),
   },
 ];
 

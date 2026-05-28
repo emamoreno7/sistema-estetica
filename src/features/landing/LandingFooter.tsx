@@ -1,5 +1,6 @@
 import { Mail, MessageCircle } from 'lucide-react';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
+import { asset } from '@/lib/asset';
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -32,7 +33,7 @@ export function LandingFooter() {
     >
       <div className="mx-auto flex max-w-4xl flex-col items-center gap-8 text-center">
         <img
-          src="/logo-amore-v2.png"
+          src={asset('logo-amore-v2.png')}
           alt="AMORE Centro Di Bellezza"
           style={{
             height: '72px',
@@ -125,7 +126,7 @@ export function LandingFooter() {
               aria-label="ByDotCom — Software & Web Solutions"
             >
               <img
-                src="/bydotcom-logo.png"
+                src={asset('bydotcom-logo.png')}
                 alt="ByDotCom"
                 className="h-12 w-12 rounded-lg object-cover"
                 style={{ filter: 'drop-shadow(0 4px 12px rgba(56,189,248,0.35))' }}

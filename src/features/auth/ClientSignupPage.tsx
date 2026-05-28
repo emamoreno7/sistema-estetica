@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import VirtualAssistantChat from '@/components/VirtualAssistantChat';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
+import { asset } from '@/lib/asset';
 import ClientSignupForm from './ClientSignupForm';
 
 export default function ClientSignupPage() {
@@ -11,7 +12,7 @@ export default function ClientSignupPage() {
   return (
     <div className="relative min-h-screen overflow-hidden" style={{ background: '#FDF8F5' }}>
       <div className="absolute inset-0">
-        <img src="/masajesr.png" alt="" className="h-full w-full object-cover" />
+        <img src={asset('masajesr.png')} alt="" className="h-full w-full object-cover" />
         <div
           className="absolute inset-0"
           style={{

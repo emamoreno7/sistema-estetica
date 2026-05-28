@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { asset } from '@/lib/asset';
 
 export function LandingHeader({ onEnter }: { onEnter: () => void }) {
   return (
@@ -9,7 +10,7 @@ export function LandingHeader({ onEnter }: { onEnter: () => void }) {
       className="fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-6 py-4 sm:px-10"
     >
       <img
-        src="/logo-amore-v2.png"
+        src={asset('logo-amore-v2.png')}
         alt="AMORE"
         style={{
           width: '120px',

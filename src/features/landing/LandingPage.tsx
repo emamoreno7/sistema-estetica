@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import VirtualAssistantChat from '@/components/VirtualAssistantChat';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
+import { asset } from '@/lib/asset';
 import { LandingHeader } from './LandingHeader';
 import { ServiciosSection } from './ServiciosSection';
 import { ConversionSection } from './ConversionSection';
@@ -46,7 +47,7 @@ export function LandingPage({ onEnter, onRegister }: Props) {
             }}
           >
             <img
-              src="/logo-amore-v2.png"
+              src={asset('logo-amore-v2.png')}
               alt="AMORE Centro Di Bellezza"
               style={{
                 width: '100%',
