@@ -291,6 +291,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
 
       <main className="relative z-10 lg:pl-64">
         <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+          {/* Header desktop: titulo + subtitulo + acciones, todo junto */}
           {(title || subtitle || actions) && (
             <motion.header
               initial={{ opacity: 0, y: -8 }}
@@ -309,6 +310,22 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
               </div>
               {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
             </motion.header>
+          )}
+
+          {/* Mobile/tablet: subtitulo + acciones (titulo ya esta en el topbar) */}
+          {(subtitle || actions) && (
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 flex flex-col gap-3 lg:hidden"
+            >
+              {subtitle ? (
+                <p className="text-xs text-[#7A746E]">{subtitle}</p>
+              ) : null}
+              {actions ? (
+                <div className="flex flex-wrap items-center gap-2">{actions}</div>
+              ) : null}
+            </motion.div>
           )}
 
           {children}
