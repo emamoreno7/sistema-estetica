@@ -1,13 +1,10 @@
 /**
  * Sección "Antes & Después" — social proof interactivo en la landing.
  *
- * Muestra un carrusel de casos donde el usuario arrastra un slider para
- * comparar el antes y después. Los casos vienen de una lista hardcodeada
- * que reusa imágenes placeholder generadas en SVG (data URLs). Cuando
- * Amore tenga fotos reales, basta con cambiar las URLs en CASOS.
- *
- * Si el archivo /antes-{slug}.jpg y /despues-{slug}.jpg existen en /public,
- * los usa automáticamente (fallback a SVG si no).
+ * Carrusel de casos reales con slider arrastrable para comparar
+ * el antes y después. Las imágenes viven en /public/casos/.
+ * Para reemplazar un caso, solo cambiá los archivos JPG manteniendo
+ * los mismos nombres.
  */
 
 import { useState } from 'react';
@@ -26,68 +23,6 @@ type Caso = {
   afterSrc: string;
 };
 
-// Imágenes placeholder en SVG (en línea, como data URL para 0 latencia).
-// Las generamos dinámicamente con la paleta del proyecto para que se vean
-// como "casos" reales sin necesitar fotos. El usuario puede reemplazar.
-function placeholderSvg({
-  tone,
-  label,
-  intensity,
-}: {
-  tone: 'before' | 'after';
-  label: string;
-  intensity: number; // 0..1 — cuán pronunciado se ve el "efecto" en el después
-}): string {
-  const isAfter = tone === 'after';
-  const skinTone = isAfter ? '#F5DBC5' : '#E0CDB8';
-  const glow = isAfter ? 0.65 + intensity * 0.3 : 0.15;
-
-  const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="bg-${tone}" x1="0" y1="0" x2="1" y2="1">
-        ${
-          isAfter
-            ? '<stop offset="0%" stop-color="#FDF8F5"/><stop offset="60%" stop-color="#FCE4D4"/><stop offset="100%" stop-color="#F2D7D5"/>'
-            : '<stop offset="0%" stop-color="#E5DDD3"/><stop offset="60%" stop-color="#D6CCC1"/><stop offset="100%" stop-color="#C2B8AC"/>'
-        }
-      </linearGradient>
-      <radialGradient id="glow-${tone}" cx="0.5" cy="0.5" r="0.6">
-        <stop offset="0%" stop-color="rgba(255,255,255,${glow})"/>
-        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-      </radialGradient>
-    </defs>
-    <rect width="800" height="500" fill="url(#bg-${tone})"/>
-    <rect width="800" height="500" fill="url(#glow-${tone})"/>
-    <!-- Silueta de piel/cuerpo abstracta -->
-    <path d="M150 ${isAfter ? 220 : 240} Q300 ${isAfter ? 180 : 200} 500 ${isAfter ? 200 : 220} Q650 ${
-      isAfter ? 220 : 240
-    } 750 ${isAfter ? 280 : 310} L750 500 L150 500 Z" fill="${skinTone}" opacity="0.85"/>
-    <!-- Líneas de textura -->
-    <g stroke="#FFFFFF" stroke-opacity="${isAfter ? 0.35 : 0.15}" stroke-width="1" fill="none">
-      <path d="M180 380 Q400 ${isAfter ? 360 : 390} 720 380"/>
-      <path d="M180 420 Q400 ${isAfter ? 405 : 430} 720 420"/>
-      <path d="M180 460 Q400 ${isAfter ? 450 : 470} 720 460"/>
-    </g>
-    <!-- Texto de label -->
-    <g font-family="Georgia, serif" fill="#003D5B" font-style="italic">
-      <text x="60" y="80" font-size="22" opacity="0.45">Amore</text>
-      <text x="60" y="105" font-size="14" opacity="0.55">${label}</text>
-    </g>
-    ${
-      isAfter
-        ? `<g fill="#003D5B" opacity="0.45">
-            <circle cx="600" cy="100" r="3"/>
-            <circle cx="640" cy="110" r="2"/>
-            <circle cx="620" cy="130" r="2.5"/>
-            <path d="M580 90 L582 95 L587 95 L583 98 L584 103 L580 100 L576 103 L577 98 L573 95 L578 95 Z"/>
-          </g>`
-        : ''
-    }
-  </svg>`;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-}
-
 const CASOS: Caso[] = [
   {
     slug: 'body-up-abdomen',
@@ -97,8 +32,8 @@ const CASOS: Caso[] = [
     testimonio:
       'No buscaba un resultado mágico, buscaba acompañamiento. Las chicas me explicaron todo en cada sesión y vi mi piel cambiar.',
     cliente: 'Sofía R.',
-    beforeSrc: placeholderSvg({ tone: 'before', label: 'Sesión 1', intensity: 0 }),
-    afterSrc: placeholderSvg({ tone: 'after', label: 'Sesión 8', intensity: 0.9 }),
+    beforeSrc: '/casos/body-up-antes.jpg',
+    afterSrc: '/casos/body-up-despues.jpg',
   },
   {
     slug: 'criolipolisis-piernas',
@@ -108,8 +43,8 @@ const CASOS: Caso[] = [
     testimonio:
       'Lo más lindo es entrar y sentir que es tu momento. La crio fue mucho más cómoda de lo que pensaba.',
     cliente: 'Mariela B.',
-    beforeSrc: placeholderSvg({ tone: 'before', label: 'Mes 0', intensity: 0 }),
-    afterSrc: placeholderSvg({ tone: 'after', label: 'Mes 3', intensity: 0.75 }),
+    beforeSrc: '/casos/crio-antes.jpg',
+    afterSrc: '/casos/crio-despues.jpg',
   },
   {
     slug: 'lifting-pestanas',
@@ -119,8 +54,8 @@ const CASOS: Caso[] = [
     testimonio:
       'Mi mirada cambió. Es sutil pero la diferencia entre maquillarme y no maquillarme se nota muchísimo.',
     cliente: 'Camila G.',
-    beforeSrc: placeholderSvg({ tone: 'before', label: 'Antes', intensity: 0 }),
-    afterSrc: placeholderSvg({ tone: 'after', label: 'Mismo día', intensity: 0.85 }),
+    beforeSrc: '/casos/pestanas-antes.jpg',
+    afterSrc: '/casos/pestanas-despues.jpg',
   },
   {
     slug: 'depilacion-piernas',
@@ -130,8 +65,8 @@ const CASOS: Caso[] = [
     testimonio:
       'Ya no me preocupo por la depilación cada semana. La constancia y la atención hicieron toda la diferencia.',
     cliente: 'Laura M.',
-    beforeSrc: placeholderSvg({ tone: 'before', label: 'Sesión 1', intensity: 0 }),
-    afterSrc: placeholderSvg({ tone: 'after', label: 'Sesión 6', intensity: 1 }),
+    beforeSrc: '/casos/depilacion-antes.jpg',
+    afterSrc: '/casos/depilacion-despues.jpg',
   },
 ];
 

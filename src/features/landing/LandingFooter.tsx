@@ -1,4 +1,10 @@
+import { Mail, MessageCircle } from 'lucide-react';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
+
+// Teléfono internacional del desarrollador (sin "+" para el link de wa.me)
+const DEV_PHONE = '5492634340284';
+const DEV_PHONE_DISPLAY = '+54 9 2634 340284';
+const DEV_EMAIL = 'emamoreno@icloud.com';
 
 export function LandingFooter() {
   return (
@@ -66,6 +72,62 @@ export function LandingFooter() {
         <p className="text-[9px] uppercase tracking-[0.35em] text-[#A9A09A]">
           &copy; {new Date().getFullYear()} Amore Centro Di Bellezza
         </p>
+
+        {/* ─── Firma del desarrollador ─── */}
+        <div className="mt-8 w-full">
+          <div
+            className="mx-auto flex max-w-xl flex-col items-center gap-5 rounded-2xl px-6 py-7 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+            style={{
+              background: 'linear-gradient(135deg, #0A1628 0%, #0E1F36 100%)',
+              boxShadow: '0 14px 40px -18px rgba(0,61,91,0.45)',
+            }}
+          >
+            {/* Logo + nombre */}
+            <a
+              href={`mailto:${DEV_EMAIL}`}
+              className="flex items-center gap-3 transition-opacity hover:opacity-90"
+              aria-label="ByDotCom — Software & Web Solutions"
+            >
+              <img
+                src="/bydotcom-logo.png"
+                alt="ByDotCom"
+                className="h-12 w-12 rounded-lg object-cover"
+                style={{ filter: 'drop-shadow(0 4px 12px rgba(56,189,248,0.35))' }}
+              />
+              <div className="text-left">
+                <p className="text-[9px] font-medium uppercase tracking-[0.32em] text-cyan-300/80">
+                  Desarrollado por
+                </p>
+                <p className="mt-0.5 text-base font-semibold tracking-tight text-white">
+                  ByDotCom
+                </p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-cyan-200/60">
+                  Software &amp; Web Solutions
+                </p>
+              </div>
+            </a>
+
+            {/* Contacto */}
+            <div className="flex flex-col items-center gap-2 sm:items-end">
+              <a
+                href={`https://wa.me/${DEV_PHONE}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[11px] font-medium text-white/85 transition-colors hover:text-cyan-300"
+              >
+                <MessageCircle className="h-3.5 w-3.5" />
+                {DEV_PHONE_DISPLAY}
+              </a>
+              <a
+                href={`mailto:${DEV_EMAIL}`}
+                className="inline-flex items-center gap-1.5 text-[11px] font-medium text-white/85 transition-colors hover:text-cyan-300"
+              >
+                <Mail className="h-3.5 w-3.5" />
+                {DEV_EMAIL}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );
