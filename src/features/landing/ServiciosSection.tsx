@@ -3,6 +3,29 @@ import { motion } from 'framer-motion';
 import { useServiciosCatalogo } from '@/hooks/useServiciosCatalogo';
 import { BADGE_STYLE, serviciosCatalogo } from '@/data/serviciosCatalogo';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
+import { ServiceIllustration, type IllustrationKey } from './ServiceIllustration';
+
+const NAME_TO_ILLUSTRATION: Record<string, IllustrationKey> = {
+  'Body Up': 'bodyUp',
+  Radiofrecuencia: 'radiofrecuencia',
+  'Crio-lipólisis': 'crio',
+  'Lipo-láser': 'lipolaser',
+  Electrodos: 'electrodos',
+  'Masajes relajantes': 'masajeRelajante',
+  'Masajes descontracturantes': 'masajeDescontracturante',
+  'Masaje linfático': 'masajeLinfatico',
+  Presoterapia: 'presoterapia',
+  'Piedras calientes': 'piedrasCalientes',
+  'Lifting de pestañas': 'liftingPestanas',
+  'Laminado de pestañas': 'laminadoPestanas',
+  'Perfilado de cejas': 'perfiladoCejas',
+  'Depilación definitiva': 'depilacionDefinitiva',
+  'Eliminación de tatuajes': 'eliminacionTatuajes',
+};
+
+function resolveIllustration(srv: { illustration?: IllustrationKey; name: string }): IllustrationKey {
+  return srv.illustration ?? NAME_TO_ILLUSTRATION[srv.name] ?? 'bodyUp';
+}
 
 export function ServiciosSection() {
   const { categorias, loading, error, fromDb } = useServiciosCatalogo();
@@ -125,40 +148,19 @@ export function ServiciosSection() {
               }}
             >
               <div
-                className="relative aspect-[3/4] max-h-[320px] min-h-[220px] overflow-hidden sm:max-h-[380px]"
+                className="relative aspect-[3/4] max-h-[320px] min-h-[220px] overflow-hidden transition-transform duration-700 group-hover:scale-[1.02] sm:max-h-[380px]"
                 style={{ background: 'var(--bg-cream)' }}
               >
-                <img
-                  src={srv.image}
-                  alt={srv.name}
-                  className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
-                  loading="lazy"
-                  onError={(e) => {
-                    const img = e.currentTarget;
-                    img.style.display = 'none';
-                    const fb = img.nextElementSibling as HTMLElement | null;
-                    if (fb) fb.style.removeProperty('display');
-                  }}
-                />
-                <div
-                  className="absolute inset-0 hidden flex-col items-center justify-center gap-2"
-                  style={{ background: '#FDF8F5' }}
-                >
-                  <span
-                    className="text-[11px] font-semibold uppercase tracking-[0.22em]"
-                    style={{ color: '#003D5B' }}
-                  >
-                    Imagen de Amore
-                  </span>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                <ServiceIllustration variant={resolveIllustration(srv)} className="absolute inset-0" />
+                {/* Vignette superior sutil para legibilidad de los badges */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/12 via-transparent to-transparent" />
                 <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">
                   {srv.badges.map((b) => (
                     <span
                       key={b}
                       className="rounded-full px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] backdrop-blur-sm"
                       style={{
-                        background: BADGE_STYLE[b]?.bg ?? 'rgba(255,255,255,0.7)',
+                        background: BADGE_STYLE[b]?.bg ?? 'rgba(255,255,255,0.78)',
                         color: BADGE_STYLE[b]?.color ?? '#003D5B',
                       }}
                     >

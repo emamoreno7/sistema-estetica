@@ -6,6 +6,8 @@ import { LandingHeader } from './LandingHeader';
 import { ServiciosSection } from './ServiciosSection';
 import { ConversionSection } from './ConversionSection';
 import { LandingFooter } from './LandingFooter';
+import { HeroCinematicBg } from './HeroCinematicBg';
+import { AntesYDespuesSection } from './AntesYDespuesSection';
 
 type Props = {
   onEnter: () => void;
@@ -21,72 +23,7 @@ export function LandingPage({ onEnter, onRegister }: Props) {
         className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center"
         style={{ paddingTop: '5rem', paddingBottom: '4rem' }}
       >
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div
-            className="absolute -left-40 top-[5%] h-[560px] w-[560px] rounded-full blur-3xl"
-            style={{ background: 'rgba(242,215,213,0.45)' }}
-          />
-          <div
-            className="absolute -right-32 top-[18%] h-[440px] w-[440px] rounded-full blur-3xl"
-            style={{ background: 'rgba(191,201,162,0.32)' }}
-          />
-          <div
-            className="absolute bottom-[8%] left-[25%] h-[380px] w-[380px] rounded-full blur-3xl"
-            style={{ background: 'rgba(242,215,213,0.28)' }}
-          />
-          <div
-            className="absolute left-[55%] top-[55%] h-[260px] w-[260px] rounded-full blur-3xl"
-            style={{ background: 'rgba(253,230,200,0.22)' }}
-          />
-        </div>
-
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ opacity: 0.18 }}>
-          <svg className="absolute left-[2%] top-[20%]" width="160" height="260" viewBox="0 0 160 260" fill="none">
-            <path
-              d="M80 250 Q70 180 60 140 Q40 90 10 60"
-              stroke="#BFC9A2"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              fill="none"
-            />
-            <path d="M60 140 Q30 130 10 110" stroke="#BFC9A2" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-            <path d="M70 175 Q45 165 28 148" stroke="#BFC9A2" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-            <ellipse cx="10" cy="60" rx="14" ry="22" transform="rotate(-30 10 60)" fill="#BFC9A2" />
-            <ellipse cx="10" cy="110" rx="12" ry="18" transform="rotate(-45 10 110)" fill="#BFC9A2" />
-            <ellipse cx="28" cy="148" rx="10" ry="16" transform="rotate(-20 28 148)" fill="#BFC9A2" />
-          </svg>
-          <svg
-            className="absolute right-[2%] top-[20%]"
-            width="160"
-            height="260"
-            viewBox="0 0 160 260"
-            fill="none"
-            style={{ transform: 'scaleX(-1)' }}
-          >
-            <path
-              d="M80 250 Q70 180 60 140 Q40 90 10 60"
-              stroke="#F2D7D5"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              fill="none"
-            />
-            <path d="M60 140 Q30 130 10 110" stroke="#F2D7D5" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-            <path d="M70 175 Q45 165 28 148" stroke="#F2D7D5" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-            <ellipse cx="10" cy="60" rx="14" ry="22" transform="rotate(-30 10 60)" fill="#F2D7D5" />
-            <ellipse cx="10" cy="110" rx="12" ry="18" transform="rotate(-45 10 110)" fill="#F2D7D5" />
-            <ellipse cx="28" cy="148" rx="10" ry="16" transform="rotate(-20 28 148)" fill="#F2D7D5" />
-          </svg>
-          <svg
-            className="absolute left-1/2 top-[12%] -translate-x-1/2"
-            width="80"
-            height="40"
-            viewBox="0 0 80 40"
-            fill="none"
-          >
-            <ellipse cx="20" cy="20" rx="16" ry="8" transform="rotate(-20 20 20)" fill="#F2D7D5" />
-            <ellipse cx="60" cy="20" rx="14" ry="7" transform="rotate(20 60 20)" fill="#BFC9A2" />
-          </svg>
-        </div>
+        <HeroCinematicBg />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.88 }}
@@ -218,6 +155,8 @@ export function LandingPage({ onEnter, onRegister }: Props) {
       </section>
 
       <ServiciosSection />
+
+      <AntesYDespuesSection />
 
       <ConversionSection onRegister={onRegister} />
       <LandingFooter />
