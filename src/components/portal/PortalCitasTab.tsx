@@ -329,7 +329,14 @@ function ProximaHeroDesdeDb(props: {
     durationMinutes: 60,
   });
 
-  const estadoLbl = cita.estado === 'confirmado' ? 'Confirmada' : 'Pendiente de confirmación';
+  const estadoLbl =
+    cita.estado === 'confirmado'
+      ? '🟢 Confirmada'
+      : cita.estado === 'pendiente'
+        ? '🟡 Pendiente de confirmación'
+        : cita.estado === 'realizado'
+          ? '🔵 Realizada'
+          : '🔴 Cancelada';
 
   return (
     <motion.div
@@ -666,7 +673,8 @@ function CitasBookingModal(props: {
         servicio,
         fechaYmd: fechaStr,
         hora,
-        estado: 'confirmado',
+        // Solicitud — el admin debe confirmar desde el panel.
+        estado: 'pendiente',
       });
       if (error || !cita) {
         setSlotsWarn(error ?? 'No se pudo guardar');
@@ -879,7 +887,7 @@ function CitasBookingModal(props: {
                   }}
                 >
                   {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-                  {saving ? 'Guardando…' : 'Guardar mi turno (Paso 3)'}
+                  {saving ? 'Enviando solicitud…' : 'Solicitar este turno'}
                 </motion.button>
 
                 {!canSubmit && wizardStep === 2 ? (
@@ -954,7 +962,11 @@ function BookingSuccessCrossSellModal(props: {
       >
         <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-[#BFC9A2]" />
         <p className="text-center text-serif-premium text-lg font-semibold leading-relaxed" style={{ color: 'var(--primary-navy)' }}>
-          Quedo reservado tu turno. Ahí te escribimos a tu teléfono. Nos vemos.
+          Tu solicitud llegó a recepción.
+        </p>
+        <p className="mt-2 text-center text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+          Vamos a confirmarte el turno por WhatsApp en breve. Mientras tanto figura como{' '}
+          <strong className="text-[#003D5B]">pendiente</strong> en tu agenda.
         </p>
         <p className="mt-4 text-center text-xs" style={{ color: 'var(--text-muted)' }}>
           {props.cita.servicio} · {format(fecha, "d 'de' MMMM", { locale: es })} a las{' '}
