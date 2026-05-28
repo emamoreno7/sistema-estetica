@@ -1,23 +1,26 @@
 /**
- * Fondo cinemático para el hero del home.
+ * Fondo cinemático "estilo Apple keynote" para el hero del home.
  *
- * Si existe /hero-loop.mp4 en /public, lo renderiza como video en autoplay
- * loop mute (compatible con todos los browsers modernos). Si el video falla
- * o tarda en cargar, se muestra el fallback animado en SVG/CSS: orbes de
- * gradiente flotando con parallax + partículas en órbita + capas de blur
- * que simulan profundidad.
+ * Capas (de abajo hacia arriba):
+ *   1. Aurora mesh gradient en CSS conic + radial con animación continua.
+ *   2. Spotlight de luz cálida que sigue el cursor (Apple-style).
+ *   3. Capas con mix-blend-mode para profundidad y "drama".
+ *   4. Líneas decorativas SVG con dash animado.
+ *   5. Partículas con trayectorias diversas (no todas iguales).
+ *   6. Película de grano sutil arriba de todo.
  *
- * El fallback es lo bastante bonito como para que el sitio se vea bien
- * sin video; el video sólo es un "premium upgrade" opcional.
+ * Si existe /hero-loop.mp4 en /public lo renderiza encima de las capas con
+ * blend overlay para mezclar mejor (más cinemático que dejarlo en bruto).
+ * Si no, el fallback animado por sí solo ya tiene fuerza visual.
+ *
+ * Respeta prefers-reduced-motion: si está activo, queda todo estático.
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 
 type Props = {
-  /** Path al video. Por defecto /hero-loop.mp4 (poné el archivo en /public). */
   videoSrc?: string;
-  /** Path al póster del video. Por defecto /hero-poster.jpg. */
   posterSrc?: string;
 };
 
@@ -29,17 +32,30 @@ export function HeroCinematicBg({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const reduce = useReducedMotion();
 
+  // Cursor tracking para el spotlight (con spring suave estilo Apple)
+  const cursorX = useMotionValue(50);
+  const cursorY = useMotionValue(30);
+  const smoothX = useSpring(cursorX, { stiffness: 50, damping: 25 });
+  const smoothY = useSpring(cursorY, { stiffness: 50, damping: 25 });
+
   useEffect(() => {
-    // Si el browser tiene "prefers-reduced-motion", no intentamos cargar el video.
+    if (reduce) return;
+    const handle = (e: MouseEvent) => {
+      cursorX.set((e.clientX / window.innerWidth) * 100);
+      cursorY.set((e.clientY / window.innerHeight) * 100);
+    };
+    window.addEventListener('mousemove', handle);
+    return () => window.removeEventListener('mousemove', handle);
+  }, [cursorX, cursorY, reduce]);
+
+  useEffect(() => {
     if (reduce) return;
     const v = videoRef.current;
     if (!v) return;
-
     const onCanPlay = () => setVideoOk(true);
     const onError = () => setVideoOk(false);
     v.addEventListener('canplaythrough', onCanPlay);
     v.addEventListener('error', onError);
-    // Disparar la carga
     v.load();
     return () => {
       v.removeEventListener('canplaythrough', onCanPlay);
@@ -49,7 +65,30 @@ export function HeroCinematicBg({
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {/* Capa 1 — Video (sólo se muestra si carga OK). */}
+      {/* ─── Capa 0: base cream con leve degradado ─── */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(180deg, #FDF8F5 0%, #F8ECE3 40%, #FDF8F5 100%)',
+        }}
+      />
+
+      {/* ─── Capa 1: Aurora mesh — 4 radial gradients en movimiento ─── */}
+      <Aurora reduceMotion={!!reduce} />
+
+      {/* ─── Capa 2: Spotlight que sigue el cursor ─── */}
+      {!reduce ? <SpotlightCursor smoothX={smoothX} smoothY={smoothY} /> : null}
+
+      {/* ─── Capa 3: Halos con blur grandes — el "dream look" ─── */}
+      <Halos reduceMotion={!!reduce} />
+
+      {/* ─── Capa 4: Líneas decorativas SVG ─── */}
+      <DecorativeLines reduceMotion={!!reduce} />
+
+      {/* ─── Capa 5: Partículas variadas ─── */}
+      <Particles reduceMotion={!!reduce} />
+
+      {/* ─── Capa 6: Video opcional (encima de fallback, debajo del grano) ─── */}
       {!reduce ? (
         <video
           ref={videoRef}
@@ -61,163 +100,272 @@ export function HeroCinematicBg({
           playsInline
           preload="metadata"
           aria-hidden="true"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-            videoOk ? 'opacity-100' : 'opacity-0'
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1500ms] ${
+            videoOk ? 'opacity-60' : 'opacity-0'
           }`}
-          style={{ filter: 'saturate(0.8) brightness(1.02)' }}
+          style={{ mixBlendMode: 'soft-light' }}
         />
       ) : null}
 
-      {/* Capa 2 — Veladura cinematográfica encima del video para tinte cálido. */}
-      {videoOk ? (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(180deg, rgba(253,248,245,0.65) 0%, rgba(253,248,245,0.35) 40%, rgba(253,248,245,0.55) 75%, rgba(253,248,245,0.9) 100%)',
-          }}
-        />
-      ) : null}
+      {/* ─── Capa 7: Grano de película sutil ─── */}
+      <FilmGrain />
 
-      {/* Capa 3 — Fallback SIEMPRE renderizado debajo, con menor opacidad si hay video. */}
+      {/* ─── Capa 8: Veladura inferior para legibilidad del botón "Descubrí más" ─── */}
       <div
-        className="absolute inset-0 transition-opacity duration-1000"
-        style={{ opacity: videoOk ? 0.35 : 1 }}
-      >
-        <CinematicFallback reduceMotion={!!reduce} />
-      </div>
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-32"
+        style={{
+          background: 'linear-gradient(180deg, transparent 0%, rgba(253,248,245,0.5) 100%)',
+        }}
+      />
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Fallback: orbes de gradiente + partículas + curvas orgánicas en movimiento
+// Aurora mesh — 4 radials enormes que se mueven en bucles desfasados
 // ─────────────────────────────────────────────────────────────────────────────
 
-function CinematicFallback({ reduceMotion }: { reduceMotion: boolean }) {
-  // Partículas estáticas distribuidas: en runtime se animan con framer
-  const particles = Array.from({ length: 14 }).map((_, i) => ({
-    id: i,
-    x: 5 + ((i * 37) % 90),
-    y: 8 + ((i * 53) % 84),
-    size: 2 + ((i * 7) % 5),
-    delay: (i * 0.4) % 3,
-    duration: 6 + (i % 5),
-  }));
+function Aurora({ reduceMotion }: { reduceMotion: boolean }) {
+  const blobs = [
+    {
+      color: 'rgba(242,180,200,0.55)', // rose pop
+      anim: { x: ['-10%', '30%', '-15%', '-10%'], y: ['-15%', '20%', '40%', '-15%'] },
+      duration: 24,
+      blendMode: 'multiply' as const,
+      size: 900,
+    },
+    {
+      color: 'rgba(191,201,162,0.55)', // sage
+      anim: { x: ['100%', '60%', '110%', '100%'], y: ['10%', '50%', '20%', '10%'] },
+      duration: 28,
+      blendMode: 'multiply' as const,
+      size: 850,
+    },
+    {
+      color: 'rgba(255,210,150,0.50)', // warm peach
+      anim: { x: ['40%', '70%', '20%', '40%'], y: ['80%', '40%', '90%', '80%'] },
+      duration: 32,
+      blendMode: 'screen' as const,
+      size: 800,
+    },
+    {
+      color: 'rgba(0,61,91,0.30)', // navy deep
+      anim: { x: ['-20%', '20%', '-5%', '-20%'], y: ['60%', '90%', '50%', '60%'] },
+      duration: 36,
+      blendMode: 'multiply' as const,
+      size: 950,
+    },
+  ];
 
   return (
     <div className="absolute inset-0">
-      {/* Orbes de gradiente (profundidad) */}
-      <motion.div
-        animate={
-          reduceMotion
-            ? undefined
-            : { x: [0, 30, -10, 0], y: [0, -25, 15, 0], scale: [1, 1.08, 0.96, 1] }
-        }
-        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -left-40 top-[5%] h-[640px] w-[640px] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(242,215,213,0.55), rgba(242,215,213,0))' }}
-      />
-      <motion.div
-        animate={
-          reduceMotion
-            ? undefined
-            : { x: [0, -35, 15, 0], y: [0, 25, -10, 0], scale: [1, 1.05, 0.98, 1] }
-        }
-        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -right-36 top-[14%] h-[520px] w-[520px] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(191,201,162,0.42), rgba(191,201,162,0))' }}
-      />
-      <motion.div
-        animate={
-          reduceMotion
-            ? undefined
-            : { x: [0, 20, -25, 0], y: [0, -15, 10, 0], scale: [1, 1.06, 0.97, 1] }
-        }
-        transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-[6%] left-[20%] h-[460px] w-[460px] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(253,230,200,0.40), rgba(253,230,200,0))' }}
-      />
-      <motion.div
-        animate={
-          reduceMotion
-            ? undefined
-            : { x: [0, -25, 18, 0], y: [0, 22, -16, 0] }
-        }
-        transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute left-[55%] top-[55%] h-[320px] w-[320px] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(0,61,91,0.18), rgba(0,61,91,0))' }}
-      />
-
-      {/* Curvas orgánicas en SVG con dash en movimiento — efecto "tejido" */}
-      <svg
-        className="absolute inset-0 h-full w-full"
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="xMidYMid slice"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="curveGradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#BFC9A2" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#F2D7D5" stopOpacity="0.0" />
-          </linearGradient>
-        </defs>
-        <motion.path
-          d="M0 400 Q360 280 720 360 T1440 320"
-          stroke="url(#curveGradient)"
-          strokeWidth="1.5"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={reduceMotion ? undefined : { pathLength: [0, 1, 1, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+      {blobs.map((b, i) => (
+        <motion.div
+          key={i}
+          aria-hidden="true"
+          className="absolute rounded-full blur-3xl"
+          style={{
+            width: b.size,
+            height: b.size,
+            left: 0,
+            top: 0,
+            background: `radial-gradient(circle, ${b.color}, transparent 70%)`,
+            mixBlendMode: b.blendMode,
+          }}
+          animate={reduceMotion ? undefined : b.anim}
+          transition={{ duration: b.duration, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <motion.path
-          d="M0 540 Q360 620 720 520 T1440 580"
-          stroke="url(#curveGradient)"
-          strokeWidth="1.2"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={reduceMotion ? undefined : { pathLength: [0, 1, 1, 0] }}
-          transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-        <motion.path
-          d="M0 720 Q360 660 720 720 T1440 700"
-          stroke="url(#curveGradient)"
-          strokeWidth="1"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={reduceMotion ? undefined : { pathLength: [0, 1, 1, 0] }}
-          transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-        />
-      </svg>
-
-      {/* Partículas flotando */}
-      {!reduceMotion
-        ? particles.map((p) => (
-            <motion.div
-              key={p.id}
-              animate={{
-                y: [0, -14, 0],
-                opacity: [0.3, 0.7, 0.3],
-              }}
-              transition={{
-                duration: p.duration,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: p.delay,
-              }}
-              className="absolute rounded-full"
-              style={{
-                left: `${p.x}%`,
-                top: `${p.y}%`,
-                width: `${p.size}px`,
-                height: `${p.size}px`,
-                background: 'radial-gradient(circle, rgba(255,255,255,0.85), rgba(255,255,255,0))',
-              }}
-            />
-          ))
-        : null}
+      ))}
     </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Spotlight cursor — círculo de luz cálida que sigue al puntero con delay
+// ─────────────────────────────────────────────────────────────────────────────
+
+function SpotlightCursor({
+  smoothX,
+  smoothY,
+}: {
+  smoothX: ReturnType<typeof useSpring>;
+  smoothY: ReturnType<typeof useSpring>;
+}) {
+  // Usamos CSS variables vía motion para que el browser repinte el gradient
+  // sin necesidad de re-render React.
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="absolute inset-0"
+      style={
+        {
+          background:
+            'radial-gradient(circle 500px at calc(var(--sx) * 1%) calc(var(--sy) * 1%), rgba(255,235,205,0.45), transparent 65%)',
+          mixBlendMode: 'soft-light',
+          '--sx': smoothX,
+          '--sy': smoothY,
+        } as React.CSSProperties
+      }
+    />
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Halos — capas con blur enorme para "dream look"
+// ─────────────────────────────────────────────────────────────────────────────
+
+function Halos({ reduceMotion }: { reduceMotion: boolean }) {
+  return (
+    <div className="absolute inset-0">
+      <motion.div
+        className="absolute left-[10%] top-[8%] h-[420px] w-[420px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,255,255,0.85), transparent 65%)',
+          filter: 'blur(50px)',
+        }}
+        animate={reduceMotion ? undefined : { scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute right-[8%] top-[60%] h-[480px] w-[480px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,240,220,0.7), transparent 65%)',
+          filter: 'blur(60px)',
+        }}
+        animate={reduceMotion ? undefined : { scale: [1, 1.18, 1], opacity: [0.35, 0.6, 0.35] }}
+        transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+      />
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Líneas decorativas — paths con dash animado
+// ─────────────────────────────────────────────────────────────────────────────
+
+function DecorativeLines({ reduceMotion }: { reduceMotion: boolean }) {
+  return (
+    <svg
+      className="absolute inset-0 h-full w-full"
+      viewBox="0 0 1440 900"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="lineGrad1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#003D5B" stopOpacity="0" />
+          <stop offset="50%" stopColor="#003D5B" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#003D5B" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="lineGrad2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#BFC9A2" stopOpacity="0" />
+          <stop offset="50%" stopColor="#BFC9A2" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#BFC9A2" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <motion.path
+        d="M-50 380 Q300 250 720 320 T1500 280"
+        stroke="url(#lineGrad1)"
+        strokeWidth="1.5"
+        fill="none"
+        initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
+        animate={reduceMotion ? undefined : { pathLength: [0, 1], opacity: [0, 1, 0] }}
+        transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.path
+        d="M-50 540 Q300 660 720 540 T1500 620"
+        stroke="url(#lineGrad2)"
+        strokeWidth="1.2"
+        fill="none"
+        initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
+        animate={reduceMotion ? undefined : { pathLength: [0, 1], opacity: [0, 1, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+      />
+      <motion.path
+        d="M-50 750 Q300 680 720 740 T1500 720"
+        stroke="url(#lineGrad1)"
+        strokeWidth="1"
+        fill="none"
+        initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
+        animate={reduceMotion ? undefined : { pathLength: [0, 1], opacity: [0, 0.7, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 6 }}
+      />
+    </svg>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Partículas con trayectorias variadas
+// ─────────────────────────────────────────────────────────────────────────────
+
+function Particles({ reduceMotion }: { reduceMotion: boolean }) {
+  if (reduceMotion) return null;
+  const particles = Array.from({ length: 22 }).map((_, i) => {
+    const seed = i * 73;
+    const x = (seed * 13) % 100;
+    const y = (seed * 17) % 100;
+    const size = 1.5 + ((seed * 7) % 5);
+    const driftX = ((seed * 11) % 60) - 30;
+    const driftY = -30 - ((seed * 5) % 50);
+    const duration = 9 + (seed % 12);
+    const delay = (seed % 50) / 10;
+    const color =
+      i % 3 === 0
+        ? 'rgba(255,235,200,0.95)'
+        : i % 3 === 1
+          ? 'rgba(255,255,255,0.8)'
+          : 'rgba(242,215,213,0.85)';
+    return { id: i, x, y, size, driftX, driftY, duration, delay, color };
+  });
+
+  return (
+    <div className="absolute inset-0">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            background: p.color,
+            boxShadow: `0 0 ${p.size * 4}px ${p.color}`,
+          }}
+          animate={{
+            x: [0, p.driftX, 0],
+            y: [0, p.driftY, 0],
+            opacity: [0, 0.9, 0],
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: p.delay,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Film grain — SVG con noise turbulence para textura sutil
+// ─────────────────────────────────────────────────────────────────────────────
+
+function FilmGrain() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="absolute inset-0 h-full w-full"
+      style={{ mixBlendMode: 'overlay', opacity: 0.22, pointerEvents: 'none' }}
+    >
+      <filter id="grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+      <rect width="100%" height="100%" filter="url(#grain)" />
+    </svg>
   );
 }
