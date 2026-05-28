@@ -242,10 +242,106 @@ export async function crearCitaAdmin(input: {
         error: 'Falta la migración 016 (creado_por_admin / nota_admin) en Supabase.',
       };
     }
+    if (flat.includes('foreign key') && flat.includes('citas')) {
+      return {
+        cita: null,
+        error: 'El cliente seleccionado es walk-in: aplicá la migración 017 para relajar la FK de citas.',
+      };
+    }
     return { cita: null, error: error.message };
   }
 
   return { cita: data as CitaClienteRow, error: null };
+}
+
+/** Da de alta un cliente "walk-in" (no se registró por el portal).
+ * Se marca como is_walkin = true y status = 'active' para que pueda
+ * usarse inmediatamente al agendar un turno desde el panel admin.
+ * Requiere migración 017. */
+export async function crearClienteWalkin(input: {
+  fullName: string;
+  phone: string;
+  email?: string;
+  tratamientoInteres?: string;
+}): Promise<{ cliente: ClienteOpcion | null; error: string | null }> {
+  const fullName = input.fullName.trim();
+  const phone = input.phone.trim();
+  const email = (input.email ?? '').trim();
+  const interes = (input.tratamientoInteres ?? '').trim();
+
+  if (!fullName) return { cliente: null, error: 'Ingresá el nombre del cliente.' };
+  if (!phone) return { cliente: null, error: 'Ingresá un teléfono de contacto.' };
+
+  const payload: Record<string, unknown> = {
+    full_name: fullName,
+    phone,
+    status: 'active',
+    is_approved: true,
+    is_walkin: true,
+  };
+  if (email) payload.email = email;
+  if (interes) payload.tratamiento_interes = interes;
+
+  const { data, error } = await supabase
+    .from('perfiles_clientes')
+    .insert(payload)
+    .select('id, full_name, phone, email')
+    .single();
+
+  if (error) {
+    const flat = `${error.code ?? ''}${error.message}`.toLowerCase();
+    if (flat.includes('row-level security')) {
+      return {
+        cliente: null,
+        error: 'Sin permiso para crear clientes. Verificá is_portal_admin() y la política portal_admin_manage_perfiles.',
+      };
+    }
+    if (flat.includes('column') && flat.includes('is_walkin')) {
+      return {
+        cliente: null,
+        error: 'Falta la migración 017 (is_walkin / clientes walk-in) en Supabase.',
+      };
+    }
+    if (flat.includes('foreign key') && flat.includes('auth.users')) {
+      return {
+        cliente: null,
+        error: 'La tabla aún exige FK a auth.users. Aplicá la migración 017 para permitir clientes walk-in.',
+      };
+    }
+    if (flat.includes('column') && flat.includes('email')) {
+      // El email es opcional: reintentar sin él
+      const retry = { ...payload };
+      delete retry.email;
+      const r = await supabase
+        .from('perfiles_clientes')
+        .insert(retry)
+        .select('id, full_name, phone')
+        .single();
+      if (r.error) return { cliente: null, error: r.error.message };
+      const p = r.data as { id: string; full_name?: string; phone?: string };
+      return {
+        cliente: {
+          id: p.id,
+          full_name: String(p.full_name ?? '').trim() || fullName,
+          phone: String(p.phone ?? '').trim() || phone,
+          email: '',
+        },
+        error: null,
+      };
+    }
+    return { cliente: null, error: error.message };
+  }
+
+  const p = data as { id: string; full_name?: string; phone?: string; email?: string };
+  return {
+    cliente: {
+      id: p.id,
+      full_name: String(p.full_name ?? '').trim() || fullName,
+      phone: String(p.phone ?? '').trim() || phone,
+      email: String(p.email ?? '').trim() || email,
+    },
+    error: null,
+  };
 }
 
 export async function actualizarEstadoCitaAdmin(

@@ -14,6 +14,7 @@ import {
   RefreshCw,
   Search,
   Trash2,
+  UserPlus,
   X,
 } from 'lucide-react';
 import { addDays, format, subDays } from 'date-fns';
@@ -24,7 +25,7 @@ import {
   filtrarFranjasDisponibles,
   generarFranjasComerciales,
 } from '@/lib/citasApi';
-import { CITAS_SERVICIOS_RESERVABLES } from '@/lib/citasConstants';
+import { serviciosCatalogo } from '@/data/serviciosCatalogo';
 import { WHATSAPP_ADMIN_PHONE } from '@/lib/whatsapp';
 import { getPortalAdminEmails, getPortalAdminUserIds } from '@/config/admin';
 import { AdminShell } from './AdminShell';
@@ -32,6 +33,7 @@ import {
   actualizarEstadoCitaAdmin,
   buscarClientesActivos,
   crearCitaAdmin,
+  crearClienteWalkin,
   eliminarCitaAdmin,
   fetchCitasPorFechaAdmin,
   fetchSolicitudesPendientesAdmin,
@@ -596,6 +598,14 @@ function NuevoTurnoModal(props: {
   const [buscando, setBuscando] = useState(false);
   const [cliente, setCliente] = useState<ClienteOpcion | null>(null);
 
+  // Sub-form "crear cliente nuevo"
+  const [mostrarCrearCliente, setMostrarCrearCliente] = useState(false);
+  const [nuevoNombre, setNuevoNombre] = useState('');
+  const [nuevoTel, setNuevoTel] = useState('');
+  const [nuevoEmail, setNuevoEmail] = useState('');
+  const [creandoCliente, setCreandoCliente] = useState(false);
+  const [crearClienteErr, setCrearClienteErr] = useState<string | null>(null);
+
   const [servicio, setServicio] = useState<string>('');
   const [fechaYmd, setFechaYmd] = useState<string>(props.fechaInicialYmd);
   const [hora, setHora] = useState<string>('');
@@ -745,6 +755,98 @@ function NuevoTurnoModal(props: {
                   Cambiar
                 </button>
               </div>
+            ) : mostrarCrearCliente ? (
+              <div className="rounded-2xl border border-[#BFC9A2]/45 bg-[#BFC9A2]/8 p-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#003D5B]">
+                    Nuevo cliente
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMostrarCrearCliente(false);
+                      setCrearClienteErr(null);
+                    }}
+                    className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/60"
+                  >
+                    ← Volver a buscar
+                  </button>
+                </div>
+                <div className="space-y-2">
+                  <label className="block">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+                      Nombre completo *
+                    </span>
+                    <input
+                      type="text"
+                      value={nuevoNombre}
+                      onChange={(e) => setNuevoNombre(e.target.value)}
+                      placeholder="Ej: María Pérez"
+                      className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+                      Teléfono / WhatsApp *
+                    </span>
+                    <input
+                      type="tel"
+                      value={nuevoTel}
+                      onChange={(e) => setNuevoTel(e.target.value)}
+                      placeholder="Ej: 2634123456"
+                      className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+                      Email (opcional)
+                    </span>
+                    <input
+                      type="email"
+                      value={nuevoEmail}
+                      onChange={(e) => setNuevoEmail(e.target.value)}
+                      placeholder="cliente@ejemplo.com"
+                      className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                    />
+                  </label>
+                </div>
+                {crearClienteErr ? (
+                  <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[11px] text-red-800">
+                    {crearClienteErr}
+                  </p>
+                ) : null}
+                <button
+                  type="button"
+                  disabled={creandoCliente}
+                  onClick={async () => {
+                    setCrearClienteErr(null);
+                    setCreandoCliente(true);
+                    const { cliente: nuevo, error } = await crearClienteWalkin({
+                      fullName: nuevoNombre,
+                      phone: nuevoTel,
+                      email: nuevoEmail,
+                    });
+                    setCreandoCliente(false);
+                    if (error || !nuevo) {
+                      setCrearClienteErr(error ?? 'No se pudo crear el cliente.');
+                      return;
+                    }
+                    setCliente(nuevo);
+                    setMostrarCrearCliente(false);
+                    setNuevoNombre('');
+                    setNuevoTel('');
+                    setNuevoEmail('');
+                  }}
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#003D5B] py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white disabled:opacity-50"
+                >
+                  {creandoCliente ? (
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  ) : (
+                    <UserPlus className="h-3.5 w-3.5" />
+                  )}
+                  {creandoCliente ? 'Creando…' : 'Guardar cliente'}
+                </button>
+              </div>
             ) : (
               <>
                 <div className="flex items-center gap-2 rounded-2xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2.5">
@@ -763,7 +865,7 @@ function NuevoTurnoModal(props: {
                   {opciones.length === 0 && !buscando ? (
                     <p className="px-4 py-3 text-xs text-[#7A746E]">
                       {termino.trim().length >= 2
-                        ? 'Sin coincidencias.'
+                        ? 'Sin coincidencias. Podés cargarlo desde abajo.'
                         : 'Mostrando clientes activos… escribí para filtrar.'}
                     </p>
                   ) : (
@@ -785,6 +887,18 @@ function NuevoTurnoModal(props: {
                     </ul>
                   )}
                 </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMostrarCrearCliente(true);
+                    setNuevoNombre(termino.trim());
+                    setCrearClienteErr(null);
+                  }}
+                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-[#003D5B]/25 bg-white/40 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[#003D5B] transition hover:border-[#003D5B]/45 hover:bg-white/70"
+                >
+                  <UserPlus className="h-3.5 w-3.5" />
+                  Crear cliente nuevo
+                </button>
               </>
             )}
           </section>
@@ -805,10 +919,14 @@ function NuevoTurnoModal(props: {
                   className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2.5 text-sm text-[#003D5B] outline-none"
                 >
                   <option value="">— Elegir —</option>
-                  {CITAS_SERVICIOS_RESERVABLES.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
+                  {serviciosCatalogo.map((cat) => (
+                    <optgroup key={cat.id} label={cat.label}>
+                      {cat.services.map((s) => (
+                        <option key={s.name} value={s.name}>
+                          {s.name}
+                        </option>
+                      ))}
+                    </optgroup>
                   ))}
                 </select>
               </label>
