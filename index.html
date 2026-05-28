@@ -13,6 +13,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Amore Centro Di Bellezza — Mi Portal</title>
+    <!--
+      SPA route restore for GitHub Pages.
+      Si entramos vía 404.html, este script reconstruye la URL real
+      desde el query string antes de que React Router se monte.
+      Sin este snippet, deep-linking a /admin o /portal devuelve 404.
+    -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(
+            null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      })(window.location);
+    </script>
   </head>
   <body>
     <div id="root"></div>

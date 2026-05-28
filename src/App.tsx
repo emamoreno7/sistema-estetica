@@ -9,6 +9,11 @@ import ClientSignupPage from '@/features/auth/ClientSignupPage';
 import { PortalGate } from '@/features/portal/PortalGate';
 import AdminPage from '@/features/admin/AdminPage';
 
+// Si el sitio se sirve en subpath (ej. GitHub Pages: /Estetica-Gestion/),
+// Vite expone import.meta.env.BASE_URL con trailing slash. React Router
+// quiere el basename sin trailing slash.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 function AppRoutes() {
   return (
     <Routes>
@@ -26,7 +31,7 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <AuthProvider>
         <CitasDataProvider>
           <RootLayout>
