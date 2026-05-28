@@ -1,6 +1,24 @@
 import { Mail, MessageCircle } from 'lucide-react';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
 
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M13.5 21v-7.5h2.55l.38-2.96H13.5V8.65c0-.86.24-1.45 1.47-1.45h1.57V4.55a21.4 21.4 0 0 0-2.29-.12c-2.27 0-3.83 1.39-3.83 3.94v2.18H8v2.96h2.42V21h3.08Z" />
+    </svg>
+  );
+}
+
 // Teléfono internacional del desarrollador (sin "+" para el link de wa.me)
 const DEV_PHONE = '5492634340284';
 const DEV_PHONE_DISPLAY = '+54 9 2634 340284';
@@ -32,30 +50,48 @@ export function LandingFooter() {
         <div className="grid gap-6 sm:grid-cols-3">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">Ubicación</p>
-            <p className="mt-2 text-sm leading-6 text-[#7A746E]">
-              Rivadavia
+            <a
+              href="https://maps.google.com/?q=Wenceslao+N%C3%BA%C3%B1ez+735,+Rivadavia,+Mendoza"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-block text-sm leading-6 text-[#7A746E] transition-colors hover:text-[#003D5B]"
+            >
+              Wenceslao Nuñez 735
               <br />
-              Mendoza, Argentina
-            </p>
+              Rivadavia, Mendoza
+            </a>
           </div>
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">Redes</p>
-            <a
-              href="https://instagram.com/amore.mendoza"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-block text-sm leading-6 text-[#7A746E] underline underline-offset-4 decoration-[#8A8178]/20 transition-colors hover:text-[#003D5B] hover:decoration-[#4A443F]/40"
-            >
-              @amore.mendoza
-            </a>
-            <a
-              href={buildWhatsAppHref('consulta general')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-block text-sm font-medium leading-6 text-[#003D5B] underline underline-offset-4 decoration-[#25D366]/40 transition-colors hover:text-[#25D366]"
-            >
-              WhatsApp
-            </a>
+            <div className="mt-2 flex flex-col items-center gap-1.5 sm:items-start">
+              <a
+                href="https://instagram.com/amorecentrodibellezza"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm leading-6 text-[#7A746E] transition-colors hover:text-[#003D5B]"
+              >
+                <InstagramIcon className="h-3.5 w-3.5" />
+                @amorecentrodibellezza
+              </a>
+              <a
+                href="https://facebook.com/amorecentrodibellezza"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm leading-6 text-[#7A746E] transition-colors hover:text-[#003D5B]"
+              >
+                <FacebookIcon className="h-3.5 w-3.5" />
+                /amorecentrodibellezza
+              </a>
+              <a
+                href={buildWhatsAppHref('consulta general')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium leading-6 text-[#003D5B] transition-colors hover:text-[#25D366]"
+              >
+                <MessageCircle className="h-3.5 w-3.5" />
+                WhatsApp
+              </a>
+            </div>
           </div>
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">Horarios</p>

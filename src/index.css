@@ -141,6 +141,17 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   HERO LOGO (responsive)
+   ═══════════════════════════════════════════════════════════════ */
+.hero-logo-ring {
+  width: 200px;
+  height: 200px;
+}
+@media (min-width: 640px)  { .hero-logo-ring { width: 240px; height: 240px; } }
+@media (min-width: 768px)  { .hero-logo-ring { width: 260px; height: 260px; } }
+@media (min-width: 1024px) { .hero-logo-ring { width: 290px; height: 290px; } }
+
+/* ═══════════════════════════════════════════════════════════════
    TIPOGRAFÍA AUXILIAR
    ═══════════════════════════════════════════════════════════════ */
 .text-serif-premium {
