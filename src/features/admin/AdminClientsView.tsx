@@ -3,6 +3,7 @@ import { useOutletContext, useSearchParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   CheckCircle2,
+  ClipboardList,
   FileText,
   Loader2,
   RefreshCw,
@@ -23,6 +24,7 @@ import {
   listConsentimientosAdmin,
   type ConsentimientoRow,
 } from '@/lib/consentimiento';
+import { FichaClinicaModal } from '@/components/FichaClinicaModal';
 import { AdminShell } from './AdminShell';
 import {
   bloquearCliente,
@@ -73,6 +75,7 @@ export default function AdminClientsView() {
   const [consentView, setConsentView] = useState<{ row: PerfilClienteRow; consent: ConsentimientoRow } | null>(
     null
   );
+  const [fichaTarget, setFichaTarget] = useState<PerfilClienteRow | null>(null);
 
   const statusFilter = statusFromParam(searchParams.get('status'));
 
@@ -315,6 +318,13 @@ export default function AdminClientsView() {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-wrap items-center justify-end gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setFichaTarget(p)}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-[#003D5B]/15 bg-white px-3 py-2 text-[11px] font-semibold text-[#003D5B] hover:bg-[#F2D7D5]/20"
+                        >
+                          <ClipboardList className="h-3.5 w-3.5" /> Ficha
+                        </button>
                         {(p.status === 'pending' || p.status === 'blocked') && (
                           <button
                             type="button"
@@ -363,6 +373,20 @@ export default function AdminClientsView() {
         onClose={() => setActivateTarget(null)}
         onActivated={() => void load()}
       />
+
+      <AnimatePresence>
+        {fichaTarget ? (
+          <FichaClinicaModal
+            clienteId={fichaTarget.id}
+            clienteNombre={fichaTarget.full_name}
+            isAdmin
+            onClose={() => {
+              setFichaTarget(null);
+              void load();
+            }}
+          />
+        ) : null}
+      </AnimatePresence>
 
       <AnimatePresence>
         {consentView ? (

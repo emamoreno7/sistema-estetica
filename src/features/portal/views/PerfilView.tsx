@@ -17,10 +17,12 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale/es';
+import { ClipboardList } from 'lucide-react';
 import { usePortalCliente } from '@/context/PortalClienteContext';
 import { useConsentimiento } from '@/context/ConsentimientoContext';
 import { useAuth } from '@/context/AuthContext';
 import { ConsentimientoModal } from '@/components/portal/ConsentimientoModal';
+import { FichaClinicaModal } from '@/components/FichaClinicaModal';
 
 export function PerfilView() {
   const {
@@ -40,6 +42,7 @@ export function PerfilView() {
   const { consentimiento, firmado, loading: consentLoading, noMigrado, setConsentimiento } =
     useConsentimiento();
   const [consentOpen, setConsentOpen] = useState(false);
+  const [fichaOpen, setFichaOpen] = useState(false);
 
   const sucursalHint =
     activeTreatment?.sucursal ?? 'Coordinamos sucursal y horarios en recepción o por WhatsApp';
@@ -210,6 +213,25 @@ export function PerfilView() {
         </div>
       </motion.div>
 
+      <motion.button
+        type="button"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        onClick={() => setFichaOpen(true)}
+        className="glass-strong flex w-full items-center gap-4 rounded-2xl p-5 text-left transition hover:shadow-md"
+      >
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#F2D7D5] to-[#BFC9A2] shadow-sm">
+          <ClipboardList className="h-5 w-5 text-white" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-serif-premium text-base font-bold text-[#003D5B]">Mi ficha de salud</h3>
+          <p className="text-xs text-[#7A746E]">
+            Completá tu cuestionario de salud y antecedentes para que tu profesional te atienda mejor.
+          </p>
+        </div>
+      </motion.button>
+
       <div>
         <h3 className="text-serif-premium mb-3 text-base font-bold text-[#003D5B]">Configuración</h3>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -251,6 +273,16 @@ export function PerfilView() {
               setConsentimiento(c);
               setConsentOpen(false);
             }}
+          />
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {fichaOpen && uid ? (
+          <FichaClinicaModal
+            clienteId={uid}
+            clienteNombre={displayName}
+            onClose={() => setFichaOpen(false)}
           />
         ) : null}
       </AnimatePresence>
