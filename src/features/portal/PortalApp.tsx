@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
 import { PortalClienteProvider } from '@/context/PortalClienteContext';
 import { PortalNotificationsProvider } from '@/context/PortalNotificationsContext';
+import { ConsentimientoProvider } from '@/context/ConsentimientoContext';
 import VirtualAssistantChat from '@/components/VirtualAssistantChat';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { isPortalAdmin } from '@/config/admin';
@@ -47,6 +48,7 @@ export function PortalApp() {
   return (
     <PortalClienteProvider sessionUser={user}>
       <PortalNotificationsProvider>
+        <ConsentimientoProvider>
         <div className="relative min-h-screen" style={{ background: 'var(--bg-cream)' }}>
           <div
             className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
@@ -119,6 +121,7 @@ export function PortalApp() {
           <VirtualAssistantChat whatsappHref={buildWhatsAppHref} forPortal />
           <WhatsAppFloatingButton forPortal />
         </div>
+        </ConsentimientoProvider>
       </PortalNotificationsProvider>
     </PortalClienteProvider>
   );

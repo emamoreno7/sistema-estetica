@@ -15,6 +15,7 @@ import {
   MessageCircle,
   Phone,
   Plus,
+  ShieldAlert,
   Stethoscope,
   X,
 } from 'lucide-react';
@@ -36,6 +37,8 @@ import { es } from 'date-fns/locale/es';
 import { useAuth } from '@/context/AuthContext';
 import { useCitasData } from '@/context/CitasDataContext';
 import { usePortalNotifications } from '@/context/PortalNotificationsContext';
+import { useConsentimiento } from '@/context/ConsentimientoContext';
+import { ConsentimientoModal } from '@/components/portal/ConsentimientoModal';
 import type { PortalActiveTreatment } from '@/lib/portalTreatment';
 import type { CitaClienteRow } from '@/lib/citasApi';
 import {
@@ -121,8 +124,11 @@ export function PortalCitasTab(props: {
 
   const { proximaCita, proximaLoading, refreshProximaCita, setUltimaReserva } = useCitasData();
   const { notifyCitaConfirmada } = usePortalNotifications();
+  const { firmado: consentFirmado, noMigrado: consentNoMigrado, setConsentimiento } =
+    useConsentimiento();
 
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [consentOpen, setConsentOpen] = useState(false);
   const [successSaved, setSuccessSaved] = useState<CitaClienteRow | null>(null);
 
   const showDbHero =
@@ -131,7 +137,15 @@ export function PortalCitasTab(props: {
   const planHero =
     activeTreatment && activeTreatment.fechaPlanPendiente === false ? activeTreatment : null;
 
-  const openBooking = () => setBookingOpen(true);
+  // Gate: si no firmó el consentimiento (y el módulo está habilitado),
+  // primero pedimos la firma; al firmar, abrimos la reserva.
+  const openBooking = () => {
+    if (!consentFirmado && !consentNoMigrado) {
+      setConsentOpen(true);
+      return;
+    }
+    setBookingOpen(true);
+  };
 
   const onBookingDone = async (saved: CitaClienteRow | null) => {
     await refreshProximaCita();
@@ -165,6 +179,26 @@ export function PortalCitasTab(props: {
           Mis citas
         </p>
       </motion.section>
+
+      {!consentFirmado && !consentNoMigrado ? (
+        <motion.button
+          type="button"
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          onClick={() => setConsentOpen(true)}
+          className="flex w-full items-start gap-3 rounded-2xl border border-amber-300/80 bg-amber-50 px-4 py-3.5 text-left"
+        >
+          <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+          <span>
+            <span className="block text-sm font-semibold text-amber-950">
+              Falta firmar tu consentimiento informado
+            </span>
+            <span className="mt-0.5 block text-xs text-amber-900/85">
+              Es obligatorio antes de reservar. Tocá acá para leerlo y firmarlo (1 minuto).
+            </span>
+          </span>
+        </motion.button>
+      ) : null}
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -285,6 +319,26 @@ export function PortalCitasTab(props: {
           </div>
         </motion.div>
       ) : null}
+
+      <AnimatePresence>
+        {consentOpen && uid && (
+          <ConsentimientoModal
+            clienteId={uid}
+            nombreSugerido={clienteDisplayName(
+              session?.user?.email ?? undefined,
+              (session?.user?.user_metadata ?? {}) as Record<string, unknown>,
+              perfilCliente?.full_name
+            )}
+            onClose={() => setConsentOpen(false)}
+            onFirmado={(c) => {
+              setConsentimiento(c);
+              setConsentOpen(false);
+              // Tras firmar, abrimos directamente la reserva
+              setBookingOpen(true);
+            }}
+          />
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {bookingOpen && uid && (

@@ -1,17 +1,28 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useOutletContext, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
+  CheckCircle2,
+  FileText,
   Loader2,
   RefreshCw,
   Search,
+  ShieldAlert,
   ShieldOff,
   Trash2,
   UserCheck,
   Users,
+  X,
 } from 'lucide-react';
+import { format } from 'date-fns';
+import { es as esLocale } from 'date-fns/locale';
 import { getPortalAdminEmails, getPortalAdminUserIds } from '@/config/admin';
 import type { PerfilClienteRow, PerfilRowStatus } from '@/lib/perfilCliente';
+import {
+  consentimientoEstaFirmado,
+  listConsentimientosAdmin,
+  type ConsentimientoRow,
+} from '@/lib/consentimiento';
 import { AdminShell } from './AdminShell';
 import {
   bloquearCliente,
@@ -57,6 +68,12 @@ export default function AdminClientsView() {
 
   const [activateTarget, setActivateTarget] = useState<PerfilClienteRow | null>(null);
 
+  // Consentimientos por cliente_id
+  const [consentMap, setConsentMap] = useState<Map<string, ConsentimientoRow>>(new Map());
+  const [consentView, setConsentView] = useState<{ row: PerfilClienteRow; consent: ConsentimientoRow } | null>(
+    null
+  );
+
   const statusFilter = statusFromParam(searchParams.get('status'));
 
   const load = useCallback(async () => {
@@ -66,6 +83,14 @@ export default function AdminClientsView() {
     if (error) setListError(error);
     else setRows(r);
     setLoading(false);
+
+    // Cargar consentimientos en paralelo (no bloquea la tabla si falla)
+    if (!error && r.length > 0) {
+      const { map } = await listConsentimientosAdmin(r.map((x) => x.id));
+      setConsentMap(map);
+    } else {
+      setConsentMap(new Map());
+    }
   }, []);
 
   useEffect(() => {
@@ -244,6 +269,9 @@ export default function AdminClientsView() {
                   <th className="min-w-[140px] px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">
                     Estado
                   </th>
+                  <th className="min-w-[150px] px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">
+                    Consentimiento
+                  </th>
                   <th className="whitespace-nowrap px-6 py-4 text-right text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">
                     Acciones
                   </th>
@@ -262,6 +290,28 @@ export default function AdminClientsView() {
                     <td className="px-6 py-4 text-[#7A746E]">{p.phone}</td>
                     <td className="px-6 py-4">
                       <StatusPill status={p.status} />
+                    </td>
+                    <td className="px-6 py-4">
+                      {(() => {
+                        const c = consentMap.get(p.id);
+                        const ok = consentimientoEstaFirmado(c ?? null);
+                        if (ok && c) {
+                          return (
+                            <button
+                              type="button"
+                              onClick={() => setConsentView({ row: p, consent: c })}
+                              className="inline-flex items-center gap-1.5 rounded-full bg-[#BFC9A2]/30 px-3 py-1.5 text-[11px] font-semibold text-[#003D5B] transition hover:bg-[#BFC9A2]/50"
+                            >
+                              <CheckCircle2 className="h-3.5 w-3.5" /> Firmado
+                            </button>
+                          );
+                        }
+                        return (
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1.5 text-[11px] font-semibold text-amber-900">
+                            <ShieldAlert className="h-3.5 w-3.5" /> Pendiente
+                          </span>
+                        );
+                      })()}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-wrap items-center justify-end gap-2">
@@ -313,6 +363,112 @@ export default function AdminClientsView() {
         onClose={() => setActivateTarget(null)}
         onActivated={() => void load()}
       />
+
+      <AnimatePresence>
+        {consentView ? (
+          <motion.div
+            className="fixed inset-0 z-[940] flex items-center justify-center p-4 sm:p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <button
+              type="button"
+              aria-label="Cerrar"
+              className="absolute inset-0 backdrop-blur-sm"
+              style={{ background: 'rgba(0,61,91,0.42)' }}
+              onClick={() => setConsentView(null)}
+            />
+            <motion.div
+              className="relative z-[941] w-full max-w-md overflow-hidden rounded-3xl bg-[#FDF8F5] p-6 shadow-2xl sm:p-7"
+              style={{ border: '1px solid rgba(242,215,213,0.75)', boxShadow: '0 28px 56px rgba(0,61,91,0.18)' }}
+              initial={{ scale: 0.96, y: 12 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.96, y: 12 }}
+            >
+              <button
+                type="button"
+                className="absolute right-5 top-5 rounded-full p-2 text-[#003D5B]/45 hover:bg-[#F2D7D5]/45"
+                onClick={() => setConsentView(null)}
+                aria-label="Cerrar"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <div className="mb-3 flex items-center gap-2.5">
+                <div className="rounded-xl bg-[#003D5B] p-2">
+                  <FileText className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-serif-premium text-lg font-bold text-[#003D5B]">
+                    Consentimiento informado
+                  </h3>
+                  <p className="text-[11px] text-[#7A746E]">{consentView.row.full_name}</p>
+                </div>
+              </div>
+
+              <dl className="mt-4 space-y-3 text-sm">
+                <div className="flex justify-between gap-3">
+                  <dt className="text-[#7A746E]">Firmado por</dt>
+                  <dd className="text-right font-semibold text-[#003D5B]">
+                    {consentView.consent.nombre_firma}
+                  </dd>
+                </div>
+                {consentView.consent.dni ? (
+                  <div className="flex justify-between gap-3">
+                    <dt className="text-[#7A746E]">DNI</dt>
+                    <dd className="text-right font-semibold text-[#003D5B]">{consentView.consent.dni}</dd>
+                  </div>
+                ) : null}
+                <div className="flex justify-between gap-3">
+                  <dt className="text-[#7A746E]">Fecha</dt>
+                  <dd className="text-right font-semibold text-[#003D5B]">
+                    {consentView.consent.firmado_at
+                      ? format(new Date(consentView.consent.firmado_at), "d 'de' MMMM yyyy · HH:mm", {
+                          locale: esLocale,
+                        })
+                      : '—'}
+                  </dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="text-[#7A746E]">Versión</dt>
+                  <dd className="text-right font-semibold text-[#003D5B]">{consentView.consent.version}</dd>
+                </div>
+                {consentView.consent.firmado_por_admin ? (
+                  <div className="flex justify-between gap-3">
+                    <dt className="text-[#7A746E]">Origen</dt>
+                    <dd className="text-right font-semibold text-[#003D5B]">Cargado por recepción</dd>
+                  </div>
+                ) : null}
+              </dl>
+
+              <div className="mt-4 space-y-2">
+                {[
+                  ['Declaración de salud', consentView.consent.declara_salud],
+                  ['Consentimiento del tratamiento', consentView.consent.acepta_tratamiento],
+                  ['Tratamiento de datos (Ley 25.326)', consentView.consent.acepta_datos],
+                ].map(([label, ok]) => (
+                  <div
+                    key={String(label)}
+                    className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 text-xs text-[#003D5B]"
+                  >
+                    <CheckCircle2 className={`h-4 w-4 ${ok ? 'text-[#4A6741]' : 'text-[#7A746E]/40'}`} />
+                    {label}
+                  </div>
+                ))}
+              </div>
+
+              {consentView.consent.contraindicaciones ? (
+                <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/70 px-4 py-3">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-800">
+                    Condiciones declaradas por el cliente
+                  </p>
+                  <p className="mt-1 text-sm text-amber-950">{consentView.consent.contraindicaciones}</p>
+                </div>
+              ) : null}
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </AdminShell>
   );
 }

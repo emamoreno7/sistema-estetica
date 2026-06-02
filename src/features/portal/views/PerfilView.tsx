@@ -1,6 +1,26 @@
-import { motion } from 'framer-motion';
-import { Bell, Download, Heart, Mail, MapPin, Phone, Shield, Star, Stethoscope } from 'lucide-react';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  Bell,
+  CheckCircle2,
+  Download,
+  FileSignature,
+  Heart,
+  Loader2,
+  Mail,
+  MapPin,
+  Phone,
+  Shield,
+  ShieldAlert,
+  Star,
+  Stethoscope,
+} from 'lucide-react';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale/es';
 import { usePortalCliente } from '@/context/PortalClienteContext';
+import { useConsentimiento } from '@/context/ConsentimientoContext';
+import { useAuth } from '@/context/AuthContext';
+import { ConsentimientoModal } from '@/components/portal/ConsentimientoModal';
 
 export function PerfilView() {
   const {
@@ -14,6 +34,12 @@ export function PerfilView() {
     loyaltyPoints,
     tratamientoInteresLabel,
   } = usePortalCliente();
+
+  const { session } = useAuth();
+  const uid = session?.user?.id ?? '';
+  const { consentimiento, firmado, loading: consentLoading, noMigrado, setConsentimiento } =
+    useConsentimiento();
+  const [consentOpen, setConsentOpen] = useState(false);
 
   const sucursalHint =
     activeTreatment?.sucursal ?? 'Coordinamos sucursal y horarios en recepción o por WhatsApp';
@@ -99,33 +125,87 @@ export function PerfilView() {
             </div>
             <div>
               <h3 className="text-serif-premium text-base font-bold text-[#003D5B]">
-                Ficha Médica & Consentimientos
+                Consentimiento informado
               </h3>
-              <p className="text-[11px] text-[#7A746E]">Tu información de salud, protegida y confidencial</p>
+              <p className="text-[11px] text-[#7A746E]">Obligatorio antes de realizar tratamientos</p>
             </div>
-            <span className="ml-auto rounded-full bg-[#F2D7D5]/35 px-3 py-1 text-[10px] font-semibold text-[#003D5B]">
-              En preparación
-            </span>
+            {consentLoading ? (
+              <Loader2 className="ml-auto h-4 w-4 animate-spin text-[#003D5B]/50" />
+            ) : firmado ? (
+              <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-[#BFC9A2]/35 px-3 py-1 text-[10px] font-semibold text-[#003D5B]">
+                <CheckCircle2 className="h-3.5 w-3.5" /> Firmado
+              </span>
+            ) : (
+              <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-[10px] font-semibold text-amber-900">
+                <ShieldAlert className="h-3.5 w-3.5" /> Pendiente
+              </span>
+            )}
           </div>
         </div>
 
         <div className="space-y-4 p-6">
-          <p className="text-center text-sm leading-relaxed text-[#7A746E]">
-            Cuando carguemos tu ficha después de tu primera sesión aparecerán acá tus datos sanitarios relevantes,
-            declaraciones firmadas y documentación asociada a tu tratamiento.
-          </p>
-
-          <div className="rounded-xl border border-dashed border-champagne-200 bg-champagne-50/40 px-4 py-8 text-center">
-            <Shield className="mx-auto mb-2 h-6 w-6 text-champagne" />
-            <p className="text-xs text-[#7A746E]">
-              No hay consentimientos digitales en el portal hasta que recepción confirme tu plan activo.
-            </p>
-          </div>
+          {firmado && consentimiento ? (
+            <>
+              <div className="flex items-start gap-3 rounded-xl border border-[#BFC9A2]/45 bg-[#BFC9A2]/10 px-4 py-4">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#4A6741]" />
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-[#003D5B]">
+                    Consentimiento firmado correctamente
+                  </p>
+                  <p className="mt-0.5 text-xs text-[#7A746E]">
+                    Firmado por <strong>{consentimiento.nombre_firma}</strong>
+                    {consentimiento.firmado_at
+                      ? ` · ${format(new Date(consentimiento.firmado_at), "d 'de' MMMM yyyy", { locale: es })}`
+                      : ''}
+                  </p>
+                  {consentimiento.contraindicaciones ? (
+                    <p className="mt-1 text-xs italic text-[#7A746E]/85">
+                      Observaciones declaradas: {consentimiento.contraindicaciones}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setConsentOpen(true)}
+                className="w-full rounded-full border border-[#003D5B]/15 bg-white/70 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[#003D5B]"
+              >
+                Volver a revisar / actualizar
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="rounded-xl border border-amber-200 bg-amber-50/70 px-4 py-5 text-center">
+                <ShieldAlert className="mx-auto mb-2 h-6 w-6 text-amber-600" />
+                <p className="text-sm font-semibold text-amber-950">
+                  Todavía no firmaste el consentimiento
+                </p>
+                <p className="mt-1 text-xs text-amber-900/80">
+                  Es un paso obligatorio y necesario para poder reservar y realizar tus tratamientos.
+                </p>
+              </div>
+              <button
+                type="button"
+                disabled={!uid || noMigrado}
+                onClick={() => setConsentOpen(true)}
+                className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white shadow-lg disabled:opacity-50"
+                style={{ background: '#003D5B', boxShadow: '0 10px 28px rgba(0,61,91,0.18)' }}
+              >
+                <FileSignature className="h-4 w-4" />
+                Leer y firmar consentimiento
+              </button>
+              {noMigrado ? (
+                <p className="text-center text-[10px] text-amber-700">
+                  (El módulo de consentimientos aún no está habilitado en el servidor.)
+                </p>
+              ) : null}
+            </>
+          )}
 
           <p className="text-center text-[10px] leading-relaxed text-[#7A746E]">
             Tu información médica es estrictamente confidencial y solo es accesible por tu profesional tratante.
             <br />
-            Cumplimos con la Ley de Protección de Datos Personales vigente.
+            Cumplimos con la Ley 25.326 de Protección de Datos Personales.
           </p>
         </div>
       </motion.div>
@@ -160,6 +240,20 @@ export function PerfilView() {
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {consentOpen && uid ? (
+          <ConsentimientoModal
+            clienteId={uid}
+            nombreSugerido={displayName}
+            onClose={() => setConsentOpen(false)}
+            onFirmado={(c) => {
+              setConsentimiento(c);
+              setConsentOpen(false);
+            }}
+          />
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }
