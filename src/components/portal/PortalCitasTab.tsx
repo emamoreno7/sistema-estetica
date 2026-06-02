@@ -2,6 +2,7 @@
  * Vista "Mis Citas" del portal: agenda con anti-superposición y recomendaciones.
  */
 import { useCallback, useEffect, useMemo, useState, type JSX, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Calendar as CalendarIcon,
@@ -689,6 +690,7 @@ function CitasBookingModal(props: {
   const [slotsWarn, setSlotsWarn] = useState<string | null>(null);
   const [availDegraded, setAvailDegraded] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [submitMsg, setSubmitMsg] = useState<string | null>(null);
 
   const fechaStr = format(pickedDay, 'yyyy-MM-dd');
 
@@ -721,6 +723,7 @@ function CitasBookingModal(props: {
   async function confirmar(): Promise<void> {
     if (!servicio || !hora) return;
     setSaving(true);
+    setSubmitMsg(null);
     try {
       const { cita, error } = await insertarReservaCliente({
         clienteId: props.userId,
@@ -731,7 +734,9 @@ function CitasBookingModal(props: {
         estado: 'pendiente',
       });
       if (error || !cita) {
-        setSlotsWarn(error ?? 'No se pudo guardar');
+        const msg = error ?? 'No se pudo guardar la solicitud. Intentá nuevamente.';
+        setSlotsWarn(msg);
+        setSubmitMsg(msg);
         await loadSlots();
         return;
       }
@@ -744,9 +749,11 @@ function CitasBookingModal(props: {
   const canGoStep2 = !!servicio;
   const canSubmit = !!(wizardStep === 2 && servicio && hora && !saving);
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <motion.div
-      className="fixed inset-0 z-[920] flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[9998] flex items-center justify-center p-3 sm:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -760,7 +767,7 @@ function CitasBookingModal(props: {
       />
       <motion.div
         layout
-        className="pointer-events-auto relative z-[921] flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-3xl shadow-2xl"
+        className="pointer-events-auto relative z-[9999] flex max-h-[94dvh] w-full max-w-lg flex-col overflow-hidden rounded-3xl shadow-2xl"
         style={{
           borderWidth: '1px',
           borderStyle: 'solid',
@@ -769,7 +776,7 @@ function CitasBookingModal(props: {
           boxShadow: '0 32px 64px rgba(0,61,91,0.12)',
         }}
       >
-        <div className="max-h-[92vh] overflow-y-auto overscroll-contain p-6 sm:p-8">
+        <div className="max-h-[94dvh] overflow-y-auto overscroll-contain p-5 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:p-8">
           <button
             type="button"
             className="absolute right-5 top-5 z-[2] rounded-full p-2 text-[#003D5B]/35 hover:bg-[#F2D7D5]/50"
@@ -944,6 +951,12 @@ function CitasBookingModal(props: {
                   {saving ? 'Enviando solicitud…' : 'Solicitar este turno'}
                 </motion.button>
 
+                {submitMsg ? (
+                  <p className="mt-3 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-center text-[11px] text-amber-900">
+                    {submitMsg}
+                  </p>
+                ) : null}
+
                 {!canSubmit && wizardStep === 2 ? (
                   <p className="mt-3 text-center text-[11px] text-[#7A746E]">
                     {!hora ? 'Elegí un horario antes de guardar.' : null}
@@ -954,7 +967,8 @@ function CitasBookingModal(props: {
           ) : null}
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 }
 
@@ -988,9 +1002,11 @@ function BookingSuccessCrossSellModal(props: {
     props.nombreCliente
   );
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <motion.div
-      className="fixed inset-0 z-[940] flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[9998] flex items-center justify-center p-3 sm:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -1003,7 +1019,7 @@ function BookingSuccessCrossSellModal(props: {
         aria-label="Cerrar"
       />
       <motion.div
-        className="relative z-[941] w-full max-w-md rounded-3xl p-8 shadow-2xl"
+        className="relative z-[9999] max-h-[94dvh] w-full max-w-md overflow-y-auto rounded-3xl p-6 pb-[calc(2rem+env(safe-area-inset-bottom))] shadow-2xl sm:p-8"
         style={{
           background: 'var(--bg-cream, #FDF8F5)',
           borderWidth: '1px',
@@ -1074,6 +1090,7 @@ function BookingSuccessCrossSellModal(props: {
           Cerrar
         </motion.button>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 }

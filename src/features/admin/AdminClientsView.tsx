@@ -4,8 +4,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   CheckCircle2,
   ClipboardList,
+  Download,
   FileText,
   Loader2,
+  Printer,
   RefreshCw,
   Search,
   ShieldAlert,
@@ -43,6 +45,71 @@ const STATUS_TABS: { id: StatusFilter; label: string }[] = [
   { id: 'active', label: 'Activos' },
   { id: 'blocked', label: 'Bloqueados' },
 ];
+
+function consentimientoTextoPlano(row: PerfilClienteRow, c: ConsentimientoRow): string {
+  const fecha = c.firmado_at
+    ? format(new Date(c.firmado_at), "d 'de' MMMM yyyy · HH:mm", { locale: esLocale })
+    : '—';
+  return [
+    'AMORE Centro Di Bellezza',
+    'Constancia de consentimiento informado',
+    '',
+    `Cliente: ${row.full_name}`,
+    `Telefono: ${row.phone || '—'}`,
+    `Firmado por: ${c.nombre_firma}`,
+    `DNI: ${c.dni || '—'}`,
+    `Fecha y hora: ${fecha}`,
+    `Version: ${c.version}`,
+    `Origen: ${c.firmado_por_admin ? 'Registrado por recepcion/admin' : 'Firmado digitalmente por cliente'}`,
+    '',
+    'Clausulas aceptadas:',
+    `- Declaracion de salud: ${c.declara_salud ? 'SI' : 'NO'}`,
+    `- Consentimiento del tratamiento: ${c.acepta_tratamiento ? 'SI' : 'NO'}`,
+    `- Tratamiento de datos personales (Ley 25.326): ${c.acepta_datos ? 'SI' : 'NO'}`,
+    '',
+    `Condiciones/observaciones declaradas: ${c.contraindicaciones || 'Sin observaciones declaradas.'}`,
+    '',
+    'Esta constancia fue generada desde el panel de gestion Amore.',
+  ].join('\n');
+}
+
+function descargarConsentimiento(row: PerfilClienteRow, c: ConsentimientoRow) {
+  const blob = new Blob([consentimientoTextoPlano(row, c)], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `consentimiento-${row.full_name.replace(/\s+/g, '-').toLowerCase()}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function imprimirConsentimiento(row: PerfilClienteRow, c: ConsentimientoRow) {
+  const texto = consentimientoTextoPlano(row, c)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  const w = window.open('', '_blank', 'noopener,noreferrer,width=760,height=900');
+  if (!w) return;
+  w.document.write(`<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Consentimiento informado - ${row.full_name}</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 32px; color: #003D5B; }
+    pre { white-space: pre-wrap; font-size: 14px; line-height: 1.6; }
+    .box { border: 1px solid #F2D7D5; border-radius: 18px; padding: 24px; }
+  </style>
+</head>
+<body>
+  <div class="box"><pre>${texto}</pre></div>
+  <script>window.onload = () => { window.print(); };</script>
+</body>
+</html>`);
+  w.document.close();
+}
 
 function StatusPill({ status }: { status: PerfilRowStatus }) {
   const base = 'rounded-full px-3 py-1 text-[11px] font-semibold capitalize';
@@ -489,6 +556,25 @@ export default function AdminClientsView() {
                   <p className="mt-1 text-sm text-amber-950">{consentView.consent.contraindicaciones}</p>
                 </div>
               ) : null}
+
+              <div className="mt-5 grid gap-2 sm:grid-cols-2">
+                <button
+                  type="button"
+                  onClick={() => imprimirConsentimiento(consentView.row, consentView.consent)}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#003D5B]/15 bg-white px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-[#003D5B]"
+                >
+                  <Printer className="h-4 w-4" />
+                  Imprimir
+                </button>
+                <button
+                  type="button"
+                  onClick={() => descargarConsentimiento(consentView.row, consentView.consent)}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#003D5B] px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-white"
+                >
+                  <Download className="h-4 w-4" />
+                  Descargar
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         ) : null}

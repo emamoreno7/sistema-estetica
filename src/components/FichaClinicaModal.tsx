@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import {
   CheckCircle2,
@@ -231,9 +232,11 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
     setConsent(consentimiento);
   }
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <motion.div
-      className="fixed inset-0 z-[960] flex items-center justify-center p-3 sm:p-6"
+      className="fixed inset-0 z-[9998] flex items-center justify-center p-3 sm:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -246,7 +249,7 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
         onClick={() => !saving && onClose()}
       />
       <motion.div
-        className="pointer-events-auto relative z-[961] flex max-h-[94vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl shadow-2xl"
+        className="pointer-events-auto relative z-[9999] flex max-h-[94dvh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl shadow-2xl"
         style={{
           border: '1px solid rgba(242,215,213,0.75)',
           background: 'var(--bg-cream, #FDF8F5)',
@@ -523,6 +526,7 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
           </div>
         ) : null}
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 }

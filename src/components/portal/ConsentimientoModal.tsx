@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle2, FileSignature, Loader2, ShieldCheck, X } from 'lucide-react';
 import {
@@ -55,9 +56,11 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
     onFirmado(consentimiento);
   }
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <motion.div
-      className="fixed inset-0 z-[950] flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -70,7 +73,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
         onClick={() => !saving && onClose()}
       />
       <motion.div
-        className="pointer-events-auto relative z-[951] flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-3xl shadow-2xl"
+        className="pointer-events-auto relative z-[10000] flex max-h-[94dvh] w-full max-w-lg flex-col overflow-hidden rounded-3xl shadow-2xl"
         style={{
           border: '1px solid rgba(242,215,213,0.75)',
           background: 'var(--bg-cream, #FDF8F5)',
@@ -79,7 +82,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
         initial={{ scale: 0.96, y: 12 }}
         animate={{ scale: 1, y: 0 }}
       >
-        <div className="max-h-[92vh] overflow-y-auto p-6 sm:p-8">
+        <div className="max-h-[94dvh] overflow-y-auto overscroll-contain p-5 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:p-8">
           <button
             type="button"
             className="absolute right-5 top-5 rounded-full p-2 text-[#003D5B]/45 hover:bg-[#F2D7D5]/45"
@@ -218,6 +221,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
           </p>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 }
