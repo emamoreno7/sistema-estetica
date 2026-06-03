@@ -70,13 +70,6 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         illustration: 'masajeRelajante',
       },
       {
-        name: 'Masajes descontracturantes',
-        desc: 'Liberación de tensiones acumuladas con técnica experta. Profundo cuando hace falta, siempre respetuoso con tu comodidad.',
-        badges: ['Terapéutico'],
-        image: '/masajesr.png',
-        illustration: 'masajeDescontracturante',
-      },
-      {
         name: 'Masaje linfático',
         desc: 'Drenaje suave y rítmico que favorece la circulación y la sensación de ligereza, en un espacio pensado para tu bienestar.',
         badges: ['Drenante'],
@@ -104,6 +97,12 @@ export const serviciosCatalogo: ServicioCategoria[] = [
     label: 'Facial & Mirada',
     services: [
       {
+        name: 'Hollywood Peel',
+        desc: 'Peeling de carbón con láser para una piel luminosa y unificada: reduce poros, opacidad y textura con un acabado fresco y radiante.',
+        badges: ['Facial'],
+        image: '/pestanas.png',
+      },
+      {
         name: 'Lifting de pestañas',
         desc: 'Curva y elevación natural: una mirada despierta y femenina sin el peso de las extensiones, con acabado limpio y duradero.',
         badges: ['Lashista'],
@@ -111,11 +110,10 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         illustration: 'liftingPestanas',
       },
       {
-        name: 'Laminado de pestañas',
-        desc: 'Nutre y ordena la fibra capilar para un efecto maquillado suave y ordenado, con brillo saludable y sensación ligera.',
+        name: 'Laminado de cejas',
+        desc: 'Cejas peinadas, fijadas y con forma definida durante semanas: efecto prolijo y voluminoso que enmarca la mirada.',
         badges: ['Lashista'],
         image: '/pestanas.png',
-        illustration: 'laminadoPestanas',
       },
       {
         name: 'Perfilado de cejas',
@@ -123,6 +121,24 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         badges: ['Lashista'],
         image: '/pestanas.png',
         illustration: 'perfiladoCejas',
+      },
+    ],
+  },
+  {
+    id: 'manos',
+    label: 'Manos & Uñas',
+    services: [
+      {
+        name: 'Belleza de manos',
+        desc: 'Cuidado completo de manos: prolijado de cutículas, hidratación y esmaltado para manos prolijas y cuidadas.',
+        badges: ['Manicura'],
+        image: '/pestanas.png',
+      },
+      {
+        name: 'Nails (uñas)',
+        desc: 'Servicio de uñas: esculpidas, semipermanente o kapping, con diseño y terminación profesional a tu estilo.',
+        badges: ['Uñas'],
+        image: '/pestanas.png',
       },
     ],
   },
@@ -156,6 +172,9 @@ export const BADGE_STYLE: Record<string, { bg: string; color: string }> = {
   Terapéutico: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
   Relajante: { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
   Lashista: { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
+  Facial: { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
+  Manicura: { bg: 'rgba(245,230,218,0.6)', color: '#7A5A3A' },
+  'Uñas': { bg: 'rgba(245,230,218,0.6)', color: '#7A5A3A' },
   Definitivo: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
   Especialidad: { bg: 'rgba(245,230,218,0.6)', color: '#7A5A3A' },
 };

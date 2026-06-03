@@ -224,7 +224,7 @@ export function PortalCitasTab(props: {
               title="Agendá con Amore cuando quieras"
               paragraph={
                 <>
-                  Reservá Crio-lipólisis, Radiofrecuencia, Himu, Depilación Definitiva, Limpieza Facial Profunda o Presoterapia.
+                  Reservá Body Up, Radiofrecuencia, Crio-lipólisis, Hollywood Peel, Depilación definitiva, Presoterapia y más.
                   Elegís día y horario según disponibilidad sin superposiciones; al confirmar se guarda en tu cuenta y podés enviar el
                   comprobante por WhatsApp.
                 </>

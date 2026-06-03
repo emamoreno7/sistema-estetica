@@ -1,11 +1,22 @@
-/** Servicios reservables en el portal según briefing (etiquetas canónicas). */
+/** Servicios reservables en el portal (etiquetas canónicas del catálogo). */
 export const CITAS_SERVICIOS_RESERVABLES = [
-  'Crio-lipólisis',
+  'Body Up',
   'Radiofrecuencia',
-  'Himu',
-  'Depilación Definitiva',
-  'Limpieza Facial Profunda',
+  'Crio-lipólisis',
+  'Lipo-láser',
+  'Electrodos',
+  'Masajes relajantes',
+  'Masaje linfático',
   'Presoterapia',
+  'Piedras calientes',
+  'Hollywood Peel',
+  'Lifting de pestañas',
+  'Laminado de cejas',
+  'Perfilado de cejas',
+  'Belleza de manos',
+  'Nails (uñas)',
+  'Depilación definitiva',
+  'Eliminación de tatuajes',
 ] as const;
 
 export type ServicioReservable = (typeof CITAS_SERVICIOS_RESERVABLES)[number];
@@ -29,42 +40,42 @@ const CROSS_SELL_MAP = new Map<string, CrossSellReco>([
   [
     key('Crio-lipólisis'),
     {
-      complemento: 'Himu (Electrodos)',
+      complemento: 'Electrodos',
       motivoProfesional: 'Potencia la tonificación tras reducir grasa.',
     },
   ],
   [
     key('Radiofrecuencia'),
     {
-      complemento: 'Limpieza Facial Profunda',
+      complemento: 'Hollywood Peel',
       motivoProfesional: 'Prepara la piel para una mejor absorción y brillo.',
     },
   ],
   [
-    key('Himu'),
+    key('Electrodos'),
     {
-      complemento: 'Drenaje Linfático',
+      complemento: 'Masaje linfático',
       motivoProfesional: 'Ayuda a eliminar toxinas liberadas por el trabajo muscular.',
     },
   ],
   [
-    key('Depilación Definitiva'),
+    key('Depilación definitiva'),
     {
       complemento: 'Nutrición / hidratación dermal focal',
       motivoProfesional: 'Ayuda al confort tras sesiones láser/IPL cuando lo indiquen tus profesionales.',
     },
   ],
   [
-    key('Limpieza Facial Profunda'),
+    key('Hollywood Peel'),
     {
       complemento: 'Hidratación con activos revitalizantes',
-      motivoProfesional: 'Sellar la limpieza con nutrición deja la piel más luminosa entre sesiones.',
+      motivoProfesional: 'Sellar el peeling con nutrición deja la piel más luminosa entre sesiones.',
     },
   ],
   [
     key('Presoterapia'),
     {
-      complemento: 'Drenaje Linfático',
+      complemento: 'Masaje linfático',
       motivoProfesional: 'Potencia los resultados reductores combinando succión dirigida con drenaje suave.',
     },
   ],
@@ -72,7 +83,7 @@ const CROSS_SELL_MAP = new Map<string, CrossSellReco>([
 
 /** Opcional cuando el servicio no está en tabla fija — “reductivo” típico. */
 const REDUCTOR_DEFAULT_CROSS: CrossSellReco = {
-  complemento: 'Himu / Presoterapia',
+  complemento: 'Presoterapia',
   motivoProfesional: 'Complementamos la reducción con tonificación/drenaje según valoración profesional.',
 };
 
