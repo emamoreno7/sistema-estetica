@@ -22,6 +22,7 @@ type Props = {
 export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirmado }: Props) {
   const [nombre, setNombre] = useState(nombreSugerido?.trim() ?? '');
   const [dni, setDni] = useState('');
+  const [fechaNac, setFechaNac] = useState('');
   const [contra, setContra] = useState('');
   const [checks, setChecks] = useState<Record<string, boolean>>({
     declara_salud: false,
@@ -33,7 +34,10 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
 
   const todasAceptadas =
     checks.declara_salud && checks.acepta_tratamiento && checks.acepta_datos;
-  const puedeGuardar = todasAceptadas && nombre.trim().length >= 3 && !saving;
+  const dniOk = dni.trim().length >= 6;
+  const fechaNacOk = fechaNac.trim().length > 0;
+  const puedeGuardar =
+    todasAceptadas && nombre.trim().length >= 3 && dniOk && fechaNacOk && !saving;
 
   async function firmar() {
     if (!puedeGuardar) return;
@@ -43,6 +47,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
       clienteId,
       nombreFirma: nombre,
       dni,
+      fechaNacimiento: fechaNac,
       contraindicaciones: contra,
       declaraSalud: checks.declara_salud,
       aceptaTratamiento: checks.acepta_tratamiento,
@@ -158,7 +163,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
 
           {/* Firma */}
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <label className="block">
+            <label className="block sm:col-span-2">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
                 Nombre completo (firma) *
               </span>
@@ -172,7 +177,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
             </label>
             <label className="block">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
-                DNI (opcional)
+                DNI *
               </span>
               <input
                 type="text"
@@ -180,6 +185,18 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
                 value={dni}
                 onChange={(e) => setDni(e.target.value)}
                 placeholder="Ej: 30123456"
+                className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+              />
+            </label>
+            <label className="block">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+                Fecha de nacimiento *
+              </span>
+              <input
+                type="date"
+                value={fechaNac}
+                max={new Date().toISOString().slice(0, 10)}
+                onChange={(e) => setFechaNac(e.target.value)}
                 className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
               />
             </label>
@@ -213,6 +230,14 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
           ) : nombre.trim().length < 3 ? (
             <p className="mt-3 text-center text-[11px] text-[#7A746E]">
               Escribí tu nombre completo como firma.
+            </p>
+          ) : !dniOk ? (
+            <p className="mt-3 text-center text-[11px] text-[#7A746E]">
+              Ingresá tu número de DNI.
+            </p>
+          ) : !fechaNacOk ? (
+            <p className="mt-3 text-center text-[11px] text-[#7A746E]">
+              Indicá tu fecha de nacimiento.
             </p>
           ) : null}
 
