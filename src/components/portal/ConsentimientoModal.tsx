@@ -156,7 +156,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
             <textarea
               value={contra}
               onChange={(e) => setContra(e.target.value)}
-              row{2}
+              rows={2}
               placeholder="Ej: embarazo, alergias, medicación, cirugías recientes…"
               className="mt-1 w-full resize-none rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
             />
