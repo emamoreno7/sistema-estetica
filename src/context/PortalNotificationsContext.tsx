@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale/es';
 import type { CitaClienteRow } from '@/lib/citasApi';
 import { parseCitaMomentLocal } from '@/lib/citasApi';
+import { brand } from '../config/brand';
 
 export type PortalNotificationKind = 'cita_confirmada' | 'admin_mensaje';
 
@@ -31,7 +32,6 @@ type PortalNotificationsCtx = {
   markAllRead: () => void;
   /** Nueva cita guardada desde el wizard del portal → suma badge y aparece en el panel. */
   notifyCitaConfirmada: (cita: CitaClienteRow) => void;
-};
 
 const PortalNotificationsContext = createContext<PortalNotificationsCtx | null>(null);
 
@@ -53,8 +53,8 @@ function seededNotifications(): PortalNotificationItem[] {
       kind: 'admin_mensaje',
       title: 'Mensaje de recepción',
       body:
-        'Somos equipo Amore. Si necesitás reagendar o tenés alguna consulta antes de tu visita, escribinos cuando quieras.',
-      createdAt: tPast,
+        `Somos ${brand.supportLabel}. Si necesitás reagendar o tenés alguna consulta antes de tu visita, escribinos cuando quieras.`,
+      createdAt: tP
       read: false,
     },
     {
@@ -88,8 +88,7 @@ export function PortalNotificationsProvider({ children }: { children: ReactNode 
   }, []);
 
   const notifyCitaConfirmada = useCallback((cita: CitaClienteRow) => {
-    const when = fechaCitaHumana(cita);
-    const id = `cita-${cita.id ?? `${cita.fecha}-${cita.hora}`}-${Date.now()}`;
+    const when = fechaCitaHumana(cita);   const id = `cita-${cita.id ?? `${cita.fecha}-${cita.hora}`}-${Date.now()}`;
     const item: PortalNotificationItem = {
       id,
       kind: 'cita_confirmada',
@@ -117,7 +116,7 @@ export function PortalNotificationsProvider({ children }: { children: ReactNode 
   );
 }
 
-export function usePortalNotifications(): PortalNotificationsCtx {
+export function usePortalNotifications(): PortNotificationsCtx {
   const ctx = useContext(PortalNotificationsContext);
   if (!ctx)
     throw new Error('usePortalNotifications debe usarse dentro de PortalNotificationsProvider');

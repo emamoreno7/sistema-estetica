@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { motion } from 'framer-motion';
+import { motion } from 'fra-motion';
 import { CheckCircle2, FileSignature, Loader2, ShieldCheck, X } from 'lucide-react';
 import {
   CONSENTIMIENTO_CLAUSULAS,
   guardarConsentimientoCliente,
   type ConsentimientoRow,
 } from '@/lib/consentimiento';
+import { brand } from '../../config/brand';
 
 type Props = {
   clienteId: string;
@@ -29,7 +30,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
     acepta_tratamiento: false,
     acepta_datos: false,
   });
-  const [saving, setSaving] = useState(false);
+  const [savng, setSaving] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
   const todasAceptadas =
@@ -113,7 +114,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
 
           <p className="mt-3 text-sm leading-relaxed text-[#7A746E]">
             Para tu seguridad y la del centro, necesitamos que leas y aceptes las siguientes
-            declaraciones antes de realizar cualquier tratamiento en Amore.
+            declaraciones antes de realizar cualquier tratamiento en {brand.shortName}.
           </p>
 
           {/* Cláusulas */}
@@ -133,7 +134,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
                 >
                   <span
                     className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition ${
-                      checked ? 'border-[#003D5B] bg-[#003D5B]' : 'border-[#003D5B]/30 bg-white'
+                      checked ? 'border-[#003D5B] bg-[#003D5B]' :'border-[#003D5B]/30 bg-white'
                     }`}
                   >
                     {checked ? <CheckCircle2 className="h-4 w-4 text-white" /> : null}
@@ -155,7 +156,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
             <textarea
               value={contra}
               onChange={(e) => setContra(e.target.value)}
-              rows={2}
+              row{2}
               placeholder="Ej: embarazo, alergias, medicación, cirugías recientes…"
               className="mt-1 w-full resize-none rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
             />
@@ -176,7 +177,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
               />
             </label>
             <label className="block">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+              <span className="text-[10px] font-semd uppercase tracking-wider text-[#003D5B]/55">
                 DNI *
               </span>
               <input
@@ -221,9 +222,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
           >
             {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileSignature className="h-4 w-4" />}
             {saving ? 'Guardando…' : 'Acepto y firmo el consentimiento'}
-          </motion.button>
-
-          {!todasAceptadas ? (
+          </motion.button>          {!todasAceptadas ? (
             <p className="mt-3 text-center text-[11px] text-[#7A746E]">
               Tocá las tres declaraciones para aceptarlas.
             </p>

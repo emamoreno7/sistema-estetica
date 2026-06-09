@@ -5,6 +5,7 @@ import { useAuth } from '@/context/AuthContext';
 import VirtualAssistantChat from '@/components/VirtualAssistantChat';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
+import { brand } from '../../../config/brand';
 
 /** Vista mostrada cuando la cuenta aún no fue activada por el equipo. */
 export function PendingActivationPortal() {
@@ -17,7 +18,7 @@ export function PendingActivationPortal() {
   }
 
   return (
-    <div className="relative min-h-screen" style={{ background: 'var(--bg-cream)' }}>
+    <div className="reative min-h-screen" style={{ background: 'var(--bg-cream)' }}>
       <div
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
         style={{ background: 'var(--bg-cream)' }}
@@ -53,10 +54,10 @@ export function PendingActivationPortal() {
             Cuenta pendiente de activación
           </h1>
           <p className="text-serif-premium text-[15px] font-semibold leading-relaxed text-[#003D5B]">
-            ¡Hola! Tu cuenta está en proceso de activación. Un administrador de Amore verificará tus datos y te
+            ¡Hola! Tu cuenta está en proceso de activación. Un administrador de {brand.shortName} verificará tus datos y te
             avisaremos por WhatsApp en cuanto puedas acceder a tu portal.
           </p>
-          <p className="mt-6 flex items-start justify-center gap-2 rounded-2xl border border-[#BFC9A2]/40 bg-[#BFC9A2]/10 px-5 py-4 text-left text-xs leading-relaxed text-[#003D5B]/90">
+          <p className="mt-6 flex items-start justify-center gap-2 rounded-2xl border border-[#BFC9A2]/40 bg-[#BFC9A2]/10 px-5 py-4 text-left te leading-relaxed text-[#003D5B]/90">
             <Heart className="mt-0.5 h-4 w-4 shrink-0 text-[#F2D7D5]" />
             Es un paso habitual: nos aseguramos de que tus datos coincidan con recepción para cuidarte con la mejor
             experiencia desde el día uno.
