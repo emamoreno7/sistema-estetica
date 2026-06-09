@@ -60,7 +60,7 @@ export function PortalHeader({
   portalCliente,
 }: {
   view: PortalHeaderView;
-  onNavigate: (v: PortalHeaderiew) => void;
+  onNavigate: (v: PortalHeaderView) => void;
   portalCliente: PortalHeaderCliente;
 }) {
   void _view;
@@ -321,7 +321,7 @@ export function PortalHeader({
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
-                    transtion={{ duration: 0.18 }}
+                    transition={{ duration: 0.18 }}
                     className={PANEL_CLASS}
                     style={{ ...PANEL_STYLE, width: 'min(100vw-1.5rem, 15.5rem)' }}
                   >
@@ -340,7 +340,7 @@ export function PortalHeader({
                       </button>
                       <button
                         type="button"
-                        className="flex w-full items-center gap-2 rounded-xl px-3 py-25 text-left text-sm font-medium transition hover:bg-[rgba(242,215,213,0.35)]"
+                        className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-[rgba(242,215,213,0.35)]"
                         style={{ color: 'var(--primary-navy)' }}
                         onClick={() => {
                           onNavigate('citas');
@@ -372,7 +372,7 @@ export function PortalHeader({
                         Cerrar Sesión
                       </button>
                     </div>
-                  </motion.div
+                  </motion.div>
                 ) : null}
               </AnimatePresence>
             </div>
@@ -463,7 +463,7 @@ export function PortalHeader({
                       boxShadow: 'inset 0 1px 2px rgba(0,61,91,0.04)',
                     }}
                     inputMode="tel"
-                    atoComplete="tel"
+                    autoComplete="tel"
                     placeholder="+54…"
                     required
                   />
@@ -486,6 +486,6 @@ export function PortalHeader({
           </motion.div>
         ) : null}
       </AnimatePresence>
-  >
+    </>
   );
 }
