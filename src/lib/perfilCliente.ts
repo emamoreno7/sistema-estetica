@@ -1,5 +1,6 @@
 import type { PostgrestError } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabaseClient';
+import { brand } from '../config/brand';
 
 /** Tabla física única del portal (nombre canónico en todo el proyecto). */
 export const PERFILES_CLIENTES_TABLE = 'perfiles_clientes' as const;
@@ -19,7 +20,7 @@ export type AccountStatus =
   /** Respuesta benigna tipo PostgREST/HTTP 400–406 sin fila válida para el usuario actual. */
   | 'profile_not_found';
 
-/** Núcleo = columnas reales del SELECT. El resto es opcional (metadata, futuras migraciones). */
+/* = columnas reales del SELECT. El resto es opcional (metadata, futuras migraciones). */
 export type PerfilClienteRow = {
   id: string;
   full_name: string;
@@ -44,14 +45,14 @@ function isLikelyMissingRowOrAmbiguousSingle(err: PostgrestError): boolean {
   return c === 'PGRST116' || c === 'PGRST301';
 }
 
-function maybeHttpStatus(err: PostgrestError): number | null {
+function mayeHttpStatus(err: PostgrestError): number | null {
   const raw = err as unknown as { status?: unknown; statusCode?: unknown };
   const n = typeof raw.status === 'number' ? raw.status : null;
   const nStr = typeof raw.statusCode === 'number' ? raw.statusCode : null;
   return typeof n === 'number' ? n : nStr;
 }
 
-/** Errores que no queremos exponer como `fetch_error`; mostramos “perfil no encontrado” sin reintentos agresivos. */
+/** Errores que no queremos exponer como `fetch_error`; mostramos "perfil no encontrado" sin reintentos agresivos. */
 function isBenignTreatAsMissingPerfil(err: PostgrestError): boolean {
   if (isLikelyMissingRowOrAmbiguousSingle(err)) return true;
   const http = maybeHttpStatus(err);
@@ -69,7 +70,7 @@ function parseRowStatus(raw: unknown): PerfilRowStatus {
 function rowFromSelect(r: RawPerfilClienteRow): PerfilClienteRow {
   return {
     id: r.id,
-    full_name: (r.full_name ?? '').trim() || 'Cliente Amore',
+    full_name: (r.full_name ?? '').trim() || brand.clientFallbackName,
     phone: (r.phone ?? '').trim() || '',
     status: parseRowStatus(r.status),
   };
@@ -85,7 +86,7 @@ async function fetchPerfilCanonicalColumns(userId: string) {
 
 /**
  * Sin fila válida sin error HTTP → perfil null, todo false.
- * Errores benignos (400 / 406, PGRST116, …) → `missingBenign` (portal debe mostrar “perfil no encontrado”).
+ * Errores benignos (400 / 406, PGRST116, …) → `missingBenign` (portalostrar "perfil no encontrado").
  * Otros errores → `fetchFailed`.
  */
 export async function fetchPerfilClienteDetailed(userId: string): Promise<{
@@ -107,7 +108,7 @@ export async function fetchPerfilClienteDetailed(userId: string): Promise<{
   const err = result.error;
 
   if (isBenignTreatAsMissingPerfil(err)) {
-    return { perfil: null, fetchFailed: false, missingBenign: true };
+    return { perfil: null, fetchFailed: false, missingBenign: true 
   }
 
   return { perfil: null, fetchFailed: true, missingBenign: false };
@@ -132,12 +133,12 @@ export function clienteDisplayName(
   const e = email?.trim();
   const isSyntheticWa = /^wa_\d+@clients\.amore\.app$/i.test(e || '');
   if (e && !isSyntheticWa) return e;
-  return 'Cliente Amore';
+  return brand.clientFallbackName;
 }
 
 export function firstNameOrFriendly(fullName: string): string {
   const t = fullName.trim();
-  if (!t) return 'Cliente Amore';
+  if (!t) return brand.clientFallbackName;
   return t.split(/\s+/)[0] ?? t;
 }
 
@@ -147,7 +148,7 @@ export async function updatePerfilClienteFields(
   patch: { full_name?: string; phone?: string }
 ): Promise<{ ok: boolean; error: string | null }> {
   const updates: Record<string, string> = {};
-  if (patch.full_name !== undefined) updates.full_name = patch.full_name.trim() || 'Cliente Amore';
+  if (patch.full_name !== undefined) updates.full_name = patch.full_name.trim() || brand.clientFallbackName;
   if (patch.phone !== undefined) updates.phone = patch.phone.trim();
 
   if (Object.keys(updates).length === 0) return { ok: true, error: null };
