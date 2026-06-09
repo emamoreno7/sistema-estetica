@@ -49,7 +49,7 @@ export function LandingFooter() {
 
         <div className="h-px w-12 bg-[#003D5B]/15" />
 
-        <div className="gridgap-6 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-3">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">Ubicación</p>
             <a
@@ -109,7 +109,7 @@ export function LandingFooter() {
 
         <p className="text-[9px] uppercase tracking-[0.35em] text-[#A9A09A]">
           &copy; {new Date().getFullYear()} {brand.copyrightName}
-      </p>
+        </p>
 
         {/* ─── Firma del desarrollador ─── */}
         <div className="mt-8 w-full">
@@ -132,7 +132,8 @@ export function LandingFooter() {
                 className="h-12 w-12 rounded-lg object-cover"
                 style={{ filter: 'drop-shadow(0 4px 12px rgba(56,189,248,0.35))' }}
               />
-              <div className="text-left"    <p className="text-[9px] font-medium uppercase tracking-[0.32em] text-cyan-300/80">
+              <div className="text-left">
+                <p className="text-[9px] font-medium uppercase tracking-[0.32em] text-cyan-300/80">
                   Desarrollado por
                 </p>
                 <p className="mt-0.5 text-base font-semibold tracking-tight text-white">
