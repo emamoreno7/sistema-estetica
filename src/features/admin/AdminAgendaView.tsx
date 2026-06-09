@@ -28,6 +28,7 @@ import {
 import { serviciosCatalogo } from '@/data/serviciosCatalogo';
 import { WHATSAPP_ADMIN_PHONE } from '@/lib/whatsapp';
 import { getPortalAdminEmails, getPortalAdminUserIds } from '@/config/admin';
+import { brand } from '../../config/brand';
 import { AdminShell } from './AdminShell';
 import {
   actualizarEstadoCitaAdmin,
@@ -52,7 +53,7 @@ function horaCorta(horaSql: string): string {
 function waClienteHref(row: CitaAdminListRow): string {
   const digits = row.phone.replace(/\D/g, '');
   const hc = horaCorta(row.hora);
-  const text = `Hola ${row.full_name}, te escribimos desde Amore por tu turno: ${row.servicio} (${format(
+  const text = `Hola ${row.full_name}, te escribimos desde ${brand.shortName} por tu turno: ${row.servicio} (${format(
     new Date(row.fecha + 'T12:00:00'),
     'd MMM',
     { locale: esLocale }
@@ -87,7 +88,7 @@ function EstadoEtiqueta({ estado }: { estado: CitaEstado }) {
   };
   const x = map[estado];
   return (
-    <span className={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wide ${x.className}`}>
+    <span className={`inline-flex rounded-full border px-3 py-1font-semibold tracking-wide ${x.className}`}>
       {x.label}
     </span>
   );
@@ -104,13 +105,11 @@ export default function AdminAgendaView() {
   const [menuRow, setMenuRow] = useState<CitaAdminListRow | null>(null);
   const [saving, setSaving] = useState(false);
 
-  // Solicitudes pendientes (turnos cargados por clientes, esperan aprobación)
   const [solicitudes, setSolicitudes] = useState<CitaAdminListRow[]>([]);
   const [solicitudesErr, setSolicitudesErr] = useState<string | null>(null);
   const [solicitudesLoading, setSolicitudesLoading] = useState(false);
   const [showSolicitudes, setShowSolicitudes] = useState(true);
 
-  // Modal "Nuevo turno"
   const [nuevoOpen, setNuevoOpen] = useState(false);
 
   const admins = getPortalAdminEmails();
@@ -150,11 +149,7 @@ export default function AdminAgendaView() {
   async function aprobarSolicitud(row: CitaAdminListRow) {
     setAccionMsg(null);
     const { error } = await actualizarEstadoCitaAdmin(row.id, 'confirmado');
-    if (error) {
-      setAccionMsg(error);
-      return;
-    }
-    // Si la solicitud aprobada cae en el día que estamos viendo, refrescar
+    if (error) { setAccionMsg(error); return; }
     if (row.fecha === fechaYmd) await load();
     await loadSolicitudes();
   }
@@ -163,10 +158,7 @@ export default function AdminAgendaView() {
     if (!window.confirm(`¿Rechazar la solicitud de ${row.full_name} (${row.servicio})?`)) return;
     setAccionMsg(null);
     const { error } = await actualizarEstadoCitaAdmin(row.id, 'cancelado');
-    if (error) {
-      setAccionMsg(error);
-      return;
-    }
+    if (error) { setAccionMsg(error); return; }
     if (row.fecha === fechaYmd) await load();
     await loadSolicitudes();
   }
@@ -177,10 +169,7 @@ export default function AdminAgendaView() {
     setSaving(true);
     const { error } = await actualizarEstadoCitaAdmin(menuRow.id, estado);
     setSaving(false);
-    if (error) {
-      setAccionMsg(error);
-      return;
-    }
+    if (error) { setAccionMsg(error); return; }
     setMenuRow(null);
     await load();
     await loadSolicitudes();
@@ -188,20 +177,13 @@ export default function AdminAgendaView() {
 
   async function borrarTurno() {
     if (!menuRow) return;
-    if (
-      !window.confirm(
-        `¿Eliminar el turno de ${menuRow.full_name} (${horaCorta(menuRow.hora)})? Esta acción no se puede deshacer.`
-      )
-    )
-      return;
+    if (!window.confirm(
+      `¿Eliminar el turno de ${menuRow.full_name} (${horaCorta(menuRow.hora)})? Esta acción no se puede deshacer.   )) return;
     setAccionMsg(null);
     setSaving(true);
     const { error } = await eliminarCitaAdmin(menuRow.id);
     setSaving(false);
-    if (error) {
-      setAccionMsg(error);
-      return;
-    }
+    if (error) { setAccionMsg(error); return; }
     setMenuRow(null);
     await load();
     await loadSolicitudes();
@@ -217,10 +199,7 @@ export default function AdminAgendaView() {
           <motion.button
             type="button"
             whileTap={{ scale: 0.98 }}
-            onClick={() => {
-              setAccionMsg(null);
-              setNuevoOpen(true);
-            }}
+            onClick={() => { setAccionMsg(null); setNuevoOpen(true); }}
             className="inline-flex items-center gap-2 rounded-full bg-[#003D5B] px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-white shadow-md"
             style={{ boxShadow: '0 10px 28px rgba(0,61,91,0.22)' }}
           >
@@ -230,10 +209,7 @@ export default function AdminAgendaView() {
           <motion.button
             type="button"
             whileTap={{ scale: 0.98 }}
-            onClick={() => {
-              void load();
-              void loadSolicitudes();
-            }}
+            onClick={() => { void load(); void loadSolicitudes(); }}
             className="inline-flex items-center gap-2 rounded-full border border-[#BFC9A2]/50 bg-white/90 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${loading || solicitudesLoading ? 'animate-spin' : ''}`} />
@@ -250,10 +226,8 @@ export default function AdminAgendaView() {
         </p>
       ) : null}
 
-      {/* ─── Panel de solicitudes pendientes ─── */}
       {solicitudesErr ? (
-        <div className="mb-4 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950">
-          <strong>Solicitudes:</strong> {solicitudesErr}
+        <div className="mb-4 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950"          <strong>Solicitudes:</strong> {solicitudesErr}
         </div>
       ) : solicitudes.length > 0 ? (
         <motion.div
@@ -373,7 +347,7 @@ export default function AdminAgendaView() {
               const [y, m, d] = v.split('-').map(Number);
               setDia(new Date(y, m - 1, d));
             }}
-            className="max-w-[11rem] rounded-xl border border-[#003D5B]/12 bg-white/95 px-3 py-2 text-center text-sm font-medium text-[#003D5B] outline-none focus:ring-2 focus:ring-[#F2D7D5]/70"
+            className="max-w-[11rem] rounded-xl border border-[#003D5B]/12 bg-white/95 px-3 py-2 text-center text-sm font-medium text-[#003D5B] outline-none focus:ring2 focus:ring-[#F2D7D5]/70"
           />
         </div>
         <button
@@ -401,7 +375,7 @@ export default function AdminAgendaView() {
       ) : null}
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center gap-3 py-24 text-[#003D5B]/55">
+        <div className="flex flex-col items-center justify-center gap- py-24 text-[#003D5B]/55">
           <Loader2 className="h-8 w-8 animate-spin" />
           <span className="text-sm">Cargando turnos…</span>
         </div>
@@ -424,13 +398,10 @@ export default function AdminAgendaView() {
       ) : (
         <ul className="space-y-3">
           {rows.map((row) => (
-            <motion.li key={row.id} layout initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+            <motion.li key={row.id} layout initial={{ opacity: 0, y: 8 }} animate={{ opacit y: 0 }}>
               <button
                 type="button"
-                onClick={() => {
-                  setAccionMsg(null);
-                  setMenuRow(row);
-                }}
+                onClick={() => { setAccionMsg(null); setMenuRow(row); }}
                 className="flex w-full flex-col gap-3 rounded-3xl border border-[#F2D7D5]/65 bg-[#FDF8F5]/98 p-4 text-left shadow-md transition hover:border-[#BFC9A2]/45 hover:shadow-lg active:scale-[0.99] sm:flex-row sm:items-center sm:gap-4 sm:p-5"
                 style={{ boxShadow: '0 14px 40px rgba(0,61,91,0.07)' }}
               >
@@ -459,7 +430,7 @@ export default function AdminAgendaView() {
                   <a
                     href={waClienteHref(row)}
                     target="_blank"
-                    rel="noopener noreferrer"
+                  rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
                     className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#25D366] px-4 py-3 text-xs font-semibold text-white shadow-md sm:flex-initial"
                     style={{ boxShadow: '0 8px 24px rgba(37,211,102,0.28)' }}
@@ -483,7 +454,7 @@ export default function AdminAgendaView() {
             <motion.button
               type="button"
               aria-label="Cerrar menú"
-              className="fixed inset-0 z-[100] bg-[#003D5B]/35 backdrop-blur-[2px]"
+              className="fixed inset-0 z-[100] bg[#003D5B]/35 backdrop-blur-[2px]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -521,7 +492,7 @@ export default function AdminAgendaView() {
                     ['cancelado', '🔴 Cancelado'],
                   ] as const
                 ).map(([estado, label]) => (
-                  <button
+         <button
                     key={estado}
                     type="button"
                     disabled={saving || menuRow.estado === estado}
@@ -555,7 +526,6 @@ export default function AdminAgendaView() {
         ) : null}
       </AnimatePresence>
 
-      {/* ─── Modal: Nuevo turno (creado por admin) ─── */}
       <AnimatePresence>
         {nuevoOpen ? (
           <NuevoTurnoModal
@@ -564,11 +534,9 @@ export default function AdminAgendaView() {
             onCreated={async (cita) => {
               setNuevoOpen(false);
               setAccionMsg(`Turno creado · ${cita.full_name} · ${horaCorta(cita.hora)}`);
-              // Si la cita cae en el día visible, refrescamos
               if (cita.fecha === fechaYmd) {
                 await load();
               } else {
-                // Saltar al día del turno creado
                 const [y, m, d] = cita.fecha.split('-').map(Number);
                 setDia(new Date(y, m - 1, d));
               }
@@ -577,14 +545,9 @@ export default function AdminAgendaView() {
           />
         ) : null}
       </AnimatePresence>
-    </AdminShell>
+    </AdminSll>
   );
 }
-
-// ═════════════════════════════════════════════════════════════════════════
-// NuevoTurnoModal — formulario para que el admin cargue un turno.
-// Flujo: 1) elegir cliente (buscador) → 2) servicio + fecha → 3) hora libre
-// ═════════════════════════════════════════════════════════════════════════
 
 type NuevoTurnoCreated = CitaAdminListRow;
 
@@ -598,7 +561,6 @@ function NuevoTurnoModal(props: {
   const [buscando, setBuscando] = useState(false);
   const [cliente, setCliente] = useState<ClienteOpcion | null>(null);
 
-  // Sub-form "crear cliente nuevo"
   const [mostrarCrearCliente, setMostrarCrearCliente] = useState(false);
   const [nuevoNombre, setNuevoNombre] = useState('');
   const [nuevoTel, setNuevoTel] = useState('');
@@ -620,7 +582,6 @@ function NuevoTurnoModal(props: {
   const [saving, setSaving] = useState(false);
   const [errMsg, setErrMsg] = useState<string | null>(null);
 
-  // Buscar clientes con debounce
   useEffect(() => {
     let cancel = false;
     setBuscando(true);
@@ -628,19 +589,12 @@ function NuevoTurnoModal(props: {
       const { rows, error } = await buscarClientesActivos(termino, 20);
       if (cancel) return;
       setBuscando(false);
-      if (error) {
-        setOpciones([]);
-        return;
-      }
+      if (error) { setOpciones([]); return; }
       setOpciones(rows);
     }, 220);
-    return () => {
-      cancel = true;
-      clearTimeout(t);
-    };
+    return () => { cancel = true; clearTimeout(t); };
   }, [termino]);
 
-  // Recargar horarios libres al cambiar la fecha
   useEffect(() => {
     let cancel = false;
     (async () => {
@@ -649,16 +603,10 @@ function NuevoTurnoModal(props: {
       const { horasOcupadas, error } = await fetchHorasOcupadasPorFecha(fechaYmd);
       if (cancel) return;
       setSlotsLoading(false);
-      if (error) {
-        setSlotsErr(error);
-        setSlotsLibres([...todasFranjas]);
-        return;
-      }
+      if (error) { setSlotsErr(error); setSlotsLibres([...todasFranjas]); return; }
       setSlotsLibres(filtrarFranjasDisponibles(horasOcupadas, todasFranjas));
     })();
-    return () => {
-      cancel = true;
-    };
+    return () => { cancel = true; };
   }, [fechaYmd, todasFranjas]);
 
   const canSubmit = !!(cliente && servicio && fechaYmd && hora && !saving);
@@ -676,10 +624,7 @@ function NuevoTurnoModal(props: {
       notaAdmin: nota.trim() || null,
     });
     setSaving(false);
-    if (error || !cita) {
-      setErrMsg(error ?? 'No se pudo crear el turno.');
-      return;
-    }
+    if (error || !cita) { setErrMsg(error ?? 'No se pudo crear el turno.'); return; }
     await props.onCreated({
       ...cita,
       full_name: cliente.full_name,
@@ -740,7 +685,7 @@ function NuevoTurnoModal(props: {
               1 · Cliente
             </p>
             {cliente ? (
-              <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#BFC9A2]/45 bg-[#BFC9A2]/12 px-4 py-3">
+              <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#BFC9A2]/45 bg-[2 px-4 py-3">
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-[#003D5B]">{cliente.full_name}</p>
                   <p className="truncate text-xs text-[#7A746E]">
@@ -759,14 +704,11 @@ function NuevoTurnoModal(props: {
               <div className="rounded-2xl border border-[#BFC9A2]/45 bg-[#BFC9A2]/8 p-4">
                 <div className="mb-3 flex items-center justify-between">
                   <p className="text-[11px] font-semibold uppercase tracking-wider text-[#003D5B]">
-                    Nuevo cliente
+                    Nueiente
                   </p>
                   <button
                     type="button"
-                    onClick={() => {
-                      setMostrarCrearCliente(false);
-                      setCrearClienteErr(null);
-                    }}
+                    onClick={() => { setMostrarCrearCliente(false); setCrearClienteErr(null); }}
                     className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/60"
                   >
                     ← Volver a buscar
@@ -782,7 +724,7 @@ function NuevoTurnoModal(props: {
                       value={nuevoNombre}
                       onChange={(e) => setNuevoNombre(e.target.value)}
                       placeholder="Ej: María Pérez"
-                      className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                      className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outlinee"
                     />
                   </label>
                   <label className="block">
@@ -803,7 +745,7 @@ function NuevoTurnoModal(props: {
                     </span>
                     <input
                       type="email"
-                      value={nuevoEmail}
+                     value={nuevoEmail}
                       onChange={(e) => setNuevoEmail(e.target.value)}
                       placeholder="cliente@ejemplo.com"
                       className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
@@ -827,10 +769,7 @@ function NuevoTurnoModal(props: {
                       email: nuevoEmail,
                     });
                     setCreandoCliente(false);
-                    if (error || !nuevo) {
-                      setCrearClienteErr(error ?? 'No se pudo crear el cliente.');
-                      return;
-                    }
+                    if (error || !nuevo) { setCrearClienteErr(error ?? 'No se pudo crear el cliente.'); return; }
                     setCliente(nuevo);
                     setMostrarCrearCliente(false);
                     setNuevoNombre('');
@@ -839,17 +778,13 @@ function NuevoTurnoModal(props: {
                   }}
                   className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#003D5B] py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white disabled:opacity-50"
                 >
-                  {creandoCliente ? (
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  ) : (
-                    <UserPlus className="h-3.5 w-3.5" />
-                  )}
+                  {creandoCliente ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <UserPlus className="h-3.5 w-3.5" />}
                   {creandoCliente ? 'Creando…' : 'Guardar cliente'}
                 </button>
               </div>
             ) : (
               <>
-                <div className="flex items-center gap-2 rounded-2xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2.5">
+                <div className="flex items-center gap-2 rounded-2xl border border-[#F2D7D575 bg-white/95 px-3 py-2.5">
                   <Search className="h-4 w-4 text-[#003D5B]/45" />
                   <input
                     autoFocus
@@ -866,7 +801,7 @@ function NuevoTurnoModal(props: {
                     <p className="px-4 py-3 text-xs text-[#7A746E]">
                       {termino.trim().length >= 2
                         ? 'Sin coincidencias. Podés cargarlo desde abajo.'
-                        : 'Mostrando clientes activos… escribí para filtrar.'}
+                        : 'Mostran clientes activos… escribí para filtrar.'}
                     </p>
                   ) : (
                     <ul className="divide-y divide-[#F2D7D5]/40">
@@ -889,11 +824,7 @@ function NuevoTurnoModal(props: {
                 </div>
                 <button
                   type="button"
-                  onClick={() => {
-                    setMostrarCrearCliente(true);
-                    setNuevoNombre(termino.trim());
-                    setCrearClienteErr(null);
-                  }}
+                  onC => { setMostrarCrearCliente(true); setNuevoNombre(termino.trim()); setCrearClienteErr(null); }}
                   className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-[#003D5B]/25 bg-white/40 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[#003D5B] transition hover:border-[#003D5B]/45 hover:bg-white/70"
                 >
                   <UserPlus className="h-3.5 w-3.5" />
@@ -910,8 +841,7 @@ function NuevoTurnoModal(props: {
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="block">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/50">
-                  Servicio
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/50            Servicio
                 </span>
                 <select
                   value={servicio}
@@ -922,9 +852,7 @@ function NuevoTurnoModal(props: {
                   {serviciosCatalogo.map((cat) => (
                     <optgroup key={cat.id} label={cat.label}>
                       {cat.services.map((s) => (
-                        <option key={s.name} value={s.name}>
-                          {s.name}
-                        </option>
+                        <option key={s.name} value={s.name}>{s.name}</option>
                       ))}
                     </optgroup>
                   ))}
@@ -936,13 +864,8 @@ function NuevoTurnoModal(props: {
                 </span>
                 <input
                   type="date"
-                  value={fechaYmd}
-                  onChange={(e) => {
-                    if (e.target.value) {
-                      setFechaYmd(e.target.value);
-                      setHora('');
-                    }
-                  }}
+                  valuechaYmd}
+                  onChange={(e) => { if (e.target.value) { setFechaYmd(e.target.value); setHora(''); } }}
                   className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2.5 text-sm text-[#003D5B] outline-none"
                 />
               </label>
@@ -959,9 +882,7 @@ function NuevoTurnoModal(props: {
                   onClick={() => setEstadoInicial(e)}
                   className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider ${
                     estadoInicial === e
-                      ? e === 'confirmado'
-                        ? 'bg-emerald-600 text-white'
-                        : 'bg-amber-500 text-white'
+                      ? e === 'confirmado' ? 'bg-emerald-600 text-white' : 'bg-amber-500 text-white'
                       : 'border border-[#003D5B]/15 bg-white/80 text-[#003D5B]'
                   }`}
                 >
@@ -985,8 +906,7 @@ function NuevoTurnoModal(props: {
             {slotsLibres.length === 0 && !slotsLoading ? (
               <p className="text-sm text-[#7A746E]">No quedan horas libres este día. Elegí otra fecha.</p>
             ) : (
-              <div className="flex flex-wrap gap-2">
-                {slotsLibres.map((hh) => (
+              <div className="flex flex-wrap gap      {slotsLibres.map((hh) => (
                   <button
                     key={hh}
                     type="button"
@@ -1011,8 +931,7 @@ function NuevoTurnoModal(props: {
                 Nota interna (opcional)
               </span>
               <textarea
-                value={nota}
-                onChange={(e) => setNota(e.target.value)}
+                value={no            onChange={(e) => setNota(e.target.value)}
                 placeholder="Comentarios para recepción/profesional."
                 rows={2}
                 className="mt-1 w-full resize-none rounded-xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2 text-sm text-[#003D5B] outline-none"
@@ -1031,7 +950,7 @@ function NuevoTurnoModal(props: {
               boxShadow: '0 14px 32px rgba(0,61,91,0.20)',
             }}
           >
-            {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
+            {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4w-4" />}
             {saving ? 'Guardando…' : 'Cargar turno'}
           </motion.button>
 
