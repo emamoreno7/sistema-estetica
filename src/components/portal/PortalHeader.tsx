@@ -18,6 +18,7 @@ import { useAuth } from '@/context/AuthContext';
 import { usePortalNotifications } from '@/context/PortalNotificationsContext';
 import { clearLocalAppData } from '@/lib/clearLocalAppData';
 import { updatePerfilClienteFields } from '@/lib/perfilCliente';
+import { brand } from '../../config/brand';
 
 export type PortalHeaderView = 'inicio' | 'tratamiento' | 'evolucion' | 'citas' | 'perfil';
 
@@ -59,7 +60,7 @@ export function PortalHeader({
   portalCliente,
 }: {
   view: PortalHeaderView;
-  onNavigate: (v: PortalHeaderView) => void;
+  onNavigate: (v: PortalHeaderiew) => void;
   portalCliente: PortalHeaderCliente;
 }) {
   void _view;
@@ -230,7 +231,7 @@ export function PortalHeader({
                             type="button"
                             className="w-full border-b px-4 py-3 text-left transition hover:bg-[rgba(242,215,213,0.2)]"
                             style={{ borderColor: 'rgba(242,215,213,0.35)' }}
-                            onClick={() => {
+                           onClick={() => {
                               markAsRead(n.id);
                             }}
                           >
@@ -320,7 +321,7 @@ export function PortalHeader({
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.18 }}
+                    transtion={{ duration: 0.18 }}
                     className={PANEL_CLASS}
                     style={{ ...PANEL_STYLE, width: 'min(100vw-1.5rem, 15.5rem)' }}
                   >
@@ -339,7 +340,7 @@ export function PortalHeader({
                       </button>
                       <button
                         type="button"
-                        className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-[rgba(242,215,213,0.35)]"
+                        className="flex w-full items-center gap-2 rounded-xl px-3 py-25 text-left text-sm font-medium transition hover:bg-[rgba(242,215,213,0.35)]"
                         style={{ color: 'var(--primary-navy)' }}
                         onClick={() => {
                           onNavigate('citas');
@@ -371,7 +372,7 @@ export function PortalHeader({
                         Cerrar Sesión
                       </button>
                     </div>
-                  </motion.div>
+                  </motion.div
                 ) : null}
               </AnimatePresence>
             </div>
@@ -416,10 +417,10 @@ export function PortalHeader({
                 <X className="h-5 w-5" />
               </button>
               <h2 className="text-serif-premium pr-10 text-lg font-bold" style={{ color: 'var(--primary-navy)' }}>
-                Tus datos en Amore
+                {brand.portalDataTitle}
               </h2>
               <p className="mt-2 text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                Estos campos se guardan en tu ficha en Supabase (<strong>perfiles_clientes</strong>). El equipo usa el
+                Estos campos se guardan en tu ficha en Supabase (<strong>perfiles_clientes</strong>). El {brand.supportLabel} usa el
                 teléfono para coordinar turnos.
               </p>
               <form className="mt-6 space-y-4" onSubmit={(e) => void guardarPerfil(e)}>
@@ -440,7 +441,7 @@ export function PortalHeader({
                       color: 'var(--primary-navy)',
                       boxShadow: 'inset 0 1px 2px rgba(0,61,91,0.04)',
                     }}
-                    autoComplete="name"
+                   autoComplete="name"
                     required
                   />
                 </div>
@@ -462,7 +463,7 @@ export function PortalHeader({
                       boxShadow: 'inset 0 1px 2px rgba(0,61,91,0.04)',
                     }}
                     inputMode="tel"
-                    autoComplete="tel"
+                    atoComplete="tel"
                     placeholder="+54…"
                     required
                   />
@@ -485,6 +486,6 @@ export function PortalHeader({
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </>
+  >
   );
 }
