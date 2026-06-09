@@ -3,6 +3,7 @@ import VirtualAssistantChat from '@/components/VirtualAssistantChat';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
 import { asset } from '@/lib/asset';
+import { brand } from '../../config/brand';
 import { LandingHeader } from './LandingHeader';
 import { ServiciosSection } from './ServiciosSection';
 import { ConversionSection } from './ConversionSection';
@@ -48,7 +49,7 @@ export function LandingPage({ onEnter, onRegister }: Props) {
           >
             <img
               src={asset('logo-amore-v2.png')}
-              alt="AMORE Centro Di Bellezza"
+              alt={brand.businessName}
               style={{
                 width: '100%',
                 height: '100%',
@@ -98,7 +99,7 @@ export function LandingPage({ onEnter, onRegister }: Props) {
             className="mx-auto mt-5 max-w-lg text-sm leading-7 sm:text-base sm:leading-8"
             style={{ color: 'var(--text-muted)', letterSpacing: '0.02em' }}
           >
-            Cada tratamiento en Amore está diseñado para acompañarte con calma, profesionalismo y resultados visibles.
+            Cada tratamiento en {brand.shortName} está diseñado para acompañarte con calma, profesionalismo y resulta visibles.
             Tu piel, en las mejores manos.
           </p>
         </motion.div>

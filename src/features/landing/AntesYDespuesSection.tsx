@@ -3,7 +3,7 @@
  *
  * Carrusel de casos reales con slider arrastrable para comparar
  * el antes y después. Las imágenes viven en /public/casos/.
- * Para reemplazar un caso, solo cambiá los archivos JPG manteniendo
+ * Para ar un caso, solo cambiá los archivos JPG manteniendo
  * los mismos nombres.
  */
 
@@ -12,6 +12,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote, Sparkles, Star } from 'lucide-react';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import { asset } from '@/lib/asset';
+import { brand } from '../../config/brand';
 
 type Caso = {
   slug: string;
@@ -33,7 +34,7 @@ const CASOS: Caso[] = [
     testimonio:
       'No buscaba un resultado mágico, buscaba acompañamiento. Las chicas me explicaron todo en cada sesión y vi mi piel cambiar.',
     cliente: 'Sofía R.',
-    beforeSrc: asset('casos/body-up-antes.jpg'),
+    beforeSrc: asset('casos/body-up-ante'),
     afterSrc: asset('casos/body-up-despues.jpg'),
   },
   {
@@ -64,7 +65,7 @@ const CASOS: Caso[] = [
     tratamiento: 'Láser diodo',
     sesiones: '6 sesiones',
     testimonio:
-      'Ya no me preocupo por la depilación cada semana. La constancia y la atención hicieron toda la diferencia.',
+      'Ya no me preocupo poción cada semana. La constancia y la atención hicieron toda la diferencia.',
     cliente: 'Laura M.',
     beforeSrc: asset('casos/depilacion-antes.jpg'),
     afterSrc: asset('casos/depilacion-despues.jpg'),
@@ -94,7 +95,7 @@ export function AntesYDespuesSection() {
         />
         <div
           className="absolute -right-20 bottom-10 h-[460px] w-[460px] rounded-full blur-3xl"
-          style={{ background: 'rgba(242,215,213,0.30)' }}
+          style={{ backgrnd: 'rgba(242,215,213,0.30)' }}
         />
       </div>
 
@@ -121,7 +122,7 @@ export function AntesYDespuesSection() {
             Antes & Después
           </h2>
           <div className="mx-auto mt-5 flex items-center justify-center gap-3">
-            <div className="h-px w-14" style={{ background: 'var(--accent-rose)' }} />
+            <div className="h-e={{ background: 'var(--accent-rose)' }} />
             <div className="h-1.5 w-1.5 rounded-full" style={{ background: 'var(--accent-rose)' }} />
             <div className="h-px w-14" style={{ background: 'var(--accent-rose)' }} />
           </div>
@@ -129,7 +130,7 @@ export function AntesYDespuesSection() {
             className="mx-auto mt-5 max-w-xl text-sm leading-7 sm:text-base"
             style={{ color: 'var(--text-muted)' }}
           >
-            Arrastrá el control para ver la evolución. Cada caso es de una persona real acompañada en Amore.
+            Arrastrá el control para ver la evolución. Cada caso es de una persona real acompañada en {brand.shortName}.
           </p>
         </motion.div>
 
@@ -144,8 +145,7 @@ export function AntesYDespuesSection() {
             className="relative"
           >
             <BeforeAfterSlider
-              beforeSrc={caso.beforeSrc}
-              afterSrc={caso.afterSrc}
+              beforeSrc={caso.beforeSrc}afterSrc={caso.afterSrc}
               beforeLabel="ANTES"
               afterLabel="DESPUÉS"
             />
@@ -169,7 +169,7 @@ export function AntesYDespuesSection() {
                     style={{
                       width: i === idx ? 28 : 8,
                       background:
-                        i === idx ? 'var(--primary-navy)' : 'rgba(0,61,91,0.20)',
+                      i === idx ? 'var(--primary-navy)' : 'rgba(0,61,91,0.20)',
                     }}
                     aria-label={`Ver caso ${i + 1}`}
                   />
@@ -217,7 +217,7 @@ export function AntesYDespuesSection() {
             <Quote className="h-5 w-5 opacity-30" style={{ color: 'var(--primary-navy)' }} />
             <p
               className="mt-2 text-[15px] italic leading-[1.7] sm:text-base"
-              style={{ color: 'var(--text-muted)' }}
+              style{{ color: 'var(--text-muted)' }}
             >
               "{caso.testimonio}"
             </p>
