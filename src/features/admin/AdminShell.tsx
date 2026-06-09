@@ -15,6 +15,7 @@ import {
 import { useAuth } from '@/context/AuthContext';
 import { countPerfilesPendientesAdmin } from './adminApi';
 import { countInsumosSinVerificar } from './adminAuditoriaApi';
+import { brand } from '../../config/brand';
 
 const PENDING_REFRESH_MS = 60_000;
 const AUDIT_REFRESH_MS = 5 * 60_000;
@@ -54,7 +55,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
   const location = useLocation();
 
   const email = session?.user?.email ?? '';
-  const initial = (email.split('@')[0] || 'A').charAt(0).toUpperCase();
+  const initial = (email.split('@')[0] || 'A'.charAt(0).toUpperCase();
 
   const [pendingCount, setPendingCount] = useState<number | null>(null);
   const [auditCount, setAuditCount] = useState<number | null>(null);
@@ -76,7 +77,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
       if (!cancelled) setPendingCount(n);
     }
     async function refreshAudit() {
-      const n = await countInsumosSinVerificar(AUDIT_DIAS_UMBRAL);
+      const n =wait countInsumosSinVerificar(AUDIT_DIAS_UMBRAL);
       if (!cancelled) setAuditCount(n);
     }
     function start() {
@@ -147,7 +148,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#003D5B]/45">
             Backoffice
           </p>
-          <p className="text-serif-premium mt-1 text-lg font-bold text-[#003D5B]">Amore</p>
+          <p className="text-serif-premium mt-1 text-lg font-bold text-[#003D5B]">{brand.shortName}</p>
         </div>
 
         <nav className="flex-1 space-y-1 px-3">
@@ -224,7 +225,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
             onClick={onSignOut}
             className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#003D5B] py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow-lg"
           >
-            <LogOut className="h-3.5 w-3.5" /> Salir
+            <LogOut className"h-3.5 w-3.5" /> Salir
           </button>
         </div>
       </aside>
@@ -238,7 +239,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
         }}
       >
         <div>
-          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[#003D5B]/45">Amore Backoffice</p>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[#003D5B]/45">{brand.backofficeName}</p>
           <p className="text-sm font-bold text-[#003D5B]">{title ?? 'Administración'}</p>
         </div>
         <button
@@ -251,7 +252,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
       </header>
 
       <nav
-        className="sticky top-[57px] z-20 flex gap-1 overflow-x-auto border-b px-3 py-2 lg:hidden"
+        className="sticky top-[57px] z-20 flex gap-1 overflow-x-auto borer-b px-3 py-2 lg:hidden"
         style={{
           background: 'rgba(253,248,245,0.92)',
           borderColor: 'rgba(242,215,213,0.55)',
