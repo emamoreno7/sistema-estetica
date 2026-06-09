@@ -6,6 +6,7 @@ import {
   type PerfilRowStatus,
 } from '@/lib/perfilCliente';
 import type { CitaEstado } from '@/lib/citasApi';
+import { brand } from '../../config/brand';
 
 export type AdminKpis = {
   clientesPendientes: number;
@@ -57,10 +58,6 @@ function ymd(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-/**
- * Calcula los KPIs principales del backoffice.
- * Devuelve {kpis, error} para permitir mostrar mensajes claros si RLS falla.
- */
 export async function fetchAdminKpis(): Promise<{ kpis: AdminKpis | null; error: string | null }> {
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
@@ -82,7 +79,7 @@ export async function fetchAdminKpis(): Promise<{ kpis: AdminKpis | null; error:
     .map((e) => e!.message);
   if (errors.length > 0) {
     const msg = errors.join(' · ');
-    const hint = msg.toLowerCase().includes('row-level security')
+    const hit = msg.toLowerCase().includes('row-level security')
       ? 'RLS: revisá que tu email/uid coincida con is_portal_admin() y migraciones 003/006/007.'
       : msg;
     return { kpis: null, error: hint };
@@ -111,7 +108,7 @@ export async function fetchAdminKpis(): Promise<{ kpis: AdminKpis | null; error:
   const servicios = (serviciosRes.data ?? []) as { activo?: unknown }[];
   let serviciosActivos = 0;
   for (const s of servicios) {
-    if (s.activo === true) serviciosActivos++;
+    if (s.activo === true) serviciosActivos+;
   }
 
   return {
@@ -131,7 +128,6 @@ export async function fetchAdminKpis(): Promise<{ kpis: AdminKpis | null; error:
   };
 }
 
-/** Últimas N altas (perfiles más recientes) — pensado para el bloque "novedades" del overview. */
 export async function fetchUltimasAltasAdmin(
   limit = 5
 ): Promise<{ rows: UltimaAltaRow[]; error: string | null }> {
@@ -148,7 +144,7 @@ export async function fetchUltimasAltasAdmin(
   const rows: UltimaAltaRow[] = ((data ?? []) as Partial<PerfilClienteRow & { created_at?: string }>[]).map(
     (r) => ({
       id: String(r.id ?? ''),
-      full_name: String(r.full_name ?? '').trim() || 'Cliente Amore',
+      full_name: String(r.full_name ?? '').trim() || brand.clientFallbackName,
       phone: String(r.phone ?? '').trim(),
       status: parseStatus(r.status),
       created_at: typeof r.created_at === 'string' ? r.created_at : null,
@@ -158,7 +154,6 @@ export async function fetchUltimasAltasAdmin(
   return { rows, error: null };
 }
 
-/** Próximos turnos desde hoy en adelante (incluye el día actual), ordenados por fecha y hora. */
 export async function fetchProximosTurnosAdmin(
   limit = 6
 ): Promise<{ rows: ProximoTurnoRow[]; error: string | null }> {

@@ -8,6 +8,7 @@ import AdminAuditoriaPreciosView from '@/features/admin/AdminAuditoriaPreciosVie
 import AprobarUsuariosPage from '@/features/admin/AprobarUsuariosPage';
 import { useAuth } from '@/context/AuthContext';
 import { isPortalAdmin } from '@/config/admin';
+import { brand } from '../../config/brand';
 
 function AdminOutletLayout({ onSignOut }: { onSignOut: () => void }) {
   return <Outlet context={{ onSignOut }} />;
@@ -40,9 +41,9 @@ export default function AdminPage() {
   if (!isPortalAdmin(email, uid)) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center px-6" style={{ background: 'var(--bg-cream)' }}>
-        <h1 className="text-serif-premium text-xl font-bold text-[#003D5B]">Acceso restringido</h1>
+        <h1 className="text-serif-premium text-xl font-bold text-[03D5B]">Acceso restringido</h1>
         <p className="mt-3 max-w-md text-center text-sm text-[#7A746E]">
-          Esta zona es sólo para el equipo autorizado de Amore. Si necesitás acceso, contactá al administrador con tu
+          Esta zona es sólo para el {brand.supportLabel} autorizado. Si necesitás acceso, contactá al administrador con tu
           correo de trabajo.
         </p>
         <button
@@ -67,7 +68,7 @@ export default function AdminPage() {
         <Route index element={<AdminOverview />} />
         <Route path="clientes" element={<AdminClientsView />} />
         <Route path="aprobar-usuarios" element={<AprobarUsuariosPage />} />
-        <Route path="agenda" element={<AdminAgendaView />} />
+     <Route path="agenda" element={<AdminAgendaView />} />
         <Route path="servicios" element={<AdminServicesView />} />
         <Route path="costos" element={<AdminCostosView />} />
         <Route path="auditoria-precios" element={<AdminAuditoriaPreciosView />} />

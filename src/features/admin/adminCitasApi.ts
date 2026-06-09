@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 import type { CitaEstado, CitaClienteRow } from '@/lib/citasApi';
+import { brand } from '../../config/brand';
 
 export type CitaAdminListRow = CitaClienteRow & {
   full_name: string;
@@ -27,7 +28,6 @@ function parseEstado(raw: unknown): CitaEstado {
   return 'pendiente';
 }
 
-/** Todas las citas de un día (requiere políticas `citas_admin_*` en Supabase). */
 export async function fetchCitasPorFechaAdmin(
   fechaYmd: string
 ): Promise<{ rows: CitaAdminListRow[]; error: string | null }> {
@@ -46,7 +46,7 @@ export async function fetchCitasPorFechaAdmin(
     };
   }
 
-  const rawList = (citas ?? []) as CitaClienteRow[];
+  const rawList = (citas ?? [as CitaClienteRow[];
   const ids = [...new Set(rawList.map((c) => c.cliente_id))];
 
   const nombrePorCliente = new Map<string, { full_name: string; phone: string }>();
@@ -62,7 +62,7 @@ export async function fetchCitasPorFechaAdmin(
     for (const p of perfiles ?? []) {
       const id = (p as { id: string }).id;
       nombrePorCliente.set(id, {
-        full_name: String((p as { full_name?: string }).full_name ?? '').trim() || 'Cliente Amore',
+        full_name: String((p as { full_name?: string }).full_name ?? '').trim() || brand.clientFallbackName,
         phone: String((p as { phone?: string }).phone ?? '').trim(),
       });
     }
@@ -88,8 +88,6 @@ export async function fetchCitasPorFechaAdmin(
   return { rows, error: null };
 }
 
-/** Lista de turnos pendientes solicitados por clientes (no por admin),
- * desde hoy en adelante. Para el panel "Solicitudes" del admin. */
 export async function fetchSolicitudesPendientesAdmin(): Promise<{
   rows: CitaAdminListRow[];
   error: string | null;
@@ -135,7 +133,7 @@ export async function fetchSolicitudesPendientesAdmin(): Promise<{
     for (const p of perfiles ?? []) {
       const id = (p as { id: string }).id;
       perfilPorId.set(id, {
-        full_name: String((p as { full_name?: string }).full_name ?? '').trim() || 'Cliente Amore',
+        full_name: String((p as { full_name?: string }).full_name ?? '').trim() || brandientFallbackName,
         phone: String((p as { phone?: string }).phone ?? '').trim(),
       });
     }
@@ -161,9 +159,6 @@ export async function fetchSolicitudesPendientesAdmin(): Promise<{
   return { rows, error: null };
 }
 
-/** Lista de clientes activos/aprobados para el selector del admin
- * al crear un turno. Se filtra por `status = active` y opcionalmente
- * por término de búsqueda en nombre/teléfono/email. */
 export async function buscarClientesActivos(
   termino: string,
   limit = 25
@@ -174,7 +169,6 @@ export async function buscarClientesActivos(
     .order('full_name', { ascending: true })
     .limit(limit);
 
-  // Acepta tanto `status = active` como `is_approved = true`
   q = q.or('status.eq.active,is_approved.eq.true');
 
   const t = termino.trim();
@@ -190,7 +184,7 @@ export async function buscarClientesActivos(
     const r = p as { id: string; full_name?: string; phone?: string; email?: string };
     return {
       id: r.id,
-      full_name: String(r.full_name ?? '').trim() || 'Cliente Amore',
+      full_name: String(r.full_name ?? '').trim() || brand.clientFallbackName,
       phone: String(r.phone ?? '').trim(),
       email: String(r.email ?? '').trim(),
     };
@@ -198,9 +192,6 @@ export async function buscarClientesActivos(
   return { rows, error: null };
 }
 
-/** Crea un turno desde el admin para un cliente seleccionado.
- * Por defecto entra en `confirmado` (porque el admin ya lo agendó).
- * Respeta la anti-superposición global por fecha+hora. */
 export async function crearCitaAdmin(input: {
   clienteId: string;
   servicio: string;
@@ -239,8 +230,7 @@ export async function crearCitaAdmin(input: {
     if (flat.includes('column') && flat.includes('creado_por_admin')) {
       return {
         cita: null,
-        error: 'Falta la migración 016 (creado_por_admin / nota_admin) en Supabase.',
-      };
+        error: 'Falta la migración 016 (creado_por_admin / nota_admin) en Supabase.'  };
     }
     if (flat.includes('foreign key') && flat.includes('citas')) {
       return {
@@ -254,10 +244,6 @@ export async function crearCitaAdmin(input: {
   return { cita: data as CitaClienteRow, error: null };
 }
 
-/** Da de alta un cliente "walk-in" (no se registró por el portal).
- * Se marca como is_walkin = true y status = 'active' para que pueda
- * usarse inmediatamente al agendar un turno desde el panel admin.
- * Requiere migración 017. */
 export async function crearClienteWalkin(input: {
   fullName: string;
   phone: string;
@@ -276,7 +262,7 @@ export async function crearClienteWalkin(input: {
     full_name: fullName,
     phone,
     status: 'active',
-    is_approved: true,
+    is_app: true,
     is_walkin: true,
   };
   if (email) payload.email = email;
@@ -307,9 +293,7 @@ export async function crearClienteWalkin(input: {
         cliente: null,
         error: 'La tabla aún exige FK a auth.users. Aplicá la migración 017 para permitir clientes walk-in.',
       };
-    }
     if (flat.includes('column') && flat.includes('email')) {
-      // El email es opcional: reintentar sin él
       const retry = { ...payload };
       delete retry.email;
       const r = await supabase
@@ -349,12 +333,10 @@ export async function actualizarEstadoCitaAdmin(
   estado: CitaEstado
 ): Promise<{ error: string | null }> {
   const { error } = await supabase.from('citas').update({ estado }).eq('id', citaId);
-
   return { error: error?.message ?? null };
 }
 
 export async function eliminarCitaAdmin(citaId: string): Promise<{ error: string | null }> {
   const { error } = await supabase.from('citas').delete().eq('id', citaId);
-
   return { error: error?.message ?? null };
 }

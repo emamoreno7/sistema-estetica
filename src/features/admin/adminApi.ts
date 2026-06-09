@@ -6,6 +6,7 @@ import {
   type PerfilClienteRow,
   type PerfilRowStatus,
 } from '@/lib/perfilCliente';
+import { brand } from '../../config/brand';
 
 function parseRowStatus(raw: unknown): PerfilRowStatus {
   if (raw === 'pending' || raw === 'active' || raw === 'blocked') return raw;
@@ -14,7 +15,7 @@ function parseRowStatus(raw: unknown): PerfilRowStatus {
 
 function mapRlsError(error: { message: string }): string {
   return error.message.includes('row-level security')
-    ? 'Políticas RLS: revisá migración admin, que tu email esté en `is_portal_admin()` y coincida con VITE_ADMIN_EMAILS.'
+    ? 'PolíticasRLS: revisá migración admin, que tu email esté en `is_portal_admin()` y coincida con VITE_ADMIN_EMAILS.'
     : error.message;
 }
 
@@ -32,19 +33,14 @@ export async function listPerfilesClientesAdmin(): Promise<{
 
   const rows: PerfilClienteRow[] = (data ?? []).map((r) => ({
     id: r.id as string,
-    full_name: String((r as { full_name?: string }).full_name ?? '').trim() || 'Cliente Amore',
-    phone: String((r as { phone?: string }).phone ?? '').trim() || '',
+    full_name: String((r as { full_name?: string }).full_name ?? '').trim() || brand.clientFallbackName,
+    phone: String((r as { p: string }).phone ?? '').trim() || '',
     status: parseRowStatus((r as { status?: string }).status),
   }));
 
   return { rows, error: null };
 }
 
-/**
- * Variante extendida con `created_at` para vistas que ordenan por fecha de alta
- * (ej. Aprobar usuarios). Mismo permiso RLS que `listPerfilesClientesAdmin`.
- * Pendientes primero, luego más recientes.
- */
 export async function listPerfilesClientesAdminExt(): Promise<{
   rows: PerfilClienteRow[];
   error: string | null;
@@ -67,7 +63,7 @@ export async function listPerfilesClientesAdminExt(): Promise<{
     };
     return {
       id: raw.id,
-      full_name: String(raw.full_name ?? '').trim() || 'Cliente Amore',
+      full_name: String(raw.full_name ?? '').trim() || brand.clientFallbackName,
       phone: String(raw.phone ?? '').trim() || '',
       status: parseRowStatus(raw.status),
       created_at: raw.created_at ?? undefined,
@@ -97,7 +93,7 @@ export async function bloquearCliente(userId: string): Promise<{ error: string |
 }
 
 /** Volver una ficha activa a estado `pending` (deshacer aprobación sin borrar la ficha). */
-export async function desaprobarCliente(userId: string): Promise<{ error: string | null }> {
+export async function desaprobarCliente(userId: string): Promise<{ error: string |ll }> {
   const { error } = await supabase
     .from(PERFILES_CLIENTES_TABLE)
     .update({ status: 'pending' })
@@ -106,10 +102,6 @@ export async function desaprobarCliente(userId: string): Promise<{ error: string
   return { error: error?.message ?? null };
 }
 
-/**
- * Cuenta liviana de fichas pendientes — usa `head: true` para no traer payload.
- * Pensado para badges del sidebar; si falla devuelve 0 silenciosamente.
- */
 export async function countPerfilesPendientesAdmin(): Promise<number> {
   const { count, error } = await supabase
     .from(PERFILES_CLIENTES_TABLE)
