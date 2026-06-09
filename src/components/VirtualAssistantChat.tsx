@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MessageCircle, Send, Sparkles, X } from 'lucide-react';
+import { brand } from '../config/brand';
 
 type ChatMessage = {
   id: string;
@@ -10,7 +11,7 @@ type ChatMessage = {
 };
 
 const GREETING =
-  '¡Hola! Soy tu asistente de Amore. ¿Tenés dudas sobre algún tratamiento o cuidado corporal?';
+  `¡Hola! Soy tu ${brand.assistantName}. ¿Tenés dudas sobre algún tratamiento o cuidado corporal?`;
 
 const PROCESSING_TEXT =
   'Estoy procesando tu consulta, mientras tanto podés hablarnos directamente por WhatsApp para una respuesta inmediata.';
@@ -19,7 +20,7 @@ const QUICK_ACTIONS: { label: string; response: string }[] = [
   {
     label: 'Cuidados Post-Crio',
     response:
-      'Después de la criolipólisis te recomendamos hidratación abundante, movimiento suave y evitar alcohol o comidas muy pesadas el mismo día. Tu equipo en Amore te indica los detalles según tu sesión. ¿Querés que coordinemos un seguimiento por WhatsApp?',
+      `Después de la criolipólisis te recomendamos hidratación abundante, movimiento suave y evitar alcohol o comidas muy pesadas el mismo día. Tu ${brand.supportLabel} te indica los detalles según tu sesión. ¿Querés que coordinemos o por WhatsApp?`,
   },
   {
     label: '¿Duele el Láser?',
@@ -45,7 +46,7 @@ export default function VirtualAssistantChat({
   forPortal?: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<Ce[]>([]);
   const [draft, setDraft] = useState('');
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -108,7 +109,7 @@ export default function VirtualAssistantChat({
           boxShadow: '0 8px 28px rgba(0,61,91,0.35)',
         }}
         aria-expanded={open}
-        aria-label={open ? 'Cerrar asistente Amore' : 'Abrir asistente virtual Amore'}
+        aria-label={open ? `Cerrar ${brand.assistantName}` : `Abrir ${brand.assistantName}`}
         whileTap={{ scale: 0.95 }}
       >
         {open ? <X className="h-6 w-6" strokeWidth={2} /> : <Sparkles className="h-6 w-6" />}
@@ -140,7 +141,7 @@ export default function VirtualAssistantChat({
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#003D5B' }}>
-                  Asistente Amore
+                  {brand.assistantName}
                 </p>
                 <p className="text-[10px]" style={{ color: 'rgba(0,61,91,0.55)' }}>
                   Respuestas orientativas · no sustituyen consulta médica
@@ -157,7 +158,7 @@ export default function VirtualAssistantChat({
                   key={m.id}
                   className={`max-w-[90%] rounded-2xl px-3 py-2.5 text-sm leading-relaxed ${
                     m.role === 'user'
-                      ? 'ml-auto rounded-br-md'
+                    ? 'ml-auto rounded-br-md'
                       : 'mr-auto rounded-bl-md'
                   }`}
                   style={
@@ -205,7 +206,7 @@ export default function VirtualAssistantChat({
               </div>
             </div>
 
-            <form onSubmit={handleSend} className="flex gap-2 border-t p-3" style={{ borderColor: 'rgba(242,215,213,0.6)' }}>
+            <form onSubmit={handleSend} className="flex gap-2 border-t p-3" style={{ borderColor: 'rgba242,215,213,0.6)' }}>
               <input
                 value={draft}
                 onChange={e => setDraft(e.target.value)}
