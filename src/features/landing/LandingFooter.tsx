@@ -1,6 +1,7 @@
 import { Mail, MessageCircle } from 'lucide-react';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
 import { asset } from '@/lib/asset';
+import { brand } from '../../config/brand';
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -34,7 +35,7 @@ export function LandingFooter() {
       <div className="mx-auto flex max-w-4xl flex-col items-center gap-8 text-center">
         <img
           src={asset('logo-amore-v2.png')}
-          alt="AMORE Centro Di Bellezza"
+          alt={brand.businessName}
           style={{
             height: '72px',
             width: 'auto',
@@ -48,7 +49,7 @@ export function LandingFooter() {
 
         <div className="h-px w-12 bg-[#003D5B]/15" />
 
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="gridgap-6 sm:grid-cols-3">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">Ubicación</p>
             <a
@@ -66,7 +67,7 @@ export function LandingFooter() {
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">Redes</p>
             <div className="mt-2 flex flex-col items-center gap-1.5 sm:items-start">
               <a
-                href="https://instagram.com/amorecentrodibellezza"
+                href="https://instagram.com/amorentrodibellezza"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm leading-6 text-[#7A746E] transition-colors hover:text-[#003D5B]"
@@ -107,8 +108,8 @@ export function LandingFooter() {
         <div className="h-px w-12 bg-[#003D5B]/15" />
 
         <p className="text-[9px] uppercase tracking-[0.35em] text-[#A9A09A]">
-          &copy; {new Date().getFullYear()} Amore Centro Di Bellezza
-        </p>
+          &copy; {new Date().getFullYear()} {brand.copyrightName}
+      </p>
 
         {/* ─── Firma del desarrollador ─── */}
         <div className="mt-8 w-full">
@@ -131,8 +132,7 @@ export function LandingFooter() {
                 className="h-12 w-12 rounded-lg object-cover"
                 style={{ filter: 'drop-shadow(0 4px 12px rgba(56,189,248,0.35))' }}
               />
-              <div className="text-left">
-                <p className="text-[9px] font-medium uppercase tracking-[0.32em] text-cyan-300/80">
+              <div className="text-left"    <p className="text-[9px] font-medium uppercase tracking-[0.32em] text-cyan-300/80">
                   Desarrollado por
                 </p>
                 <p className="mt-0.5 text-base font-semibold tracking-tight text-white">
