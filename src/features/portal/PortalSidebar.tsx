@@ -4,6 +4,7 @@ import { Heart, LogOut, Settings } from 'lucide-react';
 import { BrandWordmark } from '@/components/branding/BrandWordmark';
 import { portalNavItems } from './navItems';
 import type { PortalView } from './types';
+import { brand } from '../../config/brand';
 
 type Props = {
   view: PortalView;
@@ -114,14 +115,14 @@ export function PortalSidebar({ view, onNav, onLogout, isAdmin }: Props) {
                 whileTap={{ scale: 0.94 }}
                 className="flex w-12 shrink-0 flex-col items-center gap-1 rounded-2xl px-1 py-2.5 text-white shadow-lg outline-none ring-offset-2 focus-visible:ring-2 focus-visible:ring-red-600"
                 style={{
-                  background: 'linear-gradient(165deg, #E53935 0%, #B71C1C 45%, #C62828 100%)',
+                 background: 'linear-gradient(165deg, #E53935 0%, #B71C1C 45%, #C62828 100%)',
                   boxShadow: '0 10px 28px rgba(198,40,40,0.45)',
                 }}
-                title="Gestión Amore — administración"
+                title={brand.backofficeName}
               >
                 <Settings className="h-[18px] w-[18px] shrink-0 opacity-95" aria-hidden />
                 <span className="max-w-[3.35rem] text-center text-[7px] font-bold uppercase leading-tight tracking-[0.06em]">
-                  GESTIÓN AMORE
+                  GESTIÓN {brand.shortName.toUpperCase()}
                 </span>
               </motion.button>
             </>
@@ -135,7 +136,7 @@ export function PortalSidebar({ view, onNav, onLogout, isAdmin }: Props) {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="fixed bottom-0 left-0 right-0 z-50 flex flex-col px-3 pb-3 pt-2 lg:hidden"
       >
-        <div className="glass-bottom flex items-center justify-around rounded-2xl px-1 py-2.5">
+        <div className="glass-bottom flex items-center justify-around rouned-2xl px-1 py-2.5">
           {portalNavItems.map((item) => {
             const active = view === item.id;
             return (
@@ -172,7 +173,7 @@ export function PortalSidebar({ view, onNav, onLogout, isAdmin }: Props) {
             }}
           >
             <Settings className="h-4 w-4 shrink-0" aria-hidden />
-            GESTIÓN AMORE
+            GESTIÓN {brand.shortName.toUpperCase()}
           </motion.button>
         ) : null}
       </motion.nav>
