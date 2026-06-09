@@ -4,9 +4,7 @@ export type ServicioItem = {
   name: string;
   desc: string;
   badges: string[];
-  /** Imagen tipo foto (fallback / admin / portal). */
   image: string;
-  /** Ilustración SVG line-art usada en la landing. */
   illustration?: IllustrationKey;
 };
 
@@ -23,7 +21,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
     services: [
       {
         name: 'Body Up',
-        desc: 'Modelado corporal con protocolo Amore: tonificación y contorno con la serenidad de un ritual de belleza, no de un gimnasio.',
+        desc: 'Modelado corporal con protocolo profesional: tonificación y contorno con la serenidad de un ritual de belleza, no de un gimnasio.',
         badges: ['Tonificador', 'Reductor'],
         image: '/body-up.png',
         illustration: 'bodyUp',
@@ -37,14 +35,14 @@ export const serviciosCatalogo: ServicioCategoria[] = [
       },
       {
         name: 'Crio-lipólisis',
-        desc: 'Enfriamiento controlado sobre zonas localizadas, en un entorno clínico impecable y acogedor. Sin prisas, solo resultados bien acompañados.',
+        desc: 'Enfriamiento controlado sobre zonas ldas, en un entorno clínico impecable y acogedor. Sin prisas, solo resultados bien acompañados.',
         badges: ['Reductor'],
         image: '/crio.png',
         illustration: 'crio',
       },
       {
         name: 'Lipo-láser',
-        desc: 'Tecnología láser para acompañar tu silueta con contornos más definidos, siempre dentro de un cuidado personalizado Amore.',
+        desc: 'Tecnología láser para acompañar tu silueta con contornos más definidos, siempre dentro de un cuidado personalizado.',
         badges: ['Reductor'],
         image: '/lipolaser.png',
         illustration: 'lipolaser',
@@ -64,8 +62,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
     services: [
       {
         name: 'Masajes relajantes',
-        desc: 'Ritual de descanso con movimientos lentos y aceites seleccionados. Tu cuerpo baja el ritmo; tu mente, también.',
-        badges: ['Relajante'],
+        desc: 'Ritual de descanso con movimientos lentos y aceites seleccionados. Tu cuerpo baja el ritmo; tu mente, también. badges: ['Relajante'],
         image: '/masajesr.png',
         illustration: 'masajeRelajante',
       },
@@ -82,10 +79,9 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         badges: ['Drenante', 'Reafirmante'],
         image: '/presoterapia.png',
         illustration: 'presoterapia',
-      },
-      {
+      },{
         name: 'Piedras calientes',
-        desc: 'Calor volcanic sobre la piel que relaja la fibra muscular hasta lo más profundo. Un clásico del spa, elevado al estándar Amore.',
+        desc: 'Calor volcánico sobre la piel que relaja la fibra muscular hasta lo más profundo. Un clásico del spa, elevado al máximo estándar.',
         badges: ['Relajante'],
         image: '/piedras-calientes.png',
         illustration: 'piedrasCalientes',
@@ -107,8 +103,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         desc: 'Curva y elevación natural: una mirada despierta y femenina sin el peso de las extensiones, con acabado limpio y duradero.',
         badges: ['Lashista'],
         image: '/pestanas.png',
-        illustration: 'liftingPestanas',
-      },
+        illustration: 'liftingPe      },
       {
         name: 'Laminado de cejas',
         desc: 'Cejas peinadas, fijadas y con forma definida durante semanas: efecto prolijo y voluminoso que enmarca la mirada.',
@@ -137,7 +132,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
       {
         name: 'Nails (uñas)',
         desc: 'Servicio de uñas: esculpidas, semipermanente o kapping, con diseño y terminación profesional a tu estilo.',
-        badges: ['Uñas'],
+        badges,
         image: '/pestanas.png',
       },
     ],
@@ -167,7 +162,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
 export const BADGE_STYLE: Record<string, { bg: string; color: string }> = {
   Reductor: { bg: 'rgba(191,201,162,0.3)', color: '#4A6741' },
   Tonificador: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
-  Reafirmante: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
+  Reafirmante: { bg: 'rgba(0,61,91,0.10)', '#003D5B' },
   Drenante: { bg: 'rgba(191,201,162,0.3)', color: '#4A6741' },
   Terapéutico: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
   Relajante: { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
