@@ -122,7 +122,7 @@ export function AntesYDespuesSection() {
             Antes & Después
           </h2>
           <div className="mx-auto mt-5 flex items-center justify-center gap-3">
-            <div className="h-e={{ background: 'var(--accent-rose)' }} />
+            <div className="h-px w-14" style={{ background: 'var(--accent-rose)' }} />
             <div className="h-1.5 w-1.5 rounded-full" style={{ background: 'var(--accent-rose)' }} />
             <div className="h-px w-14" style={{ background: 'var(--accent-rose)' }} />
           </div>
@@ -217,7 +217,7 @@ export function AntesYDespuesSection() {
             <Quote className="h-5 w-5 opacity-30" style={{ color: 'var(--primary-navy)' }} />
             <p
               className="mt-2 text-[15px] italic leading-[1.7] sm:text-base"
-              style{{ color: 'var(--text-muted)' }}
+              style={{ color: 'var(--text-muted)' }}
             >
               "{caso.testimonio}"
             </p>

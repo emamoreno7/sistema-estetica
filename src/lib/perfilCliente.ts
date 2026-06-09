@@ -2,13 +2,8 @@ import type { PostgrestError } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabaseClient';
 import { brand } from '../config/brand';
 
-/** Tabla física única del portal (nombre canónico en todo el proyecto). */
 export const PERFILES_CLIENTES_TABLE = 'perfiles_clientes' as const;
-
-/** Columnas que existen en la tabla física para lecturas; evitar columnas inexistentes en `.select()`. */
 export const PERFIL_CLIENTE_SELECT_COLUMNS = 'id, full_name, phone, status' as const;
-
-/** SELECT extendido sólo para vistas admin que necesiten metadata temporal (created_at, updated_at). */
 export const PERFIL_CLIENTE_ADMIN_SELECT_COLUMNS =
   'id, full_name, phone, status, created_at, updated_at' as const;
 
@@ -17,10 +12,8 @@ export type PerfilRowStatus = 'pending' | 'active' | 'blocked';
 export type AccountStatus =
   | PerfilRowStatus
   | 'fetch_error'
-  /** Respuesta benigna tipo PostgREST/HTTP 400–406 sin fila válida para el usuario actual. */
   | 'profile_not_found';
 
-/* = columnas reales del SELECT. El resto es opcional (metadata, futuras migraciones). */
 export type PerfilClienteRow = {
   id: string;
   full_name: string;
@@ -28,31 +21,22 @@ export type PerfilClienteRow = {
   status: PerfilRowStatus;
   tratamiento_interes?: string | null;
   proxima_cita_at?: string | null;
-  created_at?: string;
-  updated_at?: string;
-};
-
-type RawPerfilClienteRow = {
-  id: string;
-  full_name: string | null;
-  phone: string | null;
+  cphone: string | null;
   status: string | null;
 };
 
-/** PostgREST: 0 ó varias filas con `.single()`; situaciones especiales de RLS. */
 function isLikelyMissingRowOrAmbiguousSingle(err: PostgrestError): boolean {
   const c = String(err.code ?? '');
   return c === 'PGRST116' || c === 'PGRST301';
 }
 
-function mayeHttpStatus(err: PostgrestError): number | null {
+function maybeHttpStatus(err: PostgrestError): number | null {
   const raw = err as unknown as { status?: unknown; statusCode?: unknown };
   const n = typeof raw.status === 'number' ? raw.status : null;
   const nStr = typeof raw.statusCode === 'number' ? raw.statusCode : null;
   return typeof n === 'number' ? n : nStr;
 }
 
-/** Errores que no queremos exponer como `fetch_error`; mostramos "perfil no encontrado" sin reintentos agresivos. */
 function isBenignTreatAsMissingPerfil(err: PostgrestError): boolean {
   if (isLikelyMissingRowOrAmbiguousSingle(err)) return true;
   const http = maybeHttpStatus(err);
@@ -84,11 +68,6 @@ async function fetchPerfilCanonicalColumns(userId: string) {
     .maybeSingle();
 }
 
-/**
- * Sin fila válida sin error HTTP → perfil null, todo false.
- * Errores benignos (400 / 406, PGRST116, …) → `missingBenign` (portalostrar "perfil no encontrado").
- * Otros errores → `fetchFailed`.
- */
 export async function fetchPerfilClienteDetailed(userId: string): Promise<{
   perfil: PerfilClienteRow | null;
   fetchFailed: boolean;
@@ -106,11 +85,9 @@ export async function fetchPerfilClienteDetailed(userId: string): Promise<{
   }
 
   const err = result.error;
-
   if (isBenignTreatAsMissingPerfil(err)) {
-    return { perfil: null, fetchFailed: false, missingBenign: true 
+    return { perfil: null, fetchFailed: false, missingBenign: true };
   }
-
   return { perfil: null, fetchFailed: true, missingBenign: false };
 }
 
@@ -142,22 +119,22 @@ export function firstNameOrFriendly(fullName: string): string {
   return t.split(/\s+/)[0] ?? t;
 }
 
-/** Actualiza nombre y/o teléfono en `perfiles_clientes` (RLS: solo tu fila). */
 export async function updatePerfilClienteFields(
   userId: string,
   patch: { full_name?: string; phone?: string }
 ): Promise<{ ok: boolean; error: string | null }> {
   const updates: Record<string, string> = {};
-  if (patch.full_name !== undefined) updates.full_name = patch.full_name.trim() || brand.clientFallbackName;
-  if (patch.phone !== undefined) updates.phone = patch.phone.trim();
-
+  if (patch.full_name !== undefined) {
+    updates.full_name = patch.full_name.trim() || brand.clientFallbackName;
+  }
+  if (patch.phone !== undefined) {
+    updates.phone = patch.phone.trim();
+  }
   if (Object.keys(updates).length === 0) return { ok: true, error: null };
-
   const { error } = await supabase
     .from(PERFILES_CLIENTES_TABLE)
     .update(updates)
     .eq('id', userId);
-
   if (error) return { ok: false, error: error.message ?? 'No se pudo guardar' };
   return { ok: true, error: null };
 }

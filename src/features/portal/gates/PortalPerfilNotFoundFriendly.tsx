@@ -24,7 +24,7 @@ export function PortalPerfilNotFoundFriendly() {
       style={{ background: 'var(--bg-cream)' }}
     >
       <motion.div
-        initial={{ opacity: 0, y 14 }}
+        initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md rounded-[1.75rem] border border-[#F2D7D5]/65 bg-white/95 p-10 text-center shadow-xl"
       >

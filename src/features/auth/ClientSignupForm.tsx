@@ -14,7 +14,7 @@ function formatInsertPerfilMessage(err: { message?: string; code?: string }): st
   if (m.includes('row-level security') || m.includes('rls')) {
     return 'No se pudo guardar tu ficha por las reglas de seguridad (RLS). Revisá las políticas INSERT en public.perfiles_clientes.';
   }
-  return err.message ?? 'No se pudo guardar tu perfil en Supabase.';
+  return err.message ?? 'No se pudo ardar tu perfil en Supabase.';
 }
 
 /** Si el trigger ya insertó la misma PK, lo tratamos como éxito. */
@@ -34,12 +34,12 @@ type Props = {
 };
 
 export default function ClientSignupForm({ onSuccess }: Props) {
-  const [nombreCompleto, ombreCompleto] = useState('');
+  const [nombreCompleto, setNombreCompleto] = useState('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [tratamiento, setTratamiento] = useState('');
   const [password, setPassword] = useState('');
-  const [busy, setBusy] = useState(false);
+  const [busy, sBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [servicios, setServicios] = useState<string[]>(() => getAllServiceNames());
@@ -100,7 +100,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
       setError('Ingresá tu nombre completo.');
       return;
     }
-    const emailNorm  email.trim().toLowerCase();
+    const emailNorm = email.trim().toLowerCase();
     if (!isValidEmail(emailNorm)) {
       setError('Ingresá un correo válido.');
       return;
@@ -130,13 +130,12 @@ export default function ClientSignupForm({ onSuccess }: Props) {
     const fullName = nombreCompleto.trim();
 
     try {
-      const { data, error: signErr } = await supabase.auth.signUp({
-        email: emailNorm,
+      const { data, error: signErr } = await supabase.auth.signUp({ email: emailNorm,
         password,
         options: {
           data: {
             full_name: fullName,
-            nombre_comName,
+            nombre_completo: fullName,
             phone: tel,
             telefono_whatsapp: tel,
             tratamiento_interes: tratamiento,
@@ -161,7 +160,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
 
       if (!data.session) {
         setError(
-          'El alta fue registrada pero no hay sesión activa (revisá en Supabase que la confirmación de email esté desactivada para clientes). Podés iniciar sesión desde /ingreso cuando esté configurado.'
+          'El alta fue registrada pero no hay sesión activa (revisá en Supabase que la confirmación de email esté desactivada para clientes). Podés iniciar sesión desd cuando esté configurado.'
         );
         setBusy(false);
         return;
@@ -174,7 +173,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
       });
 
       if (profileErr) {
-        setEInsertPerfilMessage(profileErr));
+        setError(formatInsertPerfilMessage(profileErr));
         setBusy(false);
         return;
       }
@@ -200,7 +199,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
     <motion.form
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: 0.05 }}
+      transition={{n: 0.45, delay: 0.05 }}
       onSubmit={handleSubmit}
       className="space-y-5"
     >
@@ -213,7 +212,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
         </label>
         <input
           id="nombre"
-   className={inputClass}
+          className={inputClass}
           value={nombreCompleto}
           onChange={e => setNombreCompleto(e.target.value)}
           placeholder="Tu nombre y apellido"
@@ -235,7 +234,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
           className={inputClass}
           value={email}
           onChange={e => setEmail(e.target.value)}
-          placeholder="nombre@ejemplo.com"
+          placeholder="nombre@ejemlo.com"
           autoComplete="email"
           required
         />
@@ -250,7 +249,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
         </label>
         <input
           id="tel"
-          className={inputCss}
+          className={inputClass}
           value={telefono}
           onChange={e => setTelefono(e.target.value)}
           placeholder="+54 9 … o 011 …"
@@ -310,7 +309,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
       </div>
 
       {error && (
-        <p className="rounded-xl border border-red-200/80 bg-red-50/80 px-4 py-3 text-sm text-red-800">{error}</p>
+        <p classN="rounded-xl border border-red-200/80 bg-red-50/80 px-4 py-3 text-sm text-red-800">{error}</p>
       )}
 
       <motion.button
@@ -318,7 +317,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
         disabled={busy}
         whileHover={{ y: busy ? 0 : -1 }}
         whileTap={{ scale: busy ? 1 : 0.99 }}
-        className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text11px] font-semibold uppercase tracking-[0.22em] text-white shadow-lg disabled:opacity-60"
+        className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-lg disabled:opacity-60"
         style={{ background: '#003D5B', boxShadow: '0 10px 28px rgba(0,61,91,0.18)' }}
       >
         {busy ? (

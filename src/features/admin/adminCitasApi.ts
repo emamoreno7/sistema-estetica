@@ -46,7 +46,7 @@ export async function fetchCitasPorFechaAdmin(
     };
   }
 
-  const rawList = (citas ?? [as CitaClienteRow[];
+  const rawList = (citas ?? []) as CitaClienteRow[];
   const ids = [...new Set(rawList.map((c) => c.cliente_id))];
 
   const nombrePorCliente = new Map<string, { full_name: string; phone: string }>();
@@ -57,12 +57,15 @@ export async function fetchCitasPorFechaAdmin(
       .in('id', ids);
 
     if (pe) {
-      return { rows: [], error: pe.message };
+      return { s: [], error: pe.message };
     }
+
     for (const p of perfiles ?? []) {
       const id = (p as { id: string }).id;
       nombrePorCliente.set(id, {
-        full_name: String((p as { full_name?: string }).full_name ?? '').trim() || brand.clientFallbackName,
+        full_name:
+          String((p as { full_name?: string }).full_name ?? '').trim() ||
+          brand.clientFallbackName,
         phone: String((p as { phone?: string }).phone ?? '').trim(),
       });
     }
@@ -78,7 +81,7 @@ export async function fetchCitasPorFechaAdmin(
       fecha: c.fecha,
       hora: c.hora,
       estado: parseEstado(c.estado),
-      full_name: perf?.full_name ?? 'Cliente',
+      full_name: perf?.full_name ?? brand.clientFallbackName,
       phone: perf?.phone ?? '',
       creado_por_admin: !!extra.creado_por_admin,
       nota_admin: extra.nota_admin ?? null,
@@ -114,7 +117,7 @@ export async function fetchSolicitudesPendientesAdmin(): Promise<{
         ? 'Sin permiso para ver solicitudes. Verificá la migración 006/016 y is_portal_admin().'
         : error.message.includes('column') && error.message.includes('creado_por_admin')
           ? 'Falta la migración 016 (creado_por_admin / nota_admin). Aplicala en Supabase para activar las solicitudes.'
-          : error.message,
+       : error.message,
     };
   }
 
@@ -133,7 +136,9 @@ export async function fetchSolicitudesPendientesAdmin(): Promise<{
     for (const p of perfiles ?? []) {
       const id = (p as { id: string }).id;
       perfilPorId.set(id, {
-        full_name: String((p as { full_name?: string }).full_name ?? '').trim() || brandientFallbackName,
+        full_name:
+          String((p as { full_name?: string }).full_name ?? '').trim() ||
+          brand.clientFallbackName,
         phone: String((p as { phone?: string }).phone ?? '').trim(),
       });
     }
@@ -149,7 +154,7 @@ export async function fetchSolicitudesPendientesAdmin(): Promise<{
       fecha: c.fecha,
       hora: c.hora,
       estado: parseEstado(c.estado),
-      full_name: perf?.full_name ?? 'Cliente',
+      full_name: perf?.full_name ?? brand.clientFallbackName,
       phone: perf?.phone ?? '',
       creado_por_admin: !!extra.creado_por_admin,
       nota_admin: extra.nota_admin ?? null,
@@ -189,6 +194,7 @@ export async function buscarClientesActivos(
       email: String(r.email ?? '').trim(),
     };
   });
+
   return { rows, error: null };
 }
 
@@ -218,6 +224,7 @@ export async function crearCitaAdmin(input: {
 
   if (error) {
     const flat = `${error.code ?? ''}${error.message}`.toLowerCase();
+
     if (flat.includes('unique') || flat.includes('duplicate')) {
       return { cita: null, error: 'Ese horario ya está ocupado. Elegí otra hora.' };
     }
@@ -230,7 +237,8 @@ export async function crearCitaAdmin(input: {
     if (flat.includes('column') && flat.includes('creado_por_admin')) {
       return {
         cita: null,
-        error: 'Falta la migración 016 (creado_por_admin / nota_admin) en Supabase.'  };
+        error: 'Falta la migración 016 (creado_por_admin / nota_admin) en Supabase.',
+      };
     }
     if (flat.includes('foreign key') && flat.includes('citas')) {
       return {
@@ -265,17 +273,19 @@ export async function crearClienteWalkin(input: {
     is_app: true,
     is_walkin: true,
   };
+
   if (email) payload.email = email;
   if (interes) payload.tratamiento_interes = interes;
 
   const { data, error } = await supabase
     .from('perfiles_clientes')
     .insert(payload)
-    .select('id, full_name, phone, email')
+    .select('id, l_name, phone, email')
     .single();
 
   if (error) {
     const flat = `${error.code ?? ''}${error.message}`.toLowerCase();
+
     if (flat.includes('row-level security')) {
       return {
         cliente: null,
@@ -293,13 +303,14 @@ export async function crearClienteWalkin(input: {
         cliente: null,
         error: 'La tabla aún exige FK a auth.users. Aplicá la migración 017 para permitir clientes walk-in.',
       };
+    }
     if (flat.includes('column') && flat.includes('email')) {
       const retry = { ...payload };
       delete retry.email;
       const r = await supabase
         .from('perfiles_clientes')
         .insert(retry)
-        .select('id, full_name, phone')
+        .select('id,name, phone')
         .single();
       if (r.error) return { cliente: null, error: r.error.message };
       const p = r.data as { id: string; full_name?: string; phone?: string };

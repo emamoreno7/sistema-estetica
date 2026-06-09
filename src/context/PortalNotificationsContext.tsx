@@ -32,6 +32,7 @@ type PortalNotificationsCtx = {
   markAllRead: () => void;
   /** Nueva cita guardada desde el wizard del portal → suma badge y aparece en el panel. */
   notifyCitaConfirmada: (cita: CitaClienteRow) => void;
+};
 
 const PortalNotificationsContext = createContext<PortalNotificationsCtx | null>(null);
 
@@ -54,7 +55,7 @@ function seededNotifications(): PortalNotificationItem[] {
       title: 'Mensaje de recepción',
       body:
         `Somos ${brand.supportLabel}. Si necesitás reagendar o tenés alguna consulta antes de tu visita, escribinos cuando quieras.`,
-      createdAt: tP
+      createdAt: tPast,
       read: false,
     },
     {
@@ -68,7 +69,7 @@ function seededNotifications(): PortalNotificationItem[] {
   ];
 }
 
-export function PortalNotificationsProvider({ children }: { children: ReactNode }) {
+export function PortalNotificationder({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState<PortalNotificationItem[]>([]);
 
   useEffect(() => {
@@ -88,13 +89,14 @@ export function PortalNotificationsProvider({ children }: { children: ReactNode 
   }, []);
 
   const notifyCitaConfirmada = useCallback((cita: CitaClienteRow) => {
-    const when = fechaCitaHumana(cita);   const id = `cita-${cita.id ?? `${cita.fecha}-${cita.hora}`}-${Date.now()}`;
+    const when = fechaCitaHumana(cita);
+    const id = `cita-${cita.id ?? `${cita.fecha}-${cita.hora}`}-${Date.now()}`;
     const item: PortalNotificationItem = {
       id,
       kind: 'cita_confirmada',
       title: 'Cita confirmada',
       body: `Tu turno de ${cita.servicio} quedó registrado para ${when}. Podés revisarlo en Mis citas.`,
-      createdAt: new Date().toISOString(),
+      createt: new Date().toISOString(),
       read: false,
     };
     setNotifications((prev) => [item, ...prev]);
@@ -116,7 +118,7 @@ export function PortalNotificationsProvider({ children }: { children: ReactNode 
   );
 }
 
-export function usePortalNotifications(): PortNotificationsCtx {
+export function usePortalNotifications(): PortalNotificationsCtx {
   const ctx = useContext(PortalNotificationsContext);
   if (!ctx)
     throw new Error('usePortalNotifications debe usarse dentro de PortalNotificationsProvider');

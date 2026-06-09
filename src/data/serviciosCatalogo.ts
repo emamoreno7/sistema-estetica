@@ -30,12 +30,12 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         name: 'Radiofrecuencia',
         desc: 'Firmeza y luminosidad: estimulación del colágeno para una piel más compacta, con la calma y la precisión que tu cuerpo merece.',
         badges: ['Reafirmante'],
-        image: '/radiofrecuencia.png',
+      e: '/radiofrecuencia.png',
         illustration: 'radiofrecuencia',
       },
       {
         name: 'Crio-lipólisis',
-        desc: 'Enfriamiento controlado sobre zonas ldas, en un entorno clínico impecable y acogedor. Sin prisas, solo resultados bien acompañados.',
+        desc: 'Enfriamiento controlado sobre zonas localizadas, en un entorno clínico impecable y acogedor. Sin prisas, solo resultados bien acompañados.',
         badges: ['Reductor'],
         image: '/crio.png',
         illustration: 'crio',
@@ -52,7 +52,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         desc: 'Activación muscular profunda para tonificar y drenar, con sensación de bienestar y sin perder la elegancia del momento.',
         badges: ['Tonificador', 'Drenante'],
         image: '/electrodo.png',
-        illustration: 'electrodos',
+    ration: 'electrodos',
       },
     ],
   },
@@ -62,7 +62,8 @@ export const serviciosCatalogo: ServicioCategoria[] = [
     services: [
       {
         name: 'Masajes relajantes',
-        desc: 'Ritual de descanso con movimientos lentos y aceites seleccionados. Tu cuerpo baja el ritmo; tu mente, también. badges: ['Relajante'],
+        desc: 'Ritual de descanso con movimientos lentos y aceites seleccionados. Tu cuerpo baja el ritmo; tu mente, también.',
+        badges: ['Relajante'],
         image: '/masajesr.png',
         illustration: 'masajeRelajante',
       },
@@ -75,11 +76,12 @@ export const serviciosCatalogo: ServicioCategoria[] = [
       },
       {
         name: 'Presoterapia',
-        desc: 'Compresión secuencial envolvente para activar la circulación y la sensación de piernas descansadas y definidas.',
+        desc: 'Compresión secuencial envolvente para activar la circulación y la sensaciónnas descansadas y definidas.',
         badges: ['Drenante', 'Reafirmante'],
         image: '/presoterapia.png',
         illustration: 'presoterapia',
-      },{
+      },
+      {
         name: 'Piedras calientes',
         desc: 'Calor volcánico sobre la piel que relaja la fibra muscular hasta lo más profundo. Un clásico del spa, elevado al máximo estándar.',
         badges: ['Relajante'],
@@ -99,11 +101,12 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         image: '/pestanas.png',
       },
       {
-        name: 'Lifting de pestañas',
+        name: 'Lie pestañas',
         desc: 'Curva y elevación natural: una mirada despierta y femenina sin el peso de las extensiones, con acabado limpio y duradero.',
         badges: ['Lashista'],
         image: '/pestanas.png',
-        illustration: 'liftingPe      },
+        illustration: 'liftingPestanas',
+      },
       {
         name: 'Laminado de cejas',
         desc: 'Cejas peinadas, fijadas y con forma definida durante semanas: efecto prolijo y voluminoso que enmarca la mirada.',
@@ -125,14 +128,14 @@ export const serviciosCatalogo: ServicioCategoria[] = [
     services: [
       {
         name: 'Belleza de manos',
-        desc: 'Cuidado completo de manos: prolijado de cutículas, hidratación y esmaltado para manos prolijas y cuidadas.',
+        desc: 'Cuidado completo de manos: prolijadutículas, hidratación y esmaltado para manos prolijas y cuidadas.',
         badges: ['Manicura'],
         image: '/pestanas.png',
       },
       {
         name: 'Nails (uñas)',
         desc: 'Servicio de uñas: esculpidas, semipermanente o kapping, con diseño y terminación profesional a tu estilo.',
-        badges,
+        badges: ['Uñas'],
         image: '/pestanas.png',
       },
     ],
@@ -162,7 +165,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
 export const BADGE_STYLE: Record<string, { bg: string; color: string }> = {
   Reductor: { bg: 'rgba(191,201,162,0.3)', color: '#4A6741' },
   Tonificador: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
-  Reafirmante: { bg: 'rgba(0,61,91,0.10)', '#003D5B' },
+  Reafirmante: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
   Drenante: { bg: 'rgba(191,201,162,0.3)', color: '#4A6741' },
   Terapéutico: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
   Relajante: { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },

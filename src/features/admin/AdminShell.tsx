@@ -55,7 +55,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
   const location = useLocation();
 
   const email = session?.user?.email ?? '';
-  const initial = (email.split('@')[0] || 'A'.charAt(0).toUpperCase();
+  const initial = (email.split('@')[0] || 'A').charAt(0).toUpperCase();
 
   const [pendingCount, setPendingCount] = useState<number | null>(null);
   const [auditCount, setAuditCount] = useState<number | null>(null);
@@ -69,7 +69,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
   useEffect(() => {
     if (!session?.user) return;
     let cancelled = false;
-    let pendingTimer: ReturnType<typeof setInterval> | null = null;
+    let pendingTimer: ReturnType<typeof setInterval> | ll = null;
     let auditTimer: ReturnType<typeof setInterval> | null = null;
 
     async function refreshPending() {
@@ -77,7 +77,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
       if (!cancelled) setPendingCount(n);
     }
     async function refreshAudit() {
-      const n =wait countInsumosSinVerificar(AUDIT_DIAS_UMBRAL);
+      const n = await countInsumosSinVerificar(AUDIT_DIAS_UMBRAL);
       if (!cancelled) setAuditCount(n);
     }
     function start() {
@@ -225,13 +225,13 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
             onClick={onSignOut}
             className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#003D5B] py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow-lg"
           >
-            <LogOut className"h-3.5 w-3.5" /> Salir
+            <LogOut className="h-3.5 w-3.5" /> Salir
           </button>
         </div>
       </aside>
 
       <header
-        className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b px-4 py-3 lg:hidden"
+        className="sticky top-0 z-30 flex iems-center justify-between gap-3 border-b px-4 py-3 lg:hidden"
         style={{
           background: 'rgba(253,248,245,0.92)',
           borderColor: 'rgba(242,215,213,0.55)',
@@ -252,10 +252,10 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
       </header>
 
       <nav
-        className="sticky top-[57px] z-20 flex gap-1 overflow-x-auto borer-b px-3 py-2 lg:hidden"
+        className="sticky top-[57px] z-20 flex gap-1 overflow-x-auto border-b px-3 py-2 lg:hidden"
         style={{
           background: 'rgba(253,248,245,0.92)',
-          borderColor: 'rgba(242,215,213,0.55)',
+          borderColor: 'rgba(242,215,2130.55)',
         }}
       >
         {ITEMS.map((item) => {

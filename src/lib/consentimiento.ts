@@ -10,7 +10,7 @@ export const CONSENTIMIENTO_TABLE = 'consentimientos_clientes' as const;
 export const CONSENTIMIENTO_CLAUSULAS = [
   {
     key: 'declara_salud' as const,
-    titulo: 'Declaraón de estado de salud',
+    titulo: 'Declaración de estado de salud',
     texto:
       `Declaro que la información sobre mi estado de salud es verídica y me comprometo a informar al personal de ${brand.shortName} sobre embarazo, marcapasos, implantes metálicos, alergias, enfermedades de la piel, oncológicas u otras condiciones que puedan contraindicar un tratamiento.`,
   },
@@ -18,13 +18,13 @@ export const CONSENTIMIENTO_CLAUSULAS = [
     key: 'acepta_tratamiento' as const,
     titulo: 'Consentimiento del tratamiento',
     texto:
-      'Comprendo en qué consisten los tratamientos estéticos que realizaré, sus beneficios, posibles molestias o reacciones (enrojecimiento, sensibilidad, etc.) y que los resultados pueden variar según cada persona. Autorizo su realización por el personal del centro.',
+      'Comprendo en qué consisten los ttos estéticos que realizaré, sus beneficios, posibles molestias o reacciones (enrojecimiento, sensibilidad, etc.) y que los resultados pueden variar según cada persona. Autorizo su realización por el personal del centro.',
   },
   {
     key: 'acepta_datos' as const,
     titulo: 'Tratamiento de datos personales',
     texto:
-      'Autorizo el tratamiento de mis datos personales y de salud con fines de seguimiento profesional, conforme a la Ley 25.326 de Protección de Datos Personales. Mis datos son confidenciales y solo accesiblrofesional tratante.',
+      'Autorizo el tratamiento de mis datos personales y de salud con fines de seguimiento profesional, conforme a la Ley 25.326 de Protección de Datos Personales. Mis datos son confidenciales y solo accesibles por ofesional tratante.',
   },
 ] as const;
 
@@ -47,7 +47,7 @@ export type ConsentimientoRow = {
 
 /** Un consentimiento está completo solo si aceptó las 3 cláusulas. */
 export function consentimientoEstaFirmado(c: ConsentimientoRow | null): boolean {
-  return !!c && c.declara_salud && c.acepta_tratamiento && c.acepta_datos;
+  return !!c && c.deca_salud && c.acepta_tratamiento && c.acepta_datos;
 }
 
 function mapRow(r: Record<string, unknown>): ConsentimientoRow {
@@ -56,7 +56,7 @@ function mapRow(r: Record<string, unknown>): ConsentimientoRow {
     cliente_id: String(r.cliente_id ?? ''),
     nombre_firma: String(r.nombre_firma ?? '').trim(),
     dni: r.dni != null ? String(r.dni) : null,
-    fecha_nacimiento: r.fecha_nacimiento != null ? String(r.fa_nacimiento) : null,
+    fecha_nacimiento: r.fecha_nacimiento != null ? String(r.fecha_nacimiento) : null,
     declara_salud: !!r.declara_salud,
     acepta_tratamiento: !!r.acepta_tratamiento,
     acepta_datos: !!r.acepta_datos,
@@ -82,8 +82,8 @@ export async function fetchConsentimientoCliente(
     .eq('cliente_id', clienteId)
     .maybeSingle();
 
-  if rror) {
-    const flat = `${error.code ?? ''}${error.message}`.toLowerCase();
+  if (error) {
+    const flat = `${ror.code ?? ''}${error.message}`.toLowerCase();
     if (flat.includes('does not exist') || flat.includes('relation') || flat.includes('schema cache')) {
       return { consentimiento: null, error: 'NO_MIGRADO' };
     }
@@ -125,13 +125,13 @@ export async function guardarConsentimientoCliente(input: {
     nombre_firma: nombre,
     dni: dni || null,
     fecha_nacimiento: fechaNac || null,
-    contraindicaciones: input.contraindicaciones?.trim() || null,
+    contraindicaciones: input.contraindicacies?.trim() || null,
     declara_salud: input.declaraSalud,
     acepta_tratamiento: input.aceptaTratamiento,
     acepta_datos: input.aceptaDatos,
     version: CONSENTIMIENTO_VERSION,
     firmado_at: new Date().toISOString(),
-    firmado_por_admin: input.firmadoPorAdmin ?? fse,
+    firmado_por_admin: input.firmadoPorAdmin ?? false,
     user_agent: typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 300) : null,
   };
 
@@ -150,7 +150,7 @@ export async function guardarConsentimientoCliente(input: {
       };
     }
     if (flat.includes('row-level security')) {
-      return { consentimiento: null, error: 'Sin permiso para guardar el consentimiento. Verificá la migración 018.' };
+      return { consentimiento: null, error: 'Sin permiso para guardar el consentimiento. Verificá la migración 018' };
     }
     return { consentimiento: null, error: error.message };
   }
@@ -160,7 +160,7 @@ export async function guardarConsentimientoCliente(input: {
 
 /** Admin: trae consentimientos de varios clientes (mapa por cliente_id). */
 export async function listConsentimientosAdmin(
-  centeIds?: string[]
+  clienteIds?: string[]
 ): Promise<{ map: Map<string, ConsentimientoRow>; error: string | null }> {
   let q = supabase.from(CONSENTIMIENTO_TABLE).select(SELECT_COLS);
   if (clienteIds && clienteIds.length > 0) {
