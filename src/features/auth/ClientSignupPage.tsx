@@ -4,6 +4,7 @@ import VirtualAssistantChat from '@/components/VirtualAssistantChat';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
 import { asset } from '@/lib/asset';
+import { brand } from '../../config/brand';
 import ClientSignupForm from './ClientSignupForm';
 
 export default function ClientSignupPage() {
@@ -35,11 +36,11 @@ export default function ClientSignupPage() {
           >
             ← Inicio
           </Link>
-          <h1
+        <h1
             className="text-serif-premium mt-8 text-3xl font-light leading-tight text-[#003D5B] sm:text-4xl"
             style={{ letterSpacing: '0.03em' }}
           >
-            Sumate a la comunidad Amore
+            Sumate a la comunidad {brand.shortName}
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-[#003D5B]/65">
             Registrate con correo y contraseña. Guardamos tu WhatsApp como contacto. Al terminar, verás tu cuenta
@@ -52,7 +53,7 @@ export default function ClientSignupPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.08 }}
           className="w-full max-w-md rounded-[1.75rem] border border-white/80 bg-white/75 p-8 shadow-2xl shadow-[#003D5B]/08 backdrop-blur-md lg:flex-1"
-          style={{ borderColor: 'rgba(242,215,213,0.65)' }}
+          style={{ borderColor: 'rgba(215,213,0.65)' }}
         >
           <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#003D5B]/45">
             Alta de cliente

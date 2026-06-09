@@ -7,6 +7,7 @@ import { supabase, isSupabaseConfigured } from '@/lib/supabaseClient';
 import { fetchActiveServiceNames } from '@/lib/serviciosDb';
 import { getAllServiceNames } from '@/data/serviciosCatalogo';
 import { normalizePhoneAR } from '@/lib/authPhoneEmail';
+import { brand } from '../../config/brand';
 
 function formatInsertPerfilMessage(err: { message?: string; code?: string }): string {
   const m = (err.message ?? '').toLowerCase();
@@ -33,7 +34,7 @@ type Props = {
 };
 
 export default function ClientSignupForm({ onSuccess }: Props) {
-  const [nombreCompleto, setNombreCompleto] = useState('');
+  const [nombreCompleto, ombreCompleto] = useState('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [tratamiento, setTratamiento] = useState('');
@@ -57,9 +58,6 @@ export default function ClientSignupForm({ onSuccess }: Props) {
   const inputClass =
     'w-full rounded-2xl border border-[#003D5B]/12 bg-white/90 px-4 py-3.5 text-sm text-[#003D5B] outline-none transition placeholder:text-[#003D5B]/35 focus:border-[#003D5B]/28 focus:ring-2 focus:ring-[#F2D7D5]/80';
 
-  /**
-   * Sólo columnas presentes en la tabla: id, full_name, phone, status.
-   */
   async function insertPerfilCliente(opts: {
     userId: string;
     nombre: string;
@@ -102,7 +100,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
       setError('Ingresá tu nombre completo.');
       return;
     }
-    const emailNorm = email.trim().toLowerCase();
+    const emailNorm  email.trim().toLowerCase();
     if (!isValidEmail(emailNorm)) {
       setError('Ingresá un correo válido.');
       return;
@@ -138,7 +136,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
         options: {
           data: {
             full_name: fullName,
-            nombre_completo: fullName,
+            nombre_comName,
             phone: tel,
             telefono_whatsapp: tel,
             tratamiento_interes: tratamiento,
@@ -176,7 +174,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
       });
 
       if (profileErr) {
-        setError(formatInsertPerfilMessage(profileErr));
+        setEInsertPerfilMessage(profileErr));
         setBusy(false);
         return;
       }
@@ -184,7 +182,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
       const okRow = await waitUntilPerfilExists(user.id);
       if (!okRow) {
         setError(
-          'Tu cuenta inició sesión pero no pudimos confirmar la ficha en perfiles_clientes. Contactá Amore o revisá el trigger migración.',
+          `Tu cuenta inició sesión pero no pudimos confirmar la ficha en perfiles_clientes. Contactá ${brand.supportLabel} o revisá el trigger migración.`,
         );
         setBusy(false);
         return;
@@ -215,7 +213,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
         </label>
         <input
           id="nombre"
-          className={inputClass}
+   className={inputClass}
           value={nombreCompleto}
           onChange={e => setNombreCompleto(e.target.value)}
           placeholder="Tu nombre y apellido"
@@ -252,7 +250,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
         </label>
         <input
           id="tel"
-          className={inputClass}
+          className={inputCss}
           value={telefono}
           onChange={e => setTelefono(e.target.value)}
           placeholder="+54 9 … o 011 …"
@@ -285,7 +283,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
             ))}
           </select>
           <ChevronDown
-            className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#003D5B]/40"
+            className="pointer-events-none absolute right-3.5 top-4 w-4 -translate-y-1/2 text-[#003D5B]/40"
             aria-hidden
           />
         </div>
@@ -320,7 +318,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
         disabled={busy}
         whileHover={{ y: busy ? 0 : -1 }}
         whileTap={{ scale: busy ? 1 : 0.99 }}
-        className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-lg disabled:opacity-60"
+        className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text11px] font-semibold uppercase tracking-[0.22em] text-white shadow-lg disabled:opacity-60"
         style={{ background: '#003D5B', boxShadow: '0 10px 28px rgba(0,61,91,0.18)' }}
       >
         {busy ? (
@@ -329,7 +327,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
             Creando cuenta…
           </>
         ) : (
-          'Unirme a Amore'
+          `Unirme a ${brand.shortName}`
         )}
       </motion.button>
     </motion.form>
