@@ -48,7 +48,7 @@ export function InicioView({ onNav }: Props) {
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          clssName="relative overflow-hidden rounded-3xl p-6 text-white shadow-2xl lg:p-8"
+          className="relative overflow-hidden rounded-3xl p-6 text-white shadow-2xl lg:p-8"
           style={{
             background: 'linear-gradient(135deg, #003D5B 0%, #005580 55%, #004D72 100%)',
             boxShadow: '0 24px 64px rgba(0,61,91,0.28)',
@@ -126,7 +126,7 @@ export function InicioView({ onNav }: Props) {
             >
               <div
                 className="mb-2 inline-flex rounded-2xl p-2.5"
-                style={{ background: `color-mix srgb, ${stat.accent} 14%, transparent)` }}
+                style={{ background: `color-mix(in srgb, ${stat.accent} 14%, transparent)` }}
               >
                 <stat.icon className="h-4 w-4" style={{ color: stat.accent }} />
               </div>
@@ -264,7 +264,7 @@ export function InicioView({ onNav }: Props) {
                   <Calendar className="h-4 w-4" style={{ color: 'var(--accent-sage)' }} />
                   <span className="text-sm font-medium text-white">
                     Plan registrado:{' '}
-                    {new Date(activeTreatment.fechaInicio).toLocaleateString('es-AR', {
+                    {new Date(activeTreatment.fechaInicio).toLocaleDateString('es-AR', {
                       day: 'numeric',
                       month: 'short',
                       year: 'numeric',
@@ -340,7 +340,7 @@ export function InicioView({ onNav }: Props) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 + i * 0.08 }}
-            Hover={{ y: -3 }}
+            whileHover={{ y: -3 }}
             className="group relative overflow-hidden rounded-3xl p-4 lg:p-5"
             style={{
               background: 'rgba(253,248,245,0.85)',
@@ -408,7 +408,7 @@ export function InicioView({ onNav }: Props) {
               >
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={{ width: `${progr}%` }}
+                  animate={{ width: `${progress}%` }}
                   transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
                   className="h-full rounded-full"
                   style={{ background: 'linear-gradient(90deg, var(--accent-sage), var(--primary-navy))' }}
@@ -431,7 +431,7 @@ export function InicioView({ onNav }: Props) {
           style={{
             background: 'rgba(253,248,245,0.92)',
             border: '1px solid var(--accent-rose)',
-            boxShadow: '0 12px0px rgba(0,61,91,0.08)',
+            boxShadow: '0 12px 40px rgba(0,61,91,0.08)',
           }}
         >
           <div className="mb-4 flex items-center justify-between">
@@ -450,7 +450,7 @@ export function InicioView({ onNav }: Props) {
                 <div className="rounded-xl bg-[#FDF8F5]/75 p-5 text-center">
                   <p className="text-sm leading-relaxed text-[#7A746E]">
                     Coordinamos día y hora con recepción. Escribinos por WhatsApp y te daremos opciones disponibles para{' '}
-                    <strong className="text-[#003D5B]">{activeTreatm.nombre}</strong>.
+                    <strong className="text-[#003D5B]">{activeTreatment.nombre}</strong>.
                   </p>
                 </div>
                 <motion.a
@@ -470,7 +470,7 @@ export function InicioView({ onNav }: Props) {
               <>
                 <div className="flex items-center gap-3 rounded-xl bg-[#FDF8F5]/75 p-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#F2D7D5] to-[#BFC9A2]">
-                    <Clendar className="h-5 w-5 text-[#003D5B]" />
+                    <Calendar className="h-5 w-5 text-[#003D5B]" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-[#003D5B]">
@@ -488,7 +488,7 @@ export function InicioView({ onNav }: Props) {
                   </div>
                 </div>
                 <div className="flex items-center gap-3 rounded-xl bg-[#FDF8F5]/75 p-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xF2D7D5]/40">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F2D7D5]/40">
                     <MapPin className="h-5 w-5 text-[#003D5B]" />
                   </div>
                   <div>
@@ -512,7 +512,7 @@ export function InicioView({ onNav }: Props) {
       </div>
 
       {beforeAfterPairs.length > 0 ? (
-        <moion.div
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
@@ -532,7 +532,7 @@ export function InicioView({ onNav }: Props) {
           </div>
           <BeforeAfterSlider beforeSrc={beforeAfterPairs[0].before} afterSrc={beforeAfterPairs[0].after} />
           <div className="mt-3 flex items-center justify-between rounded-xl bg-[#F2D7D5]/20 px-4 py-2.5">
-            <p className="tet-xs font-medium text-[#7A746E]">{beforeAfterPairs[0].title}</p>
+            <p className="text-xs font-medium text-[#7A746E]">{beforeAfterPairs[0].title}</p>
             <span className="flex items-center gap-1.5 text-xs font-semibold text-[#003D5B]">
               <div className="h-1.5 w-1.5 rounded-full bg-[#BFC9A2] animate-pulse" />
               {beforeAfterPairs[0].improvement}

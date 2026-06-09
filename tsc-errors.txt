@@ -1,0 +1,183 @@
+src/components/portal/ConsentimientoModal.tsx(159,19): error TS1005: '...' expected.
+src/components/portal/PortalCitasTab.tsx(41,66): error TS1109: Expression expected.
+src/components/portal/PortalCitasTab.tsx(41,68): error TS1002: Unterminated string literal.
+src/components/portal/PortalCitasTab.tsx(87,11): error TS1005: ',' expected.
+src/components/portal/PortalCitasTab.tsx(87,21): error TS1005: ':' expected.
+src/components/portal/PortalCitasTab.tsx(265,9): error TS2657: JSX expressions must have one parent element.
+src/components/portal/PortalCitasTab.tsx(277,27): error TS1003: Identifier expected.
+src/components/portal/PortalCitasTab.tsx(281,11): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/portal/PortalCitasTab.tsx(283,13): error TS17002: Expected corresponding JSX closing tag for 'motion.div'.
+src/components/portal/PortalCitasTab.tsx(292,6): error TS1005: ')' expected.
+src/components/portal/PortalCitasTab.tsx(292,8): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/components/portal/PortalCitasTab.tsx(323,7): error TS2657: JSX expressions must have one parent element.
+src/components/portal/PortalCitasTab.tsx(367,5): error TS1128: Declaration or statement expected.
+src/components/portal/PortalCitasTab.tsx(368,3): error TS1109: Expression expected.
+src/components/portal/PortalCitasTab.tsx(369,1): error TS1128: Declaration or statement expected.
+src/components/portal/PortalCitasTab.tsx(406,21): error TS1005: '}' expected.
+src/components/portal/PortalCitasTab.tsx(448,37): error TS1003: Identifier expected.
+src/components/portal/PortalCitasTab.tsx(448,40): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/portal/PortalCitasTab.tsx(448,62): error TS1002: Unterminated string literal.
+src/components/portal/PortalCitasTab.tsx(501,50): error TS1003: Identifier expected.
+src/components/portal/PortalCitasTab.tsx(501,51): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/portal/PortalCitasTab.tsx(501,52): error TS1002: Unterminated string literal.
+src/components/portal/PortalCitasTab.tsx(519,58): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/portal/PortalCitasTab.tsx(527,11): error TS17002: Expected corresponding JSX closing tag for 'motion.div'.
+src/components/portal/PortalCitasTab.tsx(528,7): error TS1005: ')' expected.
+src/components/portal/PortalCitasTab.tsx(554,5): error TS1128: Declaration or statement expected.
+src/components/portal/PortalCitasTab.tsx(555,3): error TS1109: Expression expected.
+src/components/portal/PortalCitasTab.tsx(696,12): error TS17008: JSX element 'section' has no corresponding closing tag.
+src/components/portal/PortalCitasTab.tsx(700,36): error TS1005: ',' expected.
+src/components/portal/PortalCitasTab.tsx(700,48): error TS1005: ':' expected.
+src/components/portal/PortalCitasTab.tsx(700,77): error TS1359: Identifier expected. 'null' is a reserved word that cannot be used here.
+src/components/portal/PortalCitasTab.tsx(700,98): error TS1003: Identifier expected.
+src/components/portal/PortalCitasTab.tsx(701,19): error TS1005: ',' expected.
+src/components/portal/PortalCitasTab.tsx(701,30): error TS1131: Property or signature expected.
+src/components/portal/PortalCitasTab.tsx(701,153): error TS1005: ',' expected.
+src/components/portal/PortalCitasTab.tsx(703,17): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/portal/PortalCitasTab.tsx(703,23): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/components/portal/PortalCitasTab.tsx(704,17): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/portal/PortalCitasTab.tsx(712,13): error TS17002: Expected corresponding JSX closing tag for 'motion.div'.
+src/components/portal/PortalCitasTab.tsx(752,11): error TS17002: Expected corresponding JSX closing tag for 'motion.div'.
+src/components/portal/PortalCitasTab.tsx(753,7): error TS1005: ',' expected.
+src/components/portal/PortalCitasTab.tsx(754,5): error TS1109: Expression expected.
+src/components/portal/PortalCitasTab.tsx(754,18): error TS1109: Expression expected.
+src/components/portal/PortalCitasTab.tsx(787,92): error TS1005: ',' expected.
+src/components/portal/PortalCitasTab.tsx(787,108): error TS1127: Invalid character.
+src/components/portal/PortalCitasTab.tsx(787,199): error TS17002: Expected corresponding JSX closing tag for 'motion.div'.
+src/components/portal/PortalCitasTab.tsx(805,5): error TS1005: ',' expected.
+src/components/portal/PortalCitasTab.tsx(805,18): error TS1109: Expression expected.
+src/components/portal/PortalHeader.tsx(138,11): error TS17014: JSX fragment has no corresponding closing tag.
+src/components/portal/PortalHeader.tsx(376,17): error TS1005: '>' expected.
+src/components/portal/PortalHeader.tsx(489,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/components/portal/PortalHeader.tsx(491,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/portal/PortalHeader.tsx(492,1): error TS1005: '</' expected.
+src/context/PortalNotificationsContext.tsx(35,2): error TS1005: ';' expected.
+src/context/PortalNotificationsContext.tsx(56,14): error TS1005: ',' expected.
+src/context/PortalNotificationsContext.tsx(122,95): error TS1005: ')' expected.
+src/data/serviciosCatalogo.ts(65,137): error TS1005: ',' expected.
+src/data/serviciosCatalogo.ts(65,146): error TS1005: ',' expected.
+src/data/serviciosCatalogo.ts(65,149): error TS1002: Unterminated string literal.
+src/data/serviciosCatalogo.ts(66,9): error TS1005: ':' expected.
+src/data/serviciosCatalogo.ts(66,14): error TS1005: ',' expected.
+src/data/serviciosCatalogo.ts(66,31): error TS1005: ':' expected.
+src/data/serviciosCatalogo.ts(106,41): error TS1002: Unterminated string literal.
+src/data/serviciosCatalogo.ts(107,7): error TS1005: ',' expected.
+src/data/serviciosCatalogo.ts(165,54): error TS1005: ':' expected.
+src/features/admin/AdminAgendaView.tsx(215,36): error TS1005: ',' expected.
+src/features/admin/AdminAgendaView.tsx(215,42): error TS1005: ',' expected.
+src/features/admin/AdminAgendaView.tsx(215,48): error TS1005: ',' expected.
+src/features/admin/AdminAgendaView.tsx(215,49): error TS1005: ',' expected.
+src/features/admin/AdminAgendaView.tsx(215,58): error TS1005: ',' expected.
+src/features/admin/AdminAgendaView.tsx(215,101): error TS1005: ',' expected.
+src/features/admin/AdminAgendaView.tsx(254,20): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(254,42): error TS1434: Unexpected keyword or identifier.
+src/features/admin/AdminAgendaView.tsx(254,54): error TS1434: Unexpected keyword or identifier.
+src/features/admin/AdminAgendaView.tsx(254,57): error TS1434: Unexpected keyword or identifier.
+src/features/admin/AdminAgendaView.tsx(254,73): error TS1443: Module declaration names may only use ' or " quoted strings.
+src/features/admin/AdminAgendaView.tsx(536,29): error TS1434: Unexpected keyword or identifier.
+src/features/admin/AdminAgendaView.tsx(536,42): error TS1127: Invalid character.
+src/features/admin/AdminAgendaView.tsx(536,44): error TS1434: Unexpected keyword or identifier.
+src/features/admin/AdminAgendaView.tsx(536,62): error TS1127: Invalid character.
+src/features/admin/AdminAgendaView.tsx(536,64): error TS1434: Unexpected keyword or identifier.
+src/features/admin/AdminAgendaView.tsx(883,31): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(883,44): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(883,49): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(883,54): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(883,62): error TS1351: An identifier or keyword cannot immediately follow a numeric literal.
+src/features/admin/AdminAgendaView.tsx(883,66): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(883,80): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(883,105): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(914,33): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(914,42): error TS1351: An identifier or keyword cannot immediately follow a numeric literal.
+src/features/admin/AdminAgendaView.tsx(914,46): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(914,57): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(914,71): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(914,76): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(914,84): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(914,98): error TS1005: ';' expected.
+src/features/admin/AdminAgendaView.tsx(914,109): error TS1434: Unexpected keyword or identifier.
+src/features/admin/AdminAgendaView.tsx(973,1): error TS1160: Unterminated template literal.
+src/features/admin/adminCitasApi.ts(49,33): error TS1005: ',' expected.
+src/features/admin/adminCitasApi.ts(49,48): error TS1011: An element access expression should take an argument.
+src/features/admin/adminCitasApi.ts(49,49): error TS1005: ',' expected.
+src/features/admin/adminCitasApi.ts(343,1): error TS1005: '}' expected.
+src/features/admin/adminKpisApi.ts(111,45): error TS1109: Expression expected.
+src/features/admin/AdminShell.tsx(58,70): error TS1005: ')' expected.
+src/features/admin/AdminShell.tsx(80,21): error TS1005: ',' expected.
+src/features/admin/AdminShell.tsx(80,45): error TS1005: ',' expected.
+src/features/admin/AdminShell.tsx(228,30): error TS1003: Identifier expected.
+src/features/admin/AdminShell.tsx(228,45): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/features/auth/ClientSignupForm.tsx(103,22): error TS1005: ',' expected.
+src/features/auth/ClientSignupForm.tsx(103,27): error TS1005: ',' expected.
+src/features/auth/ClientSignupForm.tsx(103,32): error TS1005: ',' expected.
+src/features/auth/ClientSignupForm.tsx(103,33): error TS1109: Expression expected.
+src/features/auth/ClientSignupForm.tsx(177,44): error TS1005: ';' expected.
+src/features/landing/AntesYDespuesSection.tsx(126,32): error TS1003: Identifier expected.
+src/features/landing/AntesYDespuesSection.tsx(126,101): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/features/landing/AntesYDespuesSection.tsx(220,21): error TS1005: '...' expected.
+src/features/landing/LandingFooter.tsx(124,14): error TS17008: JSX element 'a' has no corresponding closing tag.
+src/features/landing/LandingFooter.tsx(135,45): error TS1003: Identifier expected.
+src/features/landing/LandingFooter.tsx(145,15): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/features/landing/LandingFooter.tsx(167,11): error TS17002: Expected corresponding JSX closing tag for 'footer'.
+src/features/landing/LandingFooter.tsx(168,7): error TS1005: ')' expected.
+src/features/landing/LandingFooter.tsx(169,5): error TS1109: Expression expected.
+src/features/landing/LandingFooter.tsx(170,3): error TS1109: Expression expected.
+src/features/landing/ServiciosSection.tsx(31,39): error TS1005: '(' expected.
+src/features/landing/ServiciosSection.tsx(31,78): error TS2809: Declaration or statement expected. This '=' follows a block of statements, so if you intended to write a destructuring assignment, you might need to wrap the whole assignment in parentheses.
+src/features/landing/ServiciosSection.tsx(85,39): error TS1003: Identifier expected.
+src/features/landing/ServiciosSection.tsx(85,79): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+src/features/landing/ServiciosSection.tsx(85,80): error TS1002: Unterminated string literal.
+src/features/landing/ServiciosSection.tsx(87,15): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/features/landing/ServiciosSection.tsx(88,19): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/features/landing/ServiciosSection.tsx(229,1): error TS1128: Declaration or statement expected.
+src/features/portal/gates/PendingActivationPortal.tsx(21,20): error TS1145: '{' or JSX element expected.
+src/features/portal/gates/PendingActivationPortal.tsx(21,41): error TS1003: Identifier expected.
+src/features/portal/gates/PendingActivationPortal.tsx(21,85): error TS1002: Unterminated string literal.
+src/features/portal/gates/PendingActivationPortal.tsx(24,16): error TS1136: Property assignment expected.
+src/features/portal/gates/PendingActivationPortal.tsx(25,7): error TS1109: Expression expected.
+src/features/portal/gates/PendingActivationPortal.tsx(26,9): error TS2657: JSX expressions must have one parent element.
+src/features/portal/gates/PendingActivationPortal.tsx(34,7): error TS1128: Declaration or statement expected.
+src/features/portal/gates/PendingActivationPortal.tsx(35,7): error TS2657: JSX expressions must have one parent element.
+src/features/portal/gates/PendingActivationPortal.tsx(78,5): error TS1128: Declaration or statement expected.
+src/features/portal/gates/PendingActivationPortal.tsx(79,3): error TS1109: Expression expected.
+src/features/portal/gates/PendingActivationPortal.tsx(80,1): error TS1128: Declaration or statement expected.
+src/features/portal/gates/PortalPerfilNotFoundFriendly.tsx(27,34): error TS1005: ',' expected.
+src/features/portal/gates/PortalPerfilNotFoundFriendly.tsx(27,37): error TS1005: ':' expected.
+src/features/portal/views/InicioView.tsx(541,11): error TS17002: Expected corresponding JSX closing tag for 'moion.div'.
+src/features/portal/views/PerfilView.tsx(99,34): error TS1005: '}' expected.
+src/features/portal/views/PerfilView.tsx(117,11): error TS17002: Expected corresponding JSX closing tag for 'di'.
+src/features/portal/views/PerfilView.tsx(241,94): error TS1005: ',' expected.
+src/lib/consentimiento.ts(85,6): error TS1005: '(' expected.
+src/lib/consentimientoPdf.ts(111,4): error TS1005: ';' expected.
+src/lib/consentimientoPdf.ts(131,85): error TS1002: Unterminated string literal.
+src/lib/consentimientoPdf.ts(132,3): error TS1005: ':' expected.
+src/lib/consentimientoPdf.ts(132,29): error TS1005: ',' expected.
+src/lib/consentimientoPdf.ts(156,15): error TS1005: ';' expected.
+src/lib/consentimientoPdf.ts(156,15): error TS1434: Unexpected keyword or identifier.
+src/lib/consentimientoPdf.ts(156,33): error TS1002: Unterminated string literal.
+src/lib/consentimientoPdf.ts(213,18): error TS1005: ';' expected.
+src/lib/consentimientoPdf.ts(247,37): error TS1005: ',' expected.
+src/lib/consentimientoPdf.ts(256,1): error TS1005: ',' expected.
+src/lib/consentimientoPdf.ts(284,1): error TS1005: '}' expected.
+src/lib/perfilCliente.ts(164,1): error TS1005: '}' expected.
+src/lib/portalTreatment.ts(38,54): error TS1005: ',' expected.
+src/lib/portalTreatment.ts(39,6): error TS1005: ':' expected.
+src/lib/portalTreatment.ts(39,24): error TS1005: '=>' expected.
+src/lib/portalTreatment.ts(43,1): error TS1128: Declaration or statement expected.
+src/libimientoPdf.ts(28,32): error TS1005: ',' expected.
+src/libimientoPdf.ts(32,6): error TS1472: 'catch' or 'finally' expected.
+src/libimientoPdf.ts(40,5): error TS1005: 'try' expected.
+src/libimientoPdf.ts(43,1): error TS1128: Declaration or statement expected.
+src/libimientoPdf.ts(93,1): error TS1434: Unexpected keyword or identifier.
+src/libimientoPdf.ts(93,5): error TS1128: Declaration or statement expected.
+src/libimientoPdf.ts(123,23): error TS1003: Identifier expected.
+src/libimientoPdf.ts(128,4): error TS1005: ',' expected.
+src/libimientoPdf.ts(189,5): error TS1005: ',' expected.
+src/libimientoPdf.ts(189,37): error TS1005: ')' expected.
+src/libimientoPdf.ts(200,4): error TS1128: Declaration or statement expected.
+src/libimientoPdf.ts(212,36): error TS1434: Unexpected keyword or identifier.
+src/libimientoPdf.ts(212,56): error TS1002: Unterminated string literal.
+src/libimientoPdf.ts(239,1): error TS1128: Declaration or statement expected.
+src/libimientoPdf.ts(246,16): error TS1161: Unterminated regular expression literal.
+src/libimientoPdf.ts(247,1): error TS1005: ',' expected.
+src/libimientoPdf.ts(284,1): error TS1005: '}' expected.

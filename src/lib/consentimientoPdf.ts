@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { es as esLocale } from 'date-fns/locale';
 import { asset } from '@/lib/asset';
 import { CONSENTIMIENTO_CLAUSULAS, type ConsentimientoRow } from '@/lib/consentimiento';
+import { brand } from '../config/brand';
 
 /** Datos mínimos del cliente que se imprimen en la constancia. */
 export type ConsentimientoClienteInfo = {
@@ -12,7 +13,7 @@ export type ConsentimientoClienteInfo = {
 
 type RGB = [number, number, number];
 const NAVY: RGB = [0, 61, 91];
-const ROSE: RGB = [242, 215, 213];
+const ROSE: RGB = [242, 213];
 const SAGE: RGB = [191, 201, 162];
 const CREAM: RGB = [253, 248, 245];
 const MUTED: RGB = [122, 116, 110];
@@ -48,7 +49,7 @@ function fechaNacTexto(iso: string | null): string {
   return format(d, "d 'de' MMMM yyyy", { locale: esLocale });
 }
 
-/** Genera un PDF con estilo Amore con la constancia del consentimiento. */
+/** Genera un PDF con la constancia del consentimiento. */
 export async function buildConsentimientoPdf(
   row: ConsentimientoClienteInfo,
   c: ConsentimientoRow
@@ -75,7 +76,7 @@ export async function buildConsentimientoPdf(
     doc.setFontSize(7.5);
     doc.setTextColor(...MUTED);
     doc.text(
-      'Constancia generada electrónicamente desde el panel de gestión Amore · Ley 25.326 de Protección de Datos',
+      `Constancigenerada electrónicamente desde el panel de gestión ${brand.shortName} · Ley 25.326 de Protección de Datos`,
       W / 2,
       H - 8,
       { align: 'center' }
@@ -95,7 +96,7 @@ export async function buildConsentimientoPdf(
     doc.setTextColor(...NAVY);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(22);
-    doc.text('AMORE', W / 2, y + 8, { align: 'center' });
+    doc.text(brand.shortName.toUpperCase(), W / 2, y + 8, { align: 'center' });
     y += 16;
   }
 
@@ -105,9 +106,7 @@ export async function buildConsentimientoPdf(
   doc.text('Consentimiento informado', W / 2, y, { align: 'center' });
   y += 5.5;
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
-  doc.setTextColor(...MUTED);
-  doc.text('CENTRO DI BELLEZZA   ·   CONSTANCIA DE TRATAMIENTO ESTÉTICO', W / 2, y, {
+  docy, {
     align: 'center',
   });
   y += 6;
@@ -129,12 +128,7 @@ export async function buildConsentimientoPdf(
     ['Fecha de nacimiento', fechaNacTexto(c.fecha_nacimiento)],
     ['Fecha y hora de firma', fechaFirma],
     ['Versión del texto', c.version || 'v1'],
-    ['Origen', c.firmado_por_admin ? 'Registrado por recepción' : 'Firmado por el cliente'],
-  ];
-
-  const rowH = 11;
-  const rows = Math.ceil(datos.length / 2);
-  const boxH = rows * rowH + 8;
+    ['Origen', c.firmado_por_admin ? 'Registrado por recepci boxH = rows * rowH + 8;
   doc.setFillColor(...WHITE);
   doc.setDrawColor(...ROSE);
   doc.setLineWidth(0.5);
@@ -159,10 +153,7 @@ export async function buildConsentimientoPdf(
   y += boxH + 9;
 
   // ── Declaraciones aceptadas ────────────────────────────────────────────────
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(11);
-  doc.setTextColor(...NAVY);
-  doc.text('Declaraciones aceptadas', M, y);
+  doc.setones aceptadas', M, y);
   y += 6;
 
   const checkValues: Record<string, boolean> = {
@@ -186,7 +177,6 @@ export async function buildConsentimientoPdf(
     const blockH = 7 + lines.length * 4 + 4;
     ensureSpace(blockH);
 
-    // marcador de aceptación
     doc.setFillColor(...(ok ? SAGE : ROSE));
     doc.circle(M + 2.4, y - 1, 2.4, 'F');
     if (ok) {
@@ -220,9 +210,7 @@ export async function buildConsentimientoPdf(
   doc.setLineWidth(0.5);
   doc.roundedRect(M, y, contentW, condBoxH, 3, 3, 'FD');
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(7.5);
-  doc.setTextColor(...MUTED);
-  doc.text('CONDICIONES / OBSERVACIONES DECLARADAS', M + 5, y + 6);
+  doc.setFont + 6);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   doc.setTextColor(...NAVY);
@@ -256,14 +244,7 @@ function safeFileName(name: string): string {
     name
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-zA-Z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '')
-      .toLowerCase() || 'cliente'
-  );
-}
-
-/** Descarga la constancia como archivo PDF. */
-export async function descargarConsentimientoPdf(
+      .replace(/[^a-zA-Z0-9]+/async function descargarConsentimientoPdf(
   row: ConsentimientoClienteInfo,
   c: ConsentimientoRow
 ): Promise<void> {
@@ -282,7 +263,6 @@ export async function imprimirConsentimientoPdf(
   const win = window.open(url, '_blank');
   if (win) return;
 
-  // Fallback (popups bloqueados): imprime vía iframe oculto
   const iframe = document.createElement('iframe');
   iframe.style.position = 'fixed';
   iframe.style.right = '0';
@@ -299,5 +279,5 @@ export async function imprimirConsentimientoPdf(
       /* no-op */
     }
   };
-  document.body.appendChild(iframe);
+  dument.body.appendChild(iframe);
 }

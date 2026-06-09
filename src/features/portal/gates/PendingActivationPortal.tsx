@@ -18,7 +18,7 @@ export function PendingActivationPortal() {
   }
 
   return (
-    <div className="reative min-h-screen" style={{ background: 'var(--bg-cream)' }}>
+    <div className="relative min-h-screen" style={{ background: 'var(--bg-cream)' }}>
       <div
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
         style={{ background: 'var(--bg-cream)' }}
@@ -57,7 +57,7 @@ export function PendingActivationPortal() {
             ¡Hola! Tu cuenta está en proceso de activación. Un administrador de {brand.shortName} verificará tus datos y te
             avisaremos por WhatsApp en cuanto puedas acceder a tu portal.
           </p>
-          <p className="mt-6 flex items-start justify-center gap-2 rounded-2xl border border-[#BFC9A2]/40 bg-[#BFC9A2]/10 px-5 py-4 text-left te leading-relaxed text-[#003D5B]/90">
+     <p className="mt-6 flex items-start justify-center gap-2 rounded-2xl border border-[#BFC9A2]/40 bg-[#BFC9A2]/10 px-5 py-4 text-left text-xs leading-relaxed text-[#003D5B]/90">
             <Heart className="mt-0.5 h-4 w-4 shrink-0 text-[#F2D7D5]" />
             Es un paso habitual: nos aseguramos de que tus datos coincidan con recepción para cuidarte con la mejor
             experiencia desde el día uno.

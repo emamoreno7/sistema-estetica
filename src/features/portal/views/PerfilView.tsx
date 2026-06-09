@@ -56,7 +56,7 @@ export function PerfilView() {
         className="glass-strong relative overflow-hidden rounded-2xl p-6 lg:p-8"
       >
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br from-[#F2D7D5] to-[#BFC9A2] opacity-60" />
-        <di className="relative flex flex-col items-center gap-5 sm:flex-row">
+        <div className="relative flex flex-col items-center gap-5 sm:flex-row">
           <div className="relative">
             {photoUrl ? (
               <img
@@ -96,7 +96,8 @@ export function PerfilView() {
                 <div className="flex items-center gap-1.5 text-xs text-[#7A746E]">
                   <Phone className="h-3.5 w-3.5 text-[#003D5B]" /> {phoneDisplay}
                 </div>
-              ) : null           </div>
+              ) : null}
+              </div>
           </div>
           <div className="flex gap-6">
             <div className="text-center">
@@ -219,7 +220,7 @@ export function PerfilView() {
         type="button"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        tran={{ delay: 0.15 }}
+        transition={{ delay: 0.15 }}
         onClick={() => setFichaOpen(true)}
         className="glass-strong flex w-full items-center gap-4 rounded-2xl p-5 text-left transition hover:shadow-md"
       >
@@ -238,7 +239,8 @@ export function PerfilView() {
         <h3 className="text-serif-premium mb-3 text-base font-bold text-[#003D5B]">Configuración</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           {[
-            { icon: Shield, title: 'Seguridad', desc: 'Contraseña y verificación' }          { icon: Bell, title: 'Notificaciones', desc: 'Recordatorios de turnos' },
+            { icon: Shield, title: 'Seguridad', desc: 'Contraseña y verificación' },
+              { icon: Bell, title: 'Notificaciones', desc: 'Recordatorios de turnos' },
             { icon: Star, title: 'Programa de Fidelidad', desc: 'Canjeá puntos cuando actives tratamientos' },
             { icon: MapPin, title: 'Sucursal Preferida', desc: sucursalHint },
             { icon: Heart, title: 'Favoritos', desc: 'Tratamientos guardados' },
@@ -253,7 +255,7 @@ export function PerfilView() {
               className="glass group flex items-start gap-4 rounded-2xl p-5 text-left transition-all hover:shadow-md"
             >
               <div className="rounded-xl bg-gradient-to-br from-champagne-50 to-transparent p-3 transition-colors group-hover:bg-champagne-100">
-                <item.icn className="h-5 w-5 text-champagne" />
+                <item.icon className="h-5 w-5 text-champagne" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-[#003D5B]">{item.title}</h3>
