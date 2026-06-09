@@ -1,6 +1,7 @@
 import type { PerfilClienteRow } from '@/lib/perfilCliente';
+import { brand } from '../config/brand';
 
-/** Modelo del portal cliente: puede ampliarse cuando existan tablas clínicas. */
+/** Modeloal cliente: puede ampliarse cuando existan tablas clínicas. */
 export type PortalActiveTreatment = {
   id: string;
   nombre: string;
@@ -24,9 +25,9 @@ const PLACEHOLDER_IMAGE =
   'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&h=500&fit=crop';
 
 const BASE_META = {
-  categoria: 'Tu plan Amore',
+  categoria: `Tu plan ${brand.shortName}`,
   zona: 'A coordinar según tratamiento',
-  profesional: 'Equipo profesional Amore — te confirmamos desde la sede',
+  profesional: `${brand.supportLabel} — te confirmamos desde la sede`,
   totalSesiones: 0,
   sesionesCompletadas: 0,
   sucursal: 'Definimos sucursal y horarios con vos',
@@ -34,11 +35,11 @@ const BASE_META = {
   precio: 'Consultá en sede',
 } as const;
 
-function planDescripcion(isoCitaPresente: boolean): string {
+function planDescripcion(isoCitaPresente: booletring {
   if (isoCitaPresente) {
-    return 'Plan activo registrado en Amore. Coordiná cualquier cambio de turno con recepción o por WhatsApp.';
+    return `Plan activo registrado en ${brand.shortName}. Coordiná cualquier cambio de turno con recepción o por WhatsApp.`;
   }
-  return 'Este es el plan asociado a tu perfil en Amore. Tu recepción o profesional completará sesiones y turnos cuando corresponda; podés coordinar próximos pasos por WhatsApp.';
+  return `Este es el plan asociado a tu perfil en ${brand.shortName}. Tu recepción o profesional completará sesiones y turnos cuando corresponda; podés coordinar próximos pasos por WhatsApp.`;
 }
 
 /** Construye el bloque de tratamiento activo desde el perfil y, si aplica, metadata de Auth (signup). */
@@ -54,7 +55,7 @@ export function deriveActiveTreatmentFromPerfil(
 
   const citaIso = perfil.proxima_cita_at ?? null;
   const cita = citaIso ? new Date(citaIso) : null;
-  const tieneCitaValida = cita !== null && !Number.isNaN(cita.getTime());
+  const tieneCitaValida = citnull && !Number.isNaN(cita.getTime());
 
   return {
     id: `plan-perfil-${perfil.id}`,

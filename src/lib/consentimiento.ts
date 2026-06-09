@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabaseClient';
+import { brand } from '../config/brand';
 
 /** Versión del texto legal vigente. Subir si cambia el contenido para forzar re-firma. */
 export const CONSENTIMIENTO_VERSION = 'v1';
@@ -9,9 +10,9 @@ export const CONSENTIMIENTO_TABLE = 'consentimientos_clientes' as const;
 export const CONSENTIMIENTO_CLAUSULAS = [
   {
     key: 'declara_salud' as const,
-    titulo: 'Declaración de estado de salud',
+    titulo: 'Declaraón de estado de salud',
     texto:
-      'Declaro que la información sobre mi estado de salud es verídica y me comprometo a informar al personal de Amore sobre embarazo, marcapasos, implantes metálicos, alergias, enfermedades de la piel, oncológicas u otras condiciones que puedan contraindicar un tratamiento.',
+      `Declaro que la información sobre mi estado de salud es verídica y me comprometo a informar al personal de ${brand.shortName} sobre embarazo, marcapasos, implantes metálicos, alergias, enfermedades de la piel, oncológicas u otras condiciones que puedan contraindicar un tratamiento.`,
   },
   {
     key: 'acepta_tratamiento' as const,
@@ -23,7 +24,7 @@ export const CONSENTIMIENTO_CLAUSULAS = [
     key: 'acepta_datos' as const,
     titulo: 'Tratamiento de datos personales',
     texto:
-      'Autorizo el tratamiento de mis datos personales y de salud con fines de seguimiento profesional, conforme a la Ley 25.326 de Protección de Datos Personales. Mis datos son confidenciales y solo accesibles por mi profesional tratante.',
+      'Autorizo el tratamiento de mis datos personales y de salud con fines de seguimiento profesional, conforme a la Ley 25.326 de Protección de Datos Personales. Mis datos son confidenciales y solo accesiblrofesional tratante.',
   },
 ] as const;
 
@@ -55,7 +56,7 @@ function mapRow(r: Record<string, unknown>): ConsentimientoRow {
     cliente_id: String(r.cliente_id ?? ''),
     nombre_firma: String(r.nombre_firma ?? '').trim(),
     dni: r.dni != null ? String(r.dni) : null,
-    fecha_nacimiento: r.fecha_nacimiento != null ? String(r.fecha_nacimiento) : null,
+    fecha_nacimiento: r.fecha_nacimiento != null ? String(r.fa_nacimiento) : null,
     declara_salud: !!r.declara_salud,
     acepta_tratamiento: !!r.acepta_tratamiento,
     acepta_datos: !!r.acepta_datos,
@@ -81,9 +82,8 @@ export async function fetchConsentimientoCliente(
     .eq('cliente_id', clienteId)
     .maybeSingle();
 
-  if (error) {
+  if rror) {
     const flat = `${error.code ?? ''}${error.message}`.toLowerCase();
-    // Tabla inexistente / sin migración → tratamos como "sin firmar" sin romper la UI
     if (flat.includes('does not exist') || flat.includes('relation') || flat.includes('schema cache')) {
       return { consentimiento: null, error: 'NO_MIGRADO' };
     }
@@ -111,8 +111,6 @@ export async function guardarConsentimientoCliente(input: {
   const fechaNac = input.fechaNacimiento?.trim() || '';
   if (!nombre) return { consentimiento: null, error: 'Ingresá tu nombre completo como firma.' };
 
-  // El cliente debe completar DNI y fecha de nacimiento. Cuando lo registra el
-  // admin (firma en papel) no se exigen porque ya quedó constancia presencial.
   if (!input.firmadoPorAdmin) {
     if (!dni) return { consentimiento: null, error: 'El DNI es obligatorio.' };
     if (!fechaNac) return { consentimiento: null, error: 'La fecha de nacimiento es obligatoria.' };
@@ -133,7 +131,7 @@ export async function guardarConsentimientoCliente(input: {
     acepta_datos: input.aceptaDatos,
     version: CONSENTIMIENTO_VERSION,
     firmado_at: new Date().toISOString(),
-    firmado_por_admin: input.firmadoPorAdmin ?? false,
+    firmado_por_admin: input.firmadoPorAdmin ?? fse,
     user_agent: typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 300) : null,
   };
 
@@ -162,7 +160,7 @@ export async function guardarConsentimientoCliente(input: {
 
 /** Admin: trae consentimientos de varios clientes (mapa por cliente_id). */
 export async function listConsentimientosAdmin(
-  clienteIds?: string[]
+  centeIds?: string[]
 ): Promise<{ map: Map<string, ConsentimientoRow>; error: string | null }> {
   let q = supabase.from(CONSENTIMIENTO_TABLE).select(SELECT_COLS);
   if (clienteIds && clienteIds.length > 0) {
