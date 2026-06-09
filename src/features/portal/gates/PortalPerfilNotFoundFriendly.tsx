@@ -4,6 +4,7 @@ import { MessageCircle, UserRoundSearch } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
+import { brand } from '../../../config/brand';
 
 /** Vista mostrada cuando Supabase respondió con error benigno (sin fila / 400/406). */
 export function PortalPerfilNotFoundFriendly() {
@@ -23,7 +24,7 @@ export function PortalPerfilNotFoundFriendly() {
       style={{ background: 'var(--bg-cream)' }}
     >
       <motion.div
-        initial={{ opacity: 0, y: 14 }}
+        initial={{ opacity: 0, y 14 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md rounded-[1.75rem] border border-[#F2D7D5]/65 bg-white/95 p-10 text-center shadow-xl"
       >
@@ -32,7 +33,7 @@ export function PortalPerfilNotFoundFriendly() {
         <p className="mt-4 text-sm leading-relaxed text-[#7A746E]">
           No pudimos leer tu ficha en este momento de forma estable. Ya no repetimos solicitudes automáticas: suele pasar
           cuando aún no hay registro sincronizado o hubo una respuesta temporal del servidor (400/406). Si acabás de darte
-          de alta, esperá activación por el equipo Amore.
+          de alta, esperá activación por el {brand.supportLabel}.
         </p>
         <motion.a
           href={waHref}
@@ -40,11 +41,11 @@ export function PortalPerfilNotFoundFriendly() {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-white"
+          className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-white"
           style={{ background: '#25D366', boxShadow: '0 12px 32px rgba(37,211,102,0.35)' }}
         >
           <MessageCircle className="h-5 w-5" />
-          Escribir a Amore
+          {brand.whatsappCtaLabel}
         </motion.a>
         <motion.button
           type="button"
