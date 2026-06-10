@@ -1,0 +1,9 @@
+<svg width="920" height="220" viewBox="0 0 920 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="16" y="16" width="188" height="188" rx="48" fill="#F6EFE8"/>
+  <circle cx="110" cy="110" r="64" fill="#FFFDFC"/>
+  <path d="M110 62L119 98L155 107L119 116L110 152L101 116L65 107L101 98L110 62Z" fill="#9C6B4F"/>
+  <circle cx="72" cy="78" r="8" fill="#D9B8A3"/>
+  <circle cx="146" cy="142" r="6" fill="#D9B8A3"/>
+  <text x="240" y="96" fill="#6E4B3A" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="600">Tu Estética</text>
+  <text x="240" y="136" fill="#A07A67" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="400">Demo genérica para centros de estética</text>
+</svg>

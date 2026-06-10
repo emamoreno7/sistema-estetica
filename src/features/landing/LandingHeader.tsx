@@ -1,5 +1,16 @@
 import { motion } from 'framer-motion';
-import { asset } from '@/lib/asset';
+
+const buttonClassName = [
+  'rounded-full',
+  'px-5',
+  'py-2.5',
+  'text-[10px]',
+  'font-semibold',
+  'uppercase',
+  'tracking-[0.22em]',
+  'text-white',
+  'transition-all',
+].join(' ');
 
 export function LandingHeader({ onEnter }: { onEnter: () => void }) {
   return (
@@ -10,8 +21,8 @@ export function LandingHeader({ onEnter }: { onEnter: () => void }) {
       className="fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-6 py-4 sm:px-10"
     >
       <img
-        src={asset('logo-amore-v2.png')}
-        alt="AMORE"
+        src="/logo-generic.svg"
+        alt="Tu Estética"
         style={{
           width: '120px',
           height: '120px',
@@ -28,7 +39,7 @@ export function LandingHeader({ onEnter }: { onEnter: () => void }) {
         onClick={onEnter}
         whileHover={{ y: -1 }}
         whileTap={{ scale: 0.97 }}
-        className="rounded-full px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white transition-all"
+        className={buttonClassName}
         style={{
           background: 'var(--primary-navy)',
           boxShadow: '0 8px 24px rgba(0,61,91,0.18)',
