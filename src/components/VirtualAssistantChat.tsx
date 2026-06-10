@@ -46,8 +46,7 @@ export default function VirtualAssistantChat({
   forPortal?: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  type ChatEntry = { role: "user" | "assistant"; text: string };
-  const [messages, setMessages] = useState<ChatEntry[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState('');
   const listRef = useRef<HTMLDivElement>(null);
 
