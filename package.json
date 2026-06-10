@@ -9,7 +9,8 @@
     "build:pages": "VITE_BASE_PATH=/Estetica-Gestion/ vite build",
     "build:singlefile": "VITE_SINGLE_FILE=1 vite build",
     "preview": "vite preview",
-    "preview:pages": "VITE_BASE_PATH=/Estetica-Gestion/ vite build && vite preview --base /Estetica-Gestion/"
+    "preview:pages": "VITE_BASE_PATH=/Estetica-Gestion/ vite build && vite preview --base /Estetica-Gestion/",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.1",
