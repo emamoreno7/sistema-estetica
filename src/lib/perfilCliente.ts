@@ -21,8 +21,8 @@ export type PerfilClienteRow = {
   status: PerfilRowStatus;
   tratamiento_interes?: string | null;
   proxima_cita_at?: string | null;
-  cphone: string | null;
-  status: string | null;
+  created_at?: string;
+  updated_at?: string;
 };
 
 function isLikelyMissingRowOrAmbiguousSingle(err: PostgrestError): boolean {
@@ -51,7 +51,9 @@ function parseRowStatus(raw: unknown): PerfilRowStatus {
   return 'pending';
 }
 
-function rowFromSelect(r: RawPerfilClienteRow): PerfilClienteRow {
+type RawRow = { id: string; full_name: string | null; phone: string | null; status: string | null };
+
+function rowFromSelect(r: RawRow): PerfilClienteRow {
   return {
     id: r.id,
     full_name: (r.full_name ?? '').trim() || brand.clientFallbackName,
@@ -78,7 +80,7 @@ export async function fetchPerfilClienteDetailed(userId: string): Promise<{
   if (!result.error) {
     if (!result.data) return { perfil: null, fetchFailed: false, missingBenign: false };
     return {
-      perfil: rowFromSelect(result.data as RawPerfilClienteRow),
+      perfil: rowFromSelect(result.data as RawRow),
       fetchFailed: false,
       missingBenign: false,
     };

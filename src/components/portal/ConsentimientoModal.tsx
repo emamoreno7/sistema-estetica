@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { motion } from 'fra-motion';
+import { motion } from 'framer-motion';
 import { CheckCircle2, FileSignature, Loader2, ShieldCheck, X } from 'lucide-react';
 import {
   CONSENTIMIENTO_CLAUSULAS,
@@ -30,7 +30,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
     acepta_tratamiento: false,
     acepta_datos: false,
   });
-  const [savng, setSaving] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
   const todasAceptadas =

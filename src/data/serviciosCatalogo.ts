@@ -30,7 +30,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         name: 'Radiofrecuencia',
         desc: 'Firmeza y luminosidad: estimulación del colágeno para una piel más compacta, con la calma y la precisión que tu cuerpo merece.',
         badges: ['Reafirmante'],
-      e: '/radiofrecuencia.png',
+      image: '/radiofrecuencia.png',
         illustration: 'radiofrecuencia',
       },
       {
@@ -52,7 +52,7 @@ export const serviciosCatalogo: ServicioCategoria[] = [
         desc: 'Activación muscular profunda para tonificar y drenar, con sensación de bienestar y sin perder la elegancia del momento.',
         badges: ['Tonificador', 'Drenante'],
         image: '/electrodo.png',
-    ration: 'electrodos',
+    illustration: 'electrodos',
       },
     ],
   },

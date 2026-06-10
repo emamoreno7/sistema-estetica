@@ -68,9 +68,10 @@ export function PortalClienteProvider({
       perfilCliente?.full_name
     );
 
-    let memberSinceLabel = brand.memberSinceLabel;
-    if (perfilCliente?.created_at) {
-      const d = new Date(perfilCliente.created_at);
+    let memberSinceLabel: string = brand.memberSinceLabel;
+    const _pca = (perfilCliente as Record<string, unknown>)?.created_at;
+    if (_pca) {
+      const d = new Date(_pca as string);
       if (!Number.isNaN(d.getTime())) {
         memberSinceLabel = d.toLocaleDateString('es-AR', {
           month: 'long',
@@ -120,6 +121,6 @@ export function tratamientoProgresoPct(at: {
   sesionesCompletadas: number;
   totalSesiones: number;
 }): number {
-  if (at.totalSesio <= 0) return 0;
+  if (at.totalSesiones <= 0) return 0;
   return Math.round((at.sesionesCompletadas / at.totalSesiones) * 100);
 }

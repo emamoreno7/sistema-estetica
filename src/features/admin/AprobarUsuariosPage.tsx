@@ -296,7 +296,7 @@ export default function AprobarUsuariosPage() {
                 <div className="min-w-0">
                   <p className="text-sm font-semibold text-[#003D5B]">{p.full_name}</p>
                   <p className="mt-0.5 text-xs text-[#7A746E]">
-                    {p.phone || 'Sin teléfono'} · Registrado {formatFechaAlta(p.created_at)}
+                    {p.phone || 'Sin teléfono'} · Registrado {formatFechaAlta((p as Record<string, unknown>).created_at as string)}
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 sm:justify-end">
@@ -361,7 +361,7 @@ export default function AprobarUsuariosPage() {
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-[#003D5B]">{p.full_name}</p>
                     <p className="mt-0.5 text-xs text-[#7A746E]">
-                      {p.phone || 'Sin teléfono'} · Alta {formatFechaAlta(p.created_at)}
+                      {p.phone || 'Sin teléfono'} · Alta {formatFechaAlta((p as Record<string, unknown>).created_at as string)}
                     </p>
                   </div>
                   <button

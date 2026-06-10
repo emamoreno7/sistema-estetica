@@ -69,7 +69,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
   useEffect(() => {
     if (!session?.user) return;
     let cancelled = false;
-    let pendingTimer: ReturnType<typeof setInterval> | ll = null;
+    let pendingTimer: ReturnType<typeof setInterval> | null = null;
     let auditTimer: ReturnType<typeof setInterval> | null = null;
 
     async function refreshPending() {

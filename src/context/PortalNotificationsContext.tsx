@@ -69,7 +69,7 @@ function seededNotifications(): PortalNotificationItem[] {
   ];
 }
 
-export function PortalNotificationder({ children }: { children: ReactNode }) {
+export function PortalNotificationsProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState<PortalNotificationItem[]>([]);
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export function PortalNotificationder({ children }: { children: ReactNode }) {
       kind: 'cita_confirmada',
       title: 'Cita confirmada',
       body: `Tu turno de ${cita.servicio} quedó registrado para ${when}. Podés revisarlo en Mis citas.`,
-      createt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
       read: false,
     };
     setNotifications((prev) => [item, ...prev]);

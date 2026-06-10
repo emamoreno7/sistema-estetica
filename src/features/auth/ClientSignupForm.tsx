@@ -39,7 +39,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
   const [telefono, setTelefono] = useState('');
   const [tratamiento, setTratamiento] = useState('');
   const [password, setPassword] = useState('');
-  const [busy, sBusy] = useState(false);
+  const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [servicios, setServicios] = useState<string[]>(() => getAllServiceNames());
@@ -199,7 +199,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
     <motion.form
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{n: 0.45, delay: 0.05 }}
+      transition={{ duration: 0.45, delay: 0.05 }}
       onSubmit={handleSubmit}
       className="space-y-5"
     >
@@ -309,7 +309,7 @@ export default function ClientSignupForm({ onSuccess }: Props) {
       </div>
 
       {error && (
-        <p classN="rounded-xl border border-red-200/80 bg-red-50/80 px-4 py-3 text-sm text-red-800">{error}</p>
+        <p className="rounded-xl border border-red-200/80 bg-red-50/80 px-4 py-3 text-sm text-red-800">{error}</p>
       )}
 
       <motion.button

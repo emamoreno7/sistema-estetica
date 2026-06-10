@@ -38,7 +38,7 @@ import { es } from 'date-fns/locale/es';
 import { useAuth } from '@/context/AuthContext';
 import { useCitasData } from '@/context/CitasDataContext';
 import { usePortalNotifications } from '@/context/PortalNotificationsContext';
-import { useConsentimiento } from '@/contex/ConsentimientoContext';
+import { useConsentimiento } from '@/context/ConsentimientoContext';
 import { ConsentimientoModal } from '@/components/portal/ConsentimientoModal';
 import type { PortalActiveTreatment } from '@/lib/portalTreatment';
 import type { CitaClienteRow } from '@/lib/citasApi';
@@ -172,7 +172,7 @@ export function PortalCitasTab(props: {
         <motion.button
           type="button"
           initial={{ opacity: 0, y: -6 }}
-          anmate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           onClick={() => setConsentOpen(true)}
           className="flex w-full items-start gap-3 rounded-2xl border border-amber-300/80 bg-amber-50 px-4 py-3.5 text-left"
         >
@@ -346,7 +346,7 @@ function ProximaHeroDesdeDb(props: {
     title: `${brand.shortName} — ${cita.servicio}`,
     details: `Turno reservado desde el portal cliente ${brand.businessName}.`,
     start: fecha,
-    dationMinutes: 60,
+    durationMinutes: 60,
   });
 
   const estadoLbl =
@@ -411,7 +411,7 @@ function ProximaHeroDesdeDb(props: {
           href={props.buildWhatsAppHref(cita.servicio)}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ sce: 1.02 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#F2D7D5]/60 bg-[#FDF8F5]/75 px-5 py-3 text-sm font-semibold text-[#7A746E]"
         >
@@ -748,7 +748,7 @@ function CitasBookingModal(props: {
 
                 <MesCalendarioUniversal selected={pickedDay} onPick={(d) => { setPickedDay(d); setHora(null); }} />
 
-                <div classNme="mt-6 rounded-3xl border p-5" style={{ borderColor: 'rgba(242,215,213,0.5)', background: 'rgba(253,248,245,0.85)', boxShadow: '0 8px 28px rgba(0,61,91,0.04)' }}>
+                <div className="mt-6 rounded-3xl border p-5" style={{ borderColor: 'rgba(242,215,213,0.5)', background: 'rgba(253,248,245,0.85)', boxShadow: '0 8px 28px rgba(0,61,91,0.04)' }}>
                   <div className="mb-3 flex flex-wrap items-center gap-2">
                     <Clock className="h-4 w-4 shrink-0 text-[#003D5B]" />
                     <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#003D5B]/55">Horarios libres este dia</span>
@@ -859,7 +859,7 @@ function BookingSuccessCrossSellModal(props: {
         </p>
 
         <motion.a
-          href={comprobantHref}
+          href={comprobanteHref}
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.02 }}

@@ -13,7 +13,7 @@ export type ConsentimientoClienteInfo = {
 
 type RGB = [number, number, number];
 const NAVY: RGB = [0, 61, 91];
-const ROSE: RGB = [242, 213];
+const ROSE: RGB = [242, 215, 213];
 const SAGE: RGB = [191, 201, 162];
 const CREAM: RGB = [253, 248, 245];
 const MUTED: RGB = [122, 116, 110];
@@ -106,9 +106,9 @@ export async function buildConsentimientoPdf(
   doc.text('Consentimiento informado', W / 2, y, { align: 'center' });
   y += 5.5;
   doc.setFont('helvetica', 'normal');
-  docy, {
-    align: 'center',
-  });
+  doc.setFontSize(9);
+  doc.setTextColor(...MUTED);
+  doc.text(brand.businessName, W / 2, y, { align: 'center' });
   y += 6;
 
   doc.setDrawColor(...ROSE);
@@ -128,7 +128,11 @@ export async function buildConsentimientoPdf(
     ['Fecha de nacimiento', fechaNacTexto(c.fecha_nacimiento)],
     ['Fecha y hora de firma', fechaFirma],
     ['Versión del texto', c.version || 'v1'],
-    ['Origen', c.firmado_por_admin ? 'Registrado por recepci boxH = rows * rowH + 8;
+    ['Origen', c.firmado_por_admin ? 'Registrado por recepci\u00f3n' : 'Firmado por cliente'],
+  ];
+  const rowH = 14;
+  const rows = Math.ceil(datos.length / 2);
+  const boxH = rows * rowH + 8;
   doc.setFillColor(...WHITE);
   doc.setDrawColor(...ROSE);
   doc.setLineWidth(0.5);
@@ -153,7 +157,10 @@ export async function buildConsentimientoPdf(
   y += boxH + 9;
 
   // ── Declaraciones aceptadas ────────────────────────────────────────────────
-  doc.setones aceptadas', M, y);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(...NAVY);
+  doc.text('Declaraciones aceptadas', M, y);
   y += 6;
 
   const checkValues: Record<string, boolean> = {
@@ -210,7 +217,9 @@ export async function buildConsentimientoPdf(
   doc.setLineWidth(0.5);
   doc.roundedRect(M, y, contentW, condBoxH, 3, 3, 'FD');
   doc.setFont('helvetica', 'bold');
-  doc.setFont + 6);
+  doc.setFontSize(9);
+  doc.setTextColor(...NAVY);
+  doc.text('Condiciones de salud declaradas', M + 5, y + 6);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   doc.setTextColor(...NAVY);
@@ -244,7 +253,12 @@ function safeFileName(name: string): string {
     name
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-zA-Z0-9]+/async function descargarConsentimientoPdf(
+      .replace(/[^a-zA-Z0-9]+/g, '-')
+      .slice(0, 40) || 'cliente'
+  );
+}
+
+export async function descargarConsentimientoPdf(
   row: ConsentimientoClienteInfo,
   c: ConsentimientoRow
 ): Promise<void> {
@@ -279,5 +293,5 @@ export async function imprimirConsentimientoPdf(
       /* no-op */
     }
   };
-  dument.body.appendChild(iframe);
+  document.body.appendChild(iframe);
 }

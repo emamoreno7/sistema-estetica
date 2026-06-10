@@ -95,7 +95,7 @@ export function AntesYDespuesSection() {
         />
         <div
           className="absolute -right-20 bottom-10 h-[460px] w-[460px] rounded-full blur-3xl"
-          style={{ backgrnd: 'rgba(242,215,213,0.30)' }}
+          style={{ background: 'rgba(242,215,213,0.30)' }}
         />
       </div>
 

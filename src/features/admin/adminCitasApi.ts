@@ -57,7 +57,7 @@ export async function fetchCitasPorFechaAdmin(
       .in('id', ids);
 
     if (pe) {
-      return { s: [], error: pe.message };
+      return { rows: [], error: pe.message };
     }
 
     for (const p of perfiles ?? []) {

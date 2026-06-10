@@ -2,7 +2,13 @@ import type { PerfilClienteRow } from '@/lib/perfilCliente';
 import { brand } from '../config/brand';
 
 export type PortalActiveTreatment = {
-  id: string;s: number;
+  id: string;
+  nombre: string;
+  descripcion: string;
+  categoria: string;
+  zona: string;
+  profesional: string;
+  totalSesiones: number;
   sesionesCompletadas: number;
   fechaInicio: string;
   proximaSesion: string;
@@ -43,7 +49,7 @@ export function deriveActiveTreatmentFromPerfil(
   const nombre = perfil.tratamiento_interes?.trim() || tratamientoDesdeMetadata?.trim();
   if (!nombre) return null;
 
-  const fechaInicio = (perfil.created_at ?? new Date().toISOString()).slice(0, 10);
+  const fechaInicio = new Date().toISOString().slice(0, 10);
 
   const citaIso = perfil.proxima_cita_at ?? null;
   const cita = citaIso ? new Date(citaIso) : null;

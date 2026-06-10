@@ -47,7 +47,7 @@ export type ConsentimientoRow = {
 
 /** Un consentimiento está completo solo si aceptó las 3 cláusulas. */
 export function consentimientoEstaFirmado(c: ConsentimientoRow | null): boolean {
-  return !!c && c.deca_salud && c.acepta_tratamiento && c.acepta_datos;
+  return !!c && c.declara_salud && c.acepta_tratamiento && c.acepta_datos;
 }
 
 function mapRow(r: Record<string, unknown>): ConsentimientoRow {
@@ -83,7 +83,7 @@ export async function fetchConsentimientoCliente(
     .maybeSingle();
 
   if (error) {
-    const flat = `${ror.code ?? ''}${error.message}`.toLowerCase();
+    const flat = `${error.code ?? ''}${error.message}`.toLowerCase();
     if (flat.includes('does not exist') || flat.includes('relation') || flat.includes('schema cache')) {
       return { consentimiento: null, error: 'NO_MIGRADO' };
     }
@@ -125,7 +125,7 @@ export async function guardarConsentimientoCliente(input: {
     nombre_firma: nombre,
     dni: dni || null,
     fecha_nacimiento: fechaNac || null,
-    contraindicaciones: input.contraindicacies?.trim() || null,
+    contraindicaciones: input.contraindicaciones?.trim() || null,
     declara_salud: input.declaraSalud,
     acepta_tratamiento: input.aceptaTratamiento,
     acepta_datos: input.aceptaDatos,
