@@ -34,7 +34,7 @@ export async function listPerfilesClientesAdmin(): Promise<{
   const rows: PerfilClienteRow[] = (data ?? []).map((r) => ({
     id: r.id as string,
     full_name: String((r as { full_name?: string }).full_name ?? '').trim() || brand.clientFallbackName,
-    phone: String((r as { p: string }).phone ?? '').trim() || '',
+    phone: String((r as { phone: string }).phone ?? '').trim() || '',
     status: parseRowStatus((r as { status?: string }).status),
   }));
 
@@ -93,7 +93,7 @@ export async function bloquearCliente(userId: string): Promise<{ error: string |
 }
 
 /** Volver una ficha activa a estado `pending` (deshacer aprobación sin borrar la ficha). */
-export async function desaprobarCliente(userId: string): Promise<{ error: string |ll }> {
+export async function desaprobarCliente(userId: string): Promise<{ error: string | null }> {
   const { error } = await supabase
     .from(PERFILES_CLIENTES_TABLE)
     .update({ status: 'pending' })
