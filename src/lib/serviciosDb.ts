@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 import type { ServicioCategoria, ServicioItem } from '@/data/serviciosCatalogo';
-import { getAllServiceNames as getStaticServiceNames } from '@/data/serviciosCatalogo';
+import { getAllServiceNames as getStaticServiceNames, DEFAULT_SERVICE_IMAGE } from '@/data/serviciosCatalogo';
 
 export type ServicioRow = {
   id: string;
@@ -35,7 +35,7 @@ function parseRow(r: Record<string, unknown>): ServicioRow {
     duracion_minutos: Math.round(parseNum(r.duracion_minutos)) || 60,
     descripcion: String(r.descripcion ?? ''),
     activo: Boolean(r.activo),
-    imagen_url: String(r.imagen_url ?? '/body-up.png'),
+    imagen_url: String(r.imagen_url ?? DEFAULT_SERVICE_IMAGE),
     badges: Array.isArray(r.badges) ? (r.badges as string[]) : [],
     sort_order: Math.round(parseNum(r.sort_order)),
   };
@@ -47,7 +47,7 @@ export async function fetchServiciosActivos(): Promise<{ rows: ServicioRow[]; er
     .from('servicios')
     .select(SELECT_PUBLIC)
     .eq('activo', true)
-    .order('sort_order', { ascending: true })
+    .order('soorder', { ascending: true })
     .order('nombre', { ascending: true });
 
   if (error) return { rows: [], error: error.message };
@@ -89,7 +89,7 @@ export async function fetchActiveServiceNames(): Promise<string[]> {
 
 export function formatPrecioArs(precio: number): string {
   try {
-    return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(
+  return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(
       precio
     );
   } catch {

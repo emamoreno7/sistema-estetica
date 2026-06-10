@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 import type { ServicioRow } from '@/lib/serviciosDb';
+import { DEFAULT_SERVICE_IMAGE } from '@/data/serviciosCatalogo';
 
 const SELECT_ADMIN =
   'id, categoria_id, categoria_label, nombre, precio, duracion_minutos, descripcion, activo, imagen_url, badges, sort_order';
@@ -20,7 +21,7 @@ function parseRow(r: Record<string, unknown>): ServicioRow {
     duracion_minutos: Math.round(parseNum(r.duracion_minutos)) || 60,
     descripcion: String(r.descripcion ?? ''),
     activo: Boolean(r.activo),
-    imagen_url: String(r.imagen_url ?? '/body-up.png'),
+    imagen_url: String(r.imagen_url ?? DEFAULT_SERVICE_IMAGE),
     badges: Array.isArray(r.badges) ? (r.badges as string[]) : [],
     sort_order: Math.round(parseNum(r.sort_order)),
   };
@@ -44,7 +45,7 @@ export async function listServiciosAdmin(): Promise<{ rows: ServicioRow[]; error
   return { rows: (data ?? []).map((x) => parseRow(x as Record<string, unknown>)), error: null };
 }
 
-export async function updateServicioPrecioDescripcionAdmin(
+export async fution updateServicioPrecioDescripcionAdmin(
   id: string,
   fields: { precio: number; descripcion: string }
 ): Promise<{ error: string | null }> {
@@ -96,7 +97,7 @@ export async function createServicioAdmin(opts: {
       precio: opts.precio,
       duracion_minutos: opts.duracion_minutos,
       descripcion: opts.descripcion,
-      imagen_url: opts.imagen_url || '/body-up.png',
+      imagen_url: opts.imagen_url || DEFAULT_SERVICE_IMAGE,
       activo: opts.activo,
       badges: [] as string[],
       sort_order,

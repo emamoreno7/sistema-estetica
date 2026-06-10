@@ -10,6 +10,7 @@ import {
   setServicioActivoAdmin,
   updateServicioPrecioDescripcionAdmin,
 } from '@/features/admin/adminServiciosApi';
+import { DEFAULT_SERVICE_IMAGE } from '@/data/serviciosCatalogo';
 import { getPortalAdminEmails, getPortalAdminUserIds } from '@/config/admin';
 import { AdminShell } from './AdminShell';
 
@@ -19,7 +20,7 @@ const CATEGORIAS_NUEVO = [
   { id: 'corporal', label: 'Remodelación Corporal' },
   { id: 'bienestar', label: 'Bienestar' },
   { id: 'facial', label: 'Facial & Mirada' },
-  { id: 'especialidades', label: 'Especialidades' },
+  { id: 'especialidades', label: 'Epecialidades' },
 ] as const;
 
 export default function AdminServicesView() {
@@ -40,7 +41,7 @@ export default function AdminServicesView() {
   const [nuevoPrecio, setNuevoPrecio] = useState('0');
   const [nuevoDur, setNuevoDur] = useState('60');
   const [nuevoDesc, setNuevoDesc] = useState('');
-  const [nuevoImg, setNuevoImg] = useState('/body-up.png');
+  const [nuevoImg, setNuevoImg] = useState(DEFAULT_SERVICE_IMAGE);
 
   const admins = getPortalAdminEmails();
   const adminIds = getPortalAdminUserIds();
@@ -102,7 +103,7 @@ export default function AdminServicesView() {
     const precio = Number.parseFloat(nuevoPrecio.replace(',', '.'));
     const dur = Number.parseInt(nuevoDur, 10);
     if (!nuevoNombre.trim()) {
-      setActionErr('Completá el nombre del servicio.');
+      setActionEr('Completá el nombre del servicio.');
       return;
     }
     if (Number.isNaN(precio) || precio < 0) {
@@ -122,7 +123,7 @@ export default function AdminServicesView() {
       precio,
       duracion_minutos: dur,
       descripcion: nuevoDesc.trim(),
-      imagen_url: nuevoImg.trim() || '/body-up.png',
+      imagen_url: nuevoImg.trim() || DEFAULT_SERVICE_IMAGE,
       activo: true,
     });
     setSaving(false);
@@ -135,14 +136,14 @@ export default function AdminServicesView() {
     setNuevoPrecio('0');
     setNuevoDur('60');
     setNuevoDesc('');
-    setNuevoImg('/body-up.png');
+    setNuevoImg(DEFAULT_SERVICE_IMAGE);
     await load();
   }
 
   return (
     <AdminShell
       onSignOut={onSignOut}
-      title="Servicios"
+      title="Seos"
       subtitle="Precios, descripciones y visibilidad en la web. Los clientes ven los servicios activos de la tabla servicios."
       actions={
         <motion.button
@@ -180,7 +181,7 @@ export default function AdminServicesView() {
 
       {actionErr ? <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{actionErr}</div> : null}
 
-      <div className="overflow-hidden rounded-3xl border border-[#F2D7D5]/60 bg-[#FDF8F5]/95 shadow-xl backdrop-blur-sm" style={{ boxShadow: '0 24px 64px rgba(0,61,91,0.08)' }}>
+     <div className="overflow-hidden rounded-3xl border border-[#F2D7D5]/60 bg-[#FDF8F5]/95 shadow-xl backdrop-blur-sm" style={{ boxShadow: '0 24px 64px rgba(0,61,91,0.08)' }}>
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#F2D7D5]/50 px-5 py-4 sm:px-6">
           <div className="flex items-center gap-2">
             <LayoutList className="h-5 w-5 text-[#003D5B]/55" />
@@ -198,7 +199,7 @@ export default function AdminServicesView() {
           <div className="px-6 py-16 text-center text-sm text-red-700">{err}</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full text-left text-sm">
+            able className="min-w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-[#F2D7D5]/40 bg-gradient-to-r from-[#fffefd] to-[#FDF8F5]">
                   <th className="whitespace-nowrap px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55 sm:px-6">Nombre</th>
@@ -207,7 +208,7 @@ export default function AdminServicesView() {
                   <th className="whitespace-nowrap px-3 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Estado</th>
                   <th className="px-5 py-4 text-right text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55 sm:px-6">Acciones</th>
                 </tr>
-              </thead>
+             </thead>
               <tbody className="divide-y divide-[#F2D7D5]/35">
                 {rows.map((r) => (
                   <motion.tr key={r.id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="cursor-pointer transition-colors hover:bg-[#FFFDFB]/95" onClick={() => openEdit(r)}>
@@ -234,9 +235,7 @@ export default function AdminServicesView() {
             {!rows.length && <p className="py-14 text-center text-sm text-[#7A746E]">No hay filas. Ejecutá la migración 007 o creá el primer servicio.</p>}
           </div>
         )}
-      </div>
-
-      {/* Modales */}
+      </div>     {/* Modales */}
       <AnimatePresence>
         {editRow ? (
           <>
@@ -248,7 +247,7 @@ export default function AdminServicesView() {
                 <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Precio (ARS)</label><input type="number" min={0} step="0.01" value={precioEdit} onChange={(e) => setPrecioEdit(e.target.value)} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm text-[#003D5B] outline-none focus:ring-2 focus:ring-[#BFC9A2]/50" /></div>
                 <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Descripción</label><textarea value={descEdit} onChange={(e) => setDescEdit(e.target.value)} rows={5} className="w-full resize-y rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm text-[#003D5B] outline-none focus:ring-2 focus:ring-[#BFC9A2]/50" /></div>
               </div>
-              <div className="mt-6 flex flex-wrap gap-2"><motion.button type="button" whileTap={{ scale: 0.98 }} disabled={saving} onClick={() => void guardarEdicion()} className="flex-1 rounded-full bg-[#003D5B] py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white disabled:opacity-50">Guardar</motion.button><button type="button" disabled={saving} onClick={() => setEditRow(null)} className="rounded-full border border-[#003D5B]/15 px-6 py-3 text-xs font-semibold text-[#003D5B]/70">Cancelar</button></div>
+              <div className="mt-6 flex flex-wrap gap-2"><motion.button type="button" whileTap={{ scale: 0.98 }} disabled={saving} onClick={() => void guardarEdicion()} className="flx-1 rounded-full bg-[#003D5B] py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white disabled:opacity-50">Guardar</motion.button><button type="button" disabled={saving} onClick={() => setEditRow(null)} className="rounded-full border border-[#003D5B]/15 px-6 py-3 text-xs font-semibold text-[#003D5B]/70">Cancelar</button></div>
             </motion.div>
           </>
         ) : null}
@@ -262,10 +261,10 @@ export default function AdminServicesView() {
               <h2 className="text-serif-premium text-lg font-bold text-[#003D5B]">Nuevo servicio</h2>
               <div className="mt-5 space-y-4">
                 <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Categoría</label><select value={catId} onChange={(e) => setCatId(e.target.value)} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm text-[#003D5B]">{CATEGORIAS_NUEVO.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}</select></div>
-                <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Nombre</label><input value={nuevoNombre} onChange={(e) => setNuevoNombre(e.target.value)} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm text-[#003D5B]" placeholder="Ej. Limpieza profunda" /></div>
+                <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Nombre</label><input value={nuevoNombre} onChange={(e) => setNuevoNombre(e.target.value)} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 txt-sm text-[#003D5B]" placeholder="Ej. Limpieza profunda" /></div>
                 <div className="grid grid-cols-2 gap-3"><div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Precio ARS</label><input type="number" min={0} step="0.01" value={nuevoPrecio} onChange={(e) => setNuevoPrecio(e.target.value)} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm" /></div><div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Duración (min)</label><input type="number" min={5} value={nuevoDur} onChange={(e) => setNuevoDur(e.target.value)} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm" /></div></div>
-                <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Descripción</label><textarea value={nuevoDesc} onChange={(e) => setNuevoDesc(e.target.value)} rows={4} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm" /></div>
-                <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Imagen (ruta)</label><input value={nuevoImg} onChange={(e) => setNuevoImg(e.target.value)} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm" placeholder="/body-up.png" /></div>
+                <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Descripción</label><textarea value={nuevoDesc} onChange={(e) => setNuevoDesc(e.target.value)} rows={4} className="w-fulrounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm" /></div>
+                <div><label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55">Imagen (ruta)</label><input value={nuevoImg} onChange={(e) => setNuevoImg(e.target.value)} className="w-full rounded-2xl border border-[#F2D7D5]/80 bg-white px-4 py-3 text-sm" placeholder={DEFAULT_SERVICE_IMAGE} /></div>
               </div>
               <div className="mt-6 flex flex-wrap gap-2"><motion.button type="button" whileTap={{ scale: 0.98 }} disabled={saving} onClick={() => void crearServicio()} className="flex-1 rounded-full bg-[#003D5B] py-3 text-xs font-semibold uppercase tracking-[0.12em] text-white disabled:opacity-50">Crear</motion.button><button type="button" disabled={saving} onClick={() => setCreateOpen(false)} className="rounded-full border border-[#003D5B]/15 px-6 py-3 text-xs font-semibold text-[#003D5B]/70">Cancelar</button></div>
             </motion.div>

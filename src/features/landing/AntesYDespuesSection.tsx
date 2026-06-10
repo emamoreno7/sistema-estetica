@@ -1,10 +1,9 @@
 /**
  * Sección "Antes & Después" — social proof interactivo en la landing.
  *
- * Carrusel de casos reales con slider arrastrable para comparar
- * el antes y después. Las imágenes viven en /public/casos/.
- * Para ar un caso, solo cambiá los archivos JPG manteniendo
- * los mismos nombres.
+ * Carrusel de casos con slider arrastrable para comparar antes y después.
+ * Las imágenes viven en /public/casos/.
+ * Para cambiar un caso, reemplazá los archivos JPG manteniendo los mismos nombres.
  */
 
 import { useState } from 'react';
@@ -14,6 +13,10 @@ import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import { asset } from '@/lib/asset';
 import { brand } from '../../config/brand';
 
+/** Placeholder genérico para casos sin imagen real cargada. */
+const CASO_PLACEHOLDER_BEFORE = asset('casos/placeholder-antes.jpg');
+const CASO_PLACEHOLDER_AFTER = asset('casos/placeholder-despues.jpg');
+
 type Caso = {
   slug: string;
   titulo: string;
@@ -22,53 +25,52 @@ type Caso = {
   testimonio: string;
   cliente: string;
   beforeSrc: string;
-  afterSrc: string;
+  aftering;
 };
 
 const CASOS: Caso[] = [
   {
-    slug: 'body-up-abdomen',
-    titulo: 'Modelado abdominal',
-    tratamiento: 'Body Up + Radiofrecuencia',
+    slug: 'caso-1',
+    titulo: 'Modelado corporal',
+    tratamiento: 'Tratamiento Corporal',
     sesiones: '8 sesiones',
     testimonio:
-      'No buscaba un resultado mágico, buscaba acompañamiento. Las chicas me explicaron todo en cada sesión y vi mi piel cambiar.',
+      'No buscaba un resultado mágico, buscaba acompañamiento. Me explicaron todo en cada sesión y vi mi piel cambiar.',
     cliente: 'Sofía R.',
-    beforeSrc: asset('casos/body-up-ante'),
-    afterSrc: asset('casos/body-up-despues.jpg'),
+    beforeSrc: CASO_PLACEHOLDER_BEFORE,
+    afterSrc: CASO_PLACEHOLDER_AFTER,
   },
   {
-    slug: 'criolipolisis-piernas',
-    titulo: 'Reducción zona muslos',
-    tratamiento: 'Crio-lipólisis',
+    slug: 'caso-2',
+    titulo: 'Reducción localizada',
+    tratamiento: 'Tratamiento Reductor',
     sesiones: '4 sesiones',
     testimonio:
-      'Lo más lindo es entrar y sentir que es tu momento. La crio fue mucho más cómoda de lo que pensaba.',
+      'Lo más lindo es entrar y sentir que es tu momento. El tratamiento fue mucho más cómodo de lo que pensaba.',
     cliente: 'Mariela B.',
-    beforeSrc: asset('casos/crio-antes.jpg'),
-    afterSrc: asset('casos/crio-despues.jpg'),
+    beforeSrc: CASO_PLACEHOLDER_BEFORE,
+    afterSrc: CASO_PLACEHOLDER_AFTER,
   },
   {
-    slug: 'lifting-pestanas',
-    titulo: 'Lifting de pestañas',
-    tratamiento: 'Lifting + Tinte',
+    slug: 'caso-3',
+    titulo: 'Mirada renov  tratamiento: 'Tratamiento Facial',
     sesiones: '1 sesión',
     testimonio:
-      'Mi mirada cambió. Es sutil pero la diferencia entre maquillarme y no maquillarme se nota muchísimo.',
+      'Mi mirada cambió. Es sutil pero la diferencia se nota muchísimo.',
     cliente: 'Camila G.',
-    beforeSrc: asset('casos/pestanas-antes.jpg'),
-    afterSrc: asset('casos/pestanas-despues.jpg'),
+    beforeSrc: CASO_PLACEHOLDER_BEFORE,
+    afterSrc: CASO_PLACEHOLDER_AFTER,
   },
   {
-    slug: 'depilacion-piernas',
-    titulo: 'Depilación definitiva',
-    tratamiento: 'Láser diodo',
+    slug: 'caso-4',
+    titulo: 'Piel lisa y cuidada',
+    tratamiento: 'Depilación definitiva',
     sesiones: '6 sesiones',
     testimonio:
-      'Ya no me preocupo poción cada semana. La constancia y la atención hicieron toda la diferencia.',
+      'Ya no me preocupo por la depilación cada semana. La constancia y la atención hicieron toda la diferencia.',
     cliente: 'Laura M.',
-    beforeSrc: asset('casos/depilacion-antes.jpg'),
-    afterSrc: asset('casos/depilacion-despues.jpg'),
+    beforeSrc: CASO_PLACEHOLDER_BEFORE,
+    afterSrc: CASO_PLACEHOLDER_AFTER,
   },
 ];
 
@@ -85,7 +87,7 @@ export function AntesYDespuesSection() {
 
   return (
     <section
-      className="relative px-4 py-24 sm:px-10 lg:py-32"
+      className="relative px-4 py-24 sm:lg:py-32"
       style={{ background: 'linear-gradient(180deg, #FDF8F5 0%, #FBEEE6 100%)' }}
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -110,7 +112,7 @@ export function AntesYDespuesSection() {
         >
           <p
             className="mb-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.38em]"
-            style={{ color: 'var(--accent-sage)' }}
+            sr: 'var(--accent-sage)' }}
           >
             <Sparkles className="h-3 w-3" />
             Resultados reales
@@ -131,8 +133,7 @@ export function AntesYDespuesSection() {
             style={{ color: 'var(--text-muted)' }}
           >
             Arrastrá el control para ver la evolución. Cada caso es de una persona real acompañada en {brand.shortName}.
-          </p>
-        </motion.div>
+          </p>     </motion.div>
 
         {/* ─── Slider + info ─── */}
         <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
@@ -145,7 +146,8 @@ export function AntesYDespuesSection() {
             className="relative"
           >
             <BeforeAfterSlider
-              beforeSrc={caso.beforeSrc}afterSrc={caso.afterSrc}
+              beforeSrc={caso.beforeSrc}
+              afterSrc={caso.afterSrc}
               beforeLabel="ANTES"
               afterLabel="DESPUÉS"
             />
@@ -157,7 +159,7 @@ export function AntesYDespuesSection() {
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-[#003D5B]/10 bg-white text-[#003D5B] shadow-sm transition hover:scale-105"
                 aria-label="Caso anterior"
               >
-                <ChevronLeft className="h-4 w-4" />
+  <ChevronLeft className="h-4 w-4" />
               </button>
               <div className="flex gap-1.5">
                 {CASOS.map((c, i) => (
@@ -168,8 +170,7 @@ export function AntesYDespuesSection() {
                     className="h-2 rounded-full transition-all"
                     style={{
                       width: i === idx ? 28 : 8,
-                      background:
-                      i === idx ? 'var(--primary-navy)' : 'rgba(0,61,91,0.20)',
+                      background: i === idx ? 'var(--primary-navy)' : 'rgba(0,61,91,0.20)',
                     }}
                     aria-label={`Ver caso ${i + 1}`}
                   />
@@ -230,8 +231,7 @@ export function AntesYDespuesSection() {
 
             <div className="mt-7 rounded-2xl bg-[#FDF8F5] p-4 text-[11px] leading-5" style={{ color: 'var(--text-muted)' }}>
               <strong className="text-[#003D5B]">¿Querés un caso así?</strong> Reservá tu evaluación gratuita y armamos un
-              plan a tu medida.
-            </div>
+              plan a tu medida      </div>
           </motion.div>
         </div>
       </div>
