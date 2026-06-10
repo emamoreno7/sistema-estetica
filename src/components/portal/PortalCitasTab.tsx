@@ -109,7 +109,7 @@ export function PortalCitasTab(props: {
   sessions: PortalSesionResumen[];
   PortalTreatmentEmptyPlaceholder: (p: EmptyPhProps) => JSX.Element;
   buildWhatsAppHref: (svc: string) => string;
-}): JSX.Element {
+}): JSX.Element | null {
   const { activeTreatment, sessions, PortalTreatmentEmptyPlaceholder, buildWhatsAppHref } = props;
   const { session, perfilCliente } = useAuth();
   const uid = session?.user?.id ?? '';
@@ -339,7 +339,7 @@ function ProximaHeroDesdeDb(props: {
   cita: CitaClienteRow;
   buildWhatsAppHref: (s: string) => string;
   onAddService: () => void;
-}): JSX.Element {
+}): JSX.Element | null {
   const { cita } = props;
   const fecha = parseCitaMomentLocal(cita);
   const gcalHref = buildGoogleCalendarHref({
@@ -435,7 +435,7 @@ function ProximaHeroPlan(props: {
   plan: PortalActiveTreatment;
   onAdd: () => void;
   buildWhatsAppHref: (s: string) => string;
-}): JSX.Element {
+}): JSX.Element | null {
   const { plan } = props;
   const fecha = parseISO(plan.proximaSesion || '');
   const ok = !Number.isNaN(fecha.getTime());
@@ -516,7 +516,7 @@ function ProximaHeroPlan(props: {
 function MesCalendarioUniversal(props: {
   selected: Date;
   onPick: (d: Date) => void;
-}): JSX.Element {
+}): JSX.Element | null {
   const { selected, onPick } = props;
   const [cursor, setCursor] = useState(() => startOfMonth(selected));
   const start = startOfWeek(startOfMonth(cursor), { weekStartsOn: 1 });
@@ -606,7 +606,7 @@ function CitasBookingModal(props: {
   userId: string;
   onClose: () => void;
   onComplete: (c: CitaClienteRow | null) => Promise<void>;
-}): JSX.Element {
+}): JSX.Element | null {
   const todasFranjas = useMemo(() => generarFranjasComerciales(), []);
   const [wizardStep, setWizardStep] = useState<1 | 2>(1);
   const [servicio, setServicio] = useState<ServicioReservable | null>(null);
@@ -825,7 +825,7 @@ function BookingSuccessCrossSellModal(props: {
   cita: CitaClienteRow;
   nombreCliente: string;
   onClose: () => void;
-}): JSX.Element {
+}): JSX.Element | null {
   const reco = obtenerCrossSellPorServicio(props.cita.servicio);
   const fecha = parseCitaMomentLocal(props.cita);
   const comprobanteHref = bookingComprobanteWhatsAppHref(props.cita.servicio, fecha, props.cita.hora, props.nombreCliente);
