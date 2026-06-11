@@ -3,7 +3,7 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════
-   VARIABLES — Paleta AMORE (fuera de @layer para máxima prioridad)
+   VARIABLES - Paleta base (fuera de @layer para maxima prioridad)
    ═══════════════════════════════════════════════════════════════ */
 :root {
   --primary-navy:  #003D5B;

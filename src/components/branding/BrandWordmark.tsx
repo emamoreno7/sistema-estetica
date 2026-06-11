@@ -1,14 +1,11 @@
-/**
- * Lockup textual de marca para el portal — sin logo en caja blanca.
- * Tipografía manual: nombre en serif premium + tracking ceremonial; slogan en cursiva serif.
- */
+import { brand } from '@/config/brand';
 
 export type BrandWordmarkVariant = 'compact' | 'default';
 
 export function BrandWordmark({ variant = 'default' }: { variant?: BrandWordmarkVariant }) {
   const isCompact = variant === 'compact';
   const titleLs = isCompact ? '0.14em' : '0.22em';
-  const titleSize = isCompact ? '0.5625rem' : 'clamp(0.68rem, 1.95vw, 0.845rem)';
+  const titleSize = isCompact ? '0.5625rem' : 'clamp(0.68rem, 1.95vw,0.845rem)';
   const sloganSize = isCompact ? '0.625rem' : 'clamp(0.72rem, 1.6vw, 0.895rem)';
   const maxTitle = isCompact ? '11rem' : '26rem';
 
@@ -17,7 +14,7 @@ export function BrandWordmark({ variant = 'default' }: { variant?: BrandWordmark
       className={`flex flex-col ${isCompact ? 'items-start gap-px' : 'items-center gap-1'} text-center ${isCompact ? 'text-left' : ''}`}
     >
       <span
-        className="text-serif-premium font-semibold uppercase leading-[1.18] tracking-normal"
+        className='text-serif-premium font-semibold uppercase leading-[1.18] tracking-normal'
         style={{
           color: 'var(--primary-navy)',
           letterSpacing: titleLs,
@@ -26,10 +23,10 @@ export function BrandWordmark({ variant = 'default' }: { variant?: BrandWordmark
           fontVariantLigatures: 'common-ligatures',
         }}
       >
-        AMORE CENTRO DI BELLEZZA
+        {brand.businessName}
       </span>
       <span
-        className="text-serif-premium font-normal italic leading-tight antialiased"
+        className='text-serif-premium font-normal italic leading-tight antialiased'
         style={{
           color: 'rgba(69,95,112,0.92)',
           fontSize: sloganSize,
