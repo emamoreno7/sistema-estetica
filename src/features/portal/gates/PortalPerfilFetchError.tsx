@@ -16,13 +16,13 @@ export function PortalPerfilFetchError() {
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md rounded-[1.75rem] border border-[#F2D7D5]/65 bg-white/95 p-10 text-center shadow-xl"
+        className="w-full max-w-md rounded-[1.75rem] border border-[var(--accent-rose)]/65 bg-white/95 p-10 text-center shadow-xl"
       >
-        <Shield className="mx-auto mb-4 h-10 w-10 text-[#003D5B]/55" />
-        <p className="text-serif-premium text-lg font-semibold text-[#003D5B]">
+        <Shield className="mx-auto mb-4 h-10 w-10 text-[var(--primary-navy)]/55" />
+        <p className="text-serif-premium text-lg font-semibold text-[var(--primary-navy)]">
           No pudimos cargar tu ficha cliente
         </p>
-        <p className="mt-4 text-sm leading-relaxed text-[#7A746E]">
+        <p className="mt-4 text-sm leading-relaxed text-[var(--text-muted)]">
           La conexión con Supabase falló o no tenés permiso de lectura. No mostramos datos de demostración. Volvé a
           intentarlo o iniciá sesión de nuevo.
         </p>
@@ -33,7 +33,7 @@ export function PortalPerfilFetchError() {
             whileTap={{ scale: 0.98 }}
             onClick={() => void refreshPerfil()}
             className="rounded-full px-8 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white"
-            style={{ background: 'var(--primary-navy,#003D5B)' }}
+            style={{ background: 'var(--primary-navy,var(--primary-navy))' }}
           >
             Reintentar
           </motion.button>
@@ -44,7 +44,7 @@ export function PortalPerfilFetchError() {
               await signOut();
               navigate('/ingreso', { replace: true });
             }}
-            className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/55 underline underline-offset-4"
+            className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/55 underline underline-offset-4"
           >
             Cambiar cuenta
           </motion.button>

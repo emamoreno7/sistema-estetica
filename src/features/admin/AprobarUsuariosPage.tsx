@@ -163,7 +163,7 @@ export default function AprobarUsuariosPage() {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             to="/admin/clientes"
-            className="inline-flex items-center gap-2 rounded-full border border-[#003D5B]/12 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--primary-navy)]/12 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]"
           >
             Ver todos los clientes <ArrowRight className="h-3.5 w-3.5" />
           </Link>
@@ -171,7 +171,7 @@ export default function AprobarUsuariosPage() {
             type="button"
             whileTap={{ scale: 0.98 }}
             onClick={() => void load()}
-            className="inline-flex items-center gap-2 rounded-full border border-[#BFC9A2]/50 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-sage)]/50 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${refreshing || loading ? 'animate-spin' : ''}`} />
             Actualizar
@@ -200,12 +200,12 @@ export default function AprobarUsuariosPage() {
         className={`mb-6 flex items-start gap-3 rounded-3xl border px-5 py-4 ${
           pendientes.length > 0
             ? 'border-amber-300/80 bg-amber-50/95'
-            : 'border-[#BFC9A2]/55 bg-[#F4F7E8]/85'
+            : 'border-[var(--accent-sage)]/55 bg-[#F4F7E8]/85'
         }`}
       >
         <div
           className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl ${
-            pendientes.length > 0 ? 'bg-amber-200/70 text-amber-900' : 'bg-[#BFC9A2]/45 text-[#003D5B]'
+            pendientes.length > 0 ? 'bg-amber-200/70 text-amber-900' : 'bg-[var(--accent-sage)]/45 text-[var(--primary-navy)]'
           }`}
         >
           {pendientes.length > 0 ? (
@@ -217,7 +217,7 @@ export default function AprobarUsuariosPage() {
         <div className="flex-1">
           <p
             className={`text-serif-premium text-lg font-bold ${
-              pendientes.length > 0 ? 'text-amber-950' : 'text-[#003D5B]'
+              pendientes.length > 0 ? 'text-amber-950' : 'text-[var(--primary-navy)]'
             }`}
           >
             {pendientes.length > 0
@@ -226,7 +226,7 @@ export default function AprobarUsuariosPage() {
           </p>
           <p
             className={`mt-1 text-xs ${
-              pendientes.length > 0 ? 'text-amber-900/80' : 'text-[#003D5B]/65'
+              pendientes.length > 0 ? 'text-amber-900/80' : 'text-[var(--primary-navy)]/65'
             }`}
           >
             Actualización automática cada {REFRESH_INTERVAL_MS / 1000}s mientras la pestaña esté abierta.
@@ -245,13 +245,13 @@ export default function AprobarUsuariosPage() {
       {/* Buscador */}
       <div className="mb-6">
         <label className="relative flex items-center">
-          <Search className="pointer-events-none absolute left-5 h-5 w-5 text-[#003D5B]/35" />
+          <Search className="pointer-events-none absolute left-5 h-5 w-5 text-[var(--primary-navy)]/35" />
           <input
             type="search"
             placeholder="Buscar pendiente por nombre o teléfono…"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            className="w-full rounded-3xl border border-[#003D5B]/10 bg-white/90 py-4 pl-14 pr-6 text-sm text-[#003D5B] shadow-sm outline-none transition focus:border-[#F2D7D5] focus:ring-2 focus:ring-[#F2D7D5]/60"
+            className="w-full rounded-3xl border border-[var(--primary-navy)]/10 bg-white/90 py-4 pl-14 pr-6 text-sm text-[var(--primary-navy)] shadow-sm outline-none transition focus:border-[var(--accent-rose)] focus:ring-2 focus:ring-[var(--accent-rose)]/60"
             style={{ boxShadow: '0 8px 32px rgba(0,61,91,0.06)' }}
           />
         </label>
@@ -259,23 +259,23 @@ export default function AprobarUsuariosPage() {
 
       {/* Pendientes */}
       <div
-        className="overflow-hidden rounded-3xl border border-[#F2D7D5]/55 bg-[#FDF8F5]/95 shadow-xl backdrop-blur-sm"
+        className="overflow-hidden rounded-3xl border border-[var(--accent-rose)]/55 bg-[var(--bg-cream)]/95 shadow-xl backdrop-blur-sm"
         style={{ boxShadow: '0 24px 64px rgba(0,61,91,0.08)' }}
       >
-        <div className="border-b border-[#F2D7D5]/50 px-6 py-5">
+        <div className="border-b border-[var(--accent-rose)]/50 px-6 py-5">
           <div className="flex items-center gap-3">
-            <UserCheck className="h-4 w-4 text-[#003D5B]/55" />
-            <h2 className="text-serif-premium text-lg font-bold text-[#003D5B]">
+            <UserCheck className="h-4 w-4 text-[var(--primary-navy)]/55" />
+            <h2 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">
               Solicitudes de alta
             </h2>
           </div>
-          <p className="mt-1 text-xs text-[#7A746E]">
+          <p className="mt-1 text-xs text-[var(--text-muted)]">
             Tabla Supabase · <strong>perfiles_clientes</strong> · estado <em>pending</em>
           </p>
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center gap-3 py-20 text-[#003D5B]/55">
+          <div className="flex items-center justify-center gap-3 py-20 text-[var(--primary-navy)]/55">
             <Loader2 className="h-6 w-6 animate-spin" />
             <span>Cargando solicitudes…</span>
           </div>
@@ -284,7 +284,7 @@ export default function AprobarUsuariosPage() {
         ) : filteredPendientes.length === 0 ? (
           <EmptyState searching={q.trim().length > 0} />
         ) : (
-          <ul className="divide-y divide-[#F2D7D5]/35">
+          <ul className="divide-y divide-[var(--accent-rose)]/35">
             {filteredPendientes.map((p) => (
               <motion.li
                 key={p.id}
@@ -294,8 +294,8 @@ export default function AprobarUsuariosPage() {
                 className="flex flex-col gap-3 px-6 py-4 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-[#003D5B]">{p.full_name}</p>
-                  <p className="mt-0.5 text-xs text-[#7A746E]">
+                  <p className="text-sm font-semibold text-[var(--primary-navy)]">{p.full_name}</p>
+                  <p className="mt-0.5 text-xs text-[var(--text-muted)]">
                     {p.phone || 'Sin teléfono'} · Registrado {formatFechaAlta((p as Record<string, unknown>).created_at as string)}
                   </p>
                 </div>
@@ -310,7 +310,7 @@ export default function AprobarUsuariosPage() {
                   <button
                     type="button"
                     onClick={() => setActivateTarget(p)}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#BFC9A2] to-[#003D5B] px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-white shadow-md"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[var(--accent-sage)] to-[var(--primary-navy)] px-4 py-2 text-[11px] font-semibold uppercase tracking-wide text-white shadow-md"
                   >
                     <UserCheck className="h-3.5 w-3.5" /> Aprobar
                   </button>
@@ -323,7 +323,7 @@ export default function AprobarUsuariosPage() {
 
       {/* Aprobados (plegable) */}
       <div
-        className="mt-8 overflow-hidden rounded-3xl border border-[#003D5B]/10 bg-white/85"
+        className="mt-8 overflow-hidden rounded-3xl border border-[var(--primary-navy)]/10 bg-white/85"
         style={{ boxShadow: '0 12px 32px rgba(0,61,91,0.05)' }}
       >
         <button
@@ -333,41 +333,41 @@ export default function AprobarUsuariosPage() {
           className="flex w-full items-center justify-between gap-3 px-6 py-4 text-left"
         >
           <div className="flex items-center gap-3">
-            <CheckCircle2 className="h-4 w-4 text-[#003D5B]/55" />
-            <h3 className="text-serif-premium text-base font-bold text-[#003D5B]">
+            <CheckCircle2 className="h-4 w-4 text-[var(--primary-navy)]/55" />
+            <h3 className="text-serif-premium text-base font-bold text-[var(--primary-navy)]">
               Usuarios ya aprobados
             </h3>
-            <span className="rounded-full bg-[#BFC9A2]/35 px-2 py-0.5 text-[10px] font-semibold tabular-nums text-[#003D5B]">
+            <span className="rounded-full bg-[var(--accent-sage)]/35 px-2 py-0.5 text-[10px] font-semibold tabular-nums text-[var(--primary-navy)]">
               {aprobados.length}
             </span>
           </div>
           <ChevronDown
-            className={`h-4 w-4 text-[#003D5B]/55 transition-transform ${showApproved ? 'rotate-180' : ''}`}
+            className={`h-4 w-4 text-[var(--primary-navy)]/55 transition-transform ${showApproved ? 'rotate-180' : ''}`}
           />
         </button>
 
         {showApproved ? (
           aprobados.length === 0 ? (
-            <p className="border-t border-[#003D5B]/10 px-6 py-8 text-center text-sm text-[#7A746E]">
+            <p className="border-t border-[var(--primary-navy)]/10 px-6 py-8 text-center text-sm text-[var(--text-muted)]">
               Aún no aprobaste a ningún cliente.
             </p>
           ) : (
-            <ul className="divide-y divide-[#003D5B]/10 border-t border-[#003D5B]/10">
+            <ul className="divide-y divide-[var(--primary-navy)]/10 border-t border-[var(--primary-navy)]/10">
               {aprobados.map((p) => (
                 <li
                   key={p.id}
                   className="flex flex-col gap-2 px-6 py-3 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold text-[#003D5B]">{p.full_name}</p>
-                    <p className="mt-0.5 text-xs text-[#7A746E]">
+                    <p className="text-sm font-semibold text-[var(--primary-navy)]">{p.full_name}</p>
+                    <p className="mt-0.5 text-xs text-[var(--text-muted)]">
                       {p.phone || 'Sin teléfono'} · Alta {formatFechaAlta((p as Record<string, unknown>).created_at as string)}
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={() => void onUnapprove(p)}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-[#003D5B]/15 bg-white px-3 py-1.5 text-[11px] font-semibold text-[#003D5B] transition hover:border-amber-300 hover:bg-amber-50 hover:text-amber-900"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[var(--primary-navy)]/15 bg-white px-3 py-1.5 text-[11px] font-semibold text-[var(--primary-navy)] transition hover:border-amber-300 hover:bg-amber-50 hover:text-amber-900"
                   >
                     <Undo2 className="h-3.5 w-3.5" /> Volver a pendiente
                   </button>
@@ -393,16 +393,16 @@ type MetricTone = 'amber' | 'sage' | 'neutral';
 function MetricCard({ label, value, tone }: { label: string; value: number; tone: MetricTone }) {
   const styles: Record<MetricTone, { border: string; bg: string }> = {
     amber: { border: 'border-amber-200/80', bg: 'bg-amber-50/85' },
-    sage: { border: 'border-[#BFC9A2]/55', bg: 'bg-[#F4F7E8]/70' },
-    neutral: { border: 'border-[#003D5B]/10', bg: 'bg-white/80' },
+    sage: { border: 'border-[var(--accent-sage)]/55', bg: 'bg-[#F4F7E8]/70' },
+    neutral: { border: 'border-[var(--primary-navy)]/10', bg: 'bg-white/80' },
   };
   const s = styles[tone];
   return (
     <div className={`rounded-3xl border ${s.border} ${s.bg} px-5 py-4 shadow-sm`}>
-      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/45">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]/45">
         {label}
       </p>
-      <p className="text-serif-premium mt-1 text-3xl font-bold tabular-nums text-[#003D5B]">
+      <p className="text-serif-premium mt-1 text-3xl font-bold tabular-nums text-[var(--primary-navy)]">
         {value}
       </p>
     </div>
@@ -412,13 +412,13 @@ function MetricCard({ label, value, tone }: { label: string; value: number; tone
 function EmptyState({ searching }: { searching: boolean }) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 px-6 py-16 text-center">
-      <div className="rounded-2xl bg-gradient-to-br from-[#BFC9A2]/35 to-[#F2D7D5]/35 p-3">
-        <CheckCircle2 className="h-7 w-7 text-[#003D5B]" />
+      <div className="rounded-2xl bg-gradient-to-br from-[var(--accent-sage)]/35 to-[var(--accent-rose)]/35 p-3">
+        <CheckCircle2 className="h-7 w-7 text-[var(--primary-navy)]" />
       </div>
-      <p className="text-serif-premium text-lg font-bold text-[#003D5B]">
+      <p className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">
         {searching ? 'Sin coincidencias' : 'Todo al día'}
       </p>
-      <p className="max-w-md text-sm text-[#7A746E]">
+      <p className="max-w-md text-sm text-[var(--text-muted)]">
         {searching
           ? 'Ningún pendiente coincide con la búsqueda actual.'
           : 'No hay solicitudes esperando aprobación. Las altas nuevas aparecerán acá automáticamente.'}

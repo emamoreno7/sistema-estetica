@@ -145,10 +145,10 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
         }}
       >
         <div className="px-6 pb-6 pt-7">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#003D5B]/45">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--primary-navy)]/45">
             Backoffice
           </p>
-          <p className="text-serif-premium mt-1 text-lg font-bold text-[#003D5B]">{brand.shortName}</p>
+          <p className="text-serif-premium mt-1 text-lg font-bold text-[var(--primary-navy)]">{brand.shortName}</p>
         </div>
 
         <nav className="flex-1 space-y-1 px-3">
@@ -162,14 +162,14 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
                 className={({ isActive }) =>
                   `group flex items-center gap-3 rounded-2xl px-4 py-2.5 text-sm font-semibold transition ${
                     isActive
-                      ? 'bg-[#003D5B] text-white shadow-md'
-                      : 'text-[#003D5B]/75 hover:bg-[#F2D7D5]/30 hover:text-[#003D5B]'
+                      ? 'bg-[var(--primary-navy)] text-white shadow-md'
+                      : 'text-[var(--primary-navy)]/75 hover:bg-[var(--accent-rose)]/30 hover:text-[var(--primary-navy)]'
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <item.icon className={`h-4 w-4 ${isActive ? 'text-white' : 'text-[#003D5B]/55'}`} />
+                    <item.icon className={`h-4 w-4 ${isActive ? 'text-white' : 'text-[var(--primary-navy)]/55'}`} />
                     <span className="flex-1">{item.label}</span>
                     {badge > 0 ? (
                       <span
@@ -188,7 +188,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
           })}
         </nav>
 
-        <div className="border-t border-[#F2D7D5]/55 p-4">
+        <div className="border-t border-[var(--accent-rose)]/55 p-4">
           <div
             className="mb-3 flex items-center gap-3 rounded-2xl border px-3 py-2.5"
             style={{
@@ -204,10 +204,10 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
               {initial}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/45">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]/45">
                 Sesión activa
               </p>
-              <p className="truncate text-xs font-semibold text-[#003D5B]" title={email}>
+              <p className="truncate text-xs font-semibold text-[var(--primary-navy)]" title={email}>
                 {email || 'Admin'}
               </p>
             </div>
@@ -215,7 +215,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
 
           <Link
             to="/"
-            className="mb-2 flex items-center justify-center gap-2 rounded-2xl border border-[#003D5B]/12 bg-white/80 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]"
+            className="mb-2 flex items-center justify-center gap-2 rounded-2xl border border-[var(--primary-navy)]/12 bg-white/80 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]"
           >
             <Home className="h-3.5 w-3.5" /> Ir al sitio
           </Link>
@@ -223,7 +223,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
           <button
             type="button"
             onClick={onSignOut}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#003D5B] py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow-lg"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--primary-navy)] py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow-lg"
           >
             <LogOut className="h-3.5 w-3.5" /> Salir
           </button>
@@ -239,13 +239,13 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
         }}
       >
         <div>
-          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[#003D5B]/45">{brand.backofficeName}</p>
-          <p className="text-sm font-bold text-[#003D5B]">{title ?? 'Administración'}</p>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[var(--primary-navy)]/45">{brand.backofficeName}</p>
+          <p className="text-sm font-bold text-[var(--primary-navy)]">{title ?? 'Administración'}</p>
         </div>
         <button
           type="button"
           onClick={onSignOut}
-          className="inline-flex items-center gap-1.5 rounded-full bg-[#003D5B] px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-white shadow"
+          className="inline-flex items-center gap-1.5 rounded-full bg-[var(--primary-navy)] px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-white shadow"
         >
           <LogOut className="h-3.5 w-3.5" /> Salir
         </button>
@@ -269,8 +269,8 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
               to={item.to}
               className={`flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] transition ${
                 isActive
-                  ? 'bg-[#003D5B] text-white shadow'
-                  : 'border border-[#003D5B]/12 bg-white/85 text-[#003D5B]/75'
+                  ? 'bg-[var(--primary-navy)] text-white shadow'
+                  : 'border border-[var(--primary-navy)]/12 bg-white/85 text-[var(--primary-navy)]/75'
               }`}
             >
               <item.icon className="h-3.5 w-3.5" />
@@ -301,12 +301,12 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
             >
               <div>
                 {title ? (
-                  <h1 className="text-serif-premium text-3xl font-bold text-[#003D5B] sm:text-[2rem]">
+                  <h1 className="text-serif-premium text-3xl font-bold text-[var(--primary-navy)] sm:text-[2rem]">
                     {title}
                   </h1>
                 ) : null}
                 {subtitle ? (
-                  <p className="mt-2 max-w-2xl text-sm text-[#7A746E]">{subtitle}</p>
+                  <p className="mt-2 max-w-2xl text-sm text-[var(--text-muted)]">{subtitle}</p>
                 ) : null}
               </div>
               {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
@@ -321,7 +321,7 @@ export function AdminShell({ children, onSignOut, title, subtitle, actions }: Pr
               className="mb-6 flex flex-col gap-3 lg:hidden"
             >
               {subtitle ? (
-                <p className="text-xs text-[#7A746E]">{subtitle}</p>
+                <p className="text-xs text-[var(--text-muted)]">{subtitle}</p>
               ) : null}
               {actions ? (
                 <div className="flex flex-wrap items-center gap-2">{actions}</div>

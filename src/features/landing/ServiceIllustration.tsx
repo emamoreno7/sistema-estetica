@@ -32,8 +32,8 @@ export type IllustrationKey =
   | 'depilacionDefinitiva'
   | 'eliminacionTatuajes';
 
-const NAVY = '#003D5B';
-const SAGE = '#BFC9A2';
+const NAVY = 'var(--primary-navy)';
+const SAGE = 'var(--accent-sage)';
 const ROSE = '#E8B4B8';
 
 type Props = {

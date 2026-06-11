@@ -82,7 +82,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
         className="pointer-events-auto relative z-[10000] flex max-h-[94dvh] w-full max-w-lg flex-col overflow-hidden rounded-3xl shadow-2xl"
         style={{
           border: '1px solid rgba(242,215,213,0.75)',
-          background: 'var(--bg-cream, #FDF8F5)',
+          background: 'var(--bg-cream, var(--bg-cream))',
           boxShadow: '0 32px 64px rgba(0,61,91,0.18)',
         }}
         initial={{ scale: 0.96, y: 12 }}
@@ -91,7 +91,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
         <div className="max-h-[94dvh] overflow-y-auto overscroll-contain p-5 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:p-8">
           <button
             type="button"
-            className="absolute right-5 top-5 rounded-full p-2 text-[#003D5B]/45 hover:bg-[#F2D7D5]/45"
+            className="absolute right-5 top-5 rounded-full p-2 text-[var(--primary-navy)]/45 hover:bg-[var(--accent-rose)]/45"
             onClick={() => !saving && onClose()}
             aria-label="Cerrar"
           >
@@ -99,20 +99,20 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
           </button>
 
           <div className="mb-2 flex items-center gap-2.5">
-            <div className="rounded-xl bg-[#003D5B] p-2">
+            <div className="rounded-xl bg-[var(--primary-navy)] p-2">
               <ShieldCheck className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h2 className="text-serif-premium text-xl font-bold text-[#003D5B]">
+              <h2 className="text-serif-premium text-xl font-bold text-[var(--primary-navy)]">
                 Consentimiento informado
               </h2>
-              <p className="text-[11px] uppercase tracking-[0.16em] text-[#003D5B]/45">
+              <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--primary-navy)]/45">
                 Obligatorio antes de tu primer tratamiento
               </p>
             </div>
           </div>
 
-          <p className="mt-3 text-sm leading-relaxed text-[#7A746E]">
+          <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">
             Para tu seguridad y la del centro, necesitamos que leas y aceptes las siguientes
             declaraciones antes de realizar cualquier tratamiento en {brand.shortName}.
           </p>
@@ -128,20 +128,20 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
                   onClick={() => setChecks((s) => ({ ...s, [cl.key]: !s[cl.key] }))}
                   className={`flex w-full items-start gap-3 rounded-2xl border p-4 text-left transition ${
                     checked
-                      ? 'border-[#BFC9A2]/70 bg-[#BFC9A2]/12'
-                      : 'border-[#F2D7D5]/70 bg-white/85 hover:bg-[#F2D7D5]/15'
+                      ? 'border-[var(--accent-sage)]/70 bg-[var(--accent-sage)]/12'
+                      : 'border-[var(--accent-rose)]/70 bg-white/85 hover:bg-[var(--accent-rose)]/15'
                   }`}
                 >
                   <span
                     className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition ${
-                      checked ? 'border-[#003D5B] bg-[#003D5B]' :'border-[#003D5B]/30 bg-white'
+                      checked ? 'border-[var(--primary-navy)] bg-[var(--primary-navy)]' :'border-[var(--primary-navy)]/30 bg-white'
                     }`}
                   >
                     {checked ? <CheckCircle2 className="h-4 w-4 text-white" /> : null}
                   </span>
                   <span>
-                    <span className="block text-[13px] font-semibold text-[#003D5B]">{cl.titulo}</span>
-                    <span className="mt-1 block text-xs leading-relaxed text-[#7A746E]">{cl.texto}</span>
+                    <span className="block text-[13px] font-semibold text-[var(--primary-navy)]">{cl.titulo}</span>
+                    <span className="mt-1 block text-xs leading-relaxed text-[var(--text-muted)]">{cl.texto}</span>
                   </span>
                 </button>
               );
@@ -150,7 +150,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
 
           {/* Contraindicaciones declaradas */}
           <label className="mt-5 block">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/55">
               ¿Alguna condición de salud que debamos saber? (opcional)
             </span>
             <textarea
@@ -158,14 +158,14 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
               onChange={(e) => setContra(e.target.value)}
               rows={2}
               placeholder="Ej: embarazo, alergias, medicación, cirugías recientes…"
-              className="mt-1 w-full resize-none rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+              className="mt-1 w-full resize-none rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
             />
           </label>
 
           {/* Firma */}
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <label className="block sm:col-span-2">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/55">
                 Nombre completo (firma) *
               </span>
               <input
@@ -173,11 +173,11 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 placeholder="Tu nombre y apellido"
-                className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                className="mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
               />
             </label>
             <label className="block">
-              <span className="text-[10px] font-semd uppercase tracking-wider text-[#003D5B]/55">
+              <span className="text-[10px] font-semd uppercase tracking-wider text-[var(--primary-navy)]/55">
                 DNI *
               </span>
               <input
@@ -186,11 +186,11 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
                 value={dni}
                 onChange={(e) => setDni(e.target.value)}
                 placeholder="Ej: 30123456"
-                className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                className="mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
               />
             </label>
             <label className="block">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/55">
                 Fecha de nacimiento *
               </span>
               <input
@@ -198,7 +198,7 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
                 value={fechaNac}
                 max={new Date().toISOString().slice(0, 10)}
                 onChange={(e) => setFechaNac(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                className="mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
               />
             </label>
           </div>
@@ -216,31 +216,31 @@ export function ConsentimientoModal({ clienteId, nombreSugerido, onClose, onFirm
             onClick={() => void firmar()}
             className="mt-6 flex w-full items-center justify-center gap-2 rounded-full py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white disabled:pointer-events-none disabled:opacity-40"
             style={{
-              background: 'linear-gradient(90deg, #BFC9A2 0%, #003D5B 100%)',
+              background: 'linear-gradient(90deg, var(--accent-sage) 0%, var(--primary-navy) 100%)',
               boxShadow: '0 14px 32px rgba(0,61,91,0.2)',
             }}
           >
             {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileSignature className="h-4 w-4" />}
             {saving ? 'Guardando…' : 'Acepto y firmo el consentimiento'}
           </motion.button>          {!todasAceptadas ? (
-            <p className="mt-3 text-center text-[11px] text-[#7A746E]">
+            <p className="mt-3 text-center text-[11px] text-[var(--text-muted)]">
               Tocá las tres declaraciones para aceptarlas.
             </p>
           ) : nombre.trim().length < 3 ? (
-            <p className="mt-3 text-center text-[11px] text-[#7A746E]">
+            <p className="mt-3 text-center text-[11px] text-[var(--text-muted)]">
               Escribí tu nombre completo como firma.
             </p>
           ) : !dniOk ? (
-            <p className="mt-3 text-center text-[11px] text-[#7A746E]">
+            <p className="mt-3 text-center text-[11px] text-[var(--text-muted)]">
               Ingresá tu número de DNI.
             </p>
           ) : !fechaNacOk ? (
-            <p className="mt-3 text-center text-[11px] text-[#7A746E]">
+            <p className="mt-3 text-center text-[11px] text-[var(--text-muted)]">
               Indicá tu fecha de nacimiento.
             </p>
           ) : null}
 
-          <p className="mt-4 text-center text-[10px] leading-relaxed text-[#7A746E]">
+          <p className="mt-4 text-center text-[10px] leading-relaxed text-[var(--text-muted)]">
             Al firmar dejás constancia digital con fecha y hora. Podés solicitar una copia en recepción.
           </p>
         </div>

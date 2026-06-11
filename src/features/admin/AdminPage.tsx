@@ -42,14 +42,14 @@ export default function AdminPage() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center px-6" style={{ background: 'var(--bg-cream)' }}>
         <h1 className="text-serif-premium text-xl font-bold text-[03D5B]">Acceso restringido</h1>
-        <p className="mt-3 max-w-md text-center text-sm text-[#7A746E]">
+        <p className="mt-3 max-w-md text-center text-sm text-[var(--text-muted)]">
           Esta zona es sólo para el {brand.supportLabel} autorizado. Si necesitás acceso, contactá al administrador con tu
           correo de trabajo.
         </p>
         <button
           type="button"
           onClick={() => navigate('/', { replace: true })}
-          className="mt-8 rounded-full bg-[#003D5B] px-10 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white shadow-lg"
+          className="mt-8 rounded-full bg-[var(--primary-navy)] px-10 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white shadow-lg"
         >
           Volver al inicio
         </button>

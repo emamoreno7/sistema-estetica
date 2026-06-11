@@ -49,7 +49,7 @@ export function PortalSidebar({ view, onNav, onLogout, isAdmin }: Props) {
             </div>
           </div>
 
-          <div className="mb-2 h-px w-8 bg-gradient-to-r from-transparent via-[#F2D7D5] to-transparent" />
+          <div className="mb-2 h-px w-8 bg-gradient-to-r from-transparent via-[var(--accent-rose)] to-transparent" />
 
           {portalNavItems.map((item) => {
             const active = view === item.id;
@@ -76,7 +76,7 @@ export function PortalSidebar({ view, onNav, onLogout, isAdmin }: Props) {
                   />
                 )}
                 <item.icon
-                  className={`relative z-10 h-[18px] w-[18px] ${active ? 'text-white drop-shadow-sm' : 'text-[#7A746E]'}`}
+                  className={`relative z-10 h-[18px] w-[18px] ${active ? 'text-white drop-shadow-sm' : 'text-[var(--text-muted)]'}`}
                 />
                 <div
                   className="pointer-events-none absolute left-full ml-3 scale-90 rounded-lg px-3 py-1.5 text-xs font-medium text-white opacity-0 shadow-xl backdrop-blur-sm transition-all group-hover:scale-100 group-hover:opacity-100"
@@ -92,14 +92,14 @@ export function PortalSidebar({ view, onNav, onLogout, isAdmin }: Props) {
             );
           })}
 
-          <div className="my-2 h-px w-8 bg-gradient-to-r from-transparent via-[#F2D7D5] to-transparent" />
+          <div className="my-2 h-px w-8 bg-gradient-to-r from-transparent via-[var(--accent-rose)] to-transparent" />
 
           <motion.button
             type="button"
             onClick={() => onLogout?.()}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl text-[#7A746E] transition-colors hover:bg-red-50/60 hover:text-red-400"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl text-[var(--text-muted)] transition-colors hover:bg-red-50/60 hover:text-red-400"
             aria-label="Cerrar sesión"
           >
             <LogOut className="h-[18px] w-[18px]" />
@@ -107,7 +107,7 @@ export function PortalSidebar({ view, onNav, onLogout, isAdmin }: Props) {
 
           {isAdmin ? (
             <>
-              <div className="my-2 h-px w-8 bg-gradient-to-r from-transparent via-[#F2D7D5] to-transparent" />
+              <div className="my-2 h-px w-8 bg-gradient-to-r from-transparent via-[var(--accent-rose)] to-transparent" />
               <motion.button
                 type="button"
                 onClick={() => navigate('/admin')}
@@ -153,8 +153,8 @@ export function PortalSidebar({ view, onNav, onLogout, isAdmin }: Props) {
                     transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                   />
                 ) : null}
-                <item.icon className={`relative z-10 h-5 w-5 ${active ? 'text-champagne' : 'text-[#7A746E]'}`} />
-                <span className={`relative z-10 text-[8px] font-semibold ${active ? 'text-sand-dark' : 'text-[#7A746E]'}`}>
+                <item.icon className={`relative z-10 h-5 w-5 ${active ? 'text-champagne' : 'text-[var(--text-muted)]'}`} />
+                <span className={`relative z-10 text-[8px] font-semibold ${active ? 'text-sand-dark' : 'text-[var(--text-muted)]'}`}>
                   {item.shortLabel}
                 </span>
               </motion.button>

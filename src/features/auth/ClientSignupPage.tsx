@@ -16,7 +16,7 @@ export default function ClientSignupPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ background: '#FDF8F5' }}>
+    <div className="relative min-h-screen overflow-hidden" style={{ background: 'var(--bg-cream)' }}>
       <div className="absolute inset-0">
         <img src={BG_IMAGE} alt="" className="h-full w-full object-cover" />
         <div className="absolute inset-0" style={{ background: BG_GRADIENT }} />
@@ -31,17 +31,17 @@ export default function ClientSignupPage() {
         >
           <Link
             to="/"
-            className="inline-block text-[10px] font-semibold uppercase tracking-[0.22em] text-[#003D5B]/70 underline underline-offset-4"
+            className="inline-block text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--primary-navy)]/70 underline underline-offset-4"
           >
             Inicio
           </Link>
           <h1
-            className="text-serif-premium mt-8 text-3xl font-light leading-tight text-[#003D5B] sm:text-4xl"
+            className="text-serif-premium mt-8 text-3xl font-light leading-tight text-[var(--primary-navy)] sm:text-4xl"
             style={{ letterSpacing: '0.03em' }}
           >
             Sumate a la comunidad {brand.shortName}
           </h1>
-          <p className="mt-4 text-sm leading-relaxed text-[#003D5B]/65">
+          <p className="mt-4 text-sm leading-relaxed text-[var(--primary-navy)]/65">
             Registrate con correo y contrasena. Guardamos tu WhatsApp como contacto.
             Al terminar, veras tu cuenta pendiente de activacion hasta que recepcion te habilite.
           </p>
@@ -51,10 +51,10 @@ export default function ClientSignupPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.08 }}
-          className="w-full max-w-md rounded-[1.75rem] border border-white/80 bg-white/75 p-8 shadow-2xl shadow-[#003D5B]/08 backdrop-blur-md lg:flex-1"
+          className="w-full max-w-md rounded-[1.75rem] border border-white/80 bg-white/75 p-8 shadow-2xl shadow-[var(--primary-navy)]/08 backdrop-blur-md lg:flex-1"
           style={{ borderColor: 'rgba(215,213,200,0.65)' }}
         >
-          <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#003D5B]/45">
+          <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--primary-navy)]/45">
             Alta de cliente
           </p>
           <ClientSignupForm onSuccess={() => navigate('/portal', { replace: true })} />

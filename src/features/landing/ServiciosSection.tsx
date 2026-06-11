@@ -161,7 +161,7 @@ export function ServiciosSection() {
                       className="rounded-full px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] backdrop-blur-sm"
                       style={{
                         background: BADGE_STYLE[b]?.bg ?? 'rgba(255,255,255,0.78)',
-                        color: BADGE_STYLE[b]?.color ?? '#003D5B',
+                        color: BADGE_STYLE[b]?.color ?? 'var(--primary-navy)',
                       }}
                     >
                       {b}

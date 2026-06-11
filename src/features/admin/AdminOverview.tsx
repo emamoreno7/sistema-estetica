@@ -39,9 +39,9 @@ type KpiCardSpec = {
 
 function statusPillClass(s: UltimaAltaRow['status']): string {
   const base = 'rounded-full px-2.5 py-0.5 text-[10px] font-semibold';
-  if (s === 'active') return `${base} bg-[#BFC9A2]/35 text-[#003D5B]`;
+  if (s === 'active') return `${base} bg-[var(--accent-sage)]/35 text-[var(--primary-navy)]`;
   if (s === 'pending') return `${base} bg-amber-100/85 text-amber-900`;
-  return `${base} bg-[#F2D7D5]/65 text-[#003D5B]`;
+  return `${base} bg-[var(--accent-rose)]/65 text-[var(--primary-navy)]`;
 }
 
 function estadoPillClass(e: ProximoTurnoRow['estado']): string {
@@ -165,7 +165,7 @@ export default function AdminOverview() {
           type="button"
           whileTap={{ scale: 0.98 }}
           onClick={() => void load()}
-          className="inline-flex items-center gap-2 rounded-full border border-[#BFC9A2]/50 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]"
+          className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-sage)]/50 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]"
         >
           <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
           Actualizar
@@ -189,7 +189,7 @@ export default function AdminOverview() {
 
       {/* KPIs */}
       {loading && !kpis ? (
-        <div className="flex items-center justify-center gap-3 py-20 text-[#003D5B]/55">
+        <div className="flex items-center justify-center gap-3 py-20 text-[var(--primary-navy)]/55">
           <Loader2 className="h-6 w-6 animate-spin" />
           <span>Cargando indicadores…</span>
         </div>
@@ -201,7 +201,7 @@ export default function AdminOverview() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.04 * i }}
-                className="relative h-full overflow-hidden rounded-3xl border bg-[#FDF8F5]/95 p-5 transition-shadow hover:shadow-lg"
+                className="relative h-full overflow-hidden rounded-3xl border bg-[var(--bg-cream)]/95 p-5 transition-shadow hover:shadow-lg"
                 style={{
                   borderColor: 'rgba(242,215,213,0.55)',
                   boxShadow: '0 12px 32px rgba(0,61,91,0.06)',
@@ -219,9 +219,9 @@ export default function AdminOverview() {
                   >
                     <c.icon className="h-4 w-4" style={{ color: c.accent }} />
                   </div>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#003D5B]/55">{c.label}</p>
-                  <p className="text-serif-premium mt-1 text-3xl font-bold text-[#003D5B]">{c.value}</p>
-                  {c.hint ? <p className="mt-1 text-xs text-[#7A746E]">{c.hint}</p> : null}
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--primary-navy)]/55">{c.label}</p>
+                  <p className="text-serif-premium mt-1 text-3xl font-bold text-[var(--primary-navy)]">{c.value}</p>
+                  {c.hint ? <p className="mt-1 text-xs text-[var(--text-muted)]">{c.hint}</p> : null}
                 </div>
               </motion.div>
             );
@@ -243,24 +243,24 @@ export default function AdminOverview() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="rounded-3xl border bg-[#FDF8F5]/95 shadow-md"
+          className="rounded-3xl border bg-[var(--bg-cream)]/95 shadow-md"
           style={{ borderColor: 'rgba(242,215,213,0.55)', boxShadow: '0 16px 48px rgba(0,61,91,0.06)' }}
         >
-          <header className="flex items-center justify-between border-b border-[#F2D7D5]/45 px-5 py-4">
+          <header className="flex items-center justify-between border-b border-[var(--accent-rose)]/45 px-5 py-4">
             <div>
-              <h2 className="text-serif-premium text-base font-bold text-[#003D5B]">Últimas altas</h2>
-              <p className="text-[11px] text-[#7A746E]">Últimas fichas registradas en el portal</p>
+              <h2 className="text-serif-premium text-base font-bold text-[var(--primary-navy)]">Últimas altas</h2>
+              <p className="text-[11px] text-[var(--text-muted)]">Últimas fichas registradas en el portal</p>
             </div>
             <Link
               to="/admin/clientes"
-              className="rounded-full border border-[#003D5B]/12 bg-white/85 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]"
+              className="rounded-full border border-[var(--primary-navy)]/12 bg-white/85 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]"
             >
               Ver todos
             </Link>
           </header>
-          <ul className="divide-y divide-[#F2D7D5]/40">
+          <ul className="divide-y divide-[var(--accent-rose)]/40">
             {ultimas.length === 0 && !loading ? (
-              <li className="px-5 py-8 text-center text-sm text-[#7A746E]">
+              <li className="px-5 py-8 text-center text-sm text-[var(--text-muted)]">
                 Sin altas recientes que mostrar.
               </li>
             ) : (
@@ -274,8 +274,8 @@ export default function AdminOverview() {
                     {r.full_name.charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-[#003D5B]">{r.full_name}</p>
-                    <p className="truncate text-xs text-[#7A746E]">{r.phone || '— sin teléfono —'}</p>
+                    <p className="truncate text-sm font-semibold text-[var(--primary-navy)]">{r.full_name}</p>
+                    <p className="truncate text-xs text-[var(--text-muted)]">{r.phone || '— sin teléfono —'}</p>
                   </div>
                   <span className={statusPillClass(r.status)}>
                     {r.status === 'active' ? 'Activo' : r.status === 'pending' ? 'Pendiente' : 'Bloqueado'}
@@ -291,40 +291,40 @@ export default function AdminOverview() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="rounded-3xl border bg-[#FDF8F5]/95 shadow-md"
+          className="rounded-3xl border bg-[var(--bg-cream)]/95 shadow-md"
           style={{ borderColor: 'rgba(242,215,213,0.55)', boxShadow: '0 16px 48px rgba(0,61,91,0.06)' }}
         >
-          <header className="flex items-center justify-between border-b border-[#F2D7D5]/45 px-5 py-4">
+          <header className="flex items-center justify-between border-b border-[var(--accent-rose)]/45 px-5 py-4">
             <div>
-              <h2 className="text-serif-premium text-base font-bold text-[#003D5B]">Próximos turnos</h2>
-              <p className="text-[11px] text-[#7A746E]">Desde hoy en adelante</p>
+              <h2 className="text-serif-premium text-base font-bold text-[var(--primary-navy)]">Próximos turnos</h2>
+              <p className="text-[11px] text-[var(--text-muted)]">Desde hoy en adelante</p>
             </div>
             <Link
               to="/admin/agenda"
-              className="rounded-full border border-[#003D5B]/12 bg-white/85 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]"
+              className="rounded-full border border-[var(--primary-navy)]/12 bg-white/85 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]"
             >
               Ver agenda
             </Link>
           </header>
-          <ul className="divide-y divide-[#F2D7D5]/40">
+          <ul className="divide-y divide-[var(--accent-rose)]/40">
             {proximos.length === 0 && !loading ? (
-              <li className="px-5 py-8 text-center text-sm text-[#7A746E]">
+              <li className="px-5 py-8 text-center text-sm text-[var(--text-muted)]">
                 No hay turnos próximos cargados.
               </li>
             ) : (
               proximos.map((c) => (
                 <li key={c.id} className="flex items-center gap-4 px-5 py-3.5">
                   <div className="w-[68px] shrink-0 text-center">
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/55">
                       {fechaCorta(c.fecha)}
                     </p>
-                    <p className="text-serif-premium text-xl font-bold tabular-nums text-[#003D5B]">
+                    <p className="text-serif-premium text-xl font-bold tabular-nums text-[var(--primary-navy)]">
                       {horaCorta(c.hora)}
                     </p>
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-[#003D5B]">{c.full_name}</p>
-                    <p className="truncate text-xs text-[#7A746E]">{c.servicio}</p>
+                    <p className="truncate text-sm font-semibold text-[var(--primary-navy)]">{c.full_name}</p>
+                    <p className="truncate text-xs text-[var(--text-muted)]">{c.servicio}</p>
                   </div>
                   <span className={estadoPillClass(c.estado)}>
                     {c.estado === 'confirmado'

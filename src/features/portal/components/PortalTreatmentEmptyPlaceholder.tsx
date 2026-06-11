@@ -33,13 +33,13 @@ export function PortalTreatmentEmptyPlaceholder({ title, paragraph, children }: 
             'linear-gradient(135deg, rgba(242,215,213,0.45), rgba(191,201,162,0.35))',
         }}
       >
-        <Sparkles className="h-8 w-8 text-[#003D5B]" />
+        <Sparkles className="h-8 w-8 text-[var(--primary-navy)]" />
       </div>
-      <h2 className="text-serif-premium text-xl font-bold text-[#003D5B]">{title}</h2>
-      <div className="mt-3 text-sm leading-relaxed text-[#7A746E]">{paragraph}</div>
+      <h2 className="text-serif-premium text-xl font-bold text-[var(--primary-navy)]">{title}</h2>
+      <div className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{paragraph}</div>
       {children}
       {tratamientoInteresLabel ? (
-        <p className="mt-5 rounded-2xl border border-[#BFC9A2]/40 bg-[#BFC9A2]/10 px-4 py-3 text-xs text-[#003D5B]">
+        <p className="mt-5 rounded-2xl border border-[var(--accent-sage)]/40 bg-[var(--accent-sage)]/10 px-4 py-3 text-xs text-[var(--primary-navy)]">
           Tu interés: <strong>{tratamientoInteresLabel}</strong>. Te guiaremos cuando activemos tu plan.
         </p>
       ) : null}

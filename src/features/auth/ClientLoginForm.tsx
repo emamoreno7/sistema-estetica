@@ -16,7 +16,7 @@ export default function ClientLoginForm() {
   const [error, setError] = useState<string | null>(null);
 
   const inputClass =
-    'w-full rounded-2xl border border-[#003D5B]/12 bg-white/90 px-4 py-3.5 text-sm text-[#003D5B] outline-none transition placeholder:text-[#003D5B]/35 focus:border-[#003D5B]/28 focus:ring-2 focus:ring-[#F2D7D5]/80';
+    'w-full rounded-2xl border border-[var(--primary-navy)]/12 bg-white/90 px-4 py-3.5 text-sm text-[var(--primary-navy)] outline-none transition placeholder:text-[var(--primary-navy)]/35 focus:border-[var(--primary-navy)]/28 focus:ring-2 focus:ring-[var(--accent-rose)]/80';
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -59,7 +59,7 @@ export default function ClientLoginForm() {
       className="space-y-5"
     >
       <div>
-        <label htmlFor="login-email" className="mb-2 block text-[11px] font-medium uppercase tracking-[0.14em] text-[#003D5B]/70">
+        <label htmlFor="login-email" className="mb-2 block text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--primary-navy)]/70">
           Correo electrónico
         </label>
         <input
@@ -75,7 +75,7 @@ export default function ClientLoginForm() {
       </div>
 
       <div>
-        <label htmlFor="login-pw" className="mb-2 block text-[11px] font-medium uppercase tracking-[0.14em] text-[#003D5B]/70">
+        <label htmlFor="login-pw" className="mb-2 block text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--primary-navy)]/70">
           Contraseña
         </label>
         <input
@@ -99,7 +99,7 @@ export default function ClientLoginForm() {
         whileHover={{ y: busy ? 0 : -1 }}
         whileTap={{ scale: busy ? 1 : 0.99 }}
         className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-lg disabled:opacity-60"
-        style={{ background: '#003D5B', boxShadow: '0 10px 28px rgba(0,61,91,0.18)' }}
+        style={{ background: 'var(--primary-navy)', boxShadow: '0 10px 28px rgba(0,61,91,0.18)' }}
       >
         {busy ? (
           <>
@@ -111,9 +111,9 @@ export default function ClientLoginForm() {
         )}
       </motion.button>
 
-      <p className="text-center text-xs text-[#003D5B]/60">
+      <p className="text-center text-xs text-[var(--primary-navy)]/60">
         ¿Primera vez?{' '}
-        <Link to="/unete" className="font-semibold text-[#003D5B] underline underline-offset-2">
+        <Link to="/unete" className="font-semibold text-[var(--primary-navy)] underline underline-offset-2">
           Creá tu perfil
         </Link>
       </p>

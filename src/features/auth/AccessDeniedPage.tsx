@@ -8,7 +8,7 @@ export default function AccessDeniedPage() {
   return (
     <div
       className="relative flex min-h-screen flex-col items-center justify-center px-6 py-16 text-center"
-      style={{ background: 'var(--bg-cream, #FDF8F5)' }}
+      style={{ background: 'var(--bg-cream, var(--bg-cream))' }}
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
@@ -35,7 +35,7 @@ export default function AccessDeniedPage() {
         </p>
         <h1
           className="text-serif-premium text-2xl font-light leading-snug sm:text-3xl"
-          style={{ color: '#003D5B', letterSpacing: '0.02em' }}
+          style={{ color: 'var(--primary-navy)', letterSpacing: '0.02em' }}
         >
           Para acceder a tu progreso debes pertenecer a la comunidad AMORE.
         </h1>
@@ -49,7 +49,7 @@ export default function AccessDeniedPage() {
               to="/unete"
               className="inline-block rounded-full px-10 py-3.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-white shadow-lg transition-shadow"
               style={{
-                background: 'var(--primary-navy, #003D5B)',
+                background: 'var(--primary-navy, var(--primary-navy))',
                 boxShadow: '0 12px 32px rgba(0,61,91,0.2)',
               }}
             >
@@ -61,15 +61,15 @@ export default function AccessDeniedPage() {
         <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-6">
           <Link
             to="/ingreso"
-            className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#003D5B]/75 underline underline-offset-4"
+            className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--primary-navy)]/75 underline underline-offset-4"
           >
             Ya soy cliente — iniciar sesión
           </Link>
-          <span className="hidden text-[#003D5B]/25 sm:inline">·</span>
+          <span className="hidden text-[var(--primary-navy)]/25 sm:inline">·</span>
           <Link
             to="/"
             className="text-[11px] font-semibold uppercase tracking-[0.2em] underline underline-offset-4"
-            style={{ color: '#003D5B' }}
+            style={{ color: 'var(--primary-navy)' }}
           >
             Volver al inicio
           </Link>

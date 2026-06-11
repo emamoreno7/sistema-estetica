@@ -80,8 +80,8 @@ function TriState({
               ? 'bg-emerald-600 text-white'
               : v === false
                 ? 'bg-red-500 text-white'
-                : 'bg-[#003D5B] text-white'
-            : 'border border-[#003D5B]/15 bg-white text-[#003D5B]/70'
+                : 'bg-[var(--primary-navy)] text-white'
+            : 'border border-[var(--primary-navy)]/15 bg-white text-[var(--primary-navy)]/70'
         }`}
       >
         {label}
@@ -97,8 +97,8 @@ function TriState({
 }
 
 const fieldCls =
-  'mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none';
-const labelCls = 'text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55';
+  'mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none';
+const labelCls = 'text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/55';
 
 export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, onClose }: Props) {
   const [ficha, setFicha] = useState<FichaClinica>(() => EMPTY_FICHA(clienteId));
@@ -252,24 +252,24 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
         className="pointer-events-auto relative z-[9999] flex max-h-[94dvh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl shadow-2xl"
         style={{
           border: '1px solid rgba(242,215,213,0.75)',
-          background: 'var(--bg-cream, #FDF8F5)',
+          background: 'var(--bg-cream, var(--bg-cream))',
           boxShadow: '0 32px 64px rgba(0,61,91,0.2)',
         }}
         initial={{ scale: 0.96, y: 12 }}
         animate={{ scale: 1, y: 0 }}
       >
         {/* Header */}
-        <div className="flex items-center gap-3 border-b border-[#F2D7D5]/60 bg-gradient-to-r from-[#fffefd] to-[#FDF8F5] px-5 py-4 sm:px-7">
-          <div className="rounded-xl bg-[#003D5B] p-2">
+        <div className="flex items-center gap-3 border-b border-[var(--accent-rose)]/60 bg-gradient-to-r from-[#fffefd] to-[var(--bg-cream)] px-5 py-4 sm:px-7">
+          <div className="rounded-xl bg-[var(--primary-navy)] p-2">
             <ClipboardList className="h-5 w-5 text-white" />
           </div>
           <div className="min-w-0 flex-1">
-            <h2 className="text-serif-premium text-lg font-bold text-[#003D5B]">Ficha clínica</h2>
-            <p className="truncate text-xs text-[#7A746E]">{clienteNombre}</p>
+            <h2 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">Ficha clínica</h2>
+            <p className="truncate text-xs text-[var(--text-muted)]">{clienteNombre}</p>
           </div>
           <button
             type="button"
-            className="rounded-full p-2 text-[#003D5B]/45 hover:bg-[#F2D7D5]/45"
+            className="rounded-full p-2 text-[var(--primary-navy)]/45 hover:bg-[var(--accent-rose)]/45"
             onClick={() => !saving && onClose()}
             aria-label="Cerrar"
           >
@@ -279,7 +279,7 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
 
         <div className="flex-1 overflow-y-auto px-5 py-5 sm:px-7">
           {loading ? (
-            <div className="flex items-center justify-center gap-3 py-20 text-[#003D5B]/55">
+            <div className="flex items-center justify-center gap-3 py-20 text-[var(--primary-navy)]/55">
               <Loader2 className="h-6 w-6 animate-spin" /> Cargando ficha…
             </div>
           ) : (
@@ -291,12 +291,12 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
               ) : null}
 
               {/* Consentimiento */}
-              <section className="rounded-2xl border border-[#F2D7D5]/70 bg-white/70 p-4">
+              <section className="rounded-2xl border border-[var(--accent-rose)]/70 bg-white/70 p-4">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-[#003D5B]" />
-                  <h3 className="text-sm font-bold text-[#003D5B]">Consentimiento informado</h3>
+                  <ShieldCheck className="h-4 w-4 text-[var(--primary-navy)]" />
+                  <h3 className="text-sm font-bold text-[var(--primary-navy)]">Consentimiento informado</h3>
                   {consentFirmado ? (
-                    <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-[#BFC9A2]/35 px-2.5 py-0.5 text-[10px] font-semibold text-[#003D5B]">
+                    <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-[var(--accent-sage)]/35 px-2.5 py-0.5 text-[10px] font-semibold text-[var(--primary-navy)]">
                       <CheckCircle2 className="h-3 w-3" /> Firmado
                     </span>
                   ) : (
@@ -306,7 +306,7 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
                   )}
                 </div>
                 {consentFirmado && consent ? (
-                  <p className="mt-2 text-xs text-[#7A746E]">
+                  <p className="mt-2 text-xs text-[var(--text-muted)]">
                     Firmado por <strong>{consent.nombre_firma}</strong>
                     {consent.firmado_at
                       ? ` · ${format(new Date(consent.firmado_at), "d MMM yyyy", { locale: esLocale })}`
@@ -318,12 +318,12 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
                     type="button"
                     disabled={saving}
                     onClick={() => void registrarConsentimientoPapel()}
-                    className="mt-3 rounded-full bg-[#003D5B] px-4 py-2 text-[11px] font-semibold uppercase tracking-wider text-white disabled:opacity-50"
+                    className="mt-3 rounded-full bg-[var(--primary-navy)] px-4 py-2 text-[11px] font-semibold uppercase tracking-wider text-white disabled:opacity-50"
                   >
                     Registrar consentimiento (firmado en papel)
                   </button>
                 ) : (
-                  <p className="mt-2 text-xs text-[#7A746E]">
+                  <p className="mt-2 text-xs text-[var(--text-muted)]">
                     Aún sin firmar. Podés hacerlo desde tu perfil.
                   </p>
                 )}
@@ -332,16 +332,16 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
               {/* Anamnesis */}
               <section>
                 <div className="mb-3 flex items-center gap-2">
-                  <Stethoscope className="h-4 w-4 text-[#003D5B]" />
-                  <h3 className="text-sm font-bold text-[#003D5B]">Cuestionario de salud</h3>
+                  <Stethoscope className="h-4 w-4 text-[var(--primary-navy)]" />
+                  <h3 className="text-sm font-bold text-[var(--primary-navy)]">Cuestionario de salud</h3>
                 </div>
                 <div className="grid gap-2.5 sm:grid-cols-2">
                   {ANAMNESIS_PREGUNTAS.map((q) => (
                     <div
                       key={q.key}
-                      className="flex items-center justify-between gap-3 rounded-xl border border-[#F2D7D5]/60 bg-white/70 px-3 py-2.5"
+                      className="flex items-center justify-between gap-3 rounded-xl border border-[var(--accent-rose)]/60 bg-white/70 px-3 py-2.5"
                     >
-                      <span className="text-[13px] text-[#003D5B]">{q.label}</span>
+                      <span className="text-[13px] text-[var(--primary-navy)]">{q.label}</span>
                       <TriState
                         value={ficha[q.key as AnamnesisKey]}
                         onChange={(v) => setF(q.key as AnamnesisKey, v)}
@@ -408,11 +408,11 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
 
               {/* Historial de sesiones */}
               <section>
-                <h3 className="mb-3 text-sm font-bold text-[#003D5B]">Historial de sesiones</h3>
-                <div className="overflow-hidden rounded-2xl border border-[#F2D7D5]/60">
+                <h3 className="mb-3 text-sm font-bold text-[var(--primary-navy)]">Historial de sesiones</h3>
+                <div className="overflow-hidden rounded-2xl border border-[var(--accent-rose)]/60">
                   <table className="min-w-full text-left text-xs">
                     <thead>
-                      <tr className="bg-[#FDF8F5] text-[#003D5B]/55">
+                      <tr className="bg-[var(--bg-cream)] text-[var(--primary-navy)]/55">
                         <th className="px-3 py-2 font-semibold">Nº</th>
                         <th className="px-3 py-2 font-semibold">Fecha</th>
                         <th className="px-3 py-2 font-semibold">Tratamiento</th>
@@ -420,17 +420,17 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
                         {isAdmin ? <th className="px-3 py-2" /> : null}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#F2D7D5]/40">
+                    <tbody className="divide-y divide-[var(--accent-rose)]/40">
                       {sesiones.map((s) => (
                         <tr key={s.id} className="bg-white/70">
-                          <td className="px-3 py-2 tabular-nums text-[#003D5B]">{s.nro ?? '—'}</td>
-                          <td className="px-3 py-2 text-[#7A746E]">
+                          <td className="px-3 py-2 tabular-nums text-[var(--primary-navy)]">{s.nro ?? '—'}</td>
+                          <td className="px-3 py-2 text-[var(--text-muted)]">
                             {s.fecha
                               ? format(new Date(s.fecha + 'T12:00:00'), 'd MMM yyyy', { locale: esLocale })
                               : '—'}
                           </td>
-                          <td className="px-3 py-2 text-[#003D5B]">{s.tratamiento ?? '—'}</td>
-                          <td className="px-3 py-2 text-[#7A746E]">{s.operador ?? '—'}</td>
+                          <td className="px-3 py-2 text-[var(--primary-navy)]">{s.tratamiento ?? '—'}</td>
+                          <td className="px-3 py-2 text-[var(--text-muted)]">{s.operador ?? '—'}</td>
                           {isAdmin ? (
                             <td className="px-3 py-2 text-right">
                               <button
@@ -447,7 +447,7 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
                       ))}
                       {sesiones.length === 0 ? (
                         <tr>
-                          <td colSpan={isAdmin ? 5 : 4} className="px-3 py-5 text-center text-[#7A746E]">
+                          <td colSpan={isAdmin ? 5 : 4} className="px-3 py-5 text-center text-[var(--text-muted)]">
                             Sin sesiones registradas todavía.
                           </td>
                         </tr>
@@ -462,27 +462,27 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
                       type="date"
                       value={nsFecha}
                       onChange={(e) => setNsFecha(e.target.value)}
-                      className="rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                      className="rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
                     />
                     <input
                       type="text"
                       value={nsTrat}
                       onChange={(e) => setNsTrat(e.target.value)}
                       placeholder="Tratamiento"
-                      className="rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                      className="rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
                     />
                     <input
                       type="text"
                       value={nsOper}
                       onChange={(e) => setNsOper(e.target.value)}
                       placeholder="Operador"
-                      className="rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                      className="rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
                     />
                     <button
                       type="button"
                       disabled={addingSesion}
                       onClick={() => void addSesion()}
-                      className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#BFC9A2] px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-[#003D5B] disabled:opacity-50"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[var(--accent-sage)] px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--primary-navy)] disabled:opacity-50"
                     >
                       {addingSesion ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
                       Agregar
@@ -500,7 +500,7 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
 
         {/* Footer */}
         {!loading ? (
-          <div className="flex items-center gap-3 border-t border-[#F2D7D5]/60 bg-white/60 px-5 py-3 sm:px-7">
+          <div className="flex items-center gap-3 border-t border-[var(--accent-rose)]/60 bg-white/60 px-5 py-3 sm:px-7">
             {savedOk ? (
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#4A6741]">
                 <CheckCircle2 className="h-4 w-4" /> Ficha guardada
@@ -509,7 +509,7 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
             <button
               type="button"
               onClick={() => !saving && onClose()}
-              className="ml-auto rounded-full border border-[#003D5B]/15 bg-white px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[#003D5B]"
+              className="ml-auto rounded-full border border-[var(--primary-navy)]/15 bg-white px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]"
             >
               Cerrar
             </button>
@@ -518,7 +518,7 @@ export function FichaClinicaModal({ clienteId, clienteNombre, isAdmin = false, o
               disabled={saving || noMigrado}
               onClick={() => void guardar()}
               className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white disabled:opacity-50"
-              style={{ background: 'linear-gradient(90deg, #BFC9A2 0%, #003D5B 100%)' }}
+              style={{ background: 'linear-gradient(90deg, var(--accent-sage) 0%, var(--primary-navy) 100%)' }}
             >
               {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
               Guardar ficha

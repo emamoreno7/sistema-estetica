@@ -225,7 +225,7 @@ export default function AdminAgendaView() {
               setAccionMsg(null);
               setNuevoOpen(true);
             }}
-            className="inline-flex items-center gap-2 rounded-full bg-[#003D5B] px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12e text-white shadow-md"
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--primary-navy)] px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12e text-white shadow-md"
             style={{ boxShadow: '0 10px 28px rgba(0,61,91,0.22)' }}
           >
             <Plus className="h-3.5 w-3.5" />
@@ -239,7 +239,7 @@ export default function AdminAgendaView() {
               void load();
               void loadSolicitudes();
             }}
-            className="inline-flex items-center gap-2 rounded-full border border-[#BFC9A2]/50 bg-white/90 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-sage)]/50 bg-white/90 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${loading || solicitudesLoading ? 'animate-spin' : ''}`} />
             Actualizar
@@ -264,7 +264,7 @@ export default function AdminAgendaView() {
           layout
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-5 overflow-hidden rounded-3xl border border-amber-200/85 bg-gradient-to-br from-amber-50 via-white to-[#FDF8F5] shadow-xl"
+          className="mb-5 overflow-hidden rounded-3xl border border-amber-200/85 bg-gradient-to-br from-amber-50 via-white to-[var(--bg-cream)] shadow-xl"
           style={{ boxShadow: '0 18px 48px rgba(180,120,40,0.10)' }}
         >
           <button
@@ -310,16 +310,16 @@ export default function AdminAgendaView() {
                         <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-800/80">
                           {fechaLbl}
                         </span>
-                        <span className="text-serif-premium text-xl font-bold text-[#003D5B]">
+                        <span className="text-serif-premium text-xl font-bold text-[var(--primary-navy)]">
                           {horaCorta(row.hora)}
                         </span>
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-semibold text-[#003D5B]">{row.full_name}</p>
-                        <p className="text-xs text-[#7A746E]">{row.servicio}</p>
+                        <p className="text-sm font-semibold text-[var(--primary-navy)]">{row.full_name}</p>
+                        <p className="text-xs text-[var(--text-muted)]">{row.servicio}</p>
                         {row.phone ? (
-                          <p className="mt-0.5 text-[11px] text-[#7A746E]/85">{row.phone}</p>
+                          <p className="mt-0.5 text-[11px] text-[var(--text-muted)]/85">{row.phone}</p>
                         ) : null}
                       </div>
 
@@ -361,13 +361,13 @@ export default function AdminAgendaView() {
       ) : null}
 
       <div
-        className="mb-6 flex items-center justify-between gap-3 rounded-3xl border border-[#F2D7D5]/65 bg-[#FDF8F5]/95 px-4 py-3 shadow-lg backdrop-blur-sm sm:px-5"
+        className="mb-6 flex items-center justify-between gap-3 rounded-3xl border border-[var(--accent-rose)]/65 bg-[var(--bg-cream)]/95 px-4 py-3 shadow-lg backdrop-blur-sm sm:px-5"
         style={{ boxShadow: '0 16px 48px rgba(0,61,91,0.08)' }}
       >
         <button
           type="button"
           aria-label="Día anterior"
-          className="rounded-2xl border border-[#003D5B]/10 bg-white/90 p-3 text-[#003D5B] transition hover:bg-[#F2D7D5]/30"
+          className="rounded-2xl border border-[var(--primary-navy)]/10 bg-white/90 p-3 text-[var(--primary-navy)] transition hover:bg-[var(--accent-rose)]/30"
           onClick={() => setDia((d) => subDays(d, 1))}
         >
           <ChevronLeft className="h-5 w-5" />
@@ -384,14 +384,14 @@ export default function AdminAgendaView() {
               const [y, m, d] = v.split('-').map(Number);
               setDia(new Date(y, m - 1, d));
             }}
-            className="max-w-[11rem] rounded-xl border border-[#003D5B]/12 bg-white/95 px-3 py-2 text-center text-sm font-medium text-[#003D5B] outline-none focus:ring-2 focus:ring-[#F2D7D5]/70"
+            className="max-w-[11rem] rounded-xl border border-[var(--primary-navy)]/12 bg-white/95 px-3 py-2 text-center text-sm font-medium text-[var(--primary-navy)] outline-none focus:ring-2 focus:ring-[var(--accent-rose)]/70"
           />
         </div>
 
         <button
           type="button"
           aria-label="Día siguiente"
-          className="rounded-2xl border border-[#003D5B]/10 bg-white/90 p-3 text-[#003D5B] transition hover:bg-[#F2D7D5]/30"
+          className="rounded-2xl border border-[var(--primary-navy)]/10 bg-white/90 p-3 text-[var(--primary-navy)] transition hover:bg-[var(--accent-rose)]/30"
           onClick={() => setDia((d) => addDays(d, 1))}
         >
           <ChevronRight className="h-5 w-5" />
@@ -401,7 +401,7 @@ export default function AdminAgendaView() {
       <button
         type="button"
         onClick={() => setDia(new Date())}
-        className="mb-6 w-full rounded-2xl border border-dashed border-[#003D5B]/18 bg-whit/50 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#003D5B]/55 transition hover:border-[#BFC9A2]/60 hover:bg-white/80"
+        className="mb-6 w-full rounded-2xl border border-dashed border-[var(--primary-navy)]/18 bg-whit/50 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--primary-navy)]/55 transition hover:border-[var(--accent-sage)]/60 hover:bg-white/80"
       >
         Ir a hoy
       </button>
@@ -413,7 +413,7 @@ export default function AdminAgendaView() {
       ) : null}
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center gap-3 py-24 text-[#003D5B]/55">
+        <div className="flex flex-col items-center justify-center gap-3 py-24 text-[var(--primary-navy)]/55">
           <Loader2 className="h-8 w-8 animate-spin" />
           <span className="text-sm">Cargando turnos…</span>
         </div>
@@ -423,13 +423,13 @@ export default function AdminAgendaView() {
         </div>
       ) : rows.length === 0 ? (
         <div
-          className="rounded-3xl border border-[#F2D7D5]/60 bg-[#FDF8F5]/95 px-6 py-16 text-center shadow-md"
+          className="rounded-3xl border border-[var(--accent-rose)]/60 bg-[var(--bg-cream)]/95 px-6 py-16 text-center shadow-md"
           style={{ boxShadow: '0 20px 56px rgba(0,61,91,0.06)' }}
         >
-          <p className="text-serif-premium text-lg text-[#003D5B]/75">
+          <p className="text-serif-premium text-lg text-[var(--primary-navy)]/75">
             No hay turnos cargados para este día.
           </p>
-          <p className="mt-2 text-sm text-[#7A746E]">
+          <p className="mt-2 text-sm text-[var(--text-muted)]">
             Cuando las clientes reserven desde el portal, aparecerán aquí.
           </p>
         </div>
@@ -443,19 +443,19 @@ export default function AdminAgendaView() {
                   setAccionMsg(null);
                   setMenuRow(row);
                 }}
-                className="flex w-full flex-col gap-3 rounded-3xl border border-[#F2D7D5]/65 bg-[#FDF8F5]/98 p-4 text-left shadow-md transition hover:border-[#BFC9A2]/45 hover:shadow-lg active:scale-[0.99] sm:flex-row sm:items-center sm:gap-4 sm:p-5"
+                className="flex w-full flex-col gap-3 rounded-3xl border border-[var(--accent-rose)]/65 bg-[var(--bg-cream)]/98 p-4 text-left shadow-md transition hover:border-[var(--accent-sage)]/45 hover:shadow-lg active:scale-[0.99] sm:flex-row sm:items-center sm:gap-4 sm:p-5"
                 style={{ boxShadow: '0 14px 40px rgba(0,61,91,0.07)' }}
               >
                 <div className="flex shrin items-baseline gap-3 sm:w-24 sm:flex-col sm:gap-0">
-                  <span className="text-serif-premium text-2xl font-semibold tabular-nums text-[#003D5B]">
+                  <span className="text-serif-premium text-2xl font-semibold tabular-nums text-[var(--primary-navy)]">
                     {horaCorta(row.hora)}
                   </span>
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-[#7A746E]">hs</span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">hs</span>
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-base font-semibold text-[#003D5B]">{row.full_name}</p>
+                    <p className="text-base font-semibold text-[var(--primary-navy)]">{row.full_name}</p>
                     <EstadoEtiqueta estado={row.estado} />
                     {row.creado_por_admin === false && row.estado === 'pendiente' ? (
                       <span className="inline-flex items-center gap-1 rounded-full border border-amber-300/80 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-900">
@@ -464,10 +464,10 @@ export default function AdminAgendaView() {
                     ) : null}
                   </div>
 
-                  <p className="mt-1 text-sm text-[#7A746E]">{row.servicio}</p>
+                  <p className="mt-1 text-sm text-[var(--text-muted)]">{row.servicio}</p>
 
                   {row.nota_admin ? (
-                    <p className="mt-1 text-xs italic text-[#7A746E]/85">📝 {row.nota_admin}</p>
+                    <p className="mt-1 text-xs italic text-[var(--text-muted)]/85">📝 {row.nota_admin}</p>
                   ) : null}
                 </div>
 
@@ -484,7 +484,7 @@ export default function AdminAgendaView() {
                     WhatsApp
                   </a>
 
-                  <span className="hidden rounded-xl border border-[#003D5B]/10 bg-white/80 p-2 text-[#003D5B]/40 sm:inline-flex">
+                  <span className="hidden rounded-xl border border-[var(--primary-navy)]/10 bg-white/80 p-2 text-[var(--primary-navy)]/40 sm:inline-flex">
                     <MoreVertical className="h-5 w-5" aria-hidden />
                   </span>
                 </div>
@@ -500,7 +500,7 @@ export default function AdminAgendaView() {
             <motion.button
               type="button"
               aria-label="Cerrar menú"
-              className="fixed inset-0 z-[100] bg-[#003D5B]/35 backdrop-blur-[2px]"
+              className="fixed inset-0 z-[100] bg-[var(--primary-navy)]/35 backdrop-blur-[2px]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -515,19 +515,19 @@ export default function AdminAgendaView() {
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-              className="fixed bottom-0 left-0 right-0 z-[110] max-h-[85vh] overflow-y-auto rounded-t-[1.75rem] border border-[#F2D7D5]/80 px-5 pb-10 pt-6 shadow-2xl sm:left-1/2 sm:max-w-md sm:-translate-x-1/2"
+              className="fixed bottom-0 left-0 right-0 z-[110] max-h-[85vh] overflow-y-auto rounded-t-[1.75rem] border border-[var(--accent-rose)]/80 px-5 pb-10 pt-6 shadow-2xl sm:left-1/2 sm:max-w-md sm:-translate-x-1/2"
               style={{
-                background: 'linear-gradient(180deg, #fffefb 0%, #FDF8F5 100%)',
+                background: 'linear-gradient(180deg, #fffefb 0%, var(--bg-cream) 100%)',
                 boxShadow: '0 -20px 64px rgba(0,61,91,0.18)',
               }}
             >
-              <div className="mx-auto mb-4 h-1 w-12 rounded-full bg-[#003D5B]/15" aria-hidden />
-              <h2 id="agenda-accion-titulo" className="text-serif-premium text-lg font-bold text-[#003D5B]">
+              <div className="mx-auto mb-4 h-1 w-12 rounded-full bg-[var(--primary-navy)]/15" aria-hidden />
+              <h2 id="agenda-accion-titulo" className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">
                 Turno {horaCorta(menuRow.hora)} · {menuRow.full_name}
               </h2>
-              <p className="mt-1 text-sm text-[#7A746E]">{menuRow.servicio}</p>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">{menuRow.servicio}</p>
 
-              <p className="mb-3 mt-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/45">
+              <p className="mb-3 mt-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/45">
                 Cambiar estado
               </p>
 
@@ -545,7 +545,7 @@ export default function AdminAgendaView() {
                     type="button"
                     disabled={saving || menuRow.estado === estado}
                     onClick={() => void aplicarEstado(estado)}
-                    className="rounded-2xl border border-[#F2D7D5]/70 bg-white/90 px-3 py-3 text-left text-[13px] font-semibold text-[#003D5B] transition hover:bg-[#F2D7D5]/25 disabled:opacity-45"
+                    className="rounded-2xl border border-[var(--accent-rose)]/70 bg-white/90 px-3 py-3 text-left text-[13px] font-semibold text-[var(--primary-navy)] transition hover:bg-[var(--accent-rose)]/25 disabled:opacity-45"
                   >
                     {label}
                   </button>
@@ -566,7 +566,7 @@ export default function AdminAgendaView() {
                 type="button"
                 disabled={saving}
                 onClick={() => setMenuRow(null)}
-                className="mt-3 w-full rounded-2xl py-3 text-center text-sm font-medium text-[#003D5B]/55"
+                className="mt-3 w-full rounded-2xl py-3 text-center text-sm font-medium text-[var(--primary-navy)]/55"
               >
                 Cerrar
               </button>
@@ -724,7 +724,7 @@ function NuevoTurnoModal(props: {
         className="pointer-events-auto relative z-[931] flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-3xl shadow-2xl"
         style={{
           border: '1px solid rgba(242,215,213,0.75)',
-          background: 'var(--bg-cream, #FDF8F5)',
+          background: 'var(--bg-cream, var(--bg-cream))',
           boxShadow: '0 32px 64px rgba(0,61,91,0.18)',
         }}
         initial={{ scale: 0.96, y: 12 }}
@@ -733,15 +733,15 @@ function NuevoTurnoModal(props: {
         <div className="max-h-[92vh] overflow-y-auto p-6 sm:p-8">
           <button
             type="button"
-            className="absolute right-5 top-5 rounded-full p-2 text-[#003D5B]/45 hover:bg-[#F2D7D5]/45"
+            className="absolute right-5 top-5 rounded-full p-2 text-[var(--primary-navy)]/45 hover:bg-[var(--accent-rose)]/45"
             onClick={() => !saving && props.onClose()}
             aria-label="Cerrar"
           >
             <X className="h-5 w-5" />
           </button>
 
-          <h2 className="text-serif-premium text-xl font-bold text-[#003D5B]">Nuevo turno</h2>
-          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#003D5B]/45">
+          <h2 className="text-serif-premium text-xl font-bold text-[var(--primary-navy)]">Nuevo turno</h2>
+          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[var(--primary-navy)]/45">
             Cargado por recepción
           </p>
 
@@ -752,15 +752,15 @@ function NuevoTurnoModal(props: {
           ) : null}
 
           <section className="mt-6">
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/45">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/45">
               1 · Cliente
             </p>
 
             {cliente ? (
-              <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#BFC9A2]/45 bg-[#BFC9A2]/12 px-4 py-3">
+              <div className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--accent-sage)]/45 bg-[var(--accent-sage)]/12 px-4 py-3">
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-[#003D5B]">{cliente.full_name}</p>
-                  <p className="truncate text-xs text-[#7A746E]">
+                  <p className="truncate text-sm font-semibold text-[var(--primary-navy)]">{cliente.full_name}</p>
+                  <p className="truncate text-xs text-[var(--text-muted)]">
                     {cliente.phone || '—'} · {cliente.email || '—'}
                   </p>
                 </div>
@@ -768,15 +768,15 @@ function NuevoTurnoModal(props: {
                 <button
                   type="button"
                   onClick={() => setCliente(null)}
-                  className="rounded-full border border-[#003D5B]/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]"
+                  className="rounded-full border border-[var(--primary-navy)]/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]"
                 >
                   Cambiar
                 </button>
               </div>
             ) : mostrarCrearCliente ? (
-              <div className="rounded-2xl border border-[#BFC9A2]/45 bg-[#BFC9A2]/8 p-4">
+              <div className="rounded-2xl border border-[var(--accent-sage)]/45 bg-[var(--accent-sage)]/8 p-4">
                 <div className="mb-3 flex items-center justify-between">
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#003D5B]">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]">
                     Nuevo cliente
                   </p>
                   <button
@@ -785,7 +785,7 @@ function NuevoTurnoModal(props: {
                       setMostrarCrearCliente(false);
                       setCrearClienteErr(null);
                     }}
-                    className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/60"
+                    className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/60"
                   >
                     ← Volver a buscar
                   </button>
@@ -793,7 +793,7 @@ function NuevoTurnoModal(props: {
 
                 <div className="space-y-2">
                   <label className="block">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/55">
                       Nombre completo *
                     </span>
                     <input
@@ -801,12 +801,12 @@ function NuevoTurnoModal(props: {
                       value={nuevoNombre}
                       onChange={(e) => setNuevoNombre(e.target.value)}
                       placeholder="Ej: María Pérez"
-                      className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                      className="mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
                     />
                   </label>
 
                   <label className="block">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/55">
                       Tono / WhatsApp *
                     </span>
                     <input
@@ -814,12 +814,12 @@ function NuevoTurnoModal(props: {
                       value={nuevoTel}
                       onChange={(e) => setNuevoTel(e.target.value)}
                       placeholder="Ej: 2634123456"
-                      className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                      className="mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
                     />
                   </label>
 
                   <label className="block">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/55">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/55">
                       Email (opcional)
                     </span>
                     <input
@@ -827,7 +827,7 @@ function NuevoTurnoModal(props: {
                       value={nuevoEmail}
                       onChange={(e) => setNuevoEmail(e.target.value)}
                       placeholder="cliente@ejemplo.com"
-                      className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white px-3 py-2 text-sm text-[#003D5B] outline-none"
+                      className="mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
                     />
                   </label>
                 </div>
@@ -864,7 +864,7 @@ function NuevoTurnoModal(props: {
                     setNuevoTel('');
                     setNuevoEmail('');
                   }}
-                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#003D5B] py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white disabled:opacity-50"
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--primary-navy)] py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white disabled:opacity-50"
                 >
                   {creandoCliente ? (
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -876,37 +876,37 @@ function NuevoTurnoModal(props: {
               </div>
             ) : (
               <>
-                <div className="flex items-center gap-2 rounded-2xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2.5">
-                  <Search className="h-4 w-4 text-[#003D5B]/45" />
+                <div className="flex items-center gap-2 rounded-2xl border border-[var(--accent-rose)]/75 bg-white/95 px-3 py-2.5">
+                  <Search className="h-4 w-4 text-[var(--primary-navy)]/45" />
                   <input
                     autoFocus
                     type="text"
                     value={termino}
                     onChange={(e) => setTermino(e.target.value)}
                     placeholder="Buscar por nombre, teléfono o email"
-                    className="w-full bg-transparent text-sm text-[#003D5B] outline-none placeholder:text-[#003D5B]/30"
+                    className="w-full bg-transparent text-sm text-[var(--primary-navy)] outline-none placeholder:text-[var(--primary-navy)]/30"
                   />
-                  {buscando ? <Loader2 className="h-4 w-4 animate-spin text-[#003D5B]/45" /> : null}
+                  {buscando ? <Loader2 className="h-4 w-4 animate-spin text-[var(--primary-navy)]/45" /> : null}
                 </div>
 
-                <div className="mt-2 max-h-56 overflow-y-auto rounded-2xl border border-[#F2D7D5]/55 bg-white/85">
+                <div className="mt-2 max-h-56 overflow-y-auto rounded-2xl border border-[var(--accent-rose)]/55 bg-white/85">
                   {opciones.length === 0 && !buscando ? (
-                    <p className="px-4 py-3 text-xs text-[#7A746E]">
+                    <p className="px-4 py-3 text-xs text-[var(--text-muted)]">
                       {termino.trim().length >= 2
                         ? 'Sin coincidencis. Podés cargarlo desde abajo.'
                         : 'Mostrando clientes activos… escribí para filtrar.'}
                     </p>
                   ) : (
-                    <ul className="divide-y divide-[#F2D7D5]/40">
+                    <ul className="divide-y divide-[var(--accent-rose)]/40">
                       {opciones.map((o) => (
                         <li key={o.id}>
                           <button
                             type="button"
                             onClick={() => setCliente(o)}
-                            className="block w-full px-4 py-3 text-left transition hover:bg-[#F2D7D5]/25"
+                            className="block w-full px-4 py-3 text-left transition hover:bg-[var(--accent-rose)]/25"
                           >
-                            <p className="text-sm font-semibold text-[#003D5B]">{o.full_name}</p>
-                            <p className="text-xs text-[#7A746E]">
+                            <p className="text-sm font-semibold text-[var(--primary-navy)]">{o.full_name}</p>
+                            <p className="text-xs text-[var(--text-muted)]">
                               {o.phone || '—'} · {o.email || '—'}
                             </p>
                           </button>
@@ -923,7 +923,7 @@ function NuevoTurnoModal(props: {
                     setNuevoNombre(termino.trim());
                     setCrearClienteErr(null);
                   }}
-                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-[#003D5B]/25 bg-white/40 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[#003D5B] transition hover:border-[#003D5B]/45 hover:bg-white/70"
+                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-[var(--primary-navy)]/25 bg-white/40 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--primary-navy)] transition hover:border-[var(--primary-navy)]/45 hover:bg-white/70"
                 >
                   <UserPlus className="h-3.5 w-3.5" />
                   Crear cliente nuevo
@@ -933,19 +933,19 @@ function NuevoTurnoModal(props: {
           </section>
 
           <section className="mt-6">
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/45">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/45">
               2 · Servicio y fecha
             </p>
 
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="block">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/50">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/50">
                   Servicio
                 </span>
                 <select
                   value={servicio}
                   onChange={(e) => setServicio(e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2.5 text-sm text-[#003D5B] outline-none"
+                  className="mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white/95 px-3 py-2.5 text-sm text-[var(--primary-navy)] outline-none"
                 >
                   <option value="">— Elegir —</option>
                   {serviciosCatalogo.map((cat) => (
@@ -961,7 +961,7 @@ function NuevoTurnoModal(props: {
               </label>
 
               <label className="block">
-                <span className="text-[10px] font-semibold uppercase tracking-wider -[#003D5B]/50">
+                <span className="text-[10px] font-semibold uppercase tracking-wider -[var(--primary-navy)]/50">
                   Fecha
                 </span>
                 <input
@@ -973,13 +973,13 @@ function NuevoTurnoModal(props: {
                       setHora('');
                     }
                   }}
-                  className="mt-1 w-full rounded-xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2.5 text-sm text-[#003D5B] outline-none"
+                  className="mt-1 w-full rounded-xl border border-[var(--accent-rose)]/75 bg-white/95 px-3 py-2.5 text-sm text-[var(--primary-navy)] outline-none"
                 />
               </label>
             </div>
 
             <div className="mt-3 flex items-center gap-2">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/50">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/50">
                 Estado inicial
               </span>
 
@@ -993,7 +993,7 @@ function NuevoTurnoModal(props: {
                       ? e === 'confirmado'
                         ? 'bg-emerald-600 text-white'
                         : 'bg-amber-500 text-white'
-                      : 'border border-[#003D5B]/15 bg-white/80 text-[#003D5B]'
+                      : 'border border-[var(--primary-navy)]/15 bg-white/80 text-[var(--primary-navy)]'
                   }`}
                 >
                   {e === 'confirmado' ? '🟢 Confirmado' : '🟡 Pendiente'}
@@ -1003,7 +1003,7 @@ function NuevoTurnoModal(props: {
           </section>
 
           <section className="mt-6">
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/45">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/45">
               3 · Horario disponible
               {slotsLoading ? <Loader2 className="ml-2 inline h-3.5 w-3.5 animate-spin" /> : null}
             </p>
@@ -1015,7 +1015,7 @@ function NuevoTurnoModal(props: {
             ) : null}
 
             {slotsLibres.length === 0 && !slotsLoading ? (
-              <p className="text-sm text-[#7A746E]">No quedan horas libres este día. Elegí otra fecha.</p>
+              <p className="text-sm text-[var(--text-muted)]">No quedan horas libres este día. Elegí otra fecha.</p>
             ) : (
               <div className="flex flex-wrap gap-2">
                 {slotsLibres.map((hh) => (
@@ -1025,8 +1025,8 @@ function NuevoTurnoModal(props: {
                     onClick={() => setHora(hh)}
                     className={`min-h-[40px] rounded-xl border px-3.5 py-2 text-sm font-semibold transition ${
                       hora === hh
-                        ? 'border-[#003D5B] bg-[#003D5B] text-white'
-                        : 'border-[#003D5B]/15 bg-white text-[#003D5B] hover:bg-[#F2D7D5]/25'
+                        ? 'border-[var(--primary-navy)] bg-[var(--primary-navy)] text-white'
+                        : 'border-[var(--primary-navy)]/15 bg-white text-[var(--primary-navy)] hover:bg-[var(--accent-rose)]/25'
                     }`}
                   >
                     {horaCorta(hh)} hs
@@ -1038,7 +1038,7 @@ function NuevoTurnoModal(props: {
 
           <section className="mt-6">
             <label className="block">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#003D5B]/50">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]/50">
                 Nota interna (opcional)
               </span>
               <textarea
@@ -1046,7 +1046,7 @@ function NuevoTurnoModal(props: {
                 onChange={(e) => setNota(e.target.value)}
                 placeholder="Comentarios para recepción/profesional."
                 rows={2}
-                className="mt-1 w-full resize-none rounded-xl border border-[#F2D7D5]/75 bg-white/95 px-3 py-2 text-sm text-[#003D5B] outline-none"
+                className="mt-1 w-full resize-none rounded-xl border border-[var(--accent-rose)]/75 bg-white/95 px-3 py-2 text-sm text-[var(--primary-navy)] outline-none"
               />
             </label>
           </section>
@@ -1058,7 +1058,7 @@ function NuevoTurnoModal(props: {
             onClick={() => void guardar()}
             className="mt-7 flex w-full items-center justify-center gap-2 rounded-full py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white disabled:pointer-events-none disabled:opacity-40"
             style={{
-              background: 'linear-gradient(90eg, #BFC9A2 0%, #003D5B 100%)',
+              background: 'linear-gradient(90eg, var(--accent-sage) 0%, var(--primary-navy) 100%)',
               boxShadow: '0 14px 32px rgba(0,61,91,0.20)',
             }}
           >
@@ -1067,7 +1067,7 @@ function NuevoTurnoModal(props: {
           </motion.button>
 
           {!canSubmit && !saving ? (
-            <p className="mt-3 text-center text-[11px] text-[#7A746E]">
+            <p className="mt-3 text-center text-[11px] text-[var(--text-muted)]">
               {!cliente
                 ? 'Elegí un cliente para continuar.'
                 : !servicio

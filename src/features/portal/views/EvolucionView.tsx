@@ -41,8 +41,8 @@ export function EvolucionView() {
               <s.icon className="h-5 w-5 text-champagne" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-[#003D5B]">{s.value}</p>
-              <p className="text-xs text-[#7A746E]">{s.label}</p>
+              <p className="text-2xl font-bold text-[var(--primary-navy)]">{s.value}</p>
+              <p className="text-xs text-[var(--text-muted)]">{s.label}</p>
             </div>
           </motion.div>
         ))}
@@ -57,21 +57,21 @@ export function EvolucionView() {
         <div className="mb-4 flex items-center justify-between">
           <div>
             <div className="mb-1 flex items-center gap-2">
-              <div className="rounded-lg bg-[#003D5B] p-1.5">
+              <div className="rounded-lg bg-[var(--primary-navy)] p-1.5">
                 <Eye className="h-4 w-4 text-white" />
               </div>
-              <h3 className="text-serif-premium text-lg font-bold text-[#003D5B]">
+              <h3 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">
                 Comparación Antes & Después
               </h3>
             </div>
-            <p className="text-sm text-[#7A746E]">Desliza el controlador para comparar tu progreso</p>
+            <p className="text-sm text-[var(--text-muted)]">Desliza el controlador para comparar tu progreso</p>
           </div>
         </div>
 
         <div className="mb-4 flex items-center justify-center gap-3">
           <button
             onClick={() => setCurrentPair((p) => (p === 0 ? beforeAfterPairs.length - 1 : p - 1))}
-            className="rounded-full border border-[#F2D7D5]/70 bg-[#FDF8F5]/90 p-2 text-[#7A746E] transition-all hover:border-[#BFC9A2] hover:text-[#003D5B]"
+            className="rounded-full border border-[var(--accent-rose)]/70 bg-[var(--bg-cream)]/90 p-2 text-[var(--text-muted)] transition-all hover:border-[var(--accent-sage)] hover:text-[var(--primary-navy)]"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -82,7 +82,7 @@ export function EvolucionView() {
                 onClick={() => setCurrentPair(idx)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   idx === currentPair
-                    ? 'w-8 bg-gradient-to-r from-[#BFC9A2] to-[#003D5B]'
+                    ? 'w-8 bg-gradient-to-r from-[var(--accent-sage)] to-[var(--primary-navy)]'
                     : 'w-2 bg-gray-200 hover:bg-gray-300'
                 }`}
               />
@@ -90,7 +90,7 @@ export function EvolucionView() {
           </div>
           <button
             onClick={() => setCurrentPair((p) => (p === beforeAfterPairs.length - 1 ? 0 : p + 1))}
-            className="rounded-full border border-[#F2D7D5]/70 bg-[#FDF8F5]/90 p-2 text-[#7A746E] transition-all hover:border-[#BFC9A2] hover:text-[#003D5B]"
+            className="rounded-full border border-[var(--accent-rose)]/70 bg-[var(--bg-cream)]/90 p-2 text-[var(--text-muted)] transition-all hover:border-[var(--accent-sage)] hover:text-[var(--primary-navy)]"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -105,10 +105,10 @@ export function EvolucionView() {
             transition={{ duration: 0.3 }}
           >
             <BeforeAfterSlider beforeSrc={pair.before} afterSrc={pair.after} />
-            <div className="mt-3 flex items-center justify-between rounded-xl bg-[#F2D7D5]/20 px-5 py-3">
-              <p className="text-sm font-bold text-[#003D5B]">{pair.title}</p>
-              <span className="flex items-center gap-1.5 text-xs font-semibold text-[#003D5B]">
-                <div className="h-1.5 w-1.5 rounded-full bg-[#BFC9A2] animate-pulse" />
+            <div className="mt-3 flex items-center justify-between rounded-xl bg-[var(--accent-rose)]/20 px-5 py-3">
+              <p className="text-sm font-bold text-[var(--primary-navy)]">{pair.title}</p>
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-[var(--primary-navy)]">
+                <div className="h-1.5 w-1.5 rounded-full bg-[var(--accent-sage)] animate-pulse" />
                 {pair.improvement}
               </span>
             </div>
@@ -121,7 +121,7 @@ export function EvolucionView() {
               key={idx}
               onClick={() => setCurrentPair(idx)}
               className={`group relative shrink-0 overflow-hidden rounded-xl border-2 transition-all duration-300 ${
-                idx === currentPair ? 'border-[#003D5B] shadow-soft' : 'border-transparent opacity-50 hover:opacity-80'
+                idx === currentPair ? 'border-[var(--primary-navy)] shadow-soft' : 'border-transparent opacity-50 hover:opacity-80'
               }`}
             >
               <div className="flex h-14 w-20">
@@ -139,7 +139,7 @@ export function EvolucionView() {
         transition={{ delay: 0.5 }}
         className="glass-strong rounded-2xl p-6"
       >
-        <h3 className="text-serif-premium mb-4 text-lg font-bold text-[#003D5B]">Galería de Sesiones</h3>
+        <h3 className="text-serif-premium mb-4 text-lg font-bold text-[var(--primary-navy)]">Galería de Sesiones</h3>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {sessions
             .filter((s) => s.foto)

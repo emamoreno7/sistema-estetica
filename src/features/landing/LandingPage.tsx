@@ -16,7 +16,7 @@ type Props = {
   onRegister: () => void;
 };
 
-const rootClassName = 'overflow-hidden text-[#003D5B]';
+const rootClassName = 'overflow-hidden text-[var(--primary-navy)]';
 
 const heroSectionClassName =
   'relative flex min-h-screen flex-col items-center justify-center px-6 text-center';

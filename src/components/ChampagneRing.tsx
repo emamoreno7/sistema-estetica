@@ -27,9 +27,9 @@ export function ChampagneRing({ value, size = 100, strokeWidth = 6, label, delay
         />
         <defs>
           <linearGradient id={`champagne-ring-${size}-${value}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#BFC9A2" />
-            <stop offset="50%" stopColor="#003D5B" />
-            <stop offset="100%" stopColor="#F2D7D5" />
+            <stop offset="0%" stopColor="var(--accent-sage)" />
+            <stop offset="50%" stopColor="var(--primary-navy)" />
+            <stop offset="100%" stopColor="var(--accent-rose)" />
           </linearGradient>
           <filter id={`ring-glow-${size}`}>
             <feGaussianBlur stdDeviation="2" result="glow" />

@@ -44,11 +44,11 @@ export function AccountBlockedPortal() {
             background: 'rgba(253,248,245,0.98)',
           }}
         >
-          <Shield className="mx-auto mb-5 h-12 w-12 text-[#003D5B]/70" />
-          <h1 className="text-serif-premium text-xl font-bold text-[#003D5B]">
+          <Shield className="mx-auto mb-5 h-12 w-12 text-[var(--primary-navy)]/70" />
+          <h1 className="text-serif-premium text-xl font-bold text-[var(--primary-navy)]">
             Consultá tu acceso por WhatsApp
           </h1>
-          <p className="mt-4 text-sm leading-relaxed text-[#7A746E]">
+          <p className="mt-4 text-sm leading-relaxed text-[var(--text-muted)]">
             Tu cuenta requiere atención del equipo antes de usar el portal. Escribinos y te ayudamos a regularizar tu
             acceso cuanto antes.
           </p>
@@ -67,7 +67,7 @@ export function AccountBlockedPortal() {
           <motion.button
             type="button"
             onClick={handleLogout}
-            className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/45 underline underline-offset-4"
+            className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/45 underline underline-offset-4"
           >
             Salir del portal
           </motion.button>

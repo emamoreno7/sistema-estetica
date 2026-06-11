@@ -55,7 +55,7 @@ export function PerfilView() {
         animate={{ opacity: 1, y: 0 }}
         className="glass-strong relative overflow-hidden rounded-2xl p-6 lg:p-8"
       >
-        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br from-[#F2D7D5] to-[#BFC9A2] opacity-60" />
+        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br from-[var(--accent-rose)] to-[var(--accent-sage)] opacity-60" />
         <div className="relative flex flex-col items-center gap-5 sm:flex-row">
           <div className="relative">
             {photoUrl ? (
@@ -66,35 +66,35 @@ export function PerfilView() {
               />
             ) : (
               <div
-                className="flex h-20 w-20 items-center justify-center rounded-2xl border-4 border-champagne-200 bg-gradient-to-br from-[#F2D7D5]/80 to-[#BFC9A2]/80 text-2xl font-bold text-[#003D5B] shadow-lg"
+                className="flex h-20 w-20 items-center justify-center rounded-2xl border-4 border-champagne-200 bg-gradient-to-br from-[var(--accent-rose)]/80 to-[var(--accent-sage)]/80 text-2xl font-bold text-[var(--primary-navy)] shadow-lg"
                 aria-hidden
               >
                 {greetingName.charAt(0).toUpperCase()}
               </div>
             )}
-            <div className="absolute -bottom-1 -right-1 rounded-full bg-gradient-to-br from-[#F2D7D5] to-[#BFC9A2] p-1.5">
+            <div className="absolute -bottom-1 -right-1 rounded-full bg-gradient-to-br from-[var(--accent-rose)] to-[var(--accent-sage)] p-1.5">
               <Shield className="h-3 w-3 text-white" />
             </div>
           </div>
           <div className="flex-1 text-center sm:text-left">
-            <h2 className="text-serif-premium text-xl font-bold text-[#003D5B]">{displayName}</h2>
-            <p className="text-xs text-[#7A746E]">
+            <h2 className="text-serif-premium text-xl font-bold text-[var(--primary-navy)]">{displayName}</h2>
+            <p className="text-xs text-[var(--text-muted)]">
               {brand.clientFallbackName} • Miembro desde {memberSinceLabel}
             </p>
             {tratamientoInteresLabel ? (
-              <p className="mt-2 text-xs text-[#003D5B]/80">
+              <p className="mt-2 text-xs text-[var(--primary-navy)]/80">
                 Tu interés: <span className="font-semibold">{tratamientoInteresLabel}</span>
               </p>
             ) : null}
             <div className="mt-3 flex flex-wrap items-center justify-center gap-3 sm:justify-start">
               {emailShown ? (
-                <div className="flex items-center gap-1.5 text-xs text-[#7A746E]">
-                  <Mail className="h-3.5 w-3.5 text-[#003D5B]" /> {emailShown}
+                <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
+                  <Mail className="h-3.5 w-3.5 text-[var(--primary-navy)]" /> {emailShown}
                 </div>
               ) : null}
               {phoneDisplay ? (
-                <div className="flex items-center gap-1.5 text-xs text-[#7A746E]">
-                  <Phone className="h-3.5 w-3.5 text-[#003D5B]" /> {phoneDisplay}
+                <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
+                  <Phone className="h-3.5 w-3.5 text-[var(--primary-navy)]" /> {phoneDisplay}
                 </div>
               ) : null}
               </div>
@@ -102,17 +102,17 @@ export function PerfilView() {
           <div className="flex gap-6">
             <div className="text-center">
               <p className="text-xl font-bold text-champagne">{activeTreatment ? 1 : 0}</p>
-              <p className="text-[10px] text-[#7A746E]">Activos</p>
+              <p className="text-[10px] text-[var(--text-muted)]">Activos</p>
             </div>
             <div className="text-center">
-              <p className="text-xl font-bold text-[#003D5B]">0</p>
-              <p className="text-[10px] text-[#7A746E]">Sesiones</p>
+              <p className="text-xl font-bold text-[var(--primary-navy)]">0</p>
+              <p className="text-[10px] text-[var(--text-muted)]">Sesiones</p>
             </div>
             <div className="text-center">
-              <p className="text-xl font-bold bg-gradient-to-r from-[#F2D7D5] to-[#BFC9A2] bg-clip-text text-transparent">
+              <p className="text-xl font-bold bg-gradient-to-r from-[var(--accent-rose)] to-[var(--accent-sage)] bg-clip-text text-transparent">
                 {loyaltyPoints}
               </p>
-              <p className="text-[10px] text-[#7A746E]">Puntos</p>
+              <p className="text-[10px] text-[var(--text-muted)]">Puntos</p>
             </div>
           </div>
         </div>
@@ -126,19 +126,19 @@ export function PerfilView() {
       >
         <div className="border-b border-champagne-200 bg-gradient-to-r from-champagne-50 to-transparent px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#F2D7D5] to-[#BFC9A2] shadow-sm">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--accent-rose)] to-[var(--accent-sage)] shadow-sm">
               <Stethoscope className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h3 className="text-serif-premium text-base font-bold text-[#003D5B]">
+              <h3 className="text-serif-premium text-base font-bold text-[var(--primary-navy)]">
                 Consentimiento informado
               </h3>
-              <p className="text-[11px] text-[#7A746E]">Obligatorio antes de realizar tratamientos</p>
+              <p className="text-[11px] text-[var(--text-muted)]">Obligatorio antes de realizar tratamientos</p>
             </div>
             {consentLoading ? (
-              <Loader2 className="ml-auto h-4 w-4 animate-spin text-[#003D5B]/50" />
+              <Loader2 className="ml-auto h-4 w-4 animate-spin text-[var(--primary-navy)]/50" />
             ) : firmado ? (
-              <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-[#BFC9A2]/35 px-3 py-1 text-[10px] font-semibold text-[#003D5B]">
+              <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-sage)]/35 px-3 py-1 text-[10px] font-semibold text-[var(--primary-navy)]">
                 <CheckCircle2 className="h-3.5 w-3.5" /> Firmado
               </span>
             ) : (
@@ -152,20 +152,20 @@ export function PerfilView() {
         <div className="space-y-4 p-6">
           {firmado && consentimiento ? (
             <>
-              <div className="flex items-start gap-3 rounded-xl border border-[#BFC9A2]/45 bg-[#BFC9A2]/10 px-4 py-4">
+              <div className="flex items-start gap-3 rounded-xl border border-[var(--accent-sage)]/45 bg-[var(--accent-sage)]/10 px-4 py-4">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#4A6741]" />
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-[#003D5B]">
+                  <p className="text-sm font-semibold text-[var(--primary-navy)]">
                     Consentimiento firmado correctamente
                   </p>
-                  <p className="mt-0.5 text-xs text-[#7A746E]">
+                  <p className="mt-0.5 text-xs text-[var(--text-muted)]">
                     Firmado por <strong>{consentimiento.nombre_firma}</strong>
                     {consentimiento.firmado_at
                       ? ` · ${format(new Date(consentimiento.firmado_at), "d 'de' MMMM yyyy", { locale: es })}`
                       : ''}
                   </p>
                   {consentimiento.contraindicaciones ? (
-                    <p className="mt-1 text-xs italic text-[#7A746E]/85">
+                    <p className="mt-1 text-xs italic text-[var(--text-muted)]/85">
                       Observaciones declaradas: {consentimiento.contraindicaciones}
                     </p>
                   ) : null}
@@ -174,7 +174,7 @@ export function PerfilView() {
               <button
                 type="button"
                 onClick={() => setConsentOpen(true)}
-                className="w-full rounded-full border border-[#003D5B]/15 bg-white/70 py-2.5 text-[1px] font-semibold uppercase tracking-wider text-[#003D5B]"
+                className="w-full rounded-full border border-[var(--primary-navy)]/15 bg-white/70 py-2.5 text-[1px] font-semibold uppercase tracking-wider text-[var(--primary-navy)]"
               >
                 Volver a revisar / actualizar
               </button>
@@ -195,7 +195,7 @@ export function PerfilView() {
                 disabled={!uid || noMigrado}
                 onClick={() => setConsentOpen(true)}
                 className="flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[11px] font-semibold uppercase tracking-[0.6em] text-white shadow-lg disabled:opacity-50"
-                style={{ background: '#003D5B', boxShadow: '0 10px 28px rgba(0,61,91,0.18)' }}
+                style={{ background: 'var(--primary-navy)', boxShadow: '0 10px 28px rgba(0,61,91,0.18)' }}
               >
                 <FileSignature className="h-4 w-4" />
                 Leer y firmar consentimiento
@@ -208,7 +208,7 @@ export function PerfilView() {
             </>
           )}
 
-          <p className="text-center text-[10px] leading-relaxed text-[#7A746E]">
+          <p className="text-center text-[10px] leading-relaxed text-[var(--text-muted)]">
             Tu información médica es estrictamente confidencial y solo es accesible por tu profesional tratante.
             <br />
             Cumplimos con la Ley 25.326 de Protección de Datos Personales.
@@ -224,19 +224,19 @@ export function PerfilView() {
         onClick={() => setFichaOpen(true)}
         className="glass-strong flex w-full items-center gap-4 rounded-2xl p-5 text-left transition hover:shadow-md"
       >
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#F2D7D5] to-[#BFC9A2] shadow-sm">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--accent-rose)] to-[var(--accent-sage)] shadow-sm">
           <ClipboardList className="h-5 w-5 text-white" />
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="text-serif-premium text-base font-bold text-[#003D5B]">Mi ficha de salud</h3>
-          <p className="text-xs text-[#7A746E]">
+          <h3 className="text-serif-premium text-base font-bold text-[var(--primary-navy)]">Mi ficha de salud</h3>
+          <p className="text-xs text-[var(--text-muted)]">
             Completá tu cuestionario de salud y antecedentes para que tu profesional te atienda mejor.
           </p>
         </div>
       </motion.button>
 
       <div>
-        <h3 className="text-serif-premium mb-3 text-base font-bold text-[#003D5B]">Configuración</h3>
+        <h3 className="text-serif-premium mb-3 text-base font-bold text-[var(--primary-navy)]">Configuración</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           {[
             { icon: Shield, title: 'Seguridad', desc: 'Contraseña y verificación' },
@@ -258,8 +258,8 @@ export function PerfilView() {
                 <item.icon className="h-5 w-5 text-champagne" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-[#003D5B]">{item.title}</h3>
-                <p className="mt-0.5 text-xs text-[#7A746E]">{item.desc}</p>
+                <h3 className="text-sm font-semibold text-[var(--primary-navy)]">{item.title}</h3>
+                <p className="mt-0.5 text-xs text-[var(--text-muted)]">{item.desc}</p>
               </div>
             </motion.button>
           ))}

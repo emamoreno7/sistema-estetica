@@ -26,11 +26,11 @@ export function PortalPerfilNotFoundFriendly() {
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md rounded-[1.75rem] border border-[#F2D7D5]/65 bg-white/95 p-10 text-center shadow-xl"
+        className="w-full max-w-md rounded-[1.75rem] border border-[var(--accent-rose)]/65 bg-white/95 p-10 text-center shadow-xl"
       >
-        <UserRoundSearch className="mx-auto mb-5 h-12 w-12 text-[#003D5B]/45" />
-        <p className="text-serif-premium text-lg font-semibold text-[#003D5B]">Perfil no encontrado</p>
-        <p className="mt-4 text-sm leading-relaxed text-[#7A746E]">
+        <UserRoundSearch className="mx-auto mb-5 h-12 w-12 text-[var(--primary-navy)]/45" />
+        <p className="text-serif-premium text-lg font-semibold text-[var(--primary-navy)]">Perfil no encontrado</p>
+        <p className="mt-4 text-sm leading-relaxed text-[var(--text-muted)]">
           No pudimos leer tu ficha en este momento de forma estable. Ya no repetimos solicitudes automáticas: suele pasar
           cuando aún no hay registro sincronizado o hubo una respuesta temporal del servidor (400/406). Si acabás de darte
           de alta, esperá activación por el {brand.supportLabel}.
@@ -51,7 +51,7 @@ export function PortalPerfilNotFoundFriendly() {
           type="button"
           whileTap={{ scale: 0.98 }}
           onClick={() => void handleLogout()}
-          className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/55 underline underline-offset-4"
+          className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/55 underline underline-offset-4"
         >
           Salir y volver al inicio
         </motion.button>

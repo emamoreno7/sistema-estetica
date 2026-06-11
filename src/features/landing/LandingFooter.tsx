@@ -51,25 +51,25 @@ export function LandingFooter() {
           }}
         />
 
-        <div className="h-px w-12 bg-[#003D5B]/15" />
+        <div className="h-px w-12 bg-[var(--primary-navy)]/15" />
 
         <div className="grid gap-6 sm:grid-cols-3">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--text-muted)]">
               Ubicación
             </p>
             <a
              href={mapsHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-block text-sm leading-6 text-[#7A746E] transition-colors hover:text-[#003D5B]"
+              className="mt-2 inline-block text-sm leading-6 text-[var(--text-muted)] transition-colors hover:text-[var(--primary-navy)]"
             >
               {contact.address}
             </a>
           </div>
 
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--text-muted)]">
               Contacto
             </p>
             <div className="mt-2 flex flex-col items-center gap-1.5 sm:items-start">
@@ -77,7 +77,7 @@ export function LandingFooter() {
                 href={contact.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm leading-6 text-[#7A746E] transition-colors hover:text-[#003D5B]"
+                className="inline-flex items-center gap-1.5 text-sm leading-6 text-[var(--text-muted)] transition-colors hover:text-[var(--primary-navy)]"
               >
                 <InstagramIcon className="h-3.5 w-3.5" />
                 @{contact.instagram}
@@ -85,7 +85,7 @@ export function LandingFooter() {
 
               <a
                 href={emailHref}
-                className="inline-flex items-center gap-1.5 text-sm leading-6 text-[#7A746E] transition-colors hover:text-[#003D5B]"
+                className="inline-flex items-center gap-1.5 text-sm leading-6 text-[var(--text-muted)] transition-colors hover:text-[var(--primary-navy)]"
               >
                 <Mail className="h-3.5 w-3.5" />
                 {contact.email}
@@ -95,7 +95,7 @@ export function LandingFooter() {
                 href={buildWhatsAppHref('consulta general')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium leading-6 text-[#003D5B] transition-colors hover:text-[#25D366]"
+                className="inline-flex items-center gap-1.5 text-sm font-medium leading-6 text-[var(--primary-navy)] transition-colors hover:text-[#25D366]"
               >
                 <MessageCircle className="h-3.5 w-3.5" />
                 {contact.phoneDisplay}
@@ -104,16 +104,16 @@ export function LandingFooter() {
           </div>
 
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#7A746E]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--text-muted)]">
               Horarios
             </p>
-            <p className="mt-2 text-sm leading-6 text-[#7A746E]">
+            <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
               {contact.hours}
             </p>
           </div>
         </div>
 
-        <div className="h-px w-12 bg-[#003D5B]/15" />
+        <div className="h-px w-12 bg-[var(--primary-navy)]/15" />
 
         <p className="text-[9px] uppercase tracking-[0.35em] text-[#A9A09A]">
           &copy; {new Date().getFullYear()} {brand.copyrightName}

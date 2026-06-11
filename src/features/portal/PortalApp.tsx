@@ -99,7 +99,7 @@ export function PortalApp() {
                   boxShadow: '0 10px 32px rgba(0,61,91,0.06)',
                 }}
               >
-                <p className="text-sm font-semibold text-[#003D5B]">
+                <p className="text-sm font-semibold text-[var(--primary-navy)]">
                   Hola Emanuel, tienes privilegios de administrador
                 </p>
               </motion.div>

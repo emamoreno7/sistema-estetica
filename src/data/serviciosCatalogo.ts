@@ -167,16 +167,16 @@ export const serviciosCatalogo: ServicioCategoria[] = [
 
 export const BADGE_STYLE: Record<string, { bg: string; color: string }> = {
   Reductor:     { bg: 'rgba(191,201,162,0.3)',  color: '#4A6741' },
-  Tonificador:  { bg: 'rgba(0,61,91,0.10)',     color: '#003D5B' },
-  Reafirmante:  { bg: 'rgba(0,61,91,0.10)',     color: '#003D5B' },
+  Tonificador:  { bg: 'rgba(0,61,91,0.10)',     color: 'var(--primary-navy)' },
+  Reafirmante:  { bg: 'rgba(0,61,91,0.10)',     color: 'var(--primary-navy)' },
   Drenante:     { bg: 'rgba(191,201,162,0.3)',  color: '#4A6741' },
-  Terapeutico:  { bg: 'rgba(0,61,91,0.10)',     color: '#003D5B' },
+  Terapeutico:  { bg: 'rgba(0,61,91,0.10)',     color: 'var(--primary-navy)' },
   Relajante:    { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
   Lashista:     { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
   Facial:       { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
   Manicura:     { bg: 'rgba(245,230,218,0.6)',  color: '#7A5A3A' },
   Unas:         { bg: 'rgba(245,230,218,0.6)',  color: '#7A5A3A' },
-  Definitivo:   { bg: 'rgba(0,61,91,0.10)',     color: '#003D5B' },
+  Definitivo:   { bg: 'rgba(0,61,91,0.10)',     color: 'var(--primary-navy)' },
   Especialidad: { bg: 'rgba(245,230,218,0.6)',  color: '#7A5A3A' },
 };
 

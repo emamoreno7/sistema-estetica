@@ -76,7 +76,7 @@ export function AntesYDespuesSection() {
   return (
     <section
       className="relative px-4 py-24 sm:px-10 lg:py-32"
-      style={{ background: 'linear-gradient(180deg, #FDF8F5 0%, #FBEEE6 100%)' }}
+      style={{ background: 'linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-dark) 100%)' }}
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
@@ -141,7 +141,7 @@ export function AntesYDespuesSection() {
               <button
                 type="button"
                 onClick={prev}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#003D5B]/10 bg-white text-[#003D5B] shadow-sm transition hover:scale-105"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--primary-navy)]/10 bg-white text-[var(--primary-navy)] shadow-sm transition hover:scale-105"
                 aria-label="Caso anterior"
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -164,7 +164,7 @@ export function AntesYDespuesSection() {
               <button
                 type="button"
                 onClick={next}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#003D5B]/10 bg-white text-[#003D5B] shadow-sm transition hover:scale-105"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--primary-navy)]/10 bg-white text-[var(--primary-navy)] shadow-sm transition hover:scale-105"
                 aria-label="Caso siguiente"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -177,7 +177,7 @@ export function AntesYDespuesSection() {
             initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-3xl border border-[#F2D7D5]/55 bg-white/85 p-7 shadow-xl backdrop-blur-sm sm:p-9"
+            className="rounded-3xl border border-[var(--accent-rose)]/55 bg-white/85 p-7 shadow-xl backdrop-blur-sm sm:p-9"
           >
             <p
               className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em]"
@@ -192,7 +192,7 @@ export function AntesYDespuesSection() {
               {caso.titulo}
             </h3>
             <div className="mt-5 flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-              <Star className="h-3.5 w-3.5" fill="#BFC9A2" stroke="#BFC9A2" />
+              <Star className="h-3.5 w-3.5" fill="var(--accent-sage)" stroke="var(--accent-sage)" />
               <span>{caso.sesiones} - resultado documentado</span>
             </div>
             <div className="my-6 h-px w-12" style={{ background: 'var(--accent-rose)' }} />
@@ -210,10 +210,10 @@ export function AntesYDespuesSection() {
               {caso.cliente}
             </p>
             <div
-              className="mt-7 rounded-2xl bg-[#FDF8F5] p-4 text-[11px] leading-5"
+              className="mt-7 rounded-2xl bg-[var(--bg-cream)] p-4 text-[11px] leading-5"
               style={{ color: 'var(--text-muted)' }}
             >
-              <strong className="text-[#003D5B]">Queres un caso asi?</strong>{' '}
+              <strong className="text-[var(--primary-navy)]">Queres un caso asi?</strong>{' '}
               Reserva tu evaluacion gratuita y armamos un plan a tu medida.
             </div>
           </motion.div>

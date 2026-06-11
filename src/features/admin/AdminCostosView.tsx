@@ -156,7 +156,7 @@ export default function AdminCostosView() {
             type="button"
             whileTap={{ scale: 0.98 }}
             onClick={() => void load()}
-            className="inline-flex items-center gap-2 rounded-full border border-[#BFC9A2]/50 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-sage)]/50 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
             Actualizar
@@ -237,61 +237,61 @@ export default function AdminCostosView() {
       ) : null}
 
       <div className="mt-10 mb-4 flex items-center gap-3">
-        <Calculator className="h-4 w-4 text-[#003D5B]/55" />
-        <h2 className="text-serif-premium text-lg font-bold text-[#003D5B]">
+        <Calculator className="h-4 w-4 text-[var(--primary-navy)]/55" />
+        <h2 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">
           Matriz de costos por servicio
         </h2>
       </div>
-      <p className="mb-6 text-xs text-[#7A746E]">
+      <p className="mb-6 text-xs text-[var(--text-muted)]">
         Costo directo = insumos + mano de obra. Precio sugerido = costo directo ÷ (1 − margen objetivo %).
         Los fijos <strong>no se suman al precio individual</strong>: se cubren con la contribución mensual del panel de arriba.
         Los precios de la web no cambian solos: usá &quot;Aplicar&quot;.
       </p>
 
       {loading ? (
-        <div className="flex items-center justify-center gap-3 py-20 text-[#003D5B]/55">
+        <div className="flex items-center justify-center gap-3 py-20 text-[var(--primary-navy)]/55">
           <Loader2 className="h-6 w-6 animate-spin" />
           Cargando matriz…
         </div>
       ) : (
         <div
-          className="overflow-hidden rounded-3xl border border-[#F2D7D5]/55 bg-[#FDF8F5]/95 shadow-xl"
+          className="overflow-hidden rounded-3xl border border-[var(--accent-rose)]/55 bg-[var(--bg-cream)]/95 shadow-xl"
           style={{ boxShadow: '0 24px 64px rgba(0,61,91,0.08)' }}
         >
           <div className="overflow-x-auto">
             <table className="min-w-[1040px] w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-[#F2D7D5]/40 bg-gradient-to-r from-[#fffefd] to-[#FDF8F5]">
-                  <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                <tr className="border-b border-[var(--accent-rose)]/40 bg-gradient-to-r from-[#fffefd] to-[var(--bg-cream)]">
+                  <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     Servicio
                   </th>
-                  <th className="px-3 py-3 text-center text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                  <th className="px-3 py-3 text-center text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     Sesiones/mes
                   </th>
-                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     Insumos
                   </th>
-                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     M. obra
                   </th>
-                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     Costo directo
                   </th>
-                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     Precio actual
                   </th>
-                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     Margen %
                   </th>
-                  <th className="px-3 py-3 text-center text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                  <th className="px-3 py-3 text-center text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     Margen obj.
                   </th>
-                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]/55">
+                  <th className="px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]/55">
                     Precio sugerido
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#F2D7D5]/35">
+              <tbody className="divide-y divide-[var(--accent-rose)]/35">
                 {filas.map((f) => (
                   <ServicioCostoRowBlock
                     key={f.id}
@@ -366,11 +366,11 @@ function ResumenMensualPanel({ resumen }: { resumen: ResumenMensual }) {
           <s.Icon className="h-6 w-6" />
         </div>
         <div className="flex-1">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#003D5B]/45">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--primary-navy)]/45">
             Punto de equilibrio mensual
           </p>
-          <h3 className="text-serif-premium mt-0.5 text-xl font-bold text-[#003D5B]">{s.titulo}</h3>
-          <p className="mt-1 max-w-2xl text-xs text-[#7A746E]">{s.sub}</p>
+          <h3 className="text-serif-premium mt-0.5 text-xl font-bold text-[var(--primary-navy)]">{s.titulo}</h3>
+          <p className="mt-1 max-w-2xl text-xs text-[var(--text-muted)]">{s.sub}</p>
 
           <div className="mt-4 grid gap-3 text-xs sm:grid-cols-4">
             <ResumenChip label="Ingresos totales" value={formatPrecioArs(resumen.ingreso_total)} />
@@ -384,14 +384,14 @@ function ResumenMensualPanel({ resumen }: { resumen: ResumenMensual }) {
           </div>
 
           <div className="mt-4">
-            <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-[#003D5B]/55">
+            <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-[var(--primary-navy)]/55">
               <span>Cobertura de costos fijos</span>
-              <span className="font-semibold tabular-nums text-[#003D5B]">{cobertura}</span>
+              <span className="font-semibold tabular-nums text-[var(--primary-navy)]">{cobertura}</span>
             </div>
             <div className="relative h-3 w-full overflow-hidden rounded-full bg-white/70">
               {/* línea 100% (break-even) */}
               <div
-                className="absolute inset-y-0 z-10 w-px bg-[#003D5B]/40"
+                className="absolute inset-y-0 z-10 w-px bg-[var(--primary-navy)]/40"
                 style={{ left: '66.66%' }}
                 title="Punto de equilibrio (100%)"
               />
@@ -404,15 +404,15 @@ function ResumenMensualPanel({ resumen }: { resumen: ResumenMensual }) {
                 transition={{ duration: 0.6 }}
               />
             </div>
-            <div className="mt-1 flex justify-between text-[9px] text-[#7A746E]">
+            <div className="mt-1 flex justify-between text-[9px] text-[var(--text-muted)]">
               <span>0%</span>
               <span>100% (break-even)</span>
               <span>150%+</span>
             </div>
           </div>
 
-          <p className="mt-3 text-[10px] text-[#7A746E]">
-            Fijos del mes: <strong className="text-[#003D5B]">{formatPrecioArs(resumen.costos_fijos_total)}</strong>{' '}
+          <p className="mt-3 text-[10px] text-[var(--text-muted)]">
+            Fijos del mes: <strong className="text-[var(--primary-navy)]">{formatPrecioArs(resumen.costos_fijos_total)}</strong>{' '}
             · {resumen.sesiones_estimadas_total} sesiones en total.
           </p>
         </div>
@@ -439,11 +439,11 @@ function ResumenChip({
         ? 'text-amber-800'
         : 'text-emerald-800'
     : highlight
-      ? 'text-[#003D5B]'
-      : 'text-[#003D5B]/85';
+      ? 'text-[var(--primary-navy)]'
+      : 'text-[var(--primary-navy)]/85';
   return (
     <div className="rounded-2xl border border-white/60 bg-white/70 px-3 py-2">
-      <p className="text-[9px] font-semibold uppercase tracking-wide text-[#003D5B]/45">{label}</p>
+      <p className="text-[9px] font-semibold uppercase tracking-wide text-[var(--primary-navy)]/45">{label}</p>
       <p className={`mt-0.5 font-bold tabular-nums ${toneClass}`}>{value}</p>
     </div>
   );
@@ -453,11 +453,11 @@ function Kpi({ label, value, warn }: { label: string; value: string; warn?: bool
   return (
     <div
       className={`rounded-3xl border px-5 py-4 shadow-sm ${
-        warn ? 'border-amber-300/80 bg-amber-50/90' : 'border-[#F2D7D5]/55 bg-[#FDF8F5]/95'
+        warn ? 'border-amber-300/80 bg-amber-50/90' : 'border-[var(--accent-rose)]/55 bg-[var(--bg-cream)]/95'
       }`}
     >
-      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/45">{label}</p>
-      <p className={`text-serif-premium mt-1 text-2xl font-bold ${warn ? 'text-amber-950' : 'text-[#003D5B]'}`}>
+      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]/45">{label}</p>
+      <p className={`text-serif-premium mt-1 text-2xl font-bold ${warn ? 'text-amber-950' : 'text-[var(--primary-navy)]'}`}>
         {value}
       </p>
     </div>
@@ -481,13 +481,13 @@ function SectionToggle({
     <button
       type="button"
       onClick={onToggle}
-      className={`flex w-full items-start justify-between gap-3 rounded-2xl border border-[#003D5B]/10 bg-white/85 px-5 py-4 text-left ${className}`}
+      className={`flex w-full items-start justify-between gap-3 rounded-2xl border border-[var(--primary-navy)]/10 bg-white/85 px-5 py-4 text-left ${className}`}
     >
       <div>
-        <h3 className="text-serif-premium text-base font-bold text-[#003D5B]">{title}</h3>
-        <p className="mt-1 text-xs text-[#7A746E]">{subtitle}</p>
+        <h3 className="text-serif-premium text-base font-bold text-[var(--primary-navy)]">{title}</h3>
+        <p className="mt-1 text-xs text-[var(--text-muted)]">{subtitle}</p>
       </div>
-      <ChevronDown className={`mt-1 h-4 w-4 shrink-0 text-[#003D5B]/55 transition ${open ? 'rotate-180' : ''}`} />
+      <ChevronDown className={`mt-1 h-4 w-4 shrink-0 text-[var(--primary-navy)]/55 transition ${open ? 'rotate-180' : ''}`} />
     </button>
   );
 }
@@ -512,10 +512,10 @@ function CostosFijosTable({
   }
 
   return (
-    <div className="mt-3 overflow-hidden rounded-2xl border border-[#F2D7D5]/50 bg-white/90">
+    <div className="mt-3 overflow-hidden rounded-2xl border border-[var(--accent-rose)]/50 bg-white/90">
       <table className="min-w-full text-sm">
         <thead>
-          <tr className="border-b bg-[#FDF8F5] text-[10px] uppercase tracking-wide text-[#003D5B]/55">
+          <tr className="border-b bg-[var(--bg-cream)] text-[10px] uppercase tracking-wide text-[var(--primary-navy)]/55">
             <th className="px-4 py-2 text-left">Concepto</th>
             <th className="px-4 py-2 text-right">$/mes</th>
             <th className="px-4 py-2 text-center">Activo</th>
@@ -531,13 +531,13 @@ function CostosFijosTable({
               else onReload();
             }} />
           ))}
-          <tr className="bg-[#FDF8F5]/80">
+          <tr className="bg-[var(--bg-cream)]/80">
             <td className="px-4 py-2">
               <input
                 value={draft.concepto}
                 onChange={(e) => setDraft((d) => ({ ...d, concepto: e.target.value }))}
                 placeholder="Ej. Alquiler local"
-                className="w-full rounded-lg border border-[#003D5B]/10 px-2 py-1.5 text-sm"
+                className="w-full rounded-lg border border-[var(--primary-navy)]/10 px-2 py-1.5 text-sm"
               />
             </td>
             <td className="px-4 py-2">
@@ -545,7 +545,7 @@ function CostosFijosTable({
                 value={draft.monto}
                 onChange={(e) => setDraft((d) => ({ ...d, monto: e.target.value }))}
                 placeholder="0"
-                className="w-full rounded-lg border border-[#003D5B]/10 px-2 py-1.5 text-right text-sm"
+                className="w-full rounded-lg border border-[var(--primary-navy)]/10 px-2 py-1.5 text-right text-sm"
               />
             </td>
             <td />
@@ -559,7 +559,7 @@ function CostosFijosTable({
                     () => setDraft({ concepto: '', monto: '', notas: '' })
                   );
                 }}
-                className="inline-flex items-center gap-1 rounded-full bg-[#003D5B] px-3 py-1.5 text-[10px] font-semibold uppercase text-white disabled:opacity-50"
+                className="inline-flex items-center gap-1 rounded-full bg-[var(--primary-navy)] px-3 py-1.5 text-[10px] font-semibold uppercase text-white disabled:opacity-50"
               >
                 <Plus className="h-3 w-3" /> Agregar
               </button>
@@ -592,14 +592,14 @@ function CostoFijoEditableRow({
         <input
           value={concepto}
           onChange={(e) => setConcepto(e.target.value)}
-          className="w-full rounded-lg border border-[#003D5B]/10 px-2 py-1.5 text-sm"
+          className="w-full rounded-lg border border-[var(--primary-navy)]/10 px-2 py-1.5 text-sm"
         />
       </td>
       <td className="px-4 py-2">
         <input
           value={monto}
           onChange={(e) => setMonto(e.target.value)}
-          className="w-full rounded-lg border border-[#003D5B]/10 px-2 py-1.5 text-right text-sm"
+          className="w-full rounded-lg border border-[var(--primary-navy)]/10 px-2 py-1.5 text-right text-sm"
         />
       </td>
       <td className="px-4 py-2 text-center">
@@ -614,7 +614,7 @@ function CostoFijoEditableRow({
               const m = parseInputNum(monto) ?? 0;
               void onSave({ id: row.id, concepto, monto_mensual: m, activo, notas: row.notas });
             }}
-            className="rounded-full border px-2 py-1 text-[10px] font-semibold text-[#003D5B]"
+            className="rounded-full border px-2 py-1 text-[10px] font-semibold text-[var(--primary-navy)]"
           >
             <Save className="inline h-3 w-3" />
           </button>
@@ -652,10 +652,10 @@ function InsumosTable({
   }
 
   return (
-    <div className="mt-3 overflow-hidden rounded-2xl border border-[#F2D7D5]/50 bg-white/90">
+    <div className="mt-3 overflow-hidden rounded-2xl border border-[var(--accent-rose)]/50 bg-white/90">
       <table className="min-w-full text-sm">
         <thead>
-          <tr className="border-b bg-[#FDF8F5] text-[10px] uppercase tracking-wide text-[#003D5B]/55">
+          <tr className="border-b bg-[var(--bg-cream)] text-[10px] uppercase tracking-wide text-[var(--primary-navy)]/55">
             <th className="px-4 py-2 text-left">Nombre</th>
             <th className="px-4 py-2 text-left">Unidad</th>
             <th className="px-4 py-2 text-right">Costo unit.</th>
@@ -678,7 +678,7 @@ function InsumosTable({
               }}
             />
           ))}
-          <tr className="bg-[#FDF8F5]/80">
+          <tr className="bg-[var(--bg-cream)]/80">
             <td className="px-4 py-2">
               <input
                 value={draft.nombre}
@@ -715,7 +715,7 @@ function InsumosTable({
                     activo: true,
                   }).then(() => setDraft({ nombre: '', unidad: 'unidad', costo: '' }));
                 }}
-                className="inline-flex items-center gap-1 rounded-full bg-[#003D5B] px-3 py-1.5 text-[10px] font-semibold uppercase text-white"
+                className="inline-flex items-center gap-1 rounded-full bg-[var(--primary-navy)] px-3 py-1.5 text-[10px] font-semibold uppercase text-white"
               >
                 <Plus className="h-3 w-3" /> Agregar
               </button>
@@ -863,7 +863,7 @@ function ServicioCostoRowBlock({
 
   const margenColor =
     fila.margen_actual_pct === null
-      ? 'text-[#7A746E]'
+      ? 'text-[var(--text-muted)]'
       : fila.bajo_margen
         ? 'text-amber-800 font-semibold'
         : 'text-emerald-800';
@@ -885,7 +885,7 @@ function ServicioCostoRowBlock({
         }`}
       >
         <td className="px-4 py-3">
-          <button type="button" onClick={onToggle} className="flex items-center gap-2 text-left font-semibold text-[#003D5B]">
+          <button type="button" onClick={onToggle} className="flex items-center gap-2 text-left font-semibold text-[var(--primary-navy)]">
             <ChevronDown className={`h-3.5 w-3.5 transition ${expanded ? 'rotate-180' : ''}`} />
             <span className="flex flex-col">
               <span className="flex items-center gap-1.5">
@@ -897,7 +897,7 @@ function ServicioCostoRowBlock({
                   />
                 ) : null}
               </span>
-              <span className="text-[10px] font-normal text-[#7A746E]">{fila.categoria_label}</span>
+              <span className="text-[10px] font-normal text-[var(--text-muted)]">{fila.categoria_label}</span>
             </span>
           </button>
           {sesionesSinPrecio ? (
@@ -913,7 +913,7 @@ function ServicioCostoRowBlock({
               type="button"
               onClick={() => bumpCantidad(-1)}
               disabled={disabled}
-              className="flex h-7 w-7 items-center justify-center rounded-full border border-[#003D5B]/15 text-[#003D5B] hover:bg-[#003D5B]/5 disabled:opacity-40"
+              className="flex h-7 w-7 items-center justify-center rounded-full border border-[var(--primary-navy)]/15 text-[var(--primary-navy)] hover:bg-[var(--primary-navy)]/5 disabled:opacity-40"
               title="Restar 1 sesión"
             >
               <Minus className="h-3 w-3" />
@@ -941,7 +941,7 @@ function ServicioCostoRowBlock({
                     ? 'border-emerald-500 bg-emerald-50'
                     : cantidadDirty
                       ? 'border-amber-400 bg-amber-50'
-                      : 'border-[#003D5B]/15'
+                      : 'border-[var(--primary-navy)]/15'
                 }`}
                 title="Sesiones esperadas / mes — Enter, blur o botones para guardar"
               />
@@ -953,7 +953,7 @@ function ServicioCostoRowBlock({
               type="button"
               onClick={() => bumpCantidad(1)}
               disabled={disabled}
-              className="flex h-7 w-7 items-center justify-center rounded-full border border-[#003D5B]/15 text-[#003D5B] hover:bg-[#003D5B]/5 disabled:opacity-40"
+              className="flex h-7 w-7 items-center justify-center rounded-full border border-[var(--primary-navy)]/15 text-[var(--primary-navy)] hover:bg-[var(--primary-navy)]/5 disabled:opacity-40"
               title="Sumar 1 sesión"
             >
               <Plus className="h-3 w-3" />
@@ -961,17 +961,17 @@ function ServicioCostoRowBlock({
           </div>
         </td>
 
-        <td className="px-3 py-3 text-right tabular-nums text-[#7A746E]">{formatPrecioArs(fila.costo_insumos)}</td>
+        <td className="px-3 py-3 text-right tabular-nums text-[var(--text-muted)]">{formatPrecioArs(fila.costo_insumos)}</td>
         <td className="px-3 py-3 text-right">
           <input
             value={manoEdit}
             onChange={(e) => setManoEdit(e.target.value)}
             onBlur={saveMargenMano}
-            className="w-20 rounded border border-[#003D5B]/10 px-1.5 py-1 text-right text-xs"
+            className="w-20 rounded border border-[var(--primary-navy)]/10 px-1.5 py-1 text-right text-xs"
             title="Mano de obra por sesión"
           />
         </td>
-        <td className="px-3 py-3 text-right font-semibold tabular-nums text-[#003D5B]">
+        <td className="px-3 py-3 text-right font-semibold tabular-nums text-[var(--primary-navy)]">
           {formatPrecioArs(fila.costo_directo)}
         </td>
         <td className="px-3 py-3 text-right tabular-nums">{formatPrecioArs(fila.precio)}</td>
@@ -989,13 +989,13 @@ function ServicioCostoRowBlock({
             value={margenEdit}
             onChange={(e) => setMargenEdit(e.target.value)}
             onBlur={saveMargenMano}
-            className="w-14 rounded border border-[#003D5B]/10 px-1 py-1 text-center text-xs"
+            className="w-14 rounded border border-[var(--primary-navy)]/10 px-1 py-1 text-center text-xs"
             title="Margen objetivo %"
           />
         </td>
         <td className="px-3 py-3 text-right">
           <div className="relative inline-flex items-center justify-end gap-1">
-            <span className="text-[10px] text-[#7A746E]">$</span>
+            <span className="text-[10px] text-[var(--text-muted)]">$</span>
             <input
               type="number"
               min={0}
@@ -1020,7 +1020,7 @@ function ServicioCostoRowBlock({
                   ? 'border-emerald-500 bg-emerald-50 text-emerald-900'
                   : precioInputDirty
                     ? 'border-amber-400 bg-amber-50 text-amber-900'
-                    : 'border-[#003D5B]/10 text-[#003D5B]'
+                    : 'border-[var(--primary-navy)]/10 text-[var(--primary-navy)]'
               }`}
               title="Tipeá un precio y apretá Enter o salí del campo para aplicarlo como nuevo precio del servicio. Esc para cancelar."
             />
@@ -1031,9 +1031,9 @@ function ServicioCostoRowBlock({
         </td>
       </tr>
       {expanded ? (
-        <tr className="bg-[#FDF8F5]/90">
+        <tr className="bg-[var(--bg-cream)]/90">
           <td colSpan={9} className="px-6 py-4">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#003D5B]/55">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--primary-navy)]/55">
               Insumos por sesión
             </p>
             <div className="flex flex-wrap gap-3">
@@ -1045,9 +1045,9 @@ function ServicioCostoRowBlock({
                   return (
                     <label
                       key={ins.id}
-                      className="flex items-center gap-2 rounded-xl border border-[#F2D7D5]/60 bg-white px-3 py-2 text-xs"
+                      className="flex items-center gap-2 rounded-xl border border-[var(--accent-rose)]/60 bg-white px-3 py-2 text-xs"
                     >
-                      <span className="font-medium text-[#003D5B]">{ins.nombre}</span>
+                      <span className="font-medium text-[var(--primary-navy)]">{ins.nombre}</span>
                       <input
                         type="number"
                         min={0}
@@ -1060,12 +1060,12 @@ function ServicioCostoRowBlock({
                         }}
                         className="w-16 rounded border px-1 py-0.5 text-right"
                       />
-                      <span className="text-[#7A746E]">{ins.unidad}</span>
+                      <span className="text-[var(--text-muted)]">{ins.unidad}</span>
                     </label>
                   );
                 })}
               {insumos.filter((i) => i.activo).length === 0 ? (
-                <p className="text-sm text-[#7A746E]">Agregá insumos en la sección de arriba.</p>
+                <p className="text-sm text-[var(--text-muted)]">Agregá insumos en la sección de arriba.</p>
               ) : null}
             </div>
           </td>

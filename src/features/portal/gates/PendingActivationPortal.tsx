@@ -48,17 +48,17 @@ export function PendingActivationPortal() {
             className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-[1.75rem]"
             style={{ background: 'linear-gradient(135deg, rgba(242,215,213,0.45), rgba(191,201,162,0.4))' }}
           >
-            <Sparkles className="h-10 w-10 text-[#003D5B]" />
+            <Sparkles className="h-10 w-10 text-[var(--primary-navy)]" />
           </div>
-          <h1 className="text-serif-premium mb-4 text-xl font-bold text-[#003D5B]">
+          <h1 className="text-serif-premium mb-4 text-xl font-bold text-[var(--primary-navy)]">
             Cuenta pendiente de activación
           </h1>
-          <p className="text-serif-premium text-[15px] font-semibold leading-relaxed text-[#003D5B]">
+          <p className="text-serif-premium text-[15px] font-semibold leading-relaxed text-[var(--primary-navy)]">
             ¡Hola! Tu cuenta está en proceso de activación. Un administrador de {brand.shortName} verificará tus datos y te
             avisaremos por WhatsApp en cuanto puedas acceder a tu portal.
           </p>
-     <p className="mt-6 flex items-start justify-center gap-2 rounded-2xl border border-[#BFC9A2]/40 bg-[#BFC9A2]/10 px-5 py-4 text-left text-xs leading-relaxed text-[#003D5B]/90">
-            <Heart className="mt-0.5 h-4 w-4 shrink-0 text-[#F2D7D5]" />
+     <p className="mt-6 flex items-start justify-center gap-2 rounded-2xl border border-[var(--accent-sage)]/40 bg-[var(--accent-sage)]/10 px-5 py-4 text-left text-xs leading-relaxed text-[var(--primary-navy)]/90">
+            <Heart className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-rose)]" />
             Es un paso habitual: nos aseguramos de que tus datos coincidan con recepción para cuidarte con la mejor
             experiencia desde el día uno.
           </p>
@@ -67,7 +67,7 @@ export function PendingActivationPortal() {
             onClick={handleLogout}
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.99 }}
-            className="mt-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/50 underline underline-offset-4 hover:text-[#003D5B]/75"
+            className="mt-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/50 underline underline-offset-4 hover:text-[var(--primary-navy)]/75"
           >
             Cerrar sesión y volver al inicio
           </motion.button>

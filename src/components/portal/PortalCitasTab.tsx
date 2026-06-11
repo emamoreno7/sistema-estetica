@@ -194,7 +194,7 @@ export function PortalCitasTab(props: {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={openBooking}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#BFC9A2] to-[#003D5B] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-white shadow-lg"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--accent-sage)] to-[var(--primary-navy)] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-white shadow-lg"
           >
             <Plus className="h-4 w-4" /> + Agregar servicio
           </motion.button>
@@ -215,7 +215,7 @@ export function PortalCitasTab(props: {
               type="button"
                 whileTap={{ scale: 0.98 }}
                 onClick={openBooking}
-                className="mt-6 rounded-full bg-[#003D5B] px-8 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-md"
+                className="mt-6 rounded-full bg-[var(--primary-navy)] px-8 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-md"
               >
                 Nueva reserva
               </motion.button>
@@ -225,7 +225,7 @@ export function PortalCitasTab(props: {
       </motion.div>
 
       {proximaLoading && (
-        <p className="flex items-center gap-2 text-sm text-[#7A746E]">
+        <p className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
           <Loader2 className="h-4 w-4 animate-spin" /> Actualizando turnos...
         </p>
       )}
@@ -244,9 +244,9 @@ export function PortalCitasTab(props: {
           animate={{ opacity: 1, y: 0 }}
           className="glass-strong overflow-hidden rounded-2xl p-8 text-center"
         >
-          <CalendarIcon className="mx-auto mb-4 h-8 w-8 text-[#003D5B]" />
-          <h3 className="text-serif-premium text-lg font-bold text-[#003D5B]">Reserva tu turno con calendario</h3>
-          <p className="mt-2 text-sm text-[#7A746E]">
+          <CalendarIcon className="mx-auto mb-4 h-8 w-8 text-[var(--primary-navy)]" />
+          <h3 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">Reserva tu turno con calendario</h3>
+          <p className="mt-2 text-sm text-[var(--text-muted)]">
             Servicio elegido en tu perfil: <strong>{activeTreatment.nombre}</strong>.
           </p>
           <motion.button
@@ -254,7 +254,7 @@ export function PortalCitasTab(props: {
             onClick={openBooking}
             whileTap={{ scale: 0.98 }}
             className="mx-auto mt-6 flex rounded-full px-10 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-lg"
-            style={{ background: '#003D5B' }}
+            style={{ background: 'var(--primary-navy)' }}
           >
             Ver calendario y horarios disponibles
           </motion.button>
@@ -263,7 +263,7 @@ export function PortalCitasTab(props: {
 
       {sessions.some((s) => s.estado !== 'completada') ? (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass-strong rounded-2xl p-6">
-          <h3 className="text-serif-premium mb-4 text-lg font-bold text-[#003D5B]">Sesiones registradas</h3>
+          <h3 className="text-serif-premium mb-4 text-lg font-bold text-[var(--primary-navy)]">Sesiones registradas</h3>
           <div className="space-y-3">
             {sessions
               .filter((s) => s.estado !== 'completada')
@@ -273,16 +273,16 @@ export function PortalCitasTab(props: {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.1 * i }}
-                  className="flex items-center justify-between rounded-xl bg-[#FDF8F5]/75 p-4"
+                  className="flex items-center justify-between rounded-xl bg-[var(--bg-cream)]/75 p-4"
                 >
                   <div className="flex gap-3">
-                    <CalendarIcon className="h-5 w-5 shrink-0 text-[#003D5B]" />
+                    <CalendarIcon className="h-5 w-5 shrink-0 text-[var(--primary-navy)]" />
                     <div>
-                      <p className="text-sm font-semibold text-[#003D5B]">Sesion {s.nro}</p>
-                      <p className="text-xs text-[#7A746E]">Recepcion completa fecha y lugar.</p>
+                      <p className="text-sm font-semibold text-[var(--primary-navy)]">Sesion {s.nro}</p>
+                      <p className="text-xs text-[var(--text-muted)]">Recepcion completa fecha y lugar.</p>
                     </div>
                   </div>
-                  <span className="text-xs text-[#7A746E]">{s.estado}</span>
+                  <span className="text-xs text-[var(--text-muted)]">{s.estado}</span>
                 </motion.div>
               ))}
           </div>
@@ -364,33 +364,33 @@ function ProximaHeroDesdeDb(props: {
         <div className="rounded-lg p-1.5" style={{ background: 'var(--primary-navy)' }}>
           <CalendarIcon className="h-4 w-4 text-white" />
         </div>
-        <h3 className="text-serif-premium text-lg font-bold text-[#003D5B]">Proxima Cita</h3>
-        <span className="ml-auto rounded-full bg-[#BFC9A2]/25 px-3 py-1 text-[10px] font-semibold text-[#003D5B]">
+        <h3 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">Proxima Cita</h3>
+        <span className="ml-auto rounded-full bg-[var(--accent-sage)]/25 px-3 py-1 text-[10px] font-semibold text-[var(--primary-navy)]">
           {estadoLbl}
         </span>
       </div>
 
-      <div className="mb-4 overflow-hidden rounded-xl bg-[#F2D7D5]/20">
+      <div className="mb-4 overflow-hidden rounded-xl bg-[var(--accent-rose)]/20">
         <div className="flex flex-col sm:flex-row">
-          <div className="flex flex-col items-center justify-center border-b border-[#F2D7D5]/40 p-6 sm:border-b-0 sm:border-r sm:px-8">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#003D5B]/45">
+          <div className="flex flex-col items-center justify-center border-b border-[var(--accent-rose)]/40 p-6 sm:border-b-0 sm:border-r sm:px-8">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[var(--primary-navy)]/45">
               {format(fecha, 'MMMM', { locale: es })}
             </p>
-            <p className="text-serif-premium text-4xl font-bold text-[#003D5B]">{fecha.getDate()}</p>
-            <p className="text-xs text-[#7A746E]">{format(fecha, 'EEEE', { locale: es })}</p>
+            <p className="text-serif-premium text-4xl font-bold text-[var(--primary-navy)]">{fecha.getDate()}</p>
+            <p className="text-xs text-[var(--text-muted)]">{format(fecha, 'EEEE', { locale: es })}</p>
           </div>
           <div className="flex-1 space-y-3 p-5">
             <div className="flex items-center gap-3">
-              <Clock className="h-4 w-4 text-[#003D5B]" />
-              <span className="text-sm font-medium text-[#003D5B]">{hhmmEtiqueta(cita.hora)} hs — {cita.servicio}</span>
+              <Clock className="h-4 w-4 text-[var(--primary-navy)]" />
+              <span className="text-sm font-medium text-[var(--primary-navy)]">{hhmmEtiqueta(cita.hora)} hs — {cita.servicio}</span>
             </div>
             <div className="flex items-center gap-3">
-              <Stethoscope className="h-4 w-4 text-[#003D5B]" />
-              <span className="text-sm font-medium text-[#003D5B]">Coordinacion con cepcion — {brand.supportLabel}</span>
+              <Stethoscope className="h-4 w-4 text-[var(--primary-navy)]" />
+              <span className="text-sm font-medium text-[var(--primary-navy)]">Coordinacion con cepcion — {brand.supportLabel}</span>
             </div>
             <div className="flex items-center gap-3">
-              <MapPin className="h-4 w-4 text-[#003D5B]" />
-              <span className="text-sm font-medium text-[#003D5B]">Sede segun valoracion profesional</span>
+              <MapPin className="h-4 w-4 text-[var(--primary-navy)]" />
+              <span className="text-sm font-medium text-[var(--primary-navy)]">Sede segun valoracion profesional</span>
             </div>
           </div>
         </div>
@@ -403,7 +403,7 @@ function ProximaHeroDesdeDb(props: {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#BFC9A2] to-[#003D5B] px-5 py-3 text-sm font-semibold text-white shadow-lg"
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--accent-sage)] to-[var(--primary-navy)] px-5 py-3 text-sm font-semibold text-white shadow-lg"
         >
           <CalendarPlus className="h-4 w-4" /> Agregar al calendario
         </motion.a>
@@ -413,16 +413,16 @@ function ProximaHeroDesdeDb(props: {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#F2D7D5]/60 bg-[#FDF8F5]/75 px-5 py-3 text-sm font-semibold text-[#7A746E]"
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--accent-rose)]/60 bg-[var(--bg-cream)]/75 px-5 py-3 text-sm font-semibold text-[var(--text-muted)]"
         >
-          <MessageCircle className="h-4 w-4 text-[#003D5B]" /> Reagendar
+          <MessageCircle className="h-4 w-4 text-[var(--primary-navy)]" /> Reagendar
         </motion.a>
         <motion.button
           type="button"
           onClick={props.onAddService}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#003D5B]/15 px-5 py-3 text-sm font-semibold text-[#003D5B]"
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--primary-navy)]/15 px-5 py-3 text-sm font-semibold text-[var(--primary-navy)]"
         >
           <Plus className="h-4 w-4" /> Agregar otro servicio
         </motion.button>
@@ -451,35 +451,35 @@ function ProximaHeroPlan(props: {
         <div className="rounded-lg p-1.5" style={{ background: 'var(--primary-navy)' }}>
           <CalendarIcon className="h-4 w-4 text-white" />
         </div>
-        <h3 className="text-serif-premium text-lg font-bold text-[#003D5B]">Proxima Cita</h3>
-        <span className="ml-auto rounded-full bg-[#BFC9A2]/25 px-3 py-1 text-[10px] font-semibold text-[#003D5B]">
+        <h3 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">Proxima Cita</h3>
+        <span className="ml-auto rounded-full bg-[var(--accent-sage)]/25 px-3 py-1 text-[10px] font-semibold text-[var(--primary-navy)]">
           Plan activo
         </span>
       </div>
 
-      <div className="mb-4 overflow-hidden rounded-xl bg-[#F2D7D5]/20">
+      <div className="mb-4 overflow-hidden rounded-xl bg-[var(--accent-rose)]/20">
         <div className="flex flex-col sm:flex-row">
-          <div className="flex flex-col items-center justify-center border-b border-[#F2D7D5]/40 p-6 sm:border-b-0 sm:border-r sm:px-8">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#F2D7D5]">
+          <div className="flex flex-col items-center justify-center border-b border-[var(--accent-rose)]/40 p-6 sm:border-b-0 sm:border-r sm:px-8">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent-rose)]">
               {ok ? format(fecha, 'MMMM', { locale: es }) : '—'}
             </p>
-            <p className="text-serif-premium text-4xl font-bold text-[#003D5B]">
+            <p className="text-serif-premium text-4xl font-bold text-[var(--primary-navy)]">
               {ok ? fecha.getDate() : '—'}
             </p>
-            <p className="text-xs text-[#7A746E]">{ok ? format(fecha, 'EEEE', { locale: es }) : ''}</p>
+            <p className="text-xs text-[var(--text-muted)]">{ok ? format(fecha, 'EEEE', { locale: es }) : ''}</p>
           </div>
           <div className="flex-1 space-y-3 p-5">
             <div className="flex items-center gap-3">
-              <Clock className="h-4 w-4 text-[#003D5B]" />
-              <span className="text-sm font-medium text-[#003D5B]">{plan.horaProxima} hs — {plan.nombre}</span>
+              <Clock className="h-4 w-4 text-[var(--primary-navy)]" />
+              <span className="text-sm font-medium text-[var(--primary-navy)]">{plan.horaProxima} hs — {plan.nombre}</span>
             </div>
             <div className="flex items-center gap-3">
-              <Stethoscope className="h-4 w-4 text-[#003D5B]" />
-              <span className="text-sm font-medium text-[#003D5B]">{plan.profesional}</span>
+              <Stethoscope className="h-4 w-4 text-[var(--primary-navy)]" />
+              <span className="text-sm font-medium text-[var(--primary-navy)]">{plan.profesional}</span>
             </div>
             <div className="flex items-center gap-3">
-              <MapPin className="h-4 w-4 text-[#003D5B]" />
-              <span className="text-sm font-medium text-[#003D5B]">{plan.sucursal}</span>
+              <MapPin className="h-4 w-4 text-[var(--primary-navy)]" />
+              <span className="text-sm font-medium text-[var(--primary-navy)]">{plan.sucursal}</span>
             </div>
           </div>
         </div>
@@ -490,7 +490,7 @@ function ProximaHeroPlan(props: {
           type="button"
           onClick={props.onAdd}
           whileHover={{ scale: 1.02 }}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#BFC9A2] to-[#003D5B] px-5 py-3 text-sm font-semibold text-white shadow-lg"
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--accent-sage)] to-[var(--primary-navy)] px-5 py-3 text-sm font-semibold text-white shadow-lg"
         >
           <Plus className="h-4 w-4" /> + Agregar otro servicio
         </motion.button>
@@ -506,7 +506,7 @@ function ProximaHeroPlan(props: {
           href="tel:+542634652008"
           className="flex flex-1 items-center justify-center gap-2 rounded-xl border px-5 py-3 text-sm font-semibold"
         >
-          <Phone className="h-4 w-4 text-[#003D5B]" /> Llamar
+          <Phone className="h-4 w-4 text-[var(--primary-navy)]" /> Llamar
         </motion.a>
       </div>
     </motion.div>
@@ -529,7 +529,7 @@ function MesCalendarioUniversal(props: {
     <div
       className="rounded-3xl p-5 sm:p-6"
       style={{
-        background: 'var(--bg-cream, #FDF8F5)',
+        background: 'var(--bg-cream, var(--bg-cream))',
         border: '1px solid rgba(242,215,213,0.45)',
         boxShadow: '0 12px 40px rgba(0,61,91,0.04)',
       }}
@@ -589,7 +589,7 @@ function MesCalendarioUniversal(props: {
               }`}
               style={
                 sel && !past && !mute
-                  ? { background: 'linear-gradient(135deg, #BFC9A2 0%, #003D5B 100%)', color: '#FFFFFF', boxShadow: '0 8px 22px rgba(0,61,91,0.18)', border: 'none' }
+                  ? { background: 'linear-gradient(135deg, var(--accent-sage) 0%, var(--primary-navy) 100%)', color: '#FFFFFF', boxShadow: '0 8px 22px rgba(0,61,91,0.18)', border: 'none' }
                   : { color: mute ? 'transparent' : 'var(--primary-navy)', background: 'transparent', border: mute ? 'none' : '1px solid transparent' }
               }
             >
@@ -685,10 +685,10 @@ function CitasBookingModal(props: {
       <motion.div
         layout
         className="pointer-events-auto relative z-[9999] flex max-h-[94dvh] w-full max-w-lg flex-col overflow-hidden rounded-3xl shadow-2xl"
-        style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(242,215,213,0.75)', background: 'var(--bg-cream, #FDF8F5)', boxShadow: '0 32px 64px rgba(0,61,91,0.12)' }}
+        style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(242,215,213,0.75)', background: 'var(--bg-cream, var(--bg-cream))', boxShadow: '0 32px 64px rgba(0,61,91,0.12)' }}
       >
         <div className="max-h-[94dvh] overflow-y-auto overscroll-contain p-5 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:p-8">
-          <button type="button" className="absolute right-5 top-5 z-[2] rounded-full p-2 text-[#003D5B]/35 hover:bg-[#F2D7D5]/50" onClick={props.onClose} aria-label="Cerrar">
+          <button type="button" className="absolute right-5 top-5 z-[2] rounded-full p-2 text-[var(--primary-navy)]/35 hover:bg-[var(--accent-rose)]/50" onClick={props.onClose} aria-label="Cerrar">
             <X className="h-5 w-5" />
           </button>
 
@@ -698,7 +698,7 @@ function CitasBookingModal(props: {
           </p>
 
           <section aria-current={wizardStep === 1 ? 'step' : undefined}>
-            <p className="mb-3 -[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/40">1 · Elegi el servicio</p>
+            <p className="mb-3 -[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/40">1 · Elegi el servicio</p>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {[...CITAS_SERVICIOS_RESERVABLES].map((s) => (
                 <button
@@ -723,7 +723,7 @@ function CitasBookingModal(props: {
                 whileTap={{ scale: canGoStep2 ? 0.98 : 1 }}
                 onClick={() => setWizardStep(2)}
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-full py-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white disabled:pointer-events-none disabled:opacity-40"
-                style={{ background: 'linear-gradient(90deg, #BFC9A2 0%, #003D5B 100%)', boxShadow: '0 10px 28px rgba(0,61,91,0.15)' }}
+                style={{ background: 'linear-gradient(90deg, var(--accent-sage) 0%, var(--primary-navy) 100%)', boxShadow: '0 10px 28px rgba(0,61,91,0.15)' }}
               >
                 Siguiente: abrir calendario y horarios
                 <ChevronRight className="h-4 w-4" />
@@ -733,15 +733,15 @@ function CitasBookingModal(props: {
 
           {wizardStep === 2 ? (
             <>
-              <div className="my-8 border-t border-[#F2D7D5]/60 pt-8">
+              <div className="my-8 border-t border-[var(--accent-rose)]/60 pt-8">
                 <div className="mb-6 flex flex-wrap items-center gap-3">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#003D5B]/40">2 · Elegi dia y horario</p>
-                  <button type="button" className="ml-auto rounded-full border border-[#003D5B]/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#003D5B]" onClick={() => { setWizardStep(1); setHora(null); }}>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--primary-navy)]/40">2 · Elegi dia y horario</p>
+                  <button type="button" className="ml-auto rounded-full border border-[var(--primary-navy)]/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-navy)]" onClick={() => { setWizardStep(1); setHora(null); }}>
                     Cambiar servicio
                   </button>
                 </div>
                 {servicio ? (
-                  <p className="mb-4 rounded-2xl border border-[#BFC9A2]/35 bg-[#BFC9A2]/10 px-4 py-3 text-xs text-[#003D5B]">
+                  <p className="mb-4 rounded-2xl border border-[var(--accent-sage)]/35 bg-[var(--accent-sage)]/10 px-4 py-3 text-xs text-[var(--primary-navy)]">
                     <strong>Servicio:</strong> {servicio}
                   </p>
                 ) : null}
@@ -750,9 +750,9 @@ function CitasBookingModal(props: {
 
                 <div className="mt-6 rounded-3xl border p-5" style={{ borderColor: 'rgba(242,215,213,0.5)', background: 'rgba(253,248,245,0.85)', boxShadow: '0 8px 28px rgba(0,61,91,0.04)' }}>
                   <div className="mb-3 flex flex-wrap items-center gap-2">
-                    <Clock className="h-4 w-4 shrink-0 text-[#003D5B]" />
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#003D5B]/55">Horarios libres este dia</span>
-                    {busyOcc ? <Loader2 className="h-3.5 w-3.5 animate-spin text-[#003D5B]" /> : null}
+                    <Clock className="h-4 w-4 shrink-0 text-[var(--primary-navy)]" />
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--primary-navy)]/55">Horarios libres este dia</span>
+                    {busyOcc ? <Loader2 className="h-3.5 w-3.5 animate-spin text-[var(--primary-navy)]" /> : null}
                   </div>
 
                   {availDegraded ? (
@@ -764,7 +764,7 @@ function CitasBookingModal(props: {
                   ) : null}
 
                   {slots.length === 0 && !busyOcc ? (
-                    <p className="text-sm text-[#7A746E]">No quedaron horas libres en esta fecha, proba otro dia.</p>
+                    <p className="text-sm text-[var(--text-muted)]">No quedaron horas libres en esta fecha, proba otro dia.</p>
                   ) : (
                     <div role="radiogroup" aria-label="Elegi horario" className="flex flex-wrap gap-2">
                       {slots.map((hh) => (
@@ -775,7 +775,7 @@ function CitasBookingModal(props: {
                           aria-checked={hora === hh}
                           onClick={() => setHora(hh)}
                           className={`min-h-[44px] rounded-xl border px-4 py-2.5 text-sm font-semibold shadow-sm transition ${
-                            hora === hh ? 'border-[#003D5B] bg-[#003D5B] text-white' : 'border-[#003D5B]/14 bg-white text-[#003D5B] hover:bg-[#F2D7D5]/25'
+                            hora === hh ? 'border-[var(--primary-navy)] bg-[var(--primary-navy)] text-white' : 'border-[var(--primary-navy)]/14 bg-white text-[var(--primary-navy)] hover:bg-[var(--accent-rose)]/25'
                           }`}
                         >
                           {hhmmEtiqueta(hh)} hs
@@ -791,7 +791,7 @@ function CitasBookingModal(props: {
                   whileTap={{ scale: canSubmit ? 0.98 : 1 }}
                   onClick={() => void confirmar()}
                   className="mt-8 flex w-full items-center justify-center gap-2 rounded-full py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white disabled:pointer-events-none disabled:opacity-40"
-                  style={{ background: 'linear-gradient(90deg, #BFC9A2 0%, #003D5B 100%)', boxShadow: '0 10px 28px rgba(0,61,91,0.15)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--accent-sage) 0%, var(--primary-navy) 100%)', boxShadow: '0 10px 28px rgba(0,61,91,0.15)' }}
                 >
                   {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                   {saving ? 'Enviando solicitud...' : 'Solicitar este turno'}
@@ -842,17 +842,17 @@ function BookingSuccessCrossSellModal(props: {
       <button type="button" className="absolute inset-0 backdrop-blur-sm" style={{ background: 'rgba(0,61,91,0.38)' }} onClick={props.onClose} aria-label="Cerrar" />
       <motion.div
         className="relative z-[9999] max-h-[94dvh] w-full max-w-md overflow-y-auto rounded-3xl p-6 pb-[calc(2rem+env(safe-area-inset-bottom))] shadow-2xl sm:p-8"
-        style={{ background: 'var(--bg-cream, #FDF8F5)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(242,215,213,0.7)', boxShadow: '0 28px 56px rgba(0,61,91,0.12)' }}
+        style={{ background: 'var(--bg-cream, var(--bg-cream))', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(242,215,213,0.7)', boxShadow: '0 28px 56px rgba(0,61,91,0.12)' }}
         initial={{ scale: 0.95, y: 10 }}
         animate={{ scale: 1, y: 0 }}
       >
-        <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-[#BFC9A2]" />
+        <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-[var(--accent-sage)]" />
         <p className="text-center text-serif-premium text-lg font-semibold leading-relaxed" style={{ color: 'var(--primary-navy)' }}>
           Tu solicitud llego a recepcion.
         </p>
         <p className="mt-2 text-center text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
           Vamos a confirmarte el turno por WhatsApp en breve. Mientras tanto figura como{" "}
-          <strong className="text-[#003D5B]">pendiente</strong> en tu agenda.
+          <strong className="text-[var(--primary-navy)]">pendiente</strong> en tu agenda.
         </p>
         <p className="mt-4 text-center text-xs" style={{ color: 'var(--text-muted)' }}>
           {props.cita.servicio} · {format(fecha, "d 'de' MMMM", { locale: es })} a las {hhmmEtiqueta(props.cita.hora)} hs
@@ -872,9 +872,9 @@ function BookingSuccessCrossSellModal(props: {
         </motion.a>
 
         {reco ? (
-          <div className="mt-6 rounded-2xl border border-[#BFC9A2]/40 bg-[#BFC9A2]/12 p-5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#003D5B]/50">Recomendacion profesional</p>
-            <p className="mt-2 text-sm font-semibold text-[#003D5B]">Te sugerimos combinarlo con {reco.complemento}</p>
+          <div className="mt-6 rounded-2xl border border-[var(--accent-sage)]/40 bg-[var(--accent-sage)]/12 p-5">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--primary-navy)]/50">Recomendacion profesional</p>
+            <p className="mt-2 text-sm font-semibold text-[var(--primary-navy)]">Te sugerimos combinarlo con {reco.complemento}</p>
             <p className="mt-2 text-xs leading-relaxed text-[#455F70]">{reco.motivoProfesional}</p>
             <motion.a
               href={waHrefComplement(reco.complemento, reco.motivoProfesional)}

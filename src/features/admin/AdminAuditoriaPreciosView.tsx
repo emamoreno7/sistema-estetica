@@ -178,7 +178,7 @@ export default function AdminAuditoriaPreciosView() {
             whileTap={{ scale: 0.98 }}
             disabled={sondeando || busy}
             onClick={() => void onSondear()}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#003D5B] to-[#0a5a82] px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--primary-navy)] to-[#0a5a82] px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow disabled:opacity-50"
             title="Consulta la API de Mercado Libre y los proveedores con URL para detectar variaciones"
           >
             {sondeando ? (
@@ -202,7 +202,7 @@ export default function AdminAuditoriaPreciosView() {
             type="button"
             whileTap={{ scale: 0.98 }}
             onClick={() => void load()}
-            className="inline-flex items-center gap-2 rounded-full border border-[#BFC9A2]/50 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-sage)]/50 bg-white/90 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--primary-navy)]"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
             Actualizar
@@ -258,8 +258,8 @@ export default function AdminAuditoriaPreciosView() {
               onClick={() => setFiltro(tab.id)}
               className={`rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
                 active
-                  ? 'bg-[#003D5B] text-white shadow'
-                  : 'border border-[#003D5B]/12 bg-white/85 text-[#003D5B]/75'
+                  ? 'bg-[var(--primary-navy)] text-white shadow'
+                  : 'border border-[var(--primary-navy)]/12 bg-white/85 text-[var(--primary-navy)]/75'
               }`}
             >
               {tab.label}
@@ -269,20 +269,20 @@ export default function AdminAuditoriaPreciosView() {
       </div>
 
       <div
-        className="overflow-hidden rounded-3xl border border-[#F2D7D5]/55 bg-[#FDF8F5]/95 shadow-xl"
+        className="overflow-hidden rounded-3xl border border-[var(--accent-rose)]/55 bg-[var(--bg-cream)]/95 shadow-xl"
         style={{ boxShadow: '0 24px 64px rgba(0,61,91,0.08)' }}
       >
         {loading ? (
-          <div className="flex items-center justify-center gap-3 py-20 text-[#003D5B]/55">
+          <div className="flex items-center justify-center gap-3 py-20 text-[var(--primary-navy)]/55">
             <Loader2 className="h-6 w-6 animate-spin" />
             Cargando insumos…
           </div>
         ) : filtered.length === 0 ? (
-          <div className="px-6 py-16 text-center text-sm text-[#7A746E]">
+          <div className="px-6 py-16 text-center text-sm text-[var(--text-muted)]">
             No hay insumos en este criterio.
           </div>
         ) : (
-          <ul className="divide-y divide-[#F2D7D5]/35">
+          <ul className="divide-y divide-[var(--accent-rose)]/35">
             {filtered.map((r) => (
               <InsumoAuditRow
                 key={r.id}
@@ -313,12 +313,12 @@ export default function AdminAuditoriaPreciosView() {
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        <p className="rounded-2xl border border-[#003D5B]/8 bg-white/70 px-4 py-3 text-xs text-[#7A746E]">
+        <p className="rounded-2xl border border-[var(--primary-navy)]/8 bg-white/70 px-4 py-3 text-xs text-[var(--text-muted)]">
           <strong>Sondeo automático:</strong> el botón <em>&quot;Sondear precios ahora&quot;</em> consulta cada
           proveedor que tenga URL. Links de <strong>Mercado Libre</strong> usan su API pública (muy estable). Links
           de otros sitios usan scraping genérico (mejor esfuerzo — algunos sitios pueden bloquearlo).
         </p>
-        <p className="rounded-2xl border border-[#003D5B]/8 bg-white/70 px-4 py-3 text-xs text-[#7A746E]">
+        <p className="rounded-2xl border border-[var(--primary-navy)]/8 bg-white/70 px-4 py-3 text-xs text-[var(--text-muted)]">
           <strong>Tip:</strong> el sistema registra automáticamente el historial cada vez que cambia un costo.
           Si confirmás manualmente que el precio sigue igual, usá &quot;Verificar&quot;: queda registrado sin
           alterar el costo.
@@ -334,14 +334,14 @@ function SondeoResumenPanel({ resumen, onClose }: { resumen: SondeoSummary; onCl
     <motion.div
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-6 rounded-3xl border border-[#003D5B]/15 bg-gradient-to-br from-white to-[#FDF8F5] p-5 shadow-lg"
+      className="mb-6 rounded-3xl border border-[var(--primary-navy)]/15 bg-gradient-to-br from-white to-[var(--bg-cream)] p-5 shadow-lg"
     >
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#003D5B]/55">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--primary-navy)]/55">
             Último sondeo
           </p>
-          <h3 className="text-serif-premium text-xl font-bold text-[#003D5B]">
+          <h3 className="text-serif-premium text-xl font-bold text-[var(--primary-navy)]">
             {resumen.total === 0
               ? 'No había proveedores activos para sondear'
               : `${resumen.total} proveedor${resumen.total === 1 ? '' : 'es'} consultado${resumen.total === 1 ? '' : 's'}`}
@@ -350,7 +350,7 @@ function SondeoResumenPanel({ resumen, onClose }: { resumen: SondeoSummary; onCl
         <button
           type="button"
           onClick={onClose}
-          className="rounded-full border border-[#003D5B]/12 px-2.5 py-1 text-[10px] font-semibold uppercase text-[#003D5B]/70"
+          className="rounded-full border border-[var(--primary-navy)]/12 px-2.5 py-1 text-[10px] font-semibold uppercase text-[var(--primary-navy)]/70"
         >
           Cerrar
         </button>
@@ -381,8 +381,8 @@ function SondeoResumenPanel({ resumen, onClose }: { resumen: SondeoSummary; onCl
                   className="flex items-center justify-between gap-3 rounded-xl border border-red-200 bg-red-50/60 px-3 py-2 text-xs"
                 >
                   <div>
-                    <p className="font-semibold text-[#003D5B]">{c.insumo_nombre || c.insumo_id.slice(0, 8)}</p>
-                    <p className="text-[10px] text-[#7A746E]">
+                    <p className="font-semibold text-[var(--primary-navy)]">{c.insumo_nombre || c.insumo_id.slice(0, 8)}</p>
+                    <p className="text-[10px] text-[var(--text-muted)]">
                       {c.source === 'ml_api' ? 'Mercado Libre API' : 'Scraper genérico'} ·{' '}
                       {formatPrecioArs(c.precio_anterior ?? 0)} → {formatPrecioArs(c.precio_detectado ?? 0)}
                     </p>
@@ -412,8 +412,8 @@ function SondeoResumenPanel({ resumen, onClose }: { resumen: SondeoSummary; onCl
               .filter((d) => d.status === 'error')
               .slice(0, 10)
               .map((d) => (
-                <li key={d.proveedor_id} className="text-[#7A746E]">
-                  <strong className="text-[#003D5B]">{d.insumo_nombre || d.proveedor_id.slice(0, 8)}</strong>:{' '}
+                <li key={d.proveedor_id} className="text-[var(--text-muted)]">
+                  <strong className="text-[var(--primary-navy)]">{d.insumo_nombre || d.proveedor_id.slice(0, 8)}</strong>:{' '}
                   {d.error_msg ?? '—'}
                 </li>
               ))}
@@ -437,7 +437,7 @@ function ResumenChip({
     emerald: 'border-emerald-300 bg-emerald-50 text-emerald-900',
     red: 'border-red-300 bg-red-50 text-red-900',
     amber: 'border-amber-300 bg-amber-50 text-amber-900',
-    neutral: 'border-[#003D5B]/10 bg-white text-[#003D5B]',
+    neutral: 'border-[var(--primary-navy)]/10 bg-white text-[var(--primary-navy)]',
   }[tone];
   return (
     <div className={`rounded-2xl border px-3 py-2 ${styles}`}>
@@ -459,7 +459,7 @@ function KpiCard({
   const styles = {
     amber: 'border-amber-300/80 bg-amber-50/90 text-amber-950',
     red: 'border-red-300/80 bg-red-50/90 text-red-950',
-    neutral: 'border-[#F2D7D5]/55 bg-[#FDF8F5]/95 text-[#003D5B]',
+    neutral: 'border-[var(--accent-rose)]/55 bg-[var(--bg-cream)]/95 text-[var(--primary-navy)]',
   } as const;
   return (
     <div className={`rounded-3xl border px-5 py-4 shadow-sm ${styles[tone]}`}>
@@ -538,10 +538,10 @@ function InsumoAuditRow({
     <li className="px-6 py-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button type="button" onClick={onToggle} className="flex items-center gap-3 text-left">
-          <ChevronDown className={`h-4 w-4 text-[#003D5B]/55 transition ${expanded ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`h-4 w-4 text-[var(--primary-navy)]/55 transition ${expanded ? 'rotate-180' : ''}`} />
           <div>
-            <p className="text-sm font-semibold text-[#003D5B]">{row.nombre}</p>
-            <p className="mt-0.5 text-xs text-[#7A746E]">
+            <p className="text-sm font-semibold text-[var(--primary-navy)]">{row.nombre}</p>
+            <p className="mt-0.5 text-xs text-[var(--text-muted)]">
               {formatPrecioArs(row.costo_por_unidad)} / {row.unidad} ·{' '}
               {row.proveedores_count} proveedor{row.proveedores_count === 1 ? '' : 'es'} ·{' '}
               Actualizado {fmtFecha(row.updated_at)}
@@ -567,17 +567,17 @@ function InsumoAuditRow({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="mt-4 rounded-2xl border border-[#F2D7D5]/55 bg-white/85 p-4"
+          className="mt-4 rounded-2xl border border-[var(--accent-rose)]/55 bg-white/85 p-4"
         >
           <div className="mb-4 flex flex-wrap items-end gap-3">
-            <label className="text-xs text-[#003D5B]">
+            <label className="text-xs text-[var(--primary-navy)]">
               <span className="block font-semibold uppercase tracking-wide text-[10px]">
                 Costo / {row.unidad}
               </span>
               <input
                 value={precioEdit}
                 onChange={(e) => setPrecioEdit(e.target.value)}
-                className="mt-1 w-32 rounded-lg border border-[#003D5B]/12 px-2 py-1.5 text-right tabular-nums"
+                className="mt-1 w-32 rounded-lg border border-[var(--primary-navy)]/12 px-2 py-1.5 text-right tabular-nums"
               />
             </label>
             <button
@@ -592,14 +592,14 @@ function InsumoAuditRow({
                 await onPrecioCambio(n);
                 await reloadDetalle();
               }}
-              className="rounded-full bg-[#003D5B] px-4 py-2 text-[10px] font-semibold uppercase text-white shadow"
+              className="rounded-full bg-[var(--primary-navy)] px-4 py-2 text-[10px] font-semibold uppercase text-white shadow"
             >
               Guardar nuevo precio
             </button>
           </div>
 
           {!loaded ? (
-            <div className="flex items-center gap-2 text-xs text-[#7A746E]">
+            <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
               <Loader2 className="h-3 w-3 animate-spin" /> Cargando proveedores e historial…
             </div>
           ) : (
@@ -634,12 +634,12 @@ function ProveedoresPanel({
 
   return (
     <div>
-      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#003D5B]/55">
+      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--primary-navy)]/55">
         Proveedores de referencia
       </p>
       <ul className="space-y-2">
         {rows.length === 0 ? (
-          <li className="text-xs text-[#7A746E]">
+          <li className="text-xs text-[var(--text-muted)]">
             Aún no cargaste proveedores. Sumá un link para tener referencia semanal.
           </li>
         ) : null}
@@ -658,19 +658,19 @@ function ProveedoresPanel({
           value={draft.proveedor}
           onChange={(e) => setDraft((d) => ({ ...d, proveedor: e.target.value }))}
           placeholder="Proveedor (ej. Belstetic)"
-          className="rounded-lg border border-[#003D5B]/12 px-2 py-1.5 text-xs"
+          className="rounded-lg border border-[var(--primary-navy)]/12 px-2 py-1.5 text-xs"
         />
         <input
           value={draft.url}
           onChange={(e) => setDraft((d) => ({ ...d, url: e.target.value }))}
           placeholder="URL (https://...)"
-          className="rounded-lg border border-[#003D5B]/12 px-2 py-1.5 text-xs"
+          className="rounded-lg border border-[var(--primary-navy)]/12 px-2 py-1.5 text-xs"
         />
         <input
           value={draft.precio}
           onChange={(e) => setDraft((d) => ({ ...d, precio: e.target.value }))}
           placeholder="$"
-          className="rounded-lg border border-[#003D5B]/12 px-2 py-1.5 text-right text-xs"
+          className="rounded-lg border border-[var(--primary-navy)]/12 px-2 py-1.5 text-right text-xs"
         />
         <button
           type="button"
@@ -689,7 +689,7 @@ function ProveedoresPanel({
               onChange();
             }
           }}
-          className="col-span-2 inline-flex items-center justify-center gap-1 rounded-full bg-[#003D5B] px-3 py-1.5 text-[10px] font-semibold uppercase text-white sm:col-span-1 disabled:opacity-50"
+          className="col-span-2 inline-flex items-center justify-center gap-1 rounded-full bg-[var(--primary-navy)] px-3 py-1.5 text-[10px] font-semibold uppercase text-white sm:col-span-1 disabled:opacity-50"
         >
           <Plus className="h-3 w-3" /> Agregar
         </button>
@@ -763,14 +763,14 @@ function ProveedorRow({
   ) : null;
 
   return (
-    <li className="rounded-xl border border-[#003D5B]/8 bg-white px-3 py-2 text-xs">
+    <li className="rounded-xl border border-[var(--primary-navy)]/8 bg-white px-3 py-2 text-xs">
       <div className="flex items-start gap-2">
         <div className="grid flex-1 gap-1.5">
           <div className="flex items-center gap-2">
             <input
               value={proveedor}
               onChange={(e) => setProveedor(e.target.value)}
-              className="flex-1 rounded border border-[#003D5B]/12 px-2 py-1"
+              className="flex-1 rounded border border-[var(--primary-navy)]/12 px-2 py-1"
             />
             {mlIdDetectado ? (
               <span
@@ -781,7 +781,7 @@ function ProveedorRow({
               </span>
             ) : url ? (
               <span
-                className="inline-flex items-center gap-1 rounded-full bg-[#003D5B]/8 px-2 py-0.5 text-[9px] font-semibold text-[#003D5B]"
+                className="inline-flex items-center gap-1 rounded-full bg-[var(--primary-navy)]/8 px-2 py-0.5 text-[9px] font-semibold text-[var(--primary-navy)]"
                 title="Se intentará scraping genérico del HTML"
               >
                 <Globe className="h-2.5 w-2.5" /> Scraper
@@ -793,14 +793,14 @@ function ProveedorRow({
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="URL"
-              className="flex-1 rounded border border-[#003D5B]/12 px-2 py-1"
+              className="flex-1 rounded border border-[var(--primary-navy)]/12 px-2 py-1"
             />
             {url ? (
               <a
                 href={url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-1 rounded-full border border-[#003D5B]/12 px-2 py-1 text-[10px] text-[#003D5B]"
+                className="inline-flex items-center gap-1 rounded-full border border-[var(--primary-navy)]/12 px-2 py-1 text-[10px] text-[var(--primary-navy)]"
               >
                 Abrir <ExternalLink className="h-3 w-3" />
               </a>
@@ -811,9 +811,9 @@ function ProveedorRow({
               value={precio}
               onChange={(e) => setPrecio(e.target.value)}
               placeholder="$ listado"
-              className="w-32 rounded border border-[#003D5B]/12 px-2 py-1 text-right tabular-nums"
+              className="w-32 rounded border border-[var(--primary-navy)]/12 px-2 py-1 text-right tabular-nums"
             />
-            <span className="text-[10px] text-[#7A746E]">
+            <span className="text-[10px] text-[var(--text-muted)]">
               Verificado: {fmtFecha(row.fecha_verificacion)}
             </span>
             {sondeoBadge}
@@ -827,7 +827,7 @@ function ProveedorRow({
             type="button"
             disabled={!url || sondeandoUno}
             onClick={() => void sondearEste()}
-            className="rounded-full border border-[#003D5B]/12 bg-white p-1.5 text-[#003D5B] disabled:opacity-40"
+            className="rounded-full border border-[var(--primary-navy)]/12 bg-white p-1.5 text-[var(--primary-navy)] disabled:opacity-40"
             title="Sondear este proveedor ahora"
           >
             {sondeandoUno ? <Loader2 className="h-3 w-3 animate-spin" /> : <Zap className="h-3 w-3" />}
@@ -835,7 +835,7 @@ function ProveedorRow({
           <button
             type="button"
             onClick={() => void save()}
-            className="rounded-full border border-[#003D5B]/12 bg-white p-1.5 text-[#003D5B]"
+            className="rounded-full border border-[var(--primary-navy)]/12 bg-white p-1.5 text-[var(--primary-navy)]"
             title="Guardar"
           >
             <Save className="h-3 w-3" />
@@ -862,11 +862,11 @@ function ProveedorRow({
 function HistorialPanel({ rows, unidad }: { rows: HistorialCambioRow[]; unidad: string }) {
   return (
     <div>
-      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#003D5B]/55">
+      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--primary-navy)]/55">
         Historial de cambios
       </p>
       {rows.length === 0 ? (
-        <p className="text-xs text-[#7A746E]">Aún no hay cambios registrados para este insumo.</p>
+        <p className="text-xs text-[var(--text-muted)]">Aún no hay cambios registrados para este insumo.</p>
       ) : (
         <ul className="space-y-2">
           {rows.map((h) => {
@@ -875,14 +875,14 @@ function HistorialPanel({ rows, unidad }: { rows: HistorialCambioRow[]; unidad: 
             return (
               <li
                 key={h.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-[#003D5B]/8 bg-white px-3 py-2 text-xs"
+                className="flex items-center justify-between gap-3 rounded-xl border border-[var(--primary-navy)]/8 bg-white px-3 py-2 text-xs"
               >
                 <div>
-                  <p className="font-semibold text-[#003D5B]">
+                  <p className="font-semibold text-[var(--primary-navy)]">
                     {formatPrecioArs(h.costo_anterior)} → {formatPrecioArs(h.costo_nuevo)}
-                    <span className="ml-1 text-[10px] text-[#7A746E]">/ {unidad}</span>
+                    <span className="ml-1 text-[10px] text-[var(--text-muted)]">/ {unidad}</span>
                   </p>
-                  <p className="text-[10px] text-[#7A746E]">{fmtFecha(h.changed_at)}</p>
+                  <p className="text-[10px] text-[var(--text-muted)]">{fmtFecha(h.changed_at)}</p>
                 </div>
                 <span
                   className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold tabular-nums ${

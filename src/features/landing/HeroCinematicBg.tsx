@@ -71,7 +71,7 @@ export function HeroCinematicBg({
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(180deg, #FDF8F5 0%, #F8ECE3 40%, #FDF8F5 100%)',
+          background: 'linear-gradient(180deg, var(--bg-cream) 0%, #F8ECE3 40%, var(--bg-cream) 100%)',
         }}
       />
 
@@ -256,14 +256,14 @@ function DecorativeLines({ reduceMotion }: { reduceMotion: boolean }) {
     >
       <defs>
         <linearGradient id="lineGrad1" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#003D5B" stopOpacity="0" />
-          <stop offset="50%" stopColor="#003D5B" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#003D5B" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--primary-navy)" stopOpacity="0" />
+          <stop offset="50%" stopColor="var(--primary-navy)" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="var(--primary-navy)" stopOpacity="0" />
         </linearGradient>
         <linearGradient id="lineGrad2" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#BFC9A2" stopOpacity="0" />
-          <stop offset="50%" stopColor="#BFC9A2" stopOpacity="0.45" />
-          <stop offset="100%" stopColor="#BFC9A2" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--accent-sage)" stopOpacity="0" />
+          <stop offset="50%" stopColor="var(--accent-sage)" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="var(--accent-sage)" stopOpacity="0" />
         </linearGradient>
       </defs>
       <motion.path

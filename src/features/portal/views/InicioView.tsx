@@ -50,7 +50,7 @@ export function InicioView({ onNav }: Props) {
           animate={{ opacity: 1, y: 0 }}
           className="relative overflow-hidden rounded-3xl p-6 text-white shadow-2xl lg:p-8"
           style={{
-            background: 'linear-gradient(135deg, #003D5B 0%, #005580 55%, #004D72 100%)',
+            background: 'linear-gradient(135deg, var(--primary-navy) 0%, #005580 55%, #004D72 100%)',
             boxShadow: '0 24px 64px rgba(0,61,91,0.28)',
           }}
         >
@@ -94,9 +94,9 @@ export function InicioView({ onNav }: Props) {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[#003D5B] shadow-lg"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[var(--primary-navy)] shadow-lg"
             >
-              <Heart className="h-4 w-4 text-[#F2D7D5]" /> {brand.whatsappCtaLabel}
+              <Heart className="h-4 w-4 text-[var(--accent-rose)]" /> {brand.whatsappCtaLabel}
             </motion.a>
           </div>
         </motion.div>
@@ -130,8 +130,8 @@ export function InicioView({ onNav }: Props) {
               >
                 <stat.icon className="h-4 w-4" style={{ color: stat.accent }} />
               </div>
-              <p className="text-xl font-bold text-[#003D5B]/85">{stat.value}</p>
-              <p className="text-[11px] font-medium text-[#7A746E]/90">{stat.label}</p>
+              <p className="text-xl font-bold text-[var(--primary-navy)]/85">{stat.value}</p>
+              <p className="text-[11px] font-medium text-[var(--text-muted)]/90">{stat.label}</p>
             </motion.div>
           ))}
         </div>
@@ -147,7 +147,7 @@ export function InicioView({ onNav }: Props) {
             boxShadow: '0 12px 40px rgba(0,61,91,0.06)',
           }}
         >
-          <p className="text-sm text-[#7A746E]">
+          <p className="text-sm text-[var(--text-muted)]">
             Cuando tengamos tu plan cargado vas a poder seguir cada sesión y comparar fotos desde acá mismo.
           </p>
           <motion.button
@@ -174,7 +174,7 @@ export function InicioView({ onNav }: Props) {
         animate={{ opacity: 1, y: 0 }}
         className="relative overflow-hidden rounded-3xl p-6 text-white shadow-2xl lg:p-8"
         style={{
-          background: 'linear-gradient(135deg, #003D5B 0%, #005580 55%, #004D72 100%)',
+          background: 'linear-gradient(135deg, var(--primary-navy) 0%, #005580 55%, #004D72 100%)',
           boxShadow: '0 24px 64px rgba(0,61,91,0.28)',
         }}
       >
@@ -435,10 +435,10 @@ export function InicioView({ onNav }: Props) {
           }}
         >
           <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-serif-premium text-lg font-bold text-[#003D5B]">Próxima Cita</h3>
+            <h3 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">Próxima Cita</h3>
             <span
-              className={`rounded-full px-3 py-1 text-[10px] font-semibold text-[#003D5B] ${
-                activeTreatment.fechaPlanPendiente ? 'bg-[#F2D7D5]/40' : 'bg-[#BFC9A2]/25'
+              className={`rounded-full px-3 py-1 text-[10px] font-semibold text-[var(--primary-navy)] ${
+                activeTreatment.fechaPlanPendiente ? 'bg-[var(--accent-rose)]/40' : 'bg-[var(--accent-sage)]/25'
               }`}
             >
               {activeTreatment.fechaPlanPendiente ? 'Por confirmar' : 'Confirmada'}
@@ -447,10 +447,10 @@ export function InicioView({ onNav }: Props) {
           <div className="space-y-3">
             {activeTreatment.fechaPlanPendiente ? (
               <>
-                <div className="rounded-xl bg-[#FDF8F5]/75 p-5 text-center">
-                  <p className="text-sm leading-relaxed text-[#7A746E]">
+                <div className="rounded-xl bg-[var(--bg-cream)]/75 p-5 text-center">
+                  <p className="text-sm leading-relaxed text-[var(--text-muted)]">
                     Coordinamos día y hora con recepción. Escribinos por WhatsApp y te daremos opciones disponibles para{' '}
-                    <strong className="text-[#003D5B]">{activeTreatment.nombre}</strong>.
+                    <strong className="text-[var(--primary-navy)]">{activeTreatment.nombre}</strong>.
                   </p>
                 </div>
                 <motion.a
@@ -468,32 +468,32 @@ export function InicioView({ onNav }: Props) {
               </>
             ) : (
               <>
-                <div className="flex items-center gap-3 rounded-xl bg-[#FDF8F5]/75 p-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#F2D7D5] to-[#BFC9A2]">
-                    <Calendar className="h-5 w-5 text-[#003D5B]" />
+                <div className="flex items-center gap-3 rounded-xl bg-[var(--bg-cream)]/75 p-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--accent-rose)] to-[var(--accent-sage)]">
+                    <Calendar className="h-5 w-5 text-[var(--primary-navy)]" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#003D5B]">
+                    <p className="text-sm font-semibold text-[var(--primary-navy)]">
                       {new Date(activeTreatment.proximaSesion).toLocaleDateString('es-AR', {
                         weekday: 'long',
                         day: 'numeric',
                         month: 'long',
                       })}
                     </p>
-                    <p className="text-xs text-[#7A746E]">
+                    <p className="text-xs text-[var(--text-muted)]">
                       {activeTreatment.totalSesiones > 0
                         ? `${activeTreatment.horaProxima} hs — Sesión ${activeTreatment.sesionesCompletadas + 1}`
                         : `${activeTreatment.horaProxima} hs — Próximo turno (cronograma en definición)`}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 rounded-xl bg-[#FDF8F5]/75 p-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F2D7D5]/40">
-                    <MapPin className="h-5 w-5 text-[#003D5B]" />
+                <div className="flex items-center gap-3 rounded-xl bg-[var(--bg-cream)]/75 p-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-rose)]/40">
+                    <MapPin className="h-5 w-5 text-[var(--primary-navy)]" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#003D5B]">{activeTreatment.sucursal}</p>
-                    <p className="text-xs text-[#7A746E]">{activeTreatment.profesional}</p>
+                    <p className="text-sm font-semibold text-[var(--primary-navy)]">{activeTreatment.sucursal}</p>
+                    <p className="text-xs text-[var(--text-muted)]">{activeTreatment.profesional}</p>
                   </div>
                 </div>
                 <motion.button
@@ -520,21 +520,21 @@ export function InicioView({ onNav }: Props) {
         >
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h3 className="text-serif-premium text-lg font-bold text-[#003D5B]">Tu Evolución</h3>
-              <p className="text-xs text-[#7A746E]">Compara tu progreso con el slider interactivo</p>
+              <h3 className="text-serif-premium text-lg font-bold text-[var(--primary-navy)]">Tu Evolución</h3>
+              <p className="text-xs text-[var(--text-muted)]">Compara tu progreso con el slider interactivo</p>
             </div>
             <button
               onClick={() => onNav('evolucion')}
-              className="flex items-center gap-1 text-xs font-semibold text-[#003D5B]"
+              className="flex items-center gap-1 text-xs font-semibold text-[var(--primary-navy)]"
             >
               Ver todo <ArrowRight className="h-3 w-3" />
             </button>
           </div>
           <BeforeAfterSlider beforeSrc={beforeAfterPairs[0].before} afterSrc={beforeAfterPairs[0].after} />
-          <div className="mt-3 flex items-center justify-between rounded-xl bg-[#F2D7D5]/20 px-4 py-2.5">
-            <p className="text-xs font-medium text-[#7A746E]">{beforeAfterPairs[0].title}</p>
-            <span className="flex items-center gap-1.5 text-xs font-semibold text-[#003D5B]">
-              <div className="h-1.5 w-1.5 rounded-full bg-[#BFC9A2] animate-pulse" />
+          <div className="mt-3 flex items-center justify-between rounded-xl bg-[var(--accent-rose)]/20 px-4 py-2.5">
+            <p className="text-xs font-medium text-[var(--text-muted)]">{beforeAfterPairs[0].title}</p>
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-[var(--primary-navy)]">
+              <div className="h-1.5 w-1.5 rounded-full bg-[var(--accent-sage)] animate-pulse" />
               {beforeAfterPairs[0].improvement}
             </span>
           </div>

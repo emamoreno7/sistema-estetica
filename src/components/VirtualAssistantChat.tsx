@@ -105,7 +105,7 @@ export default function VirtualAssistantChat({
         onClick={() => setOpen(v => !v)}
         className={`fixed z-[99] flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg transition-shadow hover:shadow-xl ${fabPosition}`}
         style={{
-          background: 'linear-gradient(145deg, #003D5B 0%, #1a5a7a 100%)',
+          background: 'linear-gradient(145deg, var(--primary-navy) 0%, #1a5a7a 100%)',
           boxShadow: '0 8px 28px rgba(0,61,91,0.35)',
         }}
         aria-expanded={open}
@@ -124,7 +124,7 @@ export default function VirtualAssistantChat({
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className={`fixed z-[99] flex max-h-[min(420px,70vh)] w-[min(calc(100vw-2rem),360px)] flex-col overflow-hidden rounded-2xl border shadow-2xl ${panelPosition}`}
             style={{
-              background: 'var(--bg-cream, #FDF8F5)',
+              background: 'var(--bg-cream, var(--bg-cream))',
               borderColor: 'rgba(242,215,213,0.85)',
               boxShadow: '0 20px 50px rgba(0,61,91,0.15)',
             }}
@@ -137,10 +137,10 @@ export default function VirtualAssistantChat({
                 className="flex h-9 w-9 items-center justify-center rounded-full"
                 style={{ background: 'var(--accent-rose)' }}
               >
-                <MessageCircle className="h-4 w-4" style={{ color: '#003D5B' }} />
+                <MessageCircle className="h-4 w-4" style={{ color: 'var(--primary-navy)' }} />
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#003D5B' }}>
+                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--primary-navy)' }}>
                   {brand.assistantName}
                 </p>
                 <p className="text-[10px]" style={{ color: 'rgba(0,61,91,0.55)' }}>
@@ -163,8 +163,8 @@ export default function VirtualAssistantChat({
                   }`}
                   style={
                     m.role === 'user'
-                      ? { background: '#003D5B', color: '#fff' }
-                      : { background: 'rgba(242,215,213,0.45)', color: '#003D5B' }
+                      ? { background: 'var(--primary-navy)', color: '#fff' }
+                      : { background: 'rgba(242,215,213,0.45)', color: 'var(--primary-navy)' }
                   }
                 >
                   <p>{m.text}</p>
@@ -196,7 +196,7 @@ export default function VirtualAssistantChat({
                     className="rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors hover:opacity-90"
                     style={{
                       borderColor: 'rgba(0,61,91,0.2)',
-                      color: '#003D5B',
+                      color: 'var(--primary-navy)',
                       background: 'rgba(253,248,245,0.9)',
                     }}
                   >
@@ -211,17 +211,17 @@ export default function VirtualAssistantChat({
                 value={draft}
                 onChange={e => setDraft(e.target.value)}
                 placeholder="Escribí tu consulta..."
-                className="min-w-0 flex-1 rounded-full border px-4 py-2.5 text-sm outline-none transition focus:ring-2 focus:ring-[#003D5B]/20"
+                className="min-w-0 flex-1 rounded-full border px-4 py-2.5 text-sm outline-none transition focus:ring-2 focus:ring-[var(--primary-navy)]/20"
                 style={{
                   borderColor: 'rgba(0,61,91,0.15)',
                   background: '#fff',
-                  color: '#003D5B',
+                  color: 'var(--primary-navy)',
                 }}
               />
               <button
                 type="submit"
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition hover:opacity-95"
-                style={{ background: '#003D5B' }}
+                style={{ background: 'var(--primary-navy)' }}
                 aria-label="Enviar mensaje"
               >
                 <Send className="h-4 w-4" />
