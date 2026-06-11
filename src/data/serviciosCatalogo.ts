@@ -1,6 +1,5 @@
 import type { IllustrationKey } from '@/features/landing/ServiceIllustration';
 
-/** Imagen por defecto para servicios sin imagen propia. */
 export const DEFAULT_SERVICE_IMAGE = '/service-placeholder.png';
 
 export type ServicioItem = {
@@ -20,40 +19,41 @@ export type ServicioCategoria = {
 export const serviciosCatalogo: ServicioCategoria[] = [
   {
     id: 'corporal',
-    label: 'Remodelación Corporal',
+    label: 'Remodelacion Corporal',
     services: [
       {
         name: 'Body Up',
-        desc: 'Modelado corporal con protocolo profesional: tonificación y contorno con la serenidad de un ritual de belleza, no de un gimnasio.',
+        desc: 'Modelado corporal con protocolo profesional.',
         badges: ['Tonificador', 'Reductor'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'bodyUp',
       },
       {
         name: 'Radiofrecuencia',
-        desc: 'Firmeza y luminosidad: estimulación deolágeno para una piel más compacta, con la calma y la precisión que tu cuerpo merece.',
+        desc: 'Firmeza y luminosidad: estimulacion del colageno para una piel mas compacta.',
         badges: ['Reafirmante'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'radiofrecuencia',
       },
       {
-        name: 'Crio-lipólisis',
-        desc: 'Enfriamiento controlado sobre zonas localizadas, en un entorno clínico impecable y acogedor. Sin prisas, solo resultados bien acompañados.',
+        name: 'Crio-lipolisis',
+        desc: 'Enfriamiento controlado sobre zonas localizadas.',
         badges: ['Reductor'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'crio',
       },
       {
-        name: 'Lipo-láser',
-        desc: 'Tecnología láser para acompañar tu silueta con contornos más definidos, siempre dentro de un cuidado personalizado.',
+        name: 'Lipo-laser',
+        desc: 'Tecnologia laser para acompanar tu silueta con contornos mas definidos.',
         badges: ['Reductor'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'lipolaser',
       },
       {
         name: 'Electrodos',
-        desc: 'Activación muscular profunda para tonificar y drenar, con sensación de bienestar y sin perder la elegancia del momento.',
-        badges: ['Tonificador', 'Drenante']ge: DEFAULT_SERVICE_IMAGE,
+        desc: 'Activacion muscular profunda para tonificar y drenar.',
+        badges: ['Tonificador', 'Drenante'],
+        image: DEFAULT_SERVICE_IMAGE,
         illustration: 'electrodos',
       },
     ],
@@ -64,28 +64,28 @@ export const serviciosCatalogo: ServicioCategoria[] = [
     services: [
       {
         name: 'Masajes relajantes',
-        desc: 'Ritual de descanso con movimientos lentos y aceites seleccionados. Tu cuerpo baja el ritmo; tu mente, también.',
+        desc: 'Ritual de descanso con movimientos lentos y aceites seleccionados.',
         badges: ['Relajante'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'masajeRelajante',
       },
       {
-        name: 'Masaje linfático',
-        desc: 'Drenaje suave y rítmico que favorece la circulación y la sensación de ligereza, en un espacio pensado para tu bienestar.',
+        name: 'Masaje linfatico',
+        desc: 'Drenaje suave y ritmico que favorece la circulacion.',
         badges: ['Drenante'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'masajeLinfatico',
       },
       {
         name: 'Presoterapia',
-        desc: 'Compresión secuencial envolvente para activar la circulación y la sensación de piernas descansadas y definidas.',
+        desc: 'Compresion secuencial envolvente para activar la circulacion.',
         badges: ['Drenante', 'Reafirmante'],
         image: DEFAULT_SERVICE_IMAGE,
-        illustration: 'prea',
+        illustration: 'presoterapia',
       },
       {
         name: 'Piedras calientes',
-        desc: 'Calor volcánico sobre la piel que relaja la fibra muscular hasta lo más profundo. Un clásico del spa, elevado al máximo estándar.',
+        desc: 'Calor volcanico sobre la piel que relaja la fibra muscular.',
         badges: ['Relajante'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'piedrasCalientes',
@@ -94,30 +94,30 @@ export const serviciosCatalogo: ServicioCategoria[] = [
   },
   {
     id: 'facial',
-    label: 'Facial & Mirada',
+    label: 'Facial y Mirada',
     services: [
       {
         name: 'Hollywood Peel',
-        desc: 'Peeling de carbón con láser para una piel luminosa y unificada: reduce poros, opacidad y textura con un acabado fresco y radiante.',
+        desc: 'Peeling de carbon con laser para una piel luminosa y unificada.',
         badges: ['Facial'],
         image: DEFAULT_SERVICE_IMAGE,
       },
       {
-        name: 'Lifting de pestañas',
-        desc: 'Curva y elevación natural: una mirada despierta y femenina sin el peso de las extensiones, con acabado limpio y duradero.',
+        name: 'Lifting de pestanas',
+        desc: 'Curva y elevacion natural: una mirada despierta y femenina.',
         badges: ['Lashista'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'liftingPestanas',
       },
       {
         name: 'Laminado de cejas',
-  c: 'Cejas peinadas, fijadas y con forma definida durante semanas: efecto prolijo y voluminoso que enmarca la mirada.',
+        desc: 'Cejas peinadas, fijadas y con forma definida durante semanas.',
         badges: ['Lashista'],
         image: DEFAULT_SERVICE_IMAGE,
       },
       {
         name: 'Perfilado de cejas',
-        desc: 'Diseño a medida que equilibra simetría y expresión: cejas que enmarcan sin competir con tu rostro.',
+        desc: 'Diseno a medida que equilibra simetria y expresion.',
         badges: ['Lashista'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'perfiladoCejas',
@@ -126,18 +126,18 @@ export const serviciosCatalogo: ServicioCategoria[] = [
   },
   {
     id: 'manos',
-    label: 'Manos & Uñas',
+    label: 'Manos y Unas',
     services: [
       {
         name: 'Belleza de manos',
-        desc: 'Cuidado completo de manos: prolijidad, cutículas, hidratación y esmaltado para manos prolijas y cuidadas.',
+        desc: 'Cuidado completo de manos: prolijidad, cuticulas, hidratacion y esmaltado.',
         badges: ['Manicura'],
         image: DEFAULT_SERVICE_IMAGE,
       },
       {
-        name: 'Nails (uñas)',
-        desc: 'Servicio de uñas: esculpidas, semipermanente o kapping, con diseño y terminación profesional a tu estilo.',
-    : ['Uñas'],
+        name: 'Nails (unas)',
+        desc: 'Servicio de unas: esculpidas, semipermanente o kapping.',
+        badges: ['Unas'],
         image: DEFAULT_SERVICE_IMAGE,
       },
     ],
@@ -147,15 +147,15 @@ export const serviciosCatalogo: ServicioCategoria[] = [
     label: 'Especialidades',
     services: [
       {
-        name: 'Depilación definitiva',
-        desc: 'Piel lisa y cuidada en el tiempo, con tecnología y seguimiento profesional. Cada sesión avanza hacia tu comodidad y confianza.',
+        name: 'Depilacion definitiva',
+        desc: 'Piel lisa y cuidada en el tiempo, con tecnologia y seguimiento profesional.',
         badges: ['Definitivo'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'depilacionDefinitiva',
       },
       {
-        name: 'Eliminación de tatuajes',
-        desc: 'Protocolo láser Neatcell con enfoque en seguridad y resultados progresivos. Piel acompañada, información clara, en cada paso.',
+        name: 'Eliminacion de tatuajes',
+        desc: 'Protocolo laser con enfoque en seguridad y resultados progresivos.',
         badges: ['Especialidad'],
         image: DEFAULT_SERVICE_IMAGE,
         illustration: 'eliminacionTatuajes',
@@ -165,18 +165,18 @@ export const serviciosCatalogo: ServicioCategoria[] = [
 ];
 
 export const BADGE_STYLE: Record<string, { bg: string; color: string }> = {
-  Reductor: { bg: 'rgba,162,0.3)', color: '#4A6741' },
-  Tonificador: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
-  Reafirmante: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
-  Drenante: { bg: 'rgba(191,201,162,0.3)', color: '#4A6741' },
-  Terapéutico: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
-  Relajante: { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
-  Lashista: { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
-  Facial: { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
-  Manicura: { bg: 'rgba(245,230,218,0.6)', color: '#7A5A3A' },
-  Uñas: { bg: 'rgba(245,230,218,0.6)', color: '#7A5A3A' },
-  Definitivo: { bg: 'rgba(0,61,91,0.10)', color: '#003D5B' },
-  Especialidad: { bg: 'rgba(245,230,218,0.6)', color: '#7A5A3A' },
+  Reductor:     { bg: 'rgba(191,201,162,0.3)',  color: '#4A6741' },
+  Tonificador:  { bg: 'rgba(0,61,91,0.10)',     color: '#003D5B' },
+  Reafirmante:  { bg: 'rgba(0,61,91,0.10)',     color: '#003D5B' },
+  Drenante:     { bg: 'rgba(191,201,162,0.3)',  color: '#4A6741' },
+  Terapeutico:  { bg: 'rgba(0,61,91,0.10)',     color: '#003D5B' },
+  Relajante:    { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
+  Lashista:     { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
+  Facial:       { bg: 'rgba(242,215,213,0.55)', color: '#8B4A5A' },
+  Manicura:     { bg: 'rgba(245,230,218,0.6)',  color: '#7A5A3A' },
+  Unas:         { bg: 'rgba(245,230,218,0.6)',  color: '#7A5A3A' },
+  Definitivo:   { bg: 'rgba(0,61,91,0.10)',     color: '#003D5B' },
+  Especialidad: { bg: 'rgba(245,230,218,0.6)',  color: '#7A5A3A' },
 };
 
 export function getAllServiceNames(): string[] {

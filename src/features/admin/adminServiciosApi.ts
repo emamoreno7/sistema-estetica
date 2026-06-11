@@ -7,7 +7,9 @@ const SELECT_ADMIN =
 
 function parseNum(n: unknown): number {
   if (typeof n === 'number' && Number.isFinite(n)) return n;
-  if (typeof n === 'string' && n.trim() !== '') return Number.parseFloat(n);
+  if (typeof n === 'string' && n.trim() !== '') {
+    return Number.parseFloat(n);
+  }
   return 0;
 }
 
@@ -22,12 +24,15 @@ function parseRow(r: Record<string, unknown>): ServicioRow {
     descripcion: String(r.descripcion ?? ''),
     activo: Boolean(r.activo),
     imagen_url: String(r.imagen_url ?? DEFAULT_SERVICE_IMAGE),
-    badges: Array.isArray(r.badges) ? (r.badges as string[]) : [],
+    badges: Array.isArray(r.badges)
+      ? (r.badges as string[])
+      : [],
     sort_order: Math.round(parseNum(r.sort_order)),
   };
-}
-
-export async function listServiciosAdmin(): Promise<{ rows: ServicioRow[]; error: string | null }> {
+} export async function listServiciosAdmin(): Promise<{
+  rows: ServicioRow[];
+  error: string | null;
+}> {
   const { data, error } = await supabase
     .from('servicios')
     .select(SELECT_ADMIN)
@@ -35,17 +40,20 @@ export async function listServiciosAdmin(): Promise<{ rows: ServicioRow[]; error
     .order('nombre', { ascending: true });
 
   if (error) {
-    return {
-      rows: [],
-      error: error.message.includes('row-level security')
-        ? 'Revisá la migración 007 y que tu usuario sea admin en is_portal_admin().'
-        : error.message,
-    };
+    const msg = error.message.includes('row-level security')
+      ? 'Revisa la migracion 007 y que tu usuario sea admin.'
+      : error.message;
+    return { rows: [], error: msg };
   }
-  return { rows: (data ?? []).map((x) => parseRow(x as Record<string, unknown>)), error: null };
+  return {
+    rows: (data ?? []).map(
+      (x) => parseRow(x as Record<string, unknown>)
+    ),
+    error: null,
+  };
 }
 
-export async fution updateServicioPrecioDescripcionAdmin(
+export async function updateServicioPrecioDescripcionAdmin(
   id: string,
   fields: { precio: number; descripcion: string }
 ): Promise<{ error: string | null }> {
@@ -60,7 +68,10 @@ export async fution updateServicioPrecioDescripcionAdmin(
   return { error: error?.message ?? null };
 }
 
-export async function setServicioActivoAdmin(id: string, activo: boolean): Promise<{ error: string | null }> {
+export async function setServicioActivoAdmin(
+  id: string,
+  activo: boolean
+): Promise<{ error: string | null }> {
   const { error } = await supabase
     .from('servicios')
     .update({ activo })
@@ -85,7 +96,11 @@ export async function createServicioAdmin(opts: {
     .order('sort_order', { ascending: false })
     .limit(1);
 
-  const maxOrder = maxRows?.[0] ? parseNum((maxRows[0] as { sort_order?: unknown }).sort_order) : 0;
+  const maxOrder = maxRows?.[0]
+    ? parseNum(
+        (maxRows[0] as { sort_order?: unknown }).sort_order
+      )
+    : 0;
   const sort_order = Math.round(maxOrder) + 1;
 
   const { data, error } = await supabase

@@ -1,11 +1,3 @@
-/**
- * Sección "Antes & Después" — social proof interactivo en la landing.
- *
- * Carrusel de casos con slider arrastrable para comparar antes y después.
- * Las imágenes viven en /public/casos/.
- * Para cambiar un caso, reemplazá los archivos JPG manteniendo los mismos nombres.
- */
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote, Sparkles, Star } from 'lucide-react';
@@ -13,7 +5,6 @@ import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import { asset } from '@/lib/asset';
 import { brand } from '../../config/brand';
 
-/** Placeholder genérico para casos sin imagen real cargada. */
 const CASO_PLACEHOLDER_BEFORE = asset('casos/placeholder-antes.jpg');
 const CASO_PLACEHOLDER_AFTER = asset('casos/placeholder-despues.jpg');
 
@@ -25,7 +16,7 @@ type Caso = {
   testimonio: string;
   cliente: string;
   beforeSrc: string;
-  aftering;
+  afterSrc: string;
 };
 
 const CASOS: Caso[] = [
@@ -34,29 +25,27 @@ const CASOS: Caso[] = [
     titulo: 'Modelado corporal',
     tratamiento: 'Tratamiento Corporal',
     sesiones: '8 sesiones',
-    testimonio:
-      'No buscaba un resultado mágico, buscaba acompañamiento. Me explicaron todo en cada sesión y vi mi piel cambiar.',
-    cliente: 'Sofía R.',
+    testimonio: 'No buscaba un resultado magico, buscaba acompanamiento. Me explicaron todo en cada sesion y vi mi piel cambiar.',
+    cliente: 'Sofia R.',
     beforeSrc: CASO_PLACEHOLDER_BEFORE,
     afterSrc: CASO_PLACEHOLDER_AFTER,
   },
   {
     slug: 'caso-2',
-    titulo: 'Reducción localizada',
+    titulo: 'Reduccion localizada',
     tratamiento: 'Tratamiento Reductor',
     sesiones: '4 sesiones',
-    testimonio:
-      'Lo más lindo es entrar y sentir que es tu momento. El tratamiento fue mucho más cómodo de lo que pensaba.',
+    testimonio: 'Lo mas lindo es entrar y sentir que es tu momento. El tratamiento fue mas comodo de lo que pensaba.',
     cliente: 'Mariela B.',
     beforeSrc: CASO_PLACEHOLDER_BEFORE,
     afterSrc: CASO_PLACEHOLDER_AFTER,
   },
   {
     slug: 'caso-3',
-    titulo: 'Mirada renov  tratamiento: 'Tratamiento Facial',
-    sesiones: '1 sesión',
-    testimonio:
-      'Mi mirada cambió. Es sutil pero la diferencia se nota muchísimo.',
+    titulo: 'Mirada renovada',
+    tratamiento: 'Tratamiento Facial',
+    sesiones: '1 sesion',
+    testimonio: 'Mi mirada cambio. Es sutil pero la diferencia se nota muchisimo.',
     cliente: 'Camila G.',
     beforeSrc: CASO_PLACEHOLDER_BEFORE,
     afterSrc: CASO_PLACEHOLDER_AFTER,
@@ -64,10 +53,9 @@ const CASOS: Caso[] = [
   {
     slug: 'caso-4',
     titulo: 'Piel lisa y cuidada',
-    tratamiento: 'Depilación definitiva',
+    tratamiento: 'Depilacion definitiva',
     sesiones: '6 sesiones',
-    testimonio:
-      'Ya no me preocupo por la depilación cada semana. La constancia y la atención hicieron toda la diferencia.',
+    testimonio: 'Ya no me preocupo por la depilacion cada semana. La constancia y la atencion hicieron toda la diferencia.',
     cliente: 'Laura M.',
     beforeSrc: CASO_PLACEHOLDER_BEFORE,
     afterSrc: CASO_PLACEHOLDER_AFTER,
@@ -87,7 +75,7 @@ export function AntesYDespuesSection() {
 
   return (
     <section
-      className="relative px-4 py-24 sm:lg:py-32"
+      className="relative px-4 py-24 sm:px-10 lg:py-32"
       style={{ background: 'linear-gradient(180deg, #FDF8F5 0%, #FBEEE6 100%)' }}
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -102,7 +90,6 @@ export function AntesYDespuesSection() {
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        {/* ─── Header ─── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -112,7 +99,7 @@ export function AntesYDespuesSection() {
         >
           <p
             className="mb-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.38em]"
-            sr: 'var(--accent-sage)' }}
+            style={{ color: 'var(--accent-sage)' }}
           >
             <Sparkles className="h-3 w-3" />
             Resultados reales
@@ -121,7 +108,7 @@ export function AntesYDespuesSection() {
             className="text-serif-premium mx-auto max-w-xl text-3xl font-light leading-snug sm:text-5xl"
             style={{ color: 'var(--primary-navy)' }}
           >
-            Antes & Después
+            Antes y Despues
           </h2>
           <div className="mx-auto mt-5 flex items-center justify-center gap-3">
             <div className="h-px w-14" style={{ background: 'var(--accent-rose)' }} />
@@ -132,12 +119,11 @@ export function AntesYDespuesSection() {
             className="mx-auto mt-5 max-w-xl text-sm leading-7 sm:text-base"
             style={{ color: 'var(--text-muted)' }}
           >
-            Arrastrá el control para ver la evolución. Cada caso es de una persona real acompañada en {brand.shortName}.
-          </p>     </motion.div>
+            Arrastra el control para ver la evolucion. Cada caso es de una persona real acompanada en {brand.shortName}.
+          </p>
+        </motion.div>
 
-        {/* ─── Slider + info ─── */}
         <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
-          {/* Slider */}
           <motion.div
             key={caso.slug}
             initial={{ opacity: 0, scale: 0.97 }}
@@ -149,9 +135,8 @@ export function AntesYDespuesSection() {
               beforeSrc={caso.beforeSrc}
               afterSrc={caso.afterSrc}
               beforeLabel="ANTES"
-              afterLabel="DESPUÉS"
+              afterLabel="DESPUES"
             />
-            {/* Navegación */}
             <div className="mt-4 flex items-center justify-center gap-3">
               <button
                 type="button"
@@ -159,7 +144,7 @@ export function AntesYDespuesSection() {
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-[#003D5B]/10 bg-white text-[#003D5B] shadow-sm transition hover:scale-105"
                 aria-label="Caso anterior"
               >
-  <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-4 w-4" />
               </button>
               <div className="flex gap-1.5">
                 {CASOS.map((c, i) => (
@@ -187,7 +172,6 @@ export function AntesYDespuesSection() {
             </div>
           </motion.div>
 
-          {/* Info del caso */}
           <motion.div
             key={`info-${caso.slug}`}
             initial={{ opacity: 0, x: 16 }}
@@ -207,31 +191,31 @@ export function AntesYDespuesSection() {
             >
               {caso.titulo}
             </h3>
-
             <div className="mt-5 flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
               <Star className="h-3.5 w-3.5" fill="#BFC9A2" stroke="#BFC9A2" />
-              <span>{caso.sesiones} · resultado documentado</span>
+              <span>{caso.sesiones} - resultado documentado</span>
             </div>
-
             <div className="my-6 h-px w-12" style={{ background: 'var(--accent-rose)' }} />
-
             <Quote className="h-5 w-5 opacity-30" style={{ color: 'var(--primary-navy)' }} />
             <p
               className="mt-2 text-[15px] italic leading-[1.7] sm:text-base"
               style={{ color: 'var(--text-muted)' }}
             >
-              "{caso.testimonio}"
+              {caso.testimonio}
             </p>
             <p
               className="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em]"
               style={{ color: 'var(--primary-navy)' }}
             >
-              — {caso.cliente}
+              {caso.cliente}
             </p>
-
-            <div className="mt-7 rounded-2xl bg-[#FDF8F5] p-4 text-[11px] leading-5" style={{ color: 'var(--text-muted)' }}>
-              <strong className="text-[#003D5B]">¿Querés un caso así?</strong> Reservá tu evaluación gratuita y armamos un
-              plan a tu medida      </div>
+            <div
+              className="mt-7 rounded-2xl bg-[#FDF8F5] p-4 text-[11px] leading-5"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              <strong className="text-[#003D5B]">Queres un caso asi?</strong>{' '}
+              Reserva tu evaluacion gratuita y armamos un plan a tu medida.
+            </div>
           </motion.div>
         </div>
       </div>

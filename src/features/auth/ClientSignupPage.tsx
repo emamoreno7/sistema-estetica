@@ -7,8 +7,10 @@ import { asset } from '@/lib/asset';
 import { brand } from '../../config/brand';
 import ClientSignupForm from './ClientSignupForm';
 
-/** Imagen de fondo para la página de registro. Reemplazar en public/images/. */
 const BG_IMAGE = asset('signup-bg.jpg');
+
+const BG_GRADIENT =
+  'linear-gradient(105deg, rgba(253,248,245,0.94) 0%, rgba(253,248,245,0.78) 42%, rgba(253,248,245,0.55) 100%)';
 
 export default function ClientSignupPage() {
   const navigate = useNavigate();
@@ -17,13 +19,7 @@ export default function ClientSignupPage() {
     <div className="relative min-h-screen overflow-hidden" style={{ background: '#FDF8F5' }}>
       <div className="absolute inset-0">
         <img src={BG_IMAGE} alt="" className="h-full w-full object-cover" />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              linear-gradient(105deg, rgba(253,248,245,0.94) 0%, rgba(253,248,245,0.78) 42%, rgba(253,248,245,0.55) 100%)',
-          }}
-        />
+        <div className="absolute inset-0" style={{ background: BG_GRADIENT }} />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col px-5 py-10 sm:px-8 lg:flex-row lg:items-center lg:gap-16 lg:py-16">
@@ -37,17 +33,17 @@ export default function ClientSignupPage() {
             to="/"
             className="inline-block text-[10px] font-semibold uppercase tracking-[0.22em] text-[#003D5B]/70 underline underline-offset-4"
           >
-            ← Inicio
+            Inicio
           </Link>
           <h1
-            className="text-rif-premium mt-8 text-3xl font-light leading-tight text-[#003D5B] sm:text-4xl"
+            className="text-serif-premium mt-8 text-3xl font-light leading-tight text-[#003D5B] sm:text-4xl"
             style={{ letterSpacing: '0.03em' }}
           >
             Sumate a la comunidad {brand.shortName}
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-[#003D5B]/65">
-            Registrate con correo y contraseña. Guardamos tu WhatsApp como contacto. Al terminar, verás tu cuenta
-            pendiente de activación hasta que recepción te habilite.
+            Registrate con correo y contrasena. Guardamos tu WhatsApp como contacto.
+            Al terminar, veras tu cuenta pendiente de activacion hasta que recepcion te habilite.
           </p>
         </motion.div>
 
@@ -55,7 +51,7 @@ export default function ClientSignupPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.08 }}
-          className="w-full max-w-md rounded-[1.75rem] border border-whitebg-white/75 p-8 shadow-2xl shadow-[#003D5B]/08 backdrop-blur-md lg:flex-1"
+          className="w-full max-w-md rounded-[1.75rem] border border-white/80 bg-white/75 p-8 shadow-2xl shadow-[#003D5B]/08 backdrop-blur-md lg:flex-1"
           style={{ borderColor: 'rgba(215,213,200,0.65)' }}
         >
           <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#003D5B]/45">

@@ -103,7 +103,7 @@ export default function AdminServicesView() {
     const precio = Number.parseFloat(nuevoPrecio.replace(',', '.'));
     const dur = Number.parseInt(nuevoDur, 10);
     if (!nuevoNombre.trim()) {
-      setActionEr('Completá el nombre del servicio.');
+      setActionErr('Completá el nombre del servicio.');
       return;
     }
     if (Number.isNaN(precio) || precio < 0) {
@@ -199,7 +199,7 @@ export default function AdminServicesView() {
           <div className="px-6 py-16 text-center text-sm text-red-700">{err}</div>
         ) : (
           <div className="overflow-x-auto">
-            able className="min-w-full text-left text-sm">
+            <table className="min-w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-[#F2D7D5]/40 bg-gradient-to-r from-[#fffefd] to-[#FDF8F5]">
                   <th className="whitespace-nowrap px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#003D5B]/55 sm:px-6">Nombre</th>
