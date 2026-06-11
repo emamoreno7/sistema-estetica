@@ -1,0 +1,16 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="48" fill="#F6EFE8"/>
+  <rect x="72" y="72" width="1056" height="756" rx="36" fill="#FFFDFC" stroke="#E7D7CB" stroke-width="8"/>
+  <circle cx="600" cy="360" r="132" fill="#F1E4DA"/>
+  <path d="M600 262L616 326L680 342L616 358L600 422L584 358L520 342L584 326L600 262Z" fill="#9C6B4F"/>
+  <circle cx="510" cy="282" r="14" fill="#D9B8A3"/>
+  <circle cx="696" cy="436" r="10" fill="#D9B8A3"/>
+  <rect x="330" y="566" width="540" height="24" rx="12" fill="#E8D9CE"/>
+  <rect x="402" y="618" width="396" height="18" rx="9" fill="#EFE5DE"/>
+  <text x="600" y="710" text-anchor="middle" fill="#7A5A4A" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="600">
+    Imagen genérica
+  </text>
+  <text x="600" y="754" text-anchor="middle" fill="#A07A67" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400">
+   Reemplazable por foto o visual del cliente
+  </text>
+</svg>
