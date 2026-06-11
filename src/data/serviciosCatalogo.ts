@@ -1,6 +1,7 @@
 import type { IllustrationKey } from '@/features/landing/ServiceIllustration';
+import { assets } from '@/config/assets';
 
-export const DEFAULT_SERVICE_IMAGE = '/service-placeholder.png';
+export const DEFAULT_SERVICE_IMAGE = assets.servicePlaceholder;
 
 export type ServicioItem = {
   name: string;

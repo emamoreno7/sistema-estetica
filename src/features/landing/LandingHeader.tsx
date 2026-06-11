@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import { assets } from '@/config/assets';
+import { brand } from '@/config/brand';
 
 const buttonClassName = [
   'rounded-full',
@@ -21,8 +23,8 @@ export function LandingHeader({ onEnter }: { onEnter: () => void }) {
       className="fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-6 py-4 sm:px-10"
     >
       <img
-        src="/logo-generic.svg"
-        alt="Tu Estética"
+        src={assets.logo}
+        alt={brand.businessName}
         style={{
           width: '120px',
           height: '120px',

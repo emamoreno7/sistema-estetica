@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { es as esLocale } from 'date-fns/locale';
 import { CONSENTIMIENTO_CLAUSULAS, type ConsentimientoRow } from '@/lib/consentimiento';
 import { brand } from '../config/brand';
+import { assets } from '../config/assets';
 
 export type ConsentimientoClienteInfo = {
   full_name: string;
@@ -19,7 +20,7 @@ const WHITE: RGB = [255, 255, 255];
 
 async function loadLogo(): Promise<{ dataUrl: string; w: number; h: number } | null> {
   try {
-    const res = await fetch('/logo-generic.svg');
+    const res = await fetch(assets.logo);
     if (!res.ok) return null;
     const blob = await res.blob();
     const dataUrl: string = await new Promise((resolve, reject) => {

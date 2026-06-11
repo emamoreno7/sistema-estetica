@@ -1,4 +1,5 @@
 import { Mail, MessageCircle } from 'lucide-react';
+import { assets } from '@/config/assets';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
 import { brand } from '../../config/brand';
 import { contact } from '../../config/contact';
@@ -37,7 +38,7 @@ export function LandingFooter() {
     >
       <div className="mx-auto flex max-w-4xl flex-col items-center gap-8 text-center">
         <img
-          src="/logo-generic.svg"
+          src={assets.logo}
           alt={brand.businessName}
           style={{
             height: '72px',
