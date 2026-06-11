@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 import VirtualAssistantChat from '@/components/VirtualAssistantChat';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
-import { asset } from '@/lib/asset';
+import { assets } from '@/config/assets';
 import { brand } from '../../config/brand';
 import ClientSignupForm from './ClientSignupForm';
 
-const BG_IMAGE = asset('signup-bg.jpg');
+const BG_IMAGE = assets.signupBg;
 
 const BG_GRADIENT =
   'linear-gradient(105deg, rgba(253,248,245,0.94) 0%, rgba(253,248,245,0.78) 42%, rgba(253,248,245,0.55) 100%)';

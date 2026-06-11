@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import VirtualAssistantChat from '@/components/VirtualAssistantChat';
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
 import { buildWhatsAppHref } from '@/lib/whatsapp';
+import { assets } from '@/config/assets';
 import { brand } from '../../config/brand';
 import { LandingHeader } from './LandingHeader';
 import { ServiciosSection } from './ServiciosSection';
@@ -100,7 +101,7 @@ export function LandingPage({ onEnter, onRegister }: Props) {
             }}
           >
             <img
-              src="/logo-generic.svg"
+              src={assets.logo}
               alt={brand.businessName}
               style={{
                 width: '100%',

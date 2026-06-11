@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote, Sparkles, Star } from 'lucide-react';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
-import { asset } from '@/lib/asset';
+import { assets } from '@/config/assets';
 import { brand } from '../../config/brand';
 
-const CASO_PLACEHOLDER_BEFORE = asset('casos/placeholder-antes.jpg');
-const CASO_PLACEHOLDER_AFTER = asset('casos/placeholder-despues.jpg');
+const CASO_PLACEHOLDER_BEFORE = assets.casoPlaceholderBefore;
+const CASO_PLACEHOLDER_AFTER = assets.casoPlaceholderAfter;
 
 type Caso = {
   slug: string;

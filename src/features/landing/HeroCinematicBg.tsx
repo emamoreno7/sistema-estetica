@@ -18,6 +18,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
+import { assets } from '@/config/assets';
 import { asset } from '@/lib/asset';
 
 type Props = {
@@ -27,7 +28,7 @@ type Props = {
 
 export function HeroCinematicBg({
   videoSrc = asset('hero-loop.mp4'),
-  posterSrc = asset('hero-poster.jpg'),
+  posterSrc = assets.heroPoster,
 }: Props) {
   const [videoOk, setVideoOk] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
